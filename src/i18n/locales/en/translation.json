@@ -1,9 +1,4 @@
 {
-  "home": {
-    "title": "Welcome to the application"
-  },
-  "auth": {
-    "login": "Login",
-    "signup": "Signup"
-  }
+  "welcome": "Welcome",
+  "choose": "Choose language"
 }
