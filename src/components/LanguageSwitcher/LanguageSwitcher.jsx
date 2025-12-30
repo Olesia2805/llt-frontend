@@ -1,24 +1,13 @@
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import LanguageContext from "../../context/LanguageContext";
 
 const languages = [
   { code: "en", label: "EN" },
   { code: "uk", label: "UA" },
 ];
 
-function LanguageSwitcher() {
-  const { i18n } = useTranslation();
-  const [lang, setLang] = useState(i18n.language || "uk");
-
-  const changeLanguage = (code) => {
-    i18n.changeLanguage(code);
-    setLang(code);
-    localStorage.setItem("lang", code);
-  };
-
-  useEffect(() => {
-    document.documentElement.lang = lang;
-  }, [lang]);
+const LanguageSwitcher = () => {
+  const { lang, changeLanguage } = useContext(LanguageContext);
 
   return (
     <div>
@@ -33,6 +22,6 @@ function LanguageSwitcher() {
       ))}
     </div>
   );
-}
+};
 
 export default LanguageSwitcher;

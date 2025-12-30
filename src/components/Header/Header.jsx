@@ -1,18 +1,18 @@
 // import styles from './Header.module.css';
-// import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
-import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import Logo from "../Logo/Logo.jsx";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 // import AuthBar from '../AuthBar/AuthBar.jsx';
 // import UserBar from '../UserBar/UserBar.jsx';
 
-function Header() {
+const Header = () => {
   return (
     <header>
       <Logo />
-      {/* <ThemeSwitcher /> */}
+      <ThemeSwitcher />
       <LanguageSwitcher />
     </header>
   );
-}
+};
 
 export default Header;
