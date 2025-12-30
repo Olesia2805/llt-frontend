@@ -8,7 +8,7 @@ import { ROUTER } from "./app/routes.jsx";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
 
-function App() {
+const App = () => {
   return (
     <>
       <Suspense fallback={<Loader />}>
@@ -21,6 +21,6 @@ function App() {
       {/* <Toaster position="bottom-right" toastOptions={toastConfig} /> */}
     </>
   );
-}
+};
 
 export default App;

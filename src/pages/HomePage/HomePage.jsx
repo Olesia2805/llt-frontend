@@ -1,13 +1,11 @@
-import Hero from "../../components/Hero/Hero";
-import Testimonials from "../../components/Testimonials/Testimonials";
+import { useAuth } from "../../context/AuthContext";
+import HomePageGuest from "./HomePageGuest";
+import HomePageUser from "./HomePageUser";
 
 const HomePage = () => {
-  return (
-    <>
-      <Hero />
-      <Testimonials />
-    </>
-  );
+  const { isAuthenticated } = useAuth();
+
+  return isAuthenticated ? <HomePageUser /> : <HomePageGuest />;
 };
 
 export default HomePage;

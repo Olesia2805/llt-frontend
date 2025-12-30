@@ -1,8 +1,10 @@
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
-import { Provider } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import LanguageProvider from "./context/LanguageProvide.jsx";
+
+import AuthProvider from "./context/AuthProvider.jsx";
+import LanguageProvider from "./context/LanguageProvider.jsx";
 import ThemeProvider from "./context/ThemeProvider.jsx";
 import App from "./App.jsx";
 import "modern-normalize";
@@ -11,14 +13,16 @@ import "./i18n/index.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <LanguageProvider>
-      <ThemeProvider>
-        <Provider store={store}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </Provider>
-      </ThemeProvider>
-    </LanguageProvider>
+    <ReduxProvider store={store}>
+      <AuthProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ThemeProvider>
+        </LanguageProvider>
+      </AuthProvider>
+    </ReduxProvider>
   </StrictMode>
 );
