@@ -1,16 +1,25 @@
-import Section from "./components/Section/Section";
-import Container from "./components/Container/Container";
-// import Loader from "./components/Loader/Loader";
-// import LanguageSwitcher from "./components/LanguageSwitcher/LanguageSwitcher";
-import { PiMapTrifoldBold } from "react-icons/pi";
+import { Routes, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
+import Layout from "./components/Layout/Layout.jsx";
+import Loader from "./components/Loader/Loader.jsx";
+import { ROUTER } from "./app/routes.jsx";
+// import { Toaster } from "react-hot-toast";
+
+const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
 
 function App() {
   return (
-    <Container>
-      <Section>
-        <h1>Welcome</h1>
-      </Section>
-    </Container>
+    <>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path={ROUTER.HOME} element={<Layout />}>
+            <Route index element={<HomePage />} />
+          </Route>
+        </Routes>
+      </Suspense>
+      {/* <Toaster position="bottom-right" toastOptions={toastConfig} /> */}
+    </>
   );
 }
 
