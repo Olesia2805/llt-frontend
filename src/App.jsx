@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import Layout from "./components/Layout/Layout.jsx";
 import Loader from "./components/Loader/Loader.jsx";
 import { ROUTER } from "./app/routes.jsx";
+import "/src/assets/styles/global.css";
 // import { Toaster } from "react-hot-toast";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));

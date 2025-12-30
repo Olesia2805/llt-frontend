@@ -1,3 +1,13 @@
 @import "./reset.css";
 @import "./variable.css";
 @import "./fonts.css";
+
+body {
+  font-family: var(--font-sans-serif);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

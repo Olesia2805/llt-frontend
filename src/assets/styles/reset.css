@@ -54,3 +54,7 @@ h6 {
   font-weight: inherit;
   margin: 0;
 }
+
+q {
+  quotes: none;
+}

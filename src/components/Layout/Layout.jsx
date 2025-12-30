@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 
-import Container from "../Container/Container.jsx";
-import Header from "../Header/Header.jsx";
-import Main from "../Main/Main.jsx";
-import Footer from "../Footer/Footer.jsx";
-import ModalContainer from "../ModalContainer/ModalContainer.jsx";
+import Container from "../Container/Container";
+import Header from "../Header/Header";
+import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
+import ModalContainer from "../ModalContainer/ModalContainer";
 
 const Layout = () => {
   return (

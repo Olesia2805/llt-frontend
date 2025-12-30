@@ -1,7 +1,16 @@
 :root {
-  --background: #ffffff;
-  --text-color: #000000;
-  --primary-color: #1e90ff;
+  --primary: #14b8a6;
+  --primary-light: #2dd4bf;
+  --secondary: #134e4a;
+  --accent: #f59e0b;
+  --bg-main: #0f172a;
+  --bg-alt: #1e293b;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --font-sans-serif: "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Playfair Display", serif;
 }
 
 [data-theme="dark"] {
