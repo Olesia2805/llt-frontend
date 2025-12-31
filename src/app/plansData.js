@@ -1,0 +1,46 @@
+export const PRICE_PLANS = [
+  {
+    id: "explorer",
+    title: "Explorer",
+    description: "Essential tools for the casual traveler.",
+    price: "Free",
+    period: null,
+    features: [
+      { id: 1, text: "1 Custom Itinerary" },
+      { id: 2, text: "Basic Packing Lists" },
+      { id: 3, text: "Access to Community Forum" },
+    ],
+    buttonText: "Get started",
+    popular: false,
+  },
+  {
+    id: "nomad",
+    title: "Nomad",
+    description: "Advanced features for frequent flyers.",
+    price: "$9",
+    period: "/month",
+    features: [
+      { id: 1, text: "Unlimited Itineraries" },
+      { id: 2, text: "Offline Mode Access" },
+      { id: 3, text: "Advanced Stats & Maps" },
+      { id: 4, text: "Priority Support" },
+    ],
+    buttonText: "Subscribe now",
+    popular: true,
+  },
+  {
+    id: "globetrotter",
+    title: "Globetrotter",
+    description: "The ultimate kit for full-time travelers.",
+    price: "$89",
+    period: "/year",
+    features: [
+      { id: 1, text: "Everything in Nomad" },
+      { id: 2, text: "Exclusive Deals & Discounts" },
+      { id: 3, text: "Early Access to New Features" },
+      { id: 4, text: "2 Months Free" },
+    ],
+    buttonText: "Get yearly plan",
+    popular: false,
+  },
+];

@@ -2,14 +2,14 @@
 
 const OfferListCard = ({ title, description, Icon }) => {
   return (
-    <div>
+    <li>
       <div>{Icon && <Icon />}</div>
 
       <div>
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
-    </div>
+    </li>
   );
 };
 
