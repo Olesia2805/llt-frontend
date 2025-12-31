@@ -8,7 +8,7 @@ const PricePlansCard = ({
   price,
   period,
   features,
-  //   buttonText,
+  buttonText,
   popular,
 }) => {
   return (
@@ -19,8 +19,8 @@ const PricePlansCard = ({
       <p>{description}</p>
 
       <p>
-        <strong>{price}</strong>
-        {period && <span>{period}</span>}
+        {price}
+        {period && <span>/{period}</span>}
       </p>
 
       <ul>
@@ -31,7 +31,8 @@ const PricePlansCard = ({
           </li>
         ))}
       </ul>
-      {/* <Button /> */}
+
+      <button type="button">{buttonText}</button>
     </li>
   );
 };

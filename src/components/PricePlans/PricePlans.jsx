@@ -1,18 +1,18 @@
+import { useTranslation } from "react-i18next";
 import Section from "../Section/Section";
 import PricePlansCard from "../PricePlansCard/PricePlansCard";
 import { PRICE_PLANS } from "../../app/plansData";
 
 const PricePlans = () => {
+  const { t } = useTranslation("homeGuest");
+
   return (
     <Section>
-      <h2>Plans for Every Traveler</h2>
-      <p>
-        Choose the perfect plan for your adventure style. Switch or cancel
-        anytime.
-      </p>
+      <h2>{t("pricePlans.title")}</h2>
+      <p>{t("pricePlans.description")}</p>
 
       <ul>
-        {PRICE_PLANS.map((plan) => (
+        {PRICE_PLANS(t).map((plan) => (
           <PricePlansCard key={plan.id} {...plan} />
         ))}
       </ul>

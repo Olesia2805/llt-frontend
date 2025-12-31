@@ -1,6 +1,14 @@
 {
   "footer": {
     "description": "Discover the world with LiteLifeTrip. Plan your routes, track your stats, and explore new horizons with our comprehensive travel companion.",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "team": "Our Team",
+    "terms": "Terms and Privacy Policies",
+    "newsletterTitle": "Subscribe to our newsletter",
+    "newsletterText": "The latest news, articles, and resources, sent to your inbox weekly.",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
     "copyright": "All rights reserved."
   }
 }

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Section from "../Section/Section";
-import heroCardImg from "../../assets/img/hero-card.jpg";
+import tripPreviewCard from "../../assets/img/trip-preview-card.jpg";
 // import Button from "../Button/Button";
 
 const Hero = () => {
@@ -10,7 +10,7 @@ const Hero = () => {
     <Section>
       <h1 dangerouslySetInnerHTML={{ __html: t("hero.title") }} />
       <p>{t("hero.description")}</p>
-      <img src={heroCardImg} alt={t("hero.imageAlt")} />
+      <img src={tripPreviewCard} alt={t("hero.imageAlt")} />
     </Section>
   );
 };

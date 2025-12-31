@@ -1,11 +1,98 @@
 {
   "hero": {
-    "title": "Explore the world on <1>your own terms</1>",
+    "badgeTitle": "Travel Tips",
+    "badgeLink": "New Routes",
+    "title": "Explore the world on your own terms",
     "description": "LiteLifeTrip simplifies your adventure. From hidden local gems to seamless route planning, unlock the full potential of your next journey with our dark-mode optimized platform.",
-    "imageAlt": "Trip plan preview"
+    "button": "Start for free"
+  },
+  "chooseReasons": {
+    "title": "Why Choose LiteLifeTrip",
+    "description": "We understand that you don't have time for long planning, and weekends can be the only chance to recharge. LiteLifeTrip is designed to turn trip preparation from a stress into a pleasure.",
+    "items": [
+      {
+        "title": "Save your most valuable resource — time",
+        "description": "Instead of dozens of browser tabs and hours of research — one app that gathers everything. We do the routine work so you can relax this Friday."
+      },
+      {
+        "title": "True psychological relief",
+        "description": "We lift the 'burden of choice' from your shoulders. LiteLifeTrip automatically picks a route, and makes a preview packing list depending on the weather."
+      },
+      {
+        "title": "Adaptive Itineraries",
+        "description": "Change of plans? No problem. Drag, drop, and reshuffle your day instantly, with smart suggestions filling in the gaps."
+      }
+    ]
   },
   "offer": {
     "title": "What We Offer",
-    "description": "..."
+    "description": "Discover the comprehensive suite of features designed to make every step of your journey seamless and enjoyable.",
+    "features": [
+      {
+        "title": "Create packing lists",
+        "text": "Smart, weather-aware checklists ensure you never leave essentials behind. Customizable for every adventure type."
+      },
+      {
+        "title": "Popular and Recommended Routes",
+        "text": "Access verified paths loved by the community. From scenic drives to hidden city walks, find the best way forward."
+      },
+      {
+        "title": "Personal Statistics",
+        "text": "Track your milestones. Visualize countries visited, distance traveled, and memories collected in one dashboard."
+      }
+    ]
+  },
+  "pricePlans": {
+    "title": "Plans for Every Traveler",
+    "description": "Choose the perfect plan for your adventure style. Switch or cancel anytime.",
+    "explorer": {
+      "title": "Explorer",
+      "description": "Essential tools for the casual traveler.",
+      "price": "Free",
+      "period": null,
+      "button": "Get started",
+      "features": [
+        "1 Custom Itinerary",
+        "Basic Packing Lists",
+        "Access to Community Forum"
+      ],
+      "popular": false
+    },
+    "nomad": {
+      "title": "Nomad",
+      "description": "Advanced features for frequent flyers.",
+      "price": "$9",
+      "period": "month",
+      "button": "Subscribe now",
+      "features": [
+        "Unlimited Itineraries",
+        "Advanced Stats & Maps",
+        "Priority Support"
+      ],
+      "popular": true
+    },
+    "globetrotter": {
+      "title": "Globetrotter",
+      "description": "The ultimate kit for full-time travelers.",
+      "price": "$89",
+      "period": "year",
+      "button": "Get yearly plan",
+      "features": [
+        "Everything from the 'Nomad' plan",
+        "Exclusive Deals & Discounts",
+        "Early Access to New Features",
+        "2 Months Free"
+      ],
+      "popular": false
+    }
+ },
+  "testimonials": {
+    "title": "Loved by Travelers",
+    "description": "See what our community has to say."
+  },
+  "cta": {
+    "title": "Ready to Start Your Journey?",
+    "description": "Join thousands of travelers who are planning better trips and discovering the world with LiteLifeTrip. It's free to get started.",
+    "button": "Create Free Account"
   }
 }

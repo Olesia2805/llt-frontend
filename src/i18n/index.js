@@ -2,7 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import homeGuestEn from "./locales/en/homeGuest.json";
-import commonEn from "./locales/en/homeGuest.json";
+import commonEn from "./locales/en/common.json";
 
 import homeGuestUk from "./locales/uk/homeGuest.json";
 import commonUk from "./locales/uk/common.json";
