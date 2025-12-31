@@ -5,9 +5,14 @@ const ThemeSwitcher = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <button onClick={toggleTheme}>
-      {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-    </button>
+    <label className="switch">
+      <input
+        type="checkbox"
+        checked={theme === "dark"}
+        onChange={toggleTheme}
+      />
+      <span className="slider round"></span>
+    </label>
   );
 };
 

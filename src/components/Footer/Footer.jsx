@@ -1,20 +1,20 @@
 import styles from "./Footer.module.css";
 import Logo from "../Logo/Logo";
 import NetworkLinks from "../NetworkLinks/NetworkLinks";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation("common");
   return (
     <footer className={styles.footer}>
       <hr className={styles.divider} />
       <Logo />
-      <p>
-        Discover the world with LiteLifeTrip. Plan your routes, track your
-        stats, and explore new horizons with our comprehensive travel companion.
-      </p>
+      <p>{t("footer.description")}</p>
       <hr className={styles.divider} />
       <NetworkLinks />
       <p>
-        &copy; {new Date().getFullYear()} LiteLifeTrip Inc. All rights reserved.
+        &copy; {new Date().getFullYear()} LiteLifeTrip Inc.{" "}
+        {t("footer.copyright")}
       </p>
     </footer>
   );
