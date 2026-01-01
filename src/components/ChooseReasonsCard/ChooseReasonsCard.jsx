@@ -1,11 +1,19 @@
 // import Button from "../Button/Button";
-// import styles from "./ChooseReasonsCard.module.css";
+import styles from "./ChooseReasonsCard.module.css";
 
-const ChooseReasonsCard = ({ title, description }) => {
+const ChooseReasonsCard = ({ title, description, Icon }) => {
   return (
-    <li>
-      <h3>{title}</h3>
-      <p>{description}</p>
+    <li className={styles.card}>
+      <div className={styles.header}>
+        <div className={styles.iconWrapper}>
+          {Icon && <Icon className="icon" />}
+        </div>
+        <h3 className={styles.title}>{title}</h3>
+      </div>
+
+      <span className={styles.divider} />
+
+      <p className={styles.description}>{description}</p>
     </li>
   );
 };

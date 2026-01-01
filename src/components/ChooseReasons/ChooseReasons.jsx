@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import Section from "../Section/Section";
 import { CHOOSE_REASONS } from "../../app/sectionsGuestData.js";
 import ChooseReasonsCard from "../ChooseReasonsCard/ChooseReasonsCard";
+import styles from "./ChooseReasons.module.css";
 
 const ChooseReasons = () => {
   const { t } = useTranslation("homeGuest");
@@ -13,7 +14,7 @@ const ChooseReasons = () => {
         <p>{t("chooseReasons.description")}</p>
       </div>
 
-      <ul>
+      <ul className={styles.list}>
         {CHOOSE_REASONS(t).map((reason) => (
           <ChooseReasonsCard key={reason.id} {...reason} />
         ))}

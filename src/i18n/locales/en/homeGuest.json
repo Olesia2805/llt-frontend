@@ -11,14 +11,17 @@
     "description": "We understand that you don't have time for long planning, and weekends can be the only chance to recharge. LiteLifeTrip is designed to turn trip preparation from a stress into a pleasure.",
     "items": [
       {
+        "key": "time",
         "title": "Save your most valuable resource — time",
         "description": "Instead of dozens of browser tabs and hours of research — one app that gathers everything. We do the routine work so you can relax this Friday."
       },
       {
+        "key": "relief",
         "title": "True psychological relief",
         "description": "We lift the 'burden of choice' from your shoulders. LiteLifeTrip automatically picks a route, and makes a preview packing list depending on the weather."
       },
       {
+        "key": "itineraries",
         "title": "Adaptive Itineraries",
         "description": "Change of plans? No problem. Drag, drop, and reshuffle your day instantly, with smart suggestions filling in the gaps."
       }

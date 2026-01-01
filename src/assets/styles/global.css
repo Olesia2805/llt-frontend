@@ -48,16 +48,16 @@ p {
 }
 
 .icon {
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
   display: inline-block;
   vertical-align: middle;
 }
 
 @media (min-width: 768px) {
   .icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
 }
 
