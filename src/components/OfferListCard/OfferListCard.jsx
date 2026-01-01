@@ -1,11 +1,13 @@
-// import styles from "./OfferListCard.module.css";
+import styles from "./OfferListCard.module.css";
 
 const OfferListCard = ({ title, description, Icon }) => {
   return (
-    <li>
-      <div>{Icon && <Icon />}</div>
+    <li className={styles.card}>
+      <div className={styles.iconWrapper}>
+        {Icon && <Icon className="icon" />}
+      </div>
 
-      <div>
+      <div className={styles.content}>
         <h3>{title}</h3>
         <p>{description}</p>
       </div>

@@ -1,4 +1,117 @@
+.figure {
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.imageWrapper {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  border-radius: 6px;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--overlay-color);
+  z-index: 1;
+}
+
+.figcaption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+}
+
 .quote {
   font-family: var(--font-serif);
   font-style: italic;
+  font-size: 1.2rem;
+  max-width: 70%;
+  text-align: center;
+}
+
+.quote::before {
+  content: '"';
+}
+
+.quote::after {
+  content: '"';
+}
+
+.firebug {
+  position: absolute;
+  width: 0.4vw;
+  height: 0.4vw;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  background: var(--firebug);
+  opacity: 0.7;
+
+  animation-name: move;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.firebug::before,
+.firebug::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform-origin: center;
+}
+
+.firebug::before {
+  background: var(--firebug-background);
+  opacity: 0.4;
+  animation: drift 20s linear infinite alternate;
+}
+
+.firebug::after {
+  background: var(--firebug);
+  opacity: 0;
+  box-shadow: 0 0 0 0 var(--firebug);
+  animation: drift 20s linear infinite alternate, flash 6s ease-in-out infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translate(0, 0) scale(var(--scale, 1));
+  }
+  100% {
+    transform: translate(var(--x, 0), var(--y, 0)) scale(var(--scale, 1));
+  }
+}
+
+@keyframes flash {
+  0%,
+  30%,
+  100% {
+    opacity: 0;
+    box-shadow: 0 0 0 0 var(--firebug);
+  }
+  5% {
+    opacity: 1;
+    box-shadow: 0 0 2vw 0.4vw var(--firebug);
+  }
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0 0;
+  display: grid;
+  gap: 36px;
 }

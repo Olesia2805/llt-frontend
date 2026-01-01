@@ -30,14 +30,17 @@
     "quote": "The journey of a thousand miles begins with a single step.",
     "features": [
       {
+        "key": "packing",
         "title": "Create packing lists",
         "description": "Smart, weather-aware checklists ensure you never leave essentials behind. Customizable for every adventure type."
       },
       {
+        "key": "routes",
         "title": "Popular and Recommended Routes",
         "description": "Access verified paths loved by the community. From scenic drives to hidden city walks, find the best way forward."
       },
       {
+        "key": "statistic",
         "title": "Personal Statistics",
         "description": "Track your milestones. Visualize countries visited, distance traveled, and memories collected in one dashboard."
       }

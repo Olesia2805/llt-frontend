@@ -8,8 +8,10 @@ const PricePlans = () => {
 
   return (
     <Section>
-      <h2>{t("pricePlans.title")}</h2>
-      <p>{t("pricePlans.description")}</p>
+      <div className="sectionHeaderWrapper">
+        <h2>{t("pricePlans.title")}</h2>
+        <p>{t("pricePlans.description")}</p>
+      </div>
 
       <ul>
         {PRICE_PLANS(t).map((plan) => (

@@ -1,11 +1,9 @@
 .footer {
   padding-bottom: 16px;
+}
 
-  @media (min-width: 768px) {
-    padding-bottom: 36px;
-  }
-
-  @media (min-width: 1440px) {
+@media (min-width: 1280) {
+  .footer {
     padding-bottom: 40px;
   }
 }

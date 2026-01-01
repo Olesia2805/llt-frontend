@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.iconWrapper {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.content h3 {
+  margin: 0 0 8px;
+}
+
+.content p {
+  margin: 0;
+  color: var(--text-muted);
+}

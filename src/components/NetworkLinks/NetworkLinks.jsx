@@ -12,7 +12,7 @@ const NetworkLinks = () => {
             rel="noopener noreferrer"
             className={styles.link}
           >
-            {Icon && <Icon />}
+            {Icon && <Icon className="icon" />}
           </a>
         </li>
       ))}

@@ -8,8 +8,10 @@ const ChooseReasons = () => {
 
   return (
     <Section>
-      <h2>{t("chooseReasons.title")}</h2>
-      <p>{t("chooseReasons.description")}</p>
+      <div className="sectionHeaderWrapper">
+        <h2>{t("chooseReasons.title")}</h2>
+        <p>{t("chooseReasons.description")}</p>
+      </div>
 
       <ul>
         {CHOOSE_REASONS(t).map((reason) => (

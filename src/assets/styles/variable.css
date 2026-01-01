@@ -9,6 +9,9 @@
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --border-color: #334155;
+  --overlay-color: #10100f99;
+  --firebug: #ffff00;
+  --firebug-background: #000000;
 }
 
 [data-theme="light"] {
@@ -22,4 +25,7 @@
   --text-main: #0f172a;
   --text-muted: #64748b;
   --border-color: #cbd5e1;
+  --overlay-color: #10100f40;
+  --firebug: #ffff00;
+  --firebug-background: #000000;
 }

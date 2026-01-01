@@ -27,7 +27,7 @@ const PricePlansCard = ({
         {features.map((feature) => (
           <li key={feature.id}>
             <FaCheck />
-            {feature.text}
+            <p>{feature.text}</p>
           </li>
         ))}
       </ul>

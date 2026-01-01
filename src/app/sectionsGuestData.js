@@ -1,4 +1,5 @@
 import i18n from "../i18n";
+import { OFFER_ICONS } from "./sectionsGuestIcons";
 
 export const CHOOSE_REASONS = () => {
   const reasonsJson = i18n.getResource(
@@ -25,6 +26,7 @@ export const OFFER_FEATURES = () => {
     id: index,
     title: feature.title,
     description: feature.description,
+    Icon: OFFER_ICONS[feature.key],
   }));
 };
 
