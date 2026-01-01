@@ -27,18 +27,19 @@
   "offer": {
     "title": "What We Offer",
     "description": "Discover the comprehensive suite of features designed to make every step of your journey seamless and enjoyable.",
+    "quote": "The journey of a thousand miles begins with a single step.",
     "features": [
       {
         "title": "Create packing lists",
-        "text": "Smart, weather-aware checklists ensure you never leave essentials behind. Customizable for every adventure type."
+        "description": "Smart, weather-aware checklists ensure you never leave essentials behind. Customizable for every adventure type."
       },
       {
         "title": "Popular and Recommended Routes",
-        "text": "Access verified paths loved by the community. From scenic drives to hidden city walks, find the best way forward."
+        "description": "Access verified paths loved by the community. From scenic drives to hidden city walks, find the best way forward."
       },
       {
         "title": "Personal Statistics",
-        "text": "Track your milestones. Visualize countries visited, distance traveled, and memories collected in one dashboard."
+        "description": "Track your milestones. Visualize countries visited, distance traveled, and memories collected in one dashboard."
       }
     ]
   },

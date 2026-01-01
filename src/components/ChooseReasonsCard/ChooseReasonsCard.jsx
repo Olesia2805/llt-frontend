@@ -1,4 +1,3 @@
-import { FaCheck } from "react-icons/fa";
 // import Button from "../Button/Button";
 // import styles from "./ChooseReasonsCard.module.css";
 

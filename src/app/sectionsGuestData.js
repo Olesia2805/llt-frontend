@@ -1,5 +1,33 @@
 import i18n from "../i18n";
 
+export const CHOOSE_REASONS = () => {
+  const reasonsJson = i18n.getResource(
+    i18n.language,
+    "homeGuest",
+    "chooseReasons.items"
+  );
+
+  return reasonsJson.map((item, index) => ({
+    id: index,
+    title: item.title,
+    description: item.description,
+  }));
+};
+
+export const OFFER_FEATURES = () => {
+  const featuresJson = i18n.getResource(
+    i18n.language,
+    "homeGuest",
+    "offer.features"
+  );
+
+  return featuresJson.map((feature, index) => ({
+    id: index,
+    title: feature.title,
+    description: feature.description,
+  }));
+};
+
 export const PRICE_PLANS = () => {
   const plansJson = i18n.getResource(i18n.language, "homeGuest", "pricePlans");
 

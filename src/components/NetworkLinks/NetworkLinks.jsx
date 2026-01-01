@@ -1,4 +1,4 @@
-import { SOCIAL_NETWORKS } from "../../app/socialNetworks.js";
+import { SOCIAL_NETWORKS } from "../../app/sectionsGuestIcons.js";
 import styles from "./NetworkLinks.module.css";
 
 const NetworkLinks = () => {

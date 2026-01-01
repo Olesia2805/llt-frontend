@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Section from "../Section/Section";
-import { CHOOSE_REASONS } from "../../app/reasonsData";
+import { CHOOSE_REASONS } from "../../app/sectionsGuestData.js";
 import ChooseReasonsCard from "../ChooseReasonsCard/ChooseReasonsCard";
 
 const ChooseReasons = () => {
