@@ -1,3 +1,16 @@
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1280px) {
+  .contentWrapper {
+    flex-direction: row;
+    align-items: center;
+    gap: 60px;
+  }
+}
+
 .figure {
   position: relative;
   margin-bottom: 32px;
@@ -38,6 +51,13 @@
   font-size: 1.2rem;
   max-width: 70%;
   text-align: center;
+  line-height: 1.5;
+}
+
+@media (min-width: 1280px) {
+  .quote {
+    font-size: 2rem;
+  }
 }
 
 .quote::before {
@@ -111,7 +131,7 @@
 .list {
   list-style: none;
   padding: 0;
-  margin: 40px 0 0;
+  margin-bottom: 40px;
   display: grid;
   gap: 36px;
 }

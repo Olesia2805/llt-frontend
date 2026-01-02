@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Section from "../Section/Section";
+import Container from "../Container/Container";
 import { CHOOSE_REASONS } from "../../app/sectionsGuestData.js";
 import ChooseReasonsCard from "../ChooseReasonsCard/ChooseReasonsCard";
 import styles from "./ChooseReasons.module.css";
@@ -9,16 +10,18 @@ const ChooseReasons = () => {
 
   return (
     <Section>
-      <div className="sectionHeaderWrapper">
-        <h2>{t("chooseReasons.title")}</h2>
-        <p>{t("chooseReasons.description")}</p>
-      </div>
+      <Container>
+        <div className="sectionHeaderWrapper">
+          <h2>{t("chooseReasons.title")}</h2>
+          <p>{t("chooseReasons.description")}</p>
+        </div>
 
-      <ul className={styles.list}>
-        {CHOOSE_REASONS(t).map((reason) => (
-          <ChooseReasonsCard key={reason.id} {...reason} />
-        ))}
-      </ul>
+        <ul className={styles.list}>
+          {CHOOSE_REASONS(t).map((reason) => (
+            <ChooseReasonsCard key={reason.id} {...reason} />
+          ))}
+        </ul>
+      </Container>
     </Section>
   );
 };

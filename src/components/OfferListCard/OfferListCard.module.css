@@ -4,6 +4,12 @@
   align-items: flex-start;
 }
 
+@media (min-width: 1280px) {
+  .card {
+    gap: 20px;
+  }
+}
+
 .iconWrapper {
   width: 48px;
   height: 48px;

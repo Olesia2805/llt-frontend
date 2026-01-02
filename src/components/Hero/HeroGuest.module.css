@@ -1,6 +1,6 @@
 .heroWrapper {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .textWrapper,
