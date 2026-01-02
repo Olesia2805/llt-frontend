@@ -1,0 +1,18 @@
+.button {
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.primary {
+  background-color: var(--primary);
+  color: var(--text-light);
+}
+
+.primary:hover,
+.primary:focus {
+  background-color: color-mix(in srgb, var(--primary), black 10%);
+}

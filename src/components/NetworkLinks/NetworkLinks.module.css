@@ -1,0 +1,5 @@
+.networkLinks {
+  display: flex;
+  gap: 12px;
+  color: var(--text-muted);
+}

@@ -6,9 +6,9 @@
     "team": "Our Team",
     "terms": "Terms and Privacy Policies",
     "newsletterTitle": "Subscribe to our newsletter",
-    "newsletterText": "The latest news, articles, and resources, sent to your inbox weekly.",
+    "newsletterDescription": "The latest news, articles, and resources, sent to your inbox weekly.",
     "emailPlaceholder": "Enter your email",
-    "subscribe": "Subscribe",
+    "button": "Subscribe",
     "copyright": "All rights reserved."
   }
 }

@@ -1,0 +1,5 @@
+.divider {
+  display: block;
+  border: 0;
+  border-top: 1px solid rgb(var(--border-color-rgb));
+}

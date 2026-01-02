@@ -1,5 +1,5 @@
 import { FaCheck } from "react-icons/fa";
-// import Button from "../Button/Button";
+import Button from "../Button/Button";
 import styles from "./PricePlansCard.module.css";
 
 const PricePlansCard = ({
@@ -8,7 +8,7 @@ const PricePlansCard = ({
   price,
   period,
   features,
-  // buttonText,
+  buttonText,
   popular,
 }) => {
   return (
@@ -32,9 +32,7 @@ const PricePlansCard = ({
         ))}
       </ul>
 
-      {/* <button type="button" className={styles.button}>
-        {buttonText}
-      </button> */}
+      <Button text={buttonText} />
     </li>
   );
 };

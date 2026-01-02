@@ -1,0 +1,17 @@
+.ctaWrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.textWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  margin-bottom: 24px;
+}
+
+.description {
+  margin-bottom: 24px;
+}
