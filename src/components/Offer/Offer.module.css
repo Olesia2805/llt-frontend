@@ -16,6 +16,12 @@
   margin-bottom: 32px;
 }
 
+@media (min-width: 1280px) {
+  .figure {
+    margin-bottom: 0px;
+  }
+}
+
 .imageWrapper {
   position: relative;
   border-radius: 6px;
@@ -134,4 +140,10 @@
   margin-bottom: 40px;
   display: grid;
   gap: 36px;
+}
+
+@media (min-width: 1280px) {
+  .list {
+    margin-bottom: 0px;
+  }
 }

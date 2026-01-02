@@ -1,6 +1,6 @@
 import { FaCheck } from "react-icons/fa";
 // import Button from "../Button/Button";
-// import styles from "./PricePlansCard.module.css";
+import styles from "./PricePlansCard.module.css";
 
 const PricePlansCard = ({
   title,
@@ -8,31 +8,33 @@ const PricePlansCard = ({
   price,
   period,
   features,
-  buttonText,
+  // buttonText,
   popular,
 }) => {
   return (
-    <li>
-      {popular && <span>POPULAR</span>}
+    <li className={`${styles.card} ${popular ? styles.popular : ""}`}>
+      {popular && <span className={styles.badge}>POPULAR</span>}
 
-      <h3>{title}</h3>
-      <p>{description}</p>
+      <h3 className={styles.title}>{title}</h3>
+      <p className={styles.description}>{description}</p>
 
-      <p>
+      <p className={styles.price}>
         {price}
-        {period && <span>/{period}</span>}
+        {period && <span className={styles.period}> /{period}</span>}
       </p>
 
-      <ul>
+      <ul className={styles.features}>
         {features.map((feature) => (
-          <li key={feature.id}>
-            <FaCheck />
-            <p>{feature.text}</p>
+          <li key={feature.id} className={styles.featureItem}>
+            <FaCheck className={styles.icon} />
+            <span>{feature.text}</span>
           </li>
         ))}
       </ul>
 
-      <button type="button">{buttonText}</button>
+      {/* <button type="button" className={styles.button}>
+        {buttonText}
+      </button> */}
     </li>
   );
 };

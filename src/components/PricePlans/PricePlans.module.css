@@ -1,0 +1,11 @@
+.list {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 1280px) {
+  .list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+}
