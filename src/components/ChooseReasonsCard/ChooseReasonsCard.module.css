@@ -1,6 +1,6 @@
 .card {
   background-color: var(--bg-main);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgb(var(--border-color-rgb));
   border-radius: 6px;
   padding: 26px;
 
@@ -40,5 +40,5 @@
   height: 1px;
   margin: 20px 0;
 
-  background-color: var(--border-color);
+  background-color: rgb(var(--border-color-rgb));
 }

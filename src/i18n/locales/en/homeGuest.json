@@ -1,10 +1,9 @@
 {
   "hero": {
-    "badgeTitle": "Travel Tips",
-    "badgeLink": "New Routes",
-    "title": "Explore the world on your own terms",
-    "description": "LiteLifeTrip simplifies your adventure. From hidden local gems to seamless route planning, unlock the full potential of your next journey with our dark-mode optimized platform.",
-    "button": "Start for free"
+    "title": "Explore the world on <span>your own terms</span>",
+    "description": "LiteLifeTrip simplifies your adventure. From hidden local gems to seamless route planning, unlock the full potential of your next journey.",
+    "button": "Start for free",
+    "imageAlt": "Trip preview"
   },
   "chooseReasons": {
     "title": "Why Choose LiteLifeTrip",

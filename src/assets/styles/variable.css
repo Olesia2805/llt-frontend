@@ -7,7 +7,10 @@
   --bg-alt: #1e293b;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --border-color: #334155;
+  --border-color-rgb: 51, 65, 85;
+  --blob-strong: 0.5;
+  --blob-medium: 0.25;
+  --blob-soft: 0.18;
   --overlay-color: #10100f99;
   --firebug: #ffff00;
   --firebug-background: #000000;
