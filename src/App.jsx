@@ -17,8 +17,8 @@ const App = () => {
         <Routes>
           <Route path={ROUTER.HOME} element={<Layout />}>
             <Route index element={<HomePage />} />
+            <Route path={ROUTER.ALL} element={<NotFoundPage />} />
           </Route>
-          <Route path={ROUTER.ALL} element={<NotFoundPage />} />
         </Routes>
       </Suspense>
       {/* <Toaster position="bottom-right" toastOptions={toastConfig} /> */}
