@@ -7,7 +7,7 @@ import illustration from "../../assets/img/404_img.png";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t } = useTranslation("notFound");
 
   const handleReturnHome = () => {
     navigate("/");
@@ -26,24 +26,25 @@ const NotFoundPage = () => {
           </div>
 
           <div className={styles.textContent}>
-            <p className={styles.errorCode}>ERROR 404</p>
+            <p className={styles.errorCode}>{t("errorCode")}</p>
             <h1 className={styles.title}>
-              Looks like you've wandered off the map
+              {t("title")}
             </h1>
             <p className={styles.description}>
-              The destination you are looking for doesn't exist or has been
-              moved. Even the best travelers get lost sometimes.
+              {t("description")}
             </p>
           </div>
 
           <div className={styles.actions}>
             <Button
-              text="Return Home"
+              text={t("returnHome")}
               variant="primary"
               onClick={handleReturnHome}
               className={styles.primaryButton}
             />
-            <button className={styles.secondaryButton}>Help Center</button>
+            <button className={styles.secondaryButton}>
+              {t("helpCenter")}
+            </button>
           </div>
         </div>
       </Container>
