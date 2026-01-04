@@ -8,6 +8,7 @@ import "/src/assets/styles/global.css";
 // import { Toaster } from "react-hot-toast";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage.jsx"));
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path={ROUTER.HOME} element={<Layout />}>
             <Route index element={<HomePage />} />
           </Route>
+          <Route path={ROUTER.ALL} element={<NotFoundPage />} />
         </Routes>
       </Suspense>
       {/* <Toaster position="bottom-right" toastOptions={toastConfig} /> */}
