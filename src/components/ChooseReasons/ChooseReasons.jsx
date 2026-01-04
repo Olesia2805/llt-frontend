@@ -9,7 +9,7 @@ const ChooseReasons = () => {
   const { t } = useTranslation("homeGuest");
 
   return (
-    <Section>
+    <Section variant="altBG">
       <Container>
         <div className="sectionHeaderWrapper">
           <h2>{t("chooseReasons.title")}</h2>

@@ -81,7 +81,7 @@
   border-radius: 50%;
   pointer-events: none;
   z-index: 2;
-  background: var(--firebug);
+  background: var(--accent-color);
   opacity: 0.7;
 
   animation-name: move;
@@ -106,9 +106,9 @@
 }
 
 .firebug::after {
-  background: var(--firebug);
+  background: var(--accent-color);
   opacity: 0;
-  box-shadow: 0 0 0 0 var(--firebug);
+  box-shadow: 0 0 0 0 var(--accent-color);
   animation: drift 20s linear infinite alternate, flash 6s ease-in-out infinite;
 }
 
@@ -126,11 +126,11 @@
   30%,
   100% {
     opacity: 0;
-    box-shadow: 0 0 0 0 var(--firebug);
+    box-shadow: 0 0 0 0 var(--accent-color);
   }
   5% {
     opacity: 1;
-    box-shadow: 0 0 2vw 0.4vw var(--firebug);
+    box-shadow: 0 0 2vw 0.4vw var(--accent-color);
   }
 }
 

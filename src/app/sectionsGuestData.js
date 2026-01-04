@@ -8,11 +8,11 @@ export const CHOOSE_REASONS = () => {
     "chooseReasons.items"
   );
 
-  return reasonsJson.map((item, index) => ({
+  return reasonsJson.map((reason, index) => ({
     id: index,
-    title: item.title,
-    description: item.description,
-    Icon: REASONS_ICONS[item.key],
+    title: reason.title,
+    description: reason.description,
+    Icon: REASONS_ICONS[reason.key],
   }));
 };
 
@@ -20,7 +20,7 @@ export const OFFER_FEATURES = () => {
   const featuresJson = i18n.getResource(
     i18n.language,
     "homeGuest",
-    "offer.features"
+    "offers.items"
   );
 
   return featuresJson.map((feature, index) => ({
@@ -32,24 +32,39 @@ export const OFFER_FEATURES = () => {
 };
 
 export const PRICE_PLANS = () => {
-  const plansJson = i18n.getResource(i18n.language, "homeGuest", "pricePlans");
+  const plansJson = i18n.getResource(
+    i18n.language,
+    "homeGuest",
+    "pricePlans.items"
+  );
 
-  return Object.keys(plansJson)
-    .filter((key) => key !== "title" && key !== "description")
-    .map((key) => {
-      const plan = plansJson[key];
-      return {
-        id: key,
-        title: plan.title,
-        description: plan.description,
-        price: plan.price,
-        period: plan.period,
-        features: (plan.features || []).map((text, index) => ({
-          id: index + 1,
-          text,
-        })),
-        buttonText: plan.button,
-        popular: plan.popular,
-      };
-    });
+  return plansJson.map((plan, index) => ({
+    id: index,
+    title: plan.title,
+    description: plan.description,
+    price: plan.price,
+    period: plan.period,
+    features: (plan.features || []).map((text, index) => ({
+      id: index + 1,
+      text,
+    })),
+    buttonText: plan.button,
+    isPopular: plan.isPopular,
+  }));
+};
+
+export const TESTIMONIALS = () => {
+  const testimonialsJson = i18n.getResource(
+    i18n.language,
+    "homeGuest",
+    "testimonials.items"
+  );
+
+  return testimonialsJson.map((testimonial, index) => ({
+    id: index,
+    name: testimonial.name,
+    role: testimonial.role,
+    rating: testimonial.rating,
+    text: testimonial.text,
+  }));
 };

@@ -39,10 +39,13 @@
 .links li {
   color: var(--text-muted);
   cursor: pointer;
+
+  width: fit-content;
+  max-width: max-content;
 }
 
 .links li:hover,
-.links li:focus {
+.links li:focus-visible {
   color: var(--primary);
 }
 

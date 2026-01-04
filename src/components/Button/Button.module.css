@@ -5,6 +5,13 @@
   cursor: pointer;
   border: none;
   transition: all 0.25s ease;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .button {
+    width: auto;
+  }
 }
 
 .primary {
@@ -13,6 +20,6 @@
 }
 
 .primary:hover,
-.primary:focus {
+.primary:focus-visible {
   background-color: color-mix(in srgb, var(--primary), black 10%);
 }

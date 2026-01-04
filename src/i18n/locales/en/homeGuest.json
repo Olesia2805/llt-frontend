@@ -5,6 +5,7 @@
     "button": "Start for free",
     "imageAlt": "Trip preview"
   },
+  
   "chooseReasons": {
     "title": "Why Choose LiteLifeTrip",
     "description": "We understand that you don't have time for long planning, and weekends can be the only chance to recharge. LiteLifeTrip is designed to turn trip preparation from a stress into a pleasure.",
@@ -26,11 +27,12 @@
       }
     ]
   },
-  "offer": {
+
+  "offers": {
     "title": "What We Offer",
     "description": "Discover the comprehensive suite of features designed to make every step of your journey seamless and enjoyable.",
     "quote": "The journey of a thousand miles begins with a single step.",
-    "features": [
+    "items": [
       {
         "key": "packing",
         "title": "Create packing lists",
@@ -48,57 +50,118 @@
       }
     ]
   },
+
   "pricePlans": {
     "title": "Plans for Every Traveler",
     "description": "Choose the perfect plan for your adventure style. Switch or cancel anytime.",
-    "explorer": {
-      "title": "Explorer",
-      "description": "Essential tools for the casual traveler.",
-      "price": "Free",
-      "period": null,
-      "button": "Get started",
-      "features": [
-        "1 Custom Itinerary",
-        "Basic Packing Lists",
-        "Access to Community Forum"
-      ],
-      "popular": false
-    },
-    "nomad": {
-      "title": "Nomad",
-      "description": "Advanced features for frequent flyers.",
-      "price": "$9",
-      "period": "month",
-      "button": "Subscribe now",
-      "features": [
-        "Unlimited Itineraries",
-        "Advanced Stats & Maps",
-        "Priority Support"
-      ],
-      "popular": true
-    },
-    "globetrotter": {
-      "title": "Globetrotter",
-      "description": "The ultimate kit for full-time travelers.",
-      "price": "$89",
-      "period": "year",
-      "button": "Get yearly plan",
-      "features": [
-        "Everything from the 'Nomad' plan",
-        "Exclusive Deals & Discounts",
-        "Early Access to New Features",
-        "2 Months Free"
-      ],
-      "popular": false
-    }
+    "items": [
+      {
+        "title": "Explorer",
+        "description": "Essential tools for the casual traveler.",
+        "price": "Free",
+        "period": null,
+        "button": "Get started",
+        "features": [
+          "1 Custom Itinerary per 3 weeks",
+          "Basic Packing Lists",
+          "Access to Community Forum"
+        ],
+        "isPopular": false
+      },
+      {
+        "title": "Nomad",
+        "description": "Advanced features for active travelers.",
+        "price": "$9",
+        "period": "month",
+        "button": "Subscribe now",
+        "features": [
+          "Unlimited Itineraries",
+          "Advanced Stats & Maps",
+          "Priority Support"
+        ],
+        "isPopular": true
+      },
+      {
+        "title": "Globetrotter",
+        "description": "An essential kit for avid travelers.",
+        "price": "$89",
+        "period": "year",
+        "button": "Get yearly plan",
+        "features": [
+          "Everything from the 'Nomad' plan",
+          "Exclusive Deals & Discounts",
+          "Early Access to New Features",
+          "2 Months Free"
+        ],
+        "isPopular": false
+      }
+    ]
  },
+
   "testimonials": {
     "title": "Loved by Travelers",
-    "description": "See what our community has to say."
+    "description": "See what our community has to say.",
+    "items": [
+      {
+        "name": "Elena Rodriguez",
+        "role": "Nomad",
+        "rating": 5,
+        "text": "The best app for planning my solo trips. The packing lists are a lifesaver, and I love seeing my travel stats grow!"
+      },
+      {
+        "name": "Alex Chen",
+        "role": "Globetrotter",
+        "rating": 4.5,
+        "text": "I used to spend hours planning. LiteLifeTrip did it in minutes, and the recommendations were spot on."
+      },
+      {
+        "name": "Marta Kowalski",
+        "role": "Explorer",
+        "rating": 5,
+        "text": "Perfect for weekend getaways and short trips. Clean UI and very intuitive to use."
+      },
+      {
+        "name": "Sarah Jenkins",
+        "role": "Explorer",
+        "rating": 5,
+        "text": "A must-have for any frequent traveler. It keeps everything organized and makes the whole travel experience stress-free."
+      },
+      {
+        "name": "Lucas Meyer",
+        "role": "Nomad",
+        "rating": 4,
+        "text": "I travel constantly for work, and this app helps me stay on top of routes, packing, and schedules."
+      },
+      {
+        "name": "Aisha Rahman",
+        "role": "Globetrotter",
+        "rating": 5,
+        "text": "The statistics and trip history features are incredible. It feels built exactly for my lifestyle."
+      },
+      {
+        "name": "Daniel Thompson",
+        "role": "Explorer",
+        "rating": 5,
+        "text": "Hands down the most powerful travel planner I've used. It handles complex multi-country trips effortlessly."
+      },
+      {
+        "name": "Isabella Moretti",
+        "role": "Nomad",
+        "rating": 5,
+        "text": "I love how everything syncs together — routes, notes, stats. It feels premium and very polished."
+      },
+      {
+        "name": "Kenji Tanaka",
+        "role": "Globetrotter",
+        "rating": 4.5,
+        "text": "An essential tool for long-term travelers. The insights and planning tools save so much time."
+      }
+    ]
   },
+
   "cta": {
     "title": "Ready to Start Your Journey?",
-    "description": "Join thousands of travelers who are planning better trips and discovering the world with LiteLifeTrip. It's free to get started.",
+    "description": "Join thousands of travelers who are planning better trips and discovering the world with LiteLifeTrip. It's absolutely free to get started.",
     "button": "Create Free Account"
   }
 }

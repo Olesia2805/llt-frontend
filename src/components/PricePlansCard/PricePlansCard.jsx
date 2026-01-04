@@ -1,4 +1,4 @@
-import { FaCheck } from "react-icons/fa";
+import { FaCheck } from "../../app/sectionsGuestIcons.js";
 import Button from "../Button/Button";
 import styles from "./PricePlansCard.module.css";
 
@@ -9,14 +9,14 @@ const PricePlansCard = ({
   period,
   features,
   buttonText,
-  popular,
+  isPopular,
 }) => {
   return (
-    <li className={`${styles.card} ${popular ? styles.popular : ""}`}>
-      {popular && <span className={styles.badge}>POPULAR</span>}
+    <li className={`${styles.card} ${isPopular ? styles.popular : ""}`}>
+      {isPopular && <span className={styles.badge}>POPULAR</span>}
 
       <h3 className={styles.title}>{title}</h3>
-      <p className={styles.description}>{description}</p>
+      <p className={styles}>{description}</p>
 
       <p className={styles.price}>
         {price}

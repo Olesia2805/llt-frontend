@@ -2,6 +2,10 @@
 @import "./variable.css";
 @import "./fonts.css";
 
+html {
+  font-display: swap;
+}
+
 body {
   font-family: var(--font-sans-serif);
   background-color: var(--bg-main);
@@ -58,20 +62,6 @@ p {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
-}
-
-.icon {
-  width: 28px;
-  height: 28px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-@media (min-width: 768px) {
-  .icon {
-    width: 32px;
-    height: 32px;
-  }
 }
 
 .sectionHeaderWrapper {

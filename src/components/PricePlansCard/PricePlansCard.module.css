@@ -37,6 +37,10 @@
   font-weight: 600;
 }
 
+.title {
+  font-weight: 600;
+}
+
 .price {
   font-size: 2rem;
   font-weight: 700;
