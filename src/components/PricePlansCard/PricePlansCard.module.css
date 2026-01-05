@@ -8,6 +8,14 @@
   flex-direction: column;
   gap: 24px;
   overflow: hidden;
+  height: 100%;
+
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.4s ease;
+}
+
+[data-theme="light"] .card {
+  background-color: var(--bg-main);
 }
 
 @media (min-width: 1280px) {
@@ -16,9 +24,21 @@
   }
 }
 
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-0.625rem);
+
+  box-shadow: 0 1.25rem 2.5rem rgba(var(--border-color-rgb) 0.15);
+  border-color: var(--primary);
+}
+
 .popular {
   border: 2px solid var(--primary);
   background-color: var(--bg-alt);
+}
+
+[data-theme="light"] .popular {
+  background-color: var(--bg-main);
 }
 
 .popular h3 {
@@ -27,11 +47,11 @@
 
 .badge {
   position: absolute;
-  top: -6px;
-  right: -10px;
+  top: -4px;
+  right: -6px;
   background-color: var(--primary);
-  padding: 4px 12px;
-  border-radius: 10px;
+  padding: 6px 16px 4px 10px;
+  border-radius: 6px;
   color: var(--secondary);
   font-size: 0.75em;
   font-weight: 600;
@@ -44,7 +64,7 @@
 .price {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--text-light);
+  color: var(--text-main);
 }
 
 .period {
@@ -69,4 +89,8 @@
 
 .icon {
   color: var(--primary);
+}
+
+.cardButton {
+  margin-top: auto;
 }

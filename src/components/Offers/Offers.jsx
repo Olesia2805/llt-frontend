@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./Offers.module.css";
-import forestImg from "../../assets/img/forest.jpg";
+import forestResolution from "../../assets/img/forest-high-resolution.webp";
+import forestDesktop from "../../assets/img/forest-desktop.webp";
+import forestMobile from "../../assets/img/forest-mobile.webp";
 import Section from "../Section/Section.jsx";
 import Container from "../Container/Container.jsx";
 import OffersListCard from "../OffersListCard/OffersListCard.jsx";
@@ -33,12 +35,20 @@ const Offers = () => {
         <div className={styles.contentWrapper}>
           <figure className={styles.figure}>
             <div className={styles.imageWrapper}>
-              <img
-                src={forestImg}
-                alt="forest"
-                className={styles.image}
-                loading="lazy"
-              />
+              <picture>
+                <source media="(max-width: 768px)" srcSet={forestMobile} />
+                <source
+                  srcSet={`${forestDesktop} 1x, ${forestResolution} 2x`}
+                />
+                <img
+                  className={styles.image}
+                  src={forestDesktop}
+                  alt={t("offers.imageAlt")}
+                  width="450"
+                  height="570"
+                  loading="lazy"
+                />
+              </picture>
               <div className={styles.overlay} />
 
               {firebugs.map((f, i) => (

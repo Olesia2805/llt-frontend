@@ -4,7 +4,7 @@
 }
 
 .toggle {
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid rgb(var(--primary-light-rgb));
   background-color: var(--bg-main);
@@ -15,7 +15,7 @@
 
 .toggle:hover,
 .toggle:focus-visible {
-  filter: drop-shadow(0 0 6px rgba(var(--primary-light-rgb), 0.8));
+  filter: drop-shadow(0 0 4px rgba(var(--primary-light-rgb), 0.8));
   transform: scale(1.05);
 }
 
@@ -25,9 +25,8 @@
   left: 0;
   background-color: var(--bg-main);
   border: 1px solid rgb(var(--primary-light-rgb));
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  list-style: none;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(var(--border-color-rgb), 0.15);
   padding: 4px 0;
   margin: 0;
   min-width: 60px;

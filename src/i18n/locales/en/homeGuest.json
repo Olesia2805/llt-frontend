@@ -32,6 +32,7 @@
     "title": "What We Offer",
     "description": "Discover the comprehensive suite of features designed to make every step of your journey seamless and enjoyable.",
     "quote": "The journey of a thousand miles begins with a single step.",
+    "imageAlt": "Forest",
     "items": [
       {
         "key": "packing",

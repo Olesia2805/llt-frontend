@@ -32,7 +32,11 @@ const PricePlansCard = ({
         ))}
       </ul>
 
-      <Button text={buttonText} />
+      <Button
+        text={buttonText}
+        variant={isPopular ? "primary" : "secondary"}
+        className={styles.cardButton}
+      />
     </li>
   );
 };

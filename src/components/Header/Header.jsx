@@ -15,17 +15,25 @@ const Header = () => {
     <header className={styles.header}>
       <Container>
         <div className={styles.headerInner}>
-          <Logo />
+          <Logo variant="header" />
 
           <div className={styles.controls}>
-            <ThemeSwitcher />
-            <LanguageSwitcher />
             {isAuthenticated ? (
               <Button text="Logout" onClick={logout} />
             ) : (
               <>
-                <Button text={t("header.login")} onClick={login} />
-                <Button text={t("header.signup")} onClick={signup} />
+                <ThemeSwitcher />
+                <LanguageSwitcher />
+                <Button
+                  variant="secondary"
+                  text={t("header.login")}
+                  onClick={login}
+                />
+                <Button
+                  text={t("header.signup")}
+                  onClick={signup}
+                  className={styles.signupBtn}
+                />
               </>
             )}
           </div>

@@ -30,8 +30,8 @@
 
 .image {
   width: 100%;
+  height: auto;
   border-radius: 6px;
-  display: block;
 }
 
 .overlay {
@@ -64,6 +64,10 @@
   .quote {
     font-size: 2rem;
   }
+}
+
+[data-theme="light"] .quote {
+  color: var(--text-light);
 }
 
 .quote::before {

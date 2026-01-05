@@ -1,6 +1,7 @@
 :root {
   --primary: #14b8a6;
   --primary-light-rgb: 45, 212, 191;
+  --primary-btn-hover: #14b8a58e;
   --blobs-rgb: 20, 184, 166;
   --secondary: #134e4a;
   --bg-main: #0f172a;
@@ -19,6 +20,7 @@
 [data-theme="light"] {
   --primary: #377c55;
   --primary-light-rgb: 38, 89, 61;
+  --primary-btn-hover: #4b986ce5;
   --blobs-rgb: 0, 120, 105;
   --secondary: #ecfdf5;
   --bg-main: #ffffff;

@@ -3,8 +3,12 @@ import ThemeContext from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 import Section from "../Section/Section";
 import Container from "../Container/Container";
-import tripDark from "../../assets/img/trip-dark.jpg";
-import tripLight from "../../assets/img/trip-light.jpg";
+import tripDarkHighResolution from "../../assets/img/trip-dark-high-resolution.webp";
+import tripDarkDesktop from "../../assets/img/trip-dark-desktop.webp";
+import tripDarkMobile from "../../assets/img/trip-dark-mobile.webp";
+import tripLightHighResolution from "../../assets/img/trip-light-high-resolution.webp";
+import tripLightDesktop from "../../assets/img/trip-light-desktop.webp";
+import tripLightMobile from "../../assets/img/trip-light-mobile.webp";
 import Button from "../Button/Button";
 import styles from "./HeroGuest.module.css";
 
@@ -12,7 +16,10 @@ const Hero = () => {
   const { t } = useTranslation("homeGuest");
   const { theme } = useContext(ThemeContext);
 
-  const heroImage = theme === "dark" ? tripDark : tripLight;
+  const highResolutionSrc =
+    theme === "dark" ? tripDarkHighResolution : tripLightHighResolution;
+  const desktopSrc = theme === "dark" ? tripDarkDesktop : tripLightDesktop;
+  const mobileSrc = theme === "dark" ? tripDarkMobile : tripLightMobile;
 
   return (
     <Section variant="blobs">
@@ -27,12 +34,19 @@ const Hero = () => {
             <Button text={t("hero.button")} />
           </div>
 
-          <img
-            className={styles.image}
-            src={heroImage}
-            alt={t("hero.imageAlt")}
-            loading="lazy"
-          />
+          <picture>
+            <source media="(max-width: 768px)" srcSet={mobileSrc} />
+            <source srcSet={`${desktopSrc} 1x, ${highResolutionSrc} 2x`} />
+            <img
+              className={styles.image}
+              src={desktopSrc}
+              alt={t("hero.imageAlt")}
+              width="450"
+              height="570"
+              fetchpriority="high"
+              loading="eager"
+            />
+          </picture>
         </div>
       </Container>
     </Section>
