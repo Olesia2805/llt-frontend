@@ -46,7 +46,13 @@ const LogInForm = () => {
             type="text"
             placeholder={t("form.emailPlaceholder")}
             className={`${styles.input} ${errors.email ? styles.error : ""}`}
-            {...register("email", { required: t("validation.emailRequired") })}
+            {...register("email", { 
+              required: t("validation.emailRequired"),
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: t("validation.emailPattern")
+              }
+            })}
           />
           {errors.email && (
             <span className={styles.errorMessage}>{errors.email.message}</span>
@@ -61,7 +67,17 @@ const LogInForm = () => {
               type={showPassword ? "text" : "password"}
               placeholder={t("form.passwordPlaceholder")}
               className={`${styles.input} ${errors.password ? styles.error : ""}`}
-              {...register("password", { required: t("validation.passwordRequired") })}
+              {...register("password", { 
+                required: t("validation.passwordRequired"),
+                minLength: {
+                  value: 8,
+                  message: t("validation.passwordLength")
+                },
+                validate: {
+                  complexity: (value) => 
+                    /(?=.*[0-9])(?=.*[!@#$%^&*])/.test(value) || t("validation.passwordComplexity")
+                }
+              })}
             />
             <button
               type="button"
