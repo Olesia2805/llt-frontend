@@ -8,6 +8,7 @@ import "/src/assets/styles/global.css";
 // import { Toaster } from "react-hot-toast";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage.jsx"));
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route path={ROUTER.HOME} element={<Layout />}>
             <Route index element={<HomePage />} />
+            <Route path={ROUTER.ALL} element={<NotFoundPage />} />
           </Route>
         </Routes>
       </Suspense>
