@@ -1,0 +1,7 @@
+{
+  "errorCode": "ERROR 404",
+  "title": "Looks like you've wandered off the map",
+  "description": "The destination you are looking for doesn't exist or has been moved. Even the best travelers get lost sometimes.",
+  "returnHome": "Return Home",
+  "helpCenter": "Help Center"
+}
