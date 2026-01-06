@@ -1,4 +1,3 @@
-// import Button from "../Button/Button";
 import styles from "./ChooseReasonsCard.module.css";
 
 const ChooseReasonsCard = ({ title, description, Icon }) => {
@@ -6,7 +5,7 @@ const ChooseReasonsCard = ({ title, description, Icon }) => {
     <li className={styles.card}>
       <div className={styles.header}>
         <div className={styles.iconWrapper}>
-          {Icon && <Icon className="icon" />}
+          {Icon && <Icon className={styles.icon} />}
         </div>
         <h3 className={styles.title}>{title}</h3>
       </div>

@@ -2,8 +2,9 @@ import clsx from "clsx";
 import styles from "./Button.module.css";
 
 const Button = ({
-  text,
   variant = "primary",
+  // variant: "primary", "secondary", "..."
+  text,
   className,
   type = "button",
   onClick,

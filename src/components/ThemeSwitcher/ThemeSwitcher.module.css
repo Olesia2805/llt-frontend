@@ -1,0 +1,35 @@
+.switcher {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition: background-color 0.25s ease, box-shadow 0.25s ease,
+    transform 0.15s ease;
+}
+
+.switcher:active {
+  transform: scale(0.92);
+}
+
+.icon {
+  font-size: 22px;
+  color: rgb(var(--primary-light-rgb));
+  transition: color 0.25s ease, filter 0.25s ease, transform 0.25s ease;
+}
+
+@media (min-width: 1280px) {
+  .icon {
+    font-size: 28px;
+  }
+}
+.switcher:hover .icon,
+.switcher:focus-visible .icon {
+  filter: drop-shadow(0 0 6px rgba(var(--primary-light-rgb), 0.8))
+    drop-shadow(0 0 12px rgba(var(--primary-light-rgb), 0.5));
+}

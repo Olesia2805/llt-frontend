@@ -1,13 +1,15 @@
 import { useState } from "react";
-import styles from "./Offer.module.css";
-import forestImg from "../../assets/img/forest.jpg";
-import Section from "../Section/Section";
-import Container from "../Container/Container";
-import OfferListCard from "../OfferListCard/OfferListCard";
+import styles from "./Offers.module.css";
+import forestResolution from "../../assets/img/forest-high-resolution.webp";
+import forestDesktop from "../../assets/img/forest-desktop.webp";
+import forestMobile from "../../assets/img/forest-mobile.webp";
+import Section from "../Section/Section.jsx";
+import Container from "../Container/Container.jsx";
+import OffersListCard from "../OffersListCard/OffersListCard.jsx";
 import { useTranslation } from "react-i18next";
 import { OFFER_FEATURES } from "../../app/sectionsGuestData.js";
 
-const Offer = () => {
+const Offers = () => {
   const { t } = useTranslation("homeGuest");
 
   const [firebugs] = useState(() =>
@@ -26,14 +28,27 @@ const Offer = () => {
     <Section>
       <Container>
         <div className="sectionHeaderWrapper">
-          <h2>{t("offer.title")}</h2>
-          <p>{t("offer.description")}</p>
+          <h2>{t("offers.title")}</h2>
+          <p>{t("offers.description")}</p>
         </div>
 
         <div className={styles.contentWrapper}>
           <figure className={styles.figure}>
             <div className={styles.imageWrapper}>
-              <img src={forestImg} alt="forest" className={styles.image} />
+              <picture>
+                <source media="(max-width: 768px)" srcSet={forestMobile} />
+                <source
+                  srcSet={`${forestDesktop} 1x, ${forestResolution} 2x`}
+                />
+                <img
+                  className={styles.image}
+                  src={forestDesktop}
+                  alt={t("offers.imageAlt")}
+                  width="450"
+                  height="570"
+                  loading="lazy"
+                />
+              </picture>
               <div className={styles.overlay} />
 
               {firebugs.map((f, i) => (
@@ -54,13 +69,13 @@ const Offer = () => {
             </div>
 
             <figcaption className={styles.figcaption}>
-              <q className={styles.quote}>{t("offer.quote")}</q>
+              <q className={styles.quote}>{t("offers.quote")}</q>
             </figcaption>
           </figure>
 
           <ul className={styles.list}>
             {OFFER_FEATURES(t).map((feature) => (
-              <OfferListCard key={feature.id} {...feature} />
+              <OffersListCard key={feature.id} {...feature} />
             ))}
           </ul>
         </div>
@@ -69,4 +84,4 @@ const Offer = () => {
   );
 };
 
-export default Offer;
+export default Offers;

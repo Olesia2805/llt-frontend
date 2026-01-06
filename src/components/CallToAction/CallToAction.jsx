@@ -3,19 +3,17 @@ import Section from "../Section/Section";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
 import styles from "./CallToAction.module.css";
-import Blobs from "../Blobs/Blobs";
 
 const CallToAction = () => {
   const { t } = useTranslation("homeGuest");
 
   return (
-    <Section>
+    <Section variant="blobs ctaSection">
       <Container>
         <div className={styles.ctaWrapper}>
-          <Blobs />
-          <div className={styles.textWrapper}>
-            <h2 className={styles.title}>{t("cta.title")}</h2>
-            <p className={styles.description}>{t("cta.description")}</p>
+          <div className="sectionHeaderWrapper">
+            <h2>{t("cta.title")}</h2>
+            <p>{t("cta.description")}</p>
           </div>
           <Button text={t("cta.button")} />
         </div>

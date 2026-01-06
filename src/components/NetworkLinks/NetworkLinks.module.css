@@ -2,4 +2,22 @@
   display: flex;
   gap: 12px;
   color: var(--text-muted);
+  justify-content: center;
+}
+
+.icon {
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@media (min-width: 768px) {
+  .icon {
+    font-size: 28px;
+  }
+}
+
+.icon:hover,
+.icon:focus-visible {
+  color: var(--primary);
 }

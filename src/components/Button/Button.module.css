@@ -1,10 +1,17 @@
 .button {
-  padding: 12px 24px;
+  padding: 10px 22px;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
   border: none;
   transition: all 0.25s ease;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .button {
+    width: auto;
+  }
 }
 
 .primary {
@@ -13,6 +20,19 @@
 }
 
 .primary:hover,
-.primary:focus {
-  background-color: color-mix(in srgb, var(--primary), black 10%);
+.primary:focus-visible {
+  background-color: var(--primary-btn-hover);
+}
+
+.secondary {
+  background-color: transparent;
+  border: 3px solid rgb(var(--border-color-rgb));
+  color: var(--text-main);
+}
+
+.secondary:hover,
+.secondary:focus-visible {
+  background-color: rgba(var(--border-color-rgb), 0.1);
+  border-color: var(--primary);
+  color: var(--primary);
 }

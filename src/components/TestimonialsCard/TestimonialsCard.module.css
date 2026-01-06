@@ -1,0 +1,59 @@
+.card {
+  position: relative;
+  padding: 32px 24px 48px;
+  border-radius: 16px;
+  background-color: var(--bg-alt);
+  border: 1px solid rgb(var(--border-color-rgb));
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.rating {
+  display: flex;
+  gap: 4px;
+  color: var(--accent-color);
+}
+
+.user {
+  text-align: right;
+}
+
+.name {
+  color: var(--text-main);
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.role {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.text {
+  color: var(--text-main);
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.quotes {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  color: var(--primary);
+  opacity: 0.6;
+  pointer-events: none;
+}

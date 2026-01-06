@@ -1,10 +1,10 @@
-import styles from "./OfferListCard.module.css";
+import styles from "./OffersListCard.module.css";
 
-const OfferListCard = ({ title, description, Icon }) => {
+const OffersListCard = ({ title, description, Icon }) => {
   return (
     <li className={styles.card}>
       <div className={styles.iconWrapper}>
-        {Icon && <Icon className="icon" />}
+        {Icon && <Icon className={styles.icon} />}
       </div>
 
       <div className={styles.content}>
@@ -15,4 +15,4 @@ const OfferListCard = ({ title, description, Icon }) => {
   );
 };
 
-export default OfferListCard;
+export default OffersListCard;

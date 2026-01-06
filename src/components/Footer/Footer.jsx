@@ -19,7 +19,7 @@ const Footer = () => {
           </div>
 
           <div className={styles.column}>
-            <h4 className={styles.title}>{t("footer.company")}</h4>
+            <h3 className={styles.title}>{t("footer.company")}</h3>
             <ul className={styles.links}>
               <li>{t("footer.aboutUs")}</li>
               <li>{t("footer.team")}</li>

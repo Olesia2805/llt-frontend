@@ -29,10 +29,32 @@
   display: flex;
   align-items: center;
   gap: 18px;
+  text-align: center;
+}
+
+@media (min-width: 1280px) {
+  .header {
+    text-align: start;
+    gap: 30px;
+  }
 }
 
 .iconWrapper {
   color: var(--primary);
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@media (min-width: 768px) {
+  .icon {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .divider {

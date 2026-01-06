@@ -1,6 +1,8 @@
 :root {
   --primary: #14b8a6;
   --primary-light-rgb: 45, 212, 191;
+  --primary-btn-hover: #14b8a58e;
+  --blobs-rgb: 20, 184, 166;
   --secondary: #134e4a;
   --bg-main: #0f172a;
   --bg-alt: #1e293b;
@@ -11,22 +13,23 @@
   --blob-medium: 0.25;
   --blob-soft: 0.18;
   --overlay-color: #10100f99;
-  --firebug: #ffff00;
+  --accent-color: #cfc624;
   --firebug-background: #000000;
 }
 
 [data-theme="light"] {
   --primary: #377c55;
-  --primary-light: #52a173;
   --primary-light-rgb: 38, 89, 61;
+  --primary-btn-hover: #4b986ce5;
+  --blobs-rgb: 0, 120, 105;
   --secondary: #ecfdf5;
   --bg-main: #ffffff;
   --bg-alt: #f8fafc;
-  --text-main: #1e293b;
-  --text-muted: #64748b;
+  --text-main: #0e0f10;
+  --text-muted: #242e38;
   --text-light: #f8fafc;
-  --border-color: #e2e8f0;
+  --border-color-rgb: 210, 216, 225;
   --overlay-color: #10100f40;
-  --firebug: #ffff00;
+  --accent-color: #cfc624;
   --firebug-background: #000000;
 }
