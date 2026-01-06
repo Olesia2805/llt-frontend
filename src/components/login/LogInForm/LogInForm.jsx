@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -8,6 +9,7 @@ import styles from "./LogInForm.module.css";
 import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
 
 const LogInForm = () => {
+  const { t } = useTranslation("login");
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -32,19 +34,19 @@ const LogInForm = () => {
       </div>
 
       <div className={styles.header}>
-        <h1>Welcome Back</h1>
-        <p>Continue your journey.</p>
+        <h1>{t("form.welcome")}</h1>
+        <p>{t("form.continue")}</p>
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputGroup}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t("form.emailLabel")}</label>
           <input
             id="email"
             type="text"
-            placeholder="Email or Username"
+            placeholder={t("form.emailPlaceholder")}
             className={`${styles.input} ${errors.email ? styles.error : ""}`}
-            {...register("email", { required: "Email is required" })}
+            {...register("email", { required: t("validation.emailRequired") })}
           />
           {errors.email && (
             <span className={styles.errorMessage}>{errors.email.message}</span>
@@ -52,14 +54,14 @@ const LogInForm = () => {
         </div>
 
         <div className={styles.inputGroup}>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t("form.passwordLabel")}</label>
           <div className={styles.passwordWrapper}>
             <input
               id="password"
               type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
+              placeholder={t("form.passwordPlaceholder")}
               className={`${styles.input} ${errors.password ? styles.error : ""}`}
-              {...register("password", { required: "Password is required" })}
+              {...register("password", { required: t("validation.passwordRequired") })}
             />
             <button
               type="button"
@@ -83,21 +85,21 @@ const LogInForm = () => {
         <div className={styles.actions}>
           <label className={styles.rememberMe}>
             <input type="checkbox" {...register("rememberMe")} />
-            <span>Remember me</span>
+            <span>{t("form.rememberMe")}</span>
           </label>
           <a href="#" className={styles.forgotPassword}>
-            Forgot Password?
+            {t("form.forgotPassword")}
           </a>
         </div>
 
         <button type="submit" className={styles.submitButton}>
-          Log In
+          {t("form.loginButton")}
         </button>
       </form>
 
       <div className={styles.divider}>
         <div className={styles.bgDivider}></div>
-        <span>Or continue with</span>
+        <span>{t("form.orContinue")}</span>
         <div className={styles.bgDivider}></div>
       </div>
 
@@ -107,9 +109,9 @@ const LogInForm = () => {
 
       <div className={styles.footer}>
         <p>
-          Don't have an account?{" "}
+          {t("form.noAccount")}{" "}
           <Link to="/signup" className={styles.signupLink}>
-            Sign up
+            {t("form.signup")}
           </Link>
         </p>
       </div>

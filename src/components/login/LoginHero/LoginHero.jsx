@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next";
 import styles from "./LoginHero.module.css";
 import loginBg from "../../../assets/img/login_background.png";
 import Logo from "../../Logo/Logo";
 
 const LoginHero = () => {
+  const { t } = useTranslation("login");
+
   return (
     <div className={styles.leftPanel}>
       <div
@@ -16,11 +19,8 @@ const LoginHero = () => {
           <span className={styles.brandName}>TravelApp</span>
         </div>
         <div className={styles.heroText}>
-          <h2>Plan your next adventure.</h2>
-          <p>
-            Discover new destinations, organize your itinerary, and travel with
-            peace of mind.
-          </p>
+          <h2>{t("hero.title")}</h2>
+          <p>{t("hero.subtitle")}</p>
         </div>
       </div>
     </div>

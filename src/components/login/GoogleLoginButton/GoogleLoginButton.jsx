@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import styles from "./GoogleLoginButton.module.css";
 
 const GoogleLoginButton = ({ onClick }) => {
+  const { t } = useTranslation("login");
+
   return (
     <button className={styles.socialButton} onClick={onClick} type="button">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +24,7 @@ const GoogleLoginButton = ({ onClick }) => {
           fill="#EA4335"
         ></path>
       </svg>
-      <span>Google</span>
+      <span>{t("form.googleLogin")}</span>
     </button>
   );
 };
