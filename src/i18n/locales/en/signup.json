@@ -1,0 +1,42 @@
+{
+  "hero_section": {
+    "badge_text": "New Adventures",
+    "title": "Start your <span>perfect journey</span>",
+    "description": "Join the community of travelers, plan routes and discover the world with us.",
+    "imageAlt": "Breathtaking mountain scenery seen from a boat"
+  },
+  "registration_form": {
+    "title": "Sign Up",
+    "subtitle": "Create an account to get started",
+    "fields": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "example@email.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Create a password"
+      }
+    },
+    "password_strength": {
+      "weak": "Weak password",
+      "medium": "Medium password",
+      "strong": "Strong password"
+    },
+    "policies": {
+      "text": "I agree to the",
+      "link": "Terms of Use and Privacy Policy"
+    },
+    "error_policies": "You must agree to the Terms of Use and Privacy Policy"
+  },
+  "buttons": {
+    "submit": "Sign Up",
+    "divider_text": "or",
+    "google_signup": "Sign up with Google"
+  },
+  "login_text": "Already have an account? <span>Log in</span>"
+}

@@ -35,14 +35,14 @@
 }
 
 .secondary {
-  background-color: transparent;
+  background-color: var(--bg-main);
   border: 3px solid rgb(var(--border-color-rgb));
   color: var(--text-main);
 }
 
 .secondary:hover:not(:disabled),
 .secondary:focus-visible {
-  background-color: rgba(var(--border-color-rgb), 0.1);
+  background-color: rgba(var(--border-color-rgb), 0.3);
   border-color: var(--primary);
   color: var(--primary);
 }

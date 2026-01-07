@@ -11,6 +11,7 @@ const Button = ({
   onClick,
   disabled = false,
   isLoading = false,
+  leftIcon,
   rightIcon,
   isActive = false,
   // loaderProps = { size: "sm" },
@@ -32,6 +33,8 @@ const Button = ({
       )}
       {...props}
     >
+      {leftIcon && <span className={styles.icon}>{leftIcon}</span>}
+
       <span className={styles.content}>{children || text}</span>
 
       {rightIcon && <span className={styles.icon}>{rightIcon}</span>}
