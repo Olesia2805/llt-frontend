@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 
 import Layout from "./components/Layout/Layout.jsx";
 import Loader from "./components/Loader/Loader.jsx";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop.jsx";
 import { ROUTER } from "./app/routes.jsx";
 import "/src/assets/styles/global.css";
 
@@ -20,7 +21,9 @@ const NotFoundPage = lazy(() =>
 const App = () => {
   return (
     <>
+      {/* TODO: Loader */}
       <Suspense fallback={<Loader />}>
+        <ScrollToTop />
         <Routes>
           <Route path={ROUTER.HOME} element={<Layout />}>
             <Route index element={<HomePage />} />
