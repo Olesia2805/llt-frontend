@@ -22,7 +22,7 @@ const Hero = () => {
   const mobileSrc = theme === "dark" ? tripDarkMobile : tripLightMobile;
 
   return (
-    <Section variant="blobs">
+    <Section variant="blobsBG">
       <Container>
         <div className={styles.heroWrapper}>
           <div className={styles.textWrapper}>

@@ -4,6 +4,7 @@ import NetworkLinks from "../NetworkLinks/NetworkLinks";
 import { useTranslation } from "react-i18next";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { t } = useTranslation("common");
@@ -23,7 +24,11 @@ const Footer = () => {
             <ul className={styles.links}>
               <li>{t("footer.aboutUs")}</li>
               <li>{t("footer.team")}</li>
-              <li>{t("footer.terms")}</li>
+              <li>
+                <Link to="/policies" className={styles.footerLink}>
+                  {t("footer.terms")}
+                </Link>
+              </li>
             </ul>
           </div>
 

@@ -6,6 +6,10 @@ import Footer from "../Footer/Footer";
 import ModalContainer from "../ModalContainer/ModalContainer";
 
 const Layout = () => {
+  //TODO: SideBar
+  //   const { isAuthenticated } = useAuth();
+  //   return isAuthenticated ? <Header /> : <SideBar />;
+
   return (
     <>
       <Header />
