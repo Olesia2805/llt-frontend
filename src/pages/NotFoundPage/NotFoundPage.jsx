@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
 import Button from "../../components/Button/Button";
 import styles from "./NotFoundPage.module.css";
@@ -14,25 +15,21 @@ const NotFoundPage = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <Section className={styles.root}>
       <Container>
         <div className={styles.content}>
           <div className={styles.imageWrapper}>
             <img
               src={illustration}
               alt="404 illustration"
-              className={styles.illustration}
+              className={styles.image}
             />
           </div>
 
-          <div className={styles.textContent}>
-            <p className={styles.errorCode}>{t("errorCode")}</p>
-            <h1 className={styles.title}>
-              {t("title")}
-            </h1>
-            <p className={styles.description}>
-              {t("description")}
-            </p>
+          <div className={styles.textWrapper}>
+            <p className={styles.code}>{t("errorCode")}</p>
+            <h1 className={styles.title}>{t("title")}</h1>
+            <p className={styles.description}>{t("description")}</p>
           </div>
 
           <div className={styles.actions}>
@@ -40,15 +37,11 @@ const NotFoundPage = () => {
               text={t("returnHome")}
               variant="primary"
               onClick={handleReturnHome}
-              className={styles.primaryButton}
             />
-            <button className={styles.secondaryButton}>
-              {t("helpCenter")}
-            </button>
           </div>
         </div>
       </Container>
-    </div>
+    </Section>
   );
 };
 
