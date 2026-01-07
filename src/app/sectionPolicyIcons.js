@@ -1,25 +1,49 @@
-import { MdGavel, MdSecurity, MdAccessibilityNew } from "react-icons/md";
+import {
+  MdGavel,
+  MdSecurity,
+  MdAccessibilityNew,
+  MdLock,
+  MdToc,
+  MdArrowForward,
+} from "react-icons/md";
 import { RiDatabase2Fill } from "react-icons/ri";
+import { FaHistory, FaCheckCircle } from "react-icons/fa";
+import { IoShieldCheckmark } from "react-icons/io5";
+import { GoDotFill } from "react-icons/go";
 
 export const NAV_ITEMS = {
   terms: {
     id: "terms-of-service",
-    title: "sidebar.navTerms",
+    navTitle: "sidebar.navTerms",
+    title: "terms.title",
     Icon: MdGavel,
   },
   privacy: {
     id: "privacy-policy",
-    title: "sidebar.navPrivacy",
+    navTitle: "sidebar.navPrivacy",
+    title: "privacy.title",
     Icon: MdSecurity,
   },
   data: {
     id: "data-collection",
-    title: "sidebar.navData",
+    navTitle: "sidebar.navData",
+    title: "dataCollection.title",
     Icon: RiDatabase2Fill,
   },
   rights: {
     id: "user-rights",
-    title: "sidebar.navRights",
+    navTitle: "sidebar.navRights",
+    title: "rights.title",
     Icon: MdAccessibilityNew,
   },
+};
+
+export {
+  FaHistory,
+  FaCheckCircle,
+  IoShieldCheckmark,
+  MdLock,
+  GoDotFill,
+  MdToc,
+  MdArrowForward,
 };

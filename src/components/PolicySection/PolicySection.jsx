@@ -12,8 +12,6 @@ const PolicySection = ({ id, title, Icon, children }) => {
           <h2 className={styles.title}>{title}</h2>
         </div>
 
-        <hr className={styles.divider} />
-
         <div className={styles.content}>{children}</div>
       </Section>
     </div>

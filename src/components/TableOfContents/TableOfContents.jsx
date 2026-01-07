@@ -1,23 +1,31 @@
-import { useTranslation } from "react-i18next";
-import styles from "./TableOfContents.module.css";
-import { MdToc, MdArrowForward } from "react-icons/md";
-import { NAV_ITEMS } from "../../app/sectionPolicyIcons.js";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { NAV_ITEMS } from "../../app/sectionPolicyIcons.js";
+import { MdToc, MdArrowForward } from "../../app/sectionPolicyIcons.js";
+import Button from "../../components/Button/Button"; // Імпортуємо твій новий компонент
+import styles from "./TableOfContents.module.css";
 
 const TableOfContents = () => {
   const { t } = useTranslation("policies");
   const [activeId, setActiveId] = useState("");
 
-  const getHeaderOffset = () => {
-    if (window.innerWidth < 768) return 72; // mobile
-    return 120; // desktop
+  const handleNavClick = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
 
   useEffect(() => {
-    const headerOffset = getHeaderOffset();
+    const isDesktop = window.innerWidth >= 1024;
 
     const observer = new IntersectionObserver(
       (entries) => {
+        if (!isDesktop) return;
+
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id);
@@ -25,7 +33,7 @@ const TableOfContents = () => {
         });
       },
       {
-        rootMargin: `-${headerOffset}px 0px -60% 0px`,
+        rootMargin: `-120px 0px -60% 0px`,
         threshold: 0.1,
       }
     );
@@ -50,15 +58,15 @@ const TableOfContents = () => {
           <ul className={styles.navList}>
             {Object.values(NAV_ITEMS).map((item) => (
               <li key={item.id} className={styles.navItem}>
-                <a
-                  href={`#${item.id}`}
-                  className={`${styles.link} ${
-                    activeId === item.id ? styles.active : ""
-                  }`}
+                <Button
+                  variant="ghost"
+                  className={styles.link}
+                  isActive={activeId === item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  rightIcon={<MdArrowForward />}
                 >
-                  <span>{t(item.title)}</span>
-                  <MdArrowForward className={styles.arrow} />
-                </a>
+                  {t(item.navTitle)}
+                </Button>
               </li>
             ))}
           </ul>

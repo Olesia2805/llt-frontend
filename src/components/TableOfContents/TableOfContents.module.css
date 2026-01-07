@@ -49,41 +49,5 @@
 .navList {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  border-left: 3px solid transparent;
-}
-
-.link:hover,
-.link:focus {
-  background-color: rgba(var(--primary-light-rgb), 0.1);
-  color: var(--text-primary);
-  border-left-color: var(--primary);
-}
-
-.link.active {
-  background-color: rgba(var(--primary-light-rgb), 0.1);
-  border-left-color: var(--primary);
-}
-
-.arrow {
-  font-size: 16px;
-  opacity: 0;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  transform: translateX(-10px);
-}
-
-.link:hover .arrow,
-.link:focus .arrow {
-  opacity: 1;
-  transform: translateX(0);
-  color: var(--primary);
+  gap: 8px;
 }
