@@ -65,7 +65,7 @@
 .form {
   margin-bottom: 24px;
   width: 100%;
-  max-width: 420px;
+  max-width: 500px;
   padding: 20px;
   border-radius: 12px;
   background: rgba(var(--border-color-rgb), 0.5);
@@ -84,7 +84,7 @@
   .form {
     margin-top: 4px;
     margin-bottom: 0;
-    padding: 22px;
+    padding: 28px;
   }
 }
 
