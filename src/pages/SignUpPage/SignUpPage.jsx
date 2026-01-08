@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react";
-import boatHighResolution from "../../assets/img/boat-high-resolution.webp";
-import boatDesktop from "../../assets/img/boat-desktop.webp";
-import boatMobile from "../../assets/img/boat-mobile.webp";
+import { useGoogleLogin } from "@react-oauth/google";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { TbBrandGoogleFilled } from "react-icons/tb";
+import { FaHashtag } from "react-icons/fa6";
+
 import styles from "./SignUpPage.module.css";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
 
-import { register } from "../../app/auth.api";
+import { register, googleAuth } from "../../app/auth.api";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { getPasswordStrength } from "../../app/passwordStrength";
+
+import boatHighResolution from "../../assets/img/boat-high-resolution.webp";
+import boatDesktop from "../../assets/img/boat-desktop.webp";
+import boatMobile from "../../assets/img/boat-mobile.webp";
 
 const SignUpPage = () => {
   const { t } = useTranslation("signup");
@@ -22,7 +27,6 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-
   const [acceptedPolicies, setAcceptedPolicies] = useState(false);
 
   const strength = password ? getPasswordStrength(password) : "empty";
@@ -30,6 +34,23 @@ const SignUpPage = () => {
   useEffect(() => {
     if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
+
+  const handleGoogleSignup = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setLoading(true);
+      setError("");
+      try {
+        const data = await googleAuth(tokenResponse.access_token);
+        await login({ email: data.email, token: data.token });
+        navigate("/");
+      } catch (err) {
+        setError(err.message || "Google auth failed");
+      } finally {
+        setLoading(false);
+      }
+    },
+    onError: (error) => setError("Google login failed"),
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,16 +73,15 @@ const SignUpPage = () => {
     }
   };
 
-  const handleGoogleSignup = () => {
-    alert("Google signup integration goes here");
-  };
-
   return (
     <Container>
       <div className={styles.signupWrapper}>
         {/* Hero Text */}
         <div className={styles.heroText}>
-          <span className={styles.badge}>{t("hero_section.badge_text")}</span>
+          <span className={styles.badge}>
+            <FaHashtag />
+            {t("hero_section.badge_text").toUpperCase()}
+          </span>
           <h1
             dangerouslySetInnerHTML={{
               __html: t("hero_section.title"),
@@ -77,6 +97,19 @@ const SignUpPage = () => {
             className={styles.loginText}
             dangerouslySetInnerHTML={{ __html: t("login_text") }}
           />
+
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleGoogleSignup}
+            className={styles.googleButton}
+            leftIcon={<TbBrandGoogleFilled />}
+          >
+            {" "}
+            {t("buttons.google_signup")}
+          </Button>
+
+          <div className={styles.divider}>{t("buttons.divider_text")}</div>
 
           <label>
             {t("registration_form.fields.name.label")}
@@ -109,17 +142,8 @@ const SignUpPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <div className={styles.passwordStrength}>
-              {/* Трек із рамкою завжди на місці, він тримає висоту */}
-              <div className={styles.strengthTrack}>
-                <div className={`${styles.strengthBar} ${styles[strength]}`} />
-              </div>
-
-              <span className={styles.strengthText}>
-                {strength !== "empty"
-                  ? t(`registration_form.password_strength.${strength}`)
-                  : "\u00A0"}
-              </span>
+            <div className={styles.strengthTrack}>
+              <div className={`${styles.strengthBar} ${styles[strength]}`} />
             </div>
           </label>
 
@@ -133,7 +157,7 @@ const SignUpPage = () => {
 
             <span className={styles.checkbox} aria-hidden="true" />
 
-            <span className={styles.text}>
+            <p className={styles.text}>
               {t("registration_form.policies.text")}{" "}
               <a
                 href="/policies"
@@ -143,24 +167,11 @@ const SignUpPage = () => {
               >
                 {t("registration_form.policies.link")}
               </a>
-            </span>
+            </p>
           </label>
-
-          {error && <p className={styles.error}>{error}</p>}
 
           <Button type="submit" variant="primary" isLoading={loading}>
             {t("buttons.submit")}
-          </Button>
-
-          <div className={styles.divider}>{t("buttons.divider_text")}</div>
-
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={handleGoogleSignup}
-            className={styles.googleButton}
-          >
-            {t("buttons.google_signup")}
           </Button>
         </form>
 

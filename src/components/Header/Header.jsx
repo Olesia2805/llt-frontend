@@ -6,11 +6,9 @@ import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import Container from "../Container/Container";
 import { useAuth } from "../../context/AuthContext";
 import Button from "../Button/Button";
-import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { t } = useTranslation("common");
-  const navigate = useNavigate();
   const { isAuthenticated, login, logout } = useAuth();
 
   return (
@@ -33,7 +31,7 @@ const Header = () => {
                 />
                 <Button
                   text={t("header.signup")}
-                  onClick={() => navigate("/signup")}
+                  href="/signup"
                   className={styles.signupBtn}
                 />
               </>

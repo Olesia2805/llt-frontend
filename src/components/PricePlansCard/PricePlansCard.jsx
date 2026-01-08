@@ -10,6 +10,7 @@ const PricePlansCard = ({
   features,
   buttonText,
   isPopular,
+  href,
 }) => {
   return (
     <li className={`${styles.card} ${isPopular ? styles.popular : ""}`}>
@@ -36,6 +37,7 @@ const PricePlansCard = ({
         text={buttonText}
         variant={isPopular ? "primary" : "secondary"}
         className={styles.cardButton}
+        href={href}
       />
     </li>
   );

@@ -17,7 +17,7 @@ const PricePlans = () => {
         </div>
 
         <ul className={styles.list}>
-          {PRICE_PLANS(t).map((plan) => (
+          {Object.values(PRICE_PLANS(t)).map((plan) => (
             <PricePlansCard key={plan.id} {...plan} />
           ))}
         </ul>

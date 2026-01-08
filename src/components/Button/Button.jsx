@@ -14,23 +14,29 @@ const Button = ({
   leftIcon,
   rightIcon,
   isActive = false,
+  href,
   // loaderProps = { size: "sm" },
   ...props
 }) => {
+  const Tag = href ? "a" : "button";
+
+  const buttonClasses = clsx(
+    styles.button,
+    styles[variant],
+    {
+      [styles.loading]: isLoading,
+      [styles.active]: isActive,
+      [styles.disabled]: disabled || isLoading,
+    },
+    className
+  );
+
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled || isLoading}
-      className={clsx(
-        styles.button,
-        styles[variant],
-        {
-          [styles.loading]: isLoading,
-          [styles.active]: isActive,
-        },
-        className
-      )}
+    <Tag
+      {...(href
+        ? { href }
+        : { type, onClick, disabled: disabled || isLoading })}
+      className={buttonClasses}
       {...props}
     >
       {leftIcon && <span className={styles.icon}>{leftIcon}</span>}
@@ -40,7 +46,7 @@ const Button = ({
       {rightIcon && <span className={styles.icon}>{rightIcon}</span>}
 
       {isLoading && <div className={styles.overlay} />}
-    </button>
+    </Tag>
   );
 };
 

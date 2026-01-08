@@ -4,15 +4,15 @@
   font-weight: 600;
   cursor: pointer;
   border: none;
-  transition: all 0.25s ease;
   width: 100%;
-
-  /* TODO: Loader */
-  /* position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+
+  /* TODO: Loader */
+  /* position: relative;
+  
   min-height: 40px;
   overflow: hidden;
   outline: none; */
@@ -22,6 +22,16 @@
   .button {
     width: auto;
   }
+}
+
+.button:hover:not(:disabled),
+.button:focus-visible {
+  transition: all 0.5s ease;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
 }
 
 .primary {

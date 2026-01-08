@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: { auth: (state = { user: null }) => state },
 });

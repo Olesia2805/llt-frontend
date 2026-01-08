@@ -23,6 +23,24 @@ export const register = async (payload) => {
   return data;
 };
 
+export const googleAuth = async (idToken) => {
+  const res = await fetch(`${BASE_URL}/auth/oauth/google/idToken`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ idToken }),
+  });
+
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok) {
+    if (res.status === 401)
+      throw new Error("Google session expired. Please try again.");
+    throw new Error(data?.message || "Google authentication failed");
+  }
+
+  return data;
+};
+
 export const login = async ({ email, password }) => {
   const res = await fetch(`${BASE_URL}/auth/login`, {
     method: "POST",
