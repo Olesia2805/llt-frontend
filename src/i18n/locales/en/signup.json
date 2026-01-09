@@ -33,5 +33,6 @@
     "divider_text": "or",
     "google_signup": "Sign up with Google"
   },
-  "login_text": "Already have an account? <span>Log in</span>"
+  "login_text": "Already have an account?",
+  "login": "Log in"
 }

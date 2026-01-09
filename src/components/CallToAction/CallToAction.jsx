@@ -15,7 +15,7 @@ const CallToAction = () => {
             <h2>{t("cta.title")}</h2>
             <p>{t("cta.description")}</p>
           </div>
-          <Button text={t("cta.button")} href="/signup" />
+          <Button text={t("cta.button")} to="/signup" />
         </div>
       </Container>
     </Section>

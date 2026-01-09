@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
 import { TbBrandGoogleFilled } from "react-icons/tb";
 import { FaHashtag } from "react-icons/fa6";
 
@@ -25,9 +25,9 @@ const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [acceptedPolicies, setAcceptedPolicies] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [acceptedPolicies, setAcceptedPolicies] = useState(false);
 
   const strength = password ? getPasswordStrength(password) : "empty";
 
@@ -49,7 +49,7 @@ const SignUpPage = () => {
         setLoading(false);
       }
     },
-    onError: (error) => setError("Google login failed"),
+    onError: () => setError("Google login failed"),
   });
 
   const handleSubmit = async (e) => {
@@ -82,35 +82,33 @@ const SignUpPage = () => {
             <FaHashtag />
             {t("hero_section.badge_text").toUpperCase()}
           </span>
-          <h1
-            dangerouslySetInnerHTML={{
-              __html: t("hero_section.title"),
-            }}
-          />
+          <h1 dangerouslySetInnerHTML={{ __html: t("hero_section.title") }} />
           <p>{t("hero_section.description")}</p>
         </div>
 
         {/* Registration Form */}
         <form className={styles.form} onSubmit={handleSubmit}>
           <h2>{t("registration_form.title")}</h2>
-          <p
-            className={styles.loginText}
-            dangerouslySetInnerHTML={{ __html: t("login_text") }}
-          />
+          <p className={styles.loginText}>
+            {t("login_text")}{" "}
+            <Button variant="link-accent" to="/login">
+              {t("login")}
+            </Button>
+          </p>
 
+          {/* Google Signup */}
           <Button
             type="button"
             variant="secondary"
             onClick={handleGoogleSignup}
-            className={styles.googleButton}
             leftIcon={<TbBrandGoogleFilled />}
           >
-            {" "}
             {t("buttons.google_signup")}
           </Button>
 
           <div className={styles.divider}>{t("buttons.divider_text")}</div>
 
+          {/* Form */}
           <label>
             {t("registration_form.fields.name.label")}
             <input
@@ -153,24 +151,26 @@ const SignUpPage = () => {
               checked={acceptedPolicies}
               onChange={(e) => setAcceptedPolicies(e.target.checked)}
               required
+              aria-required="true"
             />
-
             <span className={styles.checkbox} aria-hidden="true" />
-
             <p className={styles.text}>
               {t("registration_form.policies.text")}{" "}
-              <a
-                href="/policies"
+              <Button
+                variant="link-accent"
+                to="/policies"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
               >
                 {t("registration_form.policies.link")}
-              </a>
+              </Button>
             </p>
           </label>
 
-          <Button type="submit" variant="primary" isLoading={loading}>
+          {/* Error Message */}
+          {error && <p className={styles.error}>{error}</p>}
+
+          <Button type="submit" isLoading={loading}>
             {t("buttons.submit")}
           </Button>
         </form>

@@ -33,5 +33,6 @@
     "divider_text": "або",
     "google_signup": "Зареєструватися через Google"
   },
-  "login_text": "Вже маєте акаунт? <span>Увійти</span>"
+  "login_text": "Вже маєте акаунт?",
+  "login": "Увійти"
 }

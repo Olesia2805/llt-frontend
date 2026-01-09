@@ -99,6 +99,22 @@
   }
 }
 
+.link-accent {
+  color: var(--primary);
+  padding: 0;
+}
+
+.link-accent:hover:not(:disabled),
+.link-accent:focus-visible {
+  color: rgb(var(--primary-light-rgb));
+  padding: 0;
+}
+
+.link-muted {
+  padding: 0;
+  font-weight: 400;
+}
+
 /* TODO: Loader */
 
 /* .loading {

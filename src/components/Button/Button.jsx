@@ -1,9 +1,12 @@
 import clsx from "clsx";
+import { Link } from "react-router-dom";
+
 import styles from "./Button.module.css";
 import Loader from "../Loader/Loader";
 
 const Button = ({
-  variant = "primary", // variant: "primary", "secondary", "ghost"
+  variant = "primary",
+  // variant = "primary" | "secondary" | "ghost" | "link-accent" | "| "link-muted"
   text,
   children,
   className,
@@ -14,11 +17,24 @@ const Button = ({
   leftIcon,
   rightIcon,
   isActive = false,
-  href,
-  // loaderProps = { size: "sm" },
+
+  to, // internal navigation
+  href, // external link
+
   ...props
 }) => {
-  const Tag = href ? "a" : "button";
+  const isLink = Boolean(to || href);
+
+  if (import.meta.env.DEV && isLink && onClick) {
+    console.warn(
+      "[Button]: `onClick` is ignored when `to` or `href` is provided."
+    );
+  }
+
+  let Component = "button";
+
+  if (to) Component = Link;
+  if (href) Component = "a";
 
   const buttonClasses = clsx(
     styles.button,
@@ -31,22 +47,45 @@ const Button = ({
     className
   );
 
-  return (
-    <Tag
-      {...(href
-        ? { href }
-        : { type, onClick, disabled: disabled || isLoading })}
-      className={buttonClasses}
-      {...props}
-    >
+  const commonProps = {
+    className: buttonClasses,
+    ...props,
+  };
+
+  const content = (
+    <>
       {leftIcon && <span className={styles.icon}>{leftIcon}</span>}
-
       <span className={styles.content}>{children || text}</span>
-
       {rightIcon && <span className={styles.icon}>{rightIcon}</span>}
+      {isLoading && <Loader />}
+    </>
+  );
 
-      {isLoading && <div className={styles.overlay} />}
-    </Tag>
+  if (Component === "button") {
+    return (
+      <button
+        type={type}
+        onClick={onClick}
+        disabled={disabled || isLoading}
+        {...commonProps}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  if (Component === Link) {
+    return (
+      <Link to={to} aria-disabled={disabled || isLoading} {...commonProps}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" {...commonProps}>
+      {content}
+    </a>
   );
 };
 

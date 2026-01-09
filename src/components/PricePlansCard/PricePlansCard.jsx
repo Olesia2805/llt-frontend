@@ -37,7 +37,7 @@ const PricePlansCard = ({
         text={buttonText}
         variant={isPopular ? "primary" : "secondary"}
         className={styles.cardButton}
-        href={href}
+        to={href}
       />
     </li>
   );

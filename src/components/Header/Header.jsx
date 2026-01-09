@@ -31,7 +31,7 @@ const Header = () => {
                 />
                 <Button
                   text={t("header.signup")}
-                  href="/signup"
+                  to="/signup"
                   className={styles.signupBtn}
                 />
               </>
