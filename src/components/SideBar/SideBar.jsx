@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import styles from "./SideBar.module.css";
 import Button from "../Button/Button";
 import { PiSignOutBold } from "react-icons/pi";
@@ -7,31 +8,33 @@ import { sidebarItems } from "../../app/sidebarUserData.js";
 
 const SideBar = () => {
   const { t } = useTranslation("sidebar");
-  const location = useLocation();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <aside className={styles.sidebar}>
       <ul className={styles.navList}>
         {sidebarItems.map((item) => {
           const Icon = item.icon;
-          const isActive = location.pathname === item.path;
 
           return (
-            <li key={item.id} className={isActive ? styles.active : ""}>
-              <Button variant="ghost" to={item.path}>
-                <Icon className={styles.icon} />
-                <span>{t(item.id)}</span>
+            <li key={item.id}>
+              <Button variant="ghost" to={item.path} rightIcon={<Icon />}>
+                <span>{t(item.label)}</span>
               </Button>
             </li>
           );
         })}
       </ul>
-      <div className={styles.logoutWrapper}>
-        <Button to="/logout">
-          {t("logout")}
-          <PiSignOutBold className={styles.icon} />
-        </Button>
-      </div>
+      <Button
+        onClick={async () => {
+          await logout();
+          navigate("/");
+        }}
+        rightIcon={<PiSignOutBold />}
+      >
+        {t("logout")}
+      </Button>
     </aside>
   );
 };
