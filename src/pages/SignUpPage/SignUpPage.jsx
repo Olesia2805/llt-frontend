@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import { TbBrandGoogleFilled } from "react-icons/tb";
 import { FaHashtag } from "react-icons/fa6";
 import clsx from "clsx";
@@ -130,22 +130,19 @@ const SignUpPage = () => {
     return () => clearTimeout(timeoutId);
   }, [password, t]);
 
-  const handleGoogleSignup = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      setLoading(true);
-      setErrors({});
-      try {
-        const data = await googleAuth(tokenResponse.access_token);
-        await login({ email: data.email, token: data.token });
-        navigate("/");
-      } catch (err) {
-        setErrors({ form: err.message || "Google auth failed" });
-      } finally {
-        setLoading(false);
-      }
-    },
-    onError: () => setErrors({ form: "Google login failed" }),
-  });
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setLoading(true);
+    setErrors({});
+    try {
+      const data = await googleAuth(credentialResponse.credential);
+      await login({ email: data.email, token: data.token });
+      navigate("/");
+    } catch (err) {
+      setErrors({ form: err.message || "Google auth failed" });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -193,14 +190,12 @@ const SignUpPage = () => {
             </Button>
           </p>
 
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={handleGoogleSignup}
-            leftIcon={<TbBrandGoogleFilled />}
-          >
-            {t("buttons.google_signup")}
-          </Button>
+          <div className={styles.googleBtnContainer}>
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={() => setErrors({ form: "Google login failed" })}
+            />
+          </div>
 
           <div className={styles.divider}>{t("buttons.divider_text")}</div>
 

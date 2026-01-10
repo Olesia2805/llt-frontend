@@ -30,6 +30,8 @@ export const googleAuth = async (idToken) => {
     body: JSON.stringify({ idToken }),
   });
 
+  console.log(idToken);
+
   const data = await res.json().catch(() => null);
 
   if (!res.ok) {
