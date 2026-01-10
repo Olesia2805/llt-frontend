@@ -67,7 +67,7 @@
   border-radius: 6px;
   border: 1px solid rgb(var(--border-color-rgb));
   background-color: var(--bg-main);
-  color: var(--text-main);
+  color: var(--text-muted);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 

@@ -17,7 +17,22 @@
   }
 }
 
+.heroHeader {
+  font-size: 34px;
+}
+
+@media (min-width: 1280px) {
+  .heroHeader {
+    font-size: 4.25rem;
+  }
+}
+
 .lastUpdated {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
   color: var(--primary);
   font-weight: 600;
 }

@@ -2,7 +2,8 @@
   "hero": {
     "title": "Terms & Privacy Policies",
     "description": "Everything you need to know about your rights, our responsibilities, and how we handle your data.",
-    "lastUpdated": "Last updated: January 6, 2026"
+    "lastUpdated": "Last updated:",
+    "dateOfLastUpdated": " January 6, 2026"
   },
   "sidebar": {
     "tocTitle": "Table of Contents",
@@ -51,23 +52,23 @@
     "title": "4. User Rights",
     "intro": "Depending on your location, you may have certain rights regarding your personal information, including:",
     "rightsList": [
-    {
-      "title": "Right to Access",
-      "description": "Request copies of your personal data."
-    },
-    {
-      "title": "Right to Rectification",
-      "description": "Request correction of inaccurate data."
-    },
-    {
-      "title": "Right to Erasure",
-      "description": "Request deletion of your data."
-    },
-    {
-      "title": "Data Portability",
-      "description": "Request transfer of your data to another organization."
-    }
-  ],
+      {
+        "title": "Right to Access",
+        "description": "Request copies of your personal data."
+      },
+      {
+        "title": "Right to Rectification",
+        "description": "Request correction of inaccurate data."
+      },
+      {
+        "title": "Right to Erasure",
+        "description": "Request deletion of your data."
+      },
+      {
+        "title": "Data Portability",
+        "description": "Request transfer of your data to another organization."
+      }
+    ],
     "contactDPO": "To exercise these rights, please contact our Data Protection Officer at"
   }
 }

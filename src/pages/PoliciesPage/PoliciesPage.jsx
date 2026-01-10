@@ -21,10 +21,11 @@ const PoliciesPage = () => {
       <Section>
         <Container>
           <div className={styles.headerWrapper}>
-            <h1>{t("hero.title")}</h1>
+            <h1 className={styles.heroHeader}>{t("hero.title")}</h1>
             <p>{t("hero.description")}</p>
             <div className={styles.lastUpdated}>
               <FaHistory /> <span>{t("hero.lastUpdated").toUpperCase()}</span>
+              <span>{t("hero.dateOfLastUpdated").toUpperCase()}</span>
             </div>
           </div>
         </Container>
