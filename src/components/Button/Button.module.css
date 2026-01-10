@@ -69,6 +69,7 @@
   border-radius: 6px;
   font-weight: 400;
   width: 100%;
+  font-size: 18px;
 }
 
 .ghost:hover:not(:disabled),

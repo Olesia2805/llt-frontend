@@ -1,8 +1,6 @@
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 export const register = async (payload) => {
-  console.log("REGISTER PAYLOAD:", payload);
-
   const res = await fetch(`${BASE_URL}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

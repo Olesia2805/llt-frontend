@@ -43,7 +43,7 @@ const Hero = () => {
               alt={t("hero.imageAlt")}
               width="450"
               height="570"
-              fetchpriority="high"
+              fetchPriority="high"
               loading="eager"
             />
           </picture>
