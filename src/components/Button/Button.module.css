@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  transition: all 0.2s ease;
 
   /* TODO: Loader */
   /* position: relative;
@@ -22,11 +23,6 @@
   .button {
     width: auto;
   }
-}
-
-.button:hover:not(:disabled),
-.button:focus-visible {
-  transition: all 0.5s ease;
 }
 
 .icon {
