@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import { TbBrandGoogleFilled } from "react-icons/tb";
 import { FaHashtag } from "react-icons/fa6";
 import clsx from "clsx";
 
@@ -39,25 +38,20 @@ const SignUpPage = () => {
 
   const validate = () => {
     const newErrors = {};
-
     if (!name.trim()) {
       newErrors.name = t("registration_form.errors.name_required");
     } else if (!nameRegex.test(name)) {
       newErrors.name = t("registration_form.errors.name_invalid");
     }
-
     if (!emailRegex.test(email)) {
       newErrors.email = t("registration_form.errors.email_invalid");
     }
-
     if (password.length < 6) {
       newErrors.password = t("registration_form.errors.password_short");
     }
-
     if (!acceptedPolicies) {
       newErrors.policies = t("registration_form.errors.policies_required");
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -66,6 +60,7 @@ const SignUpPage = () => {
     if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
 
+  // Live validation effects
   useEffect(() => {
     if (!name) {
       setErrors((prev) => ({ ...prev, name: null }));
@@ -147,9 +142,7 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-
     if (!validate()) return;
-
     setLoading(true);
     try {
       await register({ name, email, password });
@@ -205,6 +198,8 @@ const SignUpPage = () => {
             value={name}
             onChange={(e) => handleFieldChange("name", e.target.value, setName)}
             error={errors.name}
+            name="username"
+            autoComplete="name"
           />
 
           <InputField
@@ -216,6 +211,8 @@ const SignUpPage = () => {
               handleFieldChange("email", e.target.value, setEmail)
             }
             error={errors.email}
+            name="email"
+            autoComplete="email"
           />
 
           <InputField
@@ -226,8 +223,11 @@ const SignUpPage = () => {
             onChange={(e) =>
               handleFieldChange("password", e.target.value, setPassword)
             }
+            autoComplete="new-password"
+            name="password"
             error={errors.password}
           />
+
           <div className={styles.passwordStrengthWrapper}>
             <div className={styles.strengthTrack}>
               <div className={`${styles.strengthBar} ${styles[strength]}`} />
@@ -241,7 +241,7 @@ const SignUpPage = () => {
             >
               {strength !== "empty"
                 ? t(`registration_form.password_strength.${strength}`)
-                : ""}
+                : "\u00A0"}
             </p>
           </div>
 
@@ -278,7 +278,7 @@ const SignUpPage = () => {
                 !(errors.policies || errors.form) && styles.invisible
               )}
             >
-              {errors.policies || errors.form || ""}
+              {errors.policies || errors.form || "\u00A0"}
             </p>
           </div>
 
