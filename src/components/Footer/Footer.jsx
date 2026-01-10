@@ -23,11 +23,6 @@ const Footer = () => {
             <ul className={styles.links}>
               <li>
                 <Button variant="link-muted" to="/">
-                  {t("footer.aboutUs")}
-                </Button>
-              </li>
-              <li>
-                <Button variant="link-muted" to="/">
                   {t("footer.team")}
                 </Button>
               </li>
