@@ -6,6 +6,7 @@ import Loader from "./components/Loader/Loader.jsx";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop.jsx";
 import { ROUTER } from "./app/routes.jsx";
 import "/src/assets/styles/global.css";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 
 //TODO: Toaster
 // import { Toaster } from "react-hot-toast";
@@ -35,9 +36,11 @@ const App = () => {
             <Route index element={<HomePage />} />
             <Route path={`${ROUTER.POLICIES}`} element={<PoliciesPage />} />
             <Route path={`${ROUTER.SIGNUP}`} element={<SignUpPage />} />
-            <Route path={`${ROUTER.PROFILE}`} element={<ProfilePage />} />
-            <Route path={`${ROUTER.TRIPS}`} element={<TripsPage />} />
-            <Route path={`${ROUTER.SETTINGS}`} element={<SettingsPage />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path={ROUTER.PROFILE} element={<ProfilePage />} />
+              <Route path={ROUTER.TRIPS} element={<TripsPage />} />
+              <Route path={ROUTER.SETTINGS} element={<SettingsPage />} />
+            </Route>
             <Route path={ROUTER.ALL} element={<NotFoundPage />} />
           </Route>
         </Routes>
