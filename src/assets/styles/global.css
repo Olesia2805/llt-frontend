@@ -11,11 +11,6 @@ body {
   letter-spacing: 0;
 
   -webkit-font-smoothing: antialiased;
-
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-
-  hyphens: auto;
 }
 
 h1 {
