@@ -10,6 +10,7 @@ import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher
 import Button from "../../components/Button/Button";
 
 import { MdTune } from "react-icons/md";
+import { FaCheck } from "react-icons/fa";
 
 const SettingsPage = () => {
   const { t } = useTranslation("settings");
@@ -37,37 +38,33 @@ const SettingsPage = () => {
             <span className={styles.plan}>EXPLORER</span>
           </section>
 
-          {/* PREFERENCES BLOCK */}
-          <section className={styles.preferences}>
-            <h3 className={styles.sectionTitle}>
-              <MdTune />
-              {t("preferences.sectionTitle")}
-            </h3>
+          <div className={styles.preferencesWrapper}>
+            <section className={styles.preferences}>
+              <h3 className={styles.sectionTitle}>
+                <MdTune />
+                {t("preferences.sectionTitle")}
+              </h3>
 
-            <div className={styles.row}>
-              <p>{t("preferences.theme")}</p>
-              <ThemeSwitcher
-                options={{
-                  light: t("preferences.light"),
-                  dark: t("preferences.dark"),
-                }}
-              />
-            </div>
+              <div className={styles.row}>
+                <p>{t("preferences.theme")}</p>
+                <ThemeSwitcher />
+              </div>
 
-            <div className={styles.row}>
-              <p>{t("preferences.language")}</p>
-              <LanguageSwitcher />
-            </div>
+              <div className={styles.row}>
+                <p>{t("preferences.language")}</p>
+                <LanguageSwitcher />
+              </div>
 
-            <div className={styles.row}>
-              <p>{t("preferences.notifications")}</p>
-              <label className={`${styles.switch} ${styles.rounded}`}>
-                <input type="checkbox" className={styles.switchInput} />
-                <span className={styles.switchThumb}></span>
-              </label>
-            </div>
-          </section>
-          <Button className={styles.save}>{t("buttons.saveChanges")}</Button>
+              <div className={styles.row}>
+                <p>{t("preferences.notifications")}</p>
+                <label className={`${styles.switch} ${styles.rounded}`}>
+                  <input type="checkbox" className={styles.switchInput} />
+                  <span className={styles.switchThumb}></span>
+                </label>
+              </div>
+            </section>
+            <Button leftIcon={<FaCheck />}>{t("buttons.saveChanges")}</Button>
+          </div>
         </div>
       </Container>
     </Section>

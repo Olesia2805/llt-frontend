@@ -11,6 +11,12 @@
   padding: 50px;
 }
 
+.preferencesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .profile {
   background: var(--bg-alt);
   border: 2px solid rgb(var(--border-color-rgb));
@@ -120,4 +126,10 @@
 
 .switch.rounded .switchThumb::before {
   border-radius: 50%;
+}
+
+.saveWrapper {
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
