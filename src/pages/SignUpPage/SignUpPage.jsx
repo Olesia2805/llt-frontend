@@ -27,8 +27,10 @@ const SignUpPage = () => {
   const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState(localStorage.getItem("signup_name") || "");
+  const [email, setEmail] = useState(
+    localStorage.getItem("signup_email") || ""
+  );
   const [password, setPassword] = useState("");
   const [acceptedPolicies, setAcceptedPolicies] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -125,6 +127,14 @@ const SignUpPage = () => {
     return () => clearTimeout(timeoutId);
   }, [password, t]);
 
+  useEffect(() => {
+    localStorage.setItem("signup_name", name);
+  }, [name]);
+
+  useEffect(() => {
+    localStorage.setItem("signup_email", email);
+  }, [email]);
+
   const handleGoogleSuccess = async (credentialResponse) => {
     setLoading(true);
     setErrors({});
@@ -146,6 +156,10 @@ const SignUpPage = () => {
     setLoading(true);
     try {
       await register({ name, email, password });
+
+      localStorage.removeItem("signup_name");
+      localStorage.removeItem("signup_email");
+
       await login({ email, password });
       navigate("/");
     } catch (err) {
