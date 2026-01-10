@@ -114,6 +114,8 @@
 .link-muted {
   padding: 0;
   font-weight: 400;
+}
+
 .dot {
   width: 12px;
   height: 12px;
@@ -133,6 +135,23 @@
   background-color: var(--primary);
   width: 14px;
   height: 14px;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  padding: 4px;
+}
+
+.eyeButton:hover {
+  color: var(--primary);
 }
 
 /* TODO: Loader */
