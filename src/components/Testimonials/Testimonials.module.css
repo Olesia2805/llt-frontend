@@ -8,3 +8,11 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.dotsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+}

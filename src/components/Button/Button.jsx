@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 import Loader from "../Loader/Loader";
 
 const Button = ({
-  variant = "primary", // variant: "primary", "secondary", "ghost"
+  variant = "primary", // variant: "primary", "secondary", "ghost", "dot"
   text,
   children,
   className,
