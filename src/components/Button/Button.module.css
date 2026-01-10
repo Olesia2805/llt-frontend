@@ -136,6 +136,23 @@
   height: 14px;
 }
 
+.eyeButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  padding: 4px;
+}
+
+.eyeButton:hover {
+  color: var(--primary);
+}
+
 /* TODO: Loader */
 
 /* .loading {

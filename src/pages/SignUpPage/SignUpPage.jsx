@@ -4,14 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import { TbBrandGoogleFilled } from "react-icons/tb";
 import { FaHashtag } from "react-icons/fa6";
+import clsx from "clsx";
 
 import styles from "./SignUpPage.module.css";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
+import InputField from "../../components/InputField/InputField";
 
 import { register, googleAuth } from "../../app/auth.api";
 import { useAuth } from "../../context/AuthContext";
-import { getPasswordStrength } from "../../app/passwordStrength";
+import {
+  getPasswordStrength,
+  emailRegex,
+  nameRegex,
+} from "../../app/validation";
 
 import boatHighResolution from "../../assets/img/boat-high-resolution.webp";
 import boatDesktop from "../../assets/img/boat-desktop.webp";
@@ -27,39 +33,125 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [acceptedPolicies, setAcceptedPolicies] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
 
   const strength = password ? getPasswordStrength(password) : "empty";
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!name.trim()) {
+      newErrors.name = t("registration_form.errors.name_required");
+    } else if (!nameRegex.test(name)) {
+      newErrors.name = t("registration_form.errors.name_invalid");
+    }
+
+    if (!emailRegex.test(email)) {
+      newErrors.email = t("registration_form.errors.email_invalid");
+    }
+
+    if (password.length < 6) {
+      newErrors.password = t("registration_form.errors.password_short");
+    }
+
+    if (!acceptedPolicies) {
+      newErrors.policies = t("registration_form.errors.policies_required");
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   useEffect(() => {
     if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
 
+  useEffect(() => {
+    if (!name) {
+      setErrors((prev) => ({ ...prev, name: null }));
+      return;
+    }
+    const timeoutId = setTimeout(() => {
+      if (name.trim().length < 2) {
+        setErrors((prev) => ({
+          ...prev,
+          name: t("registration_form.errors.name_short"),
+        }));
+      } else if (name.trim().length > 30) {
+        setErrors((prev) => ({
+          ...prev,
+          name: t("registration_form.errors.name_too_long"),
+        }));
+      } else if (!nameRegex.test(name)) {
+        setErrors((prev) => ({
+          ...prev,
+          name: t("registration_form.errors.name_invalid"),
+        }));
+      } else {
+        setErrors((prev) => ({ ...prev, name: null }));
+      }
+    }, 800);
+    return () => clearTimeout(timeoutId);
+  }, [name, t]);
+
+  useEffect(() => {
+    if (!email) {
+      setErrors((prev) => ({ ...prev, email: null }));
+      return;
+    }
+    const timeoutId = setTimeout(() => {
+      if (!emailRegex.test(email)) {
+        setErrors((prev) => ({
+          ...prev,
+          email: t("registration_form.errors.email_invalid"),
+        }));
+      } else {
+        setErrors((prev) => ({ ...prev, email: null }));
+      }
+    }, 800);
+    return () => clearTimeout(timeoutId);
+  }, [email, t]);
+
+  useEffect(() => {
+    if (!password) {
+      setErrors((prev) => ({ ...prev, password: null }));
+      return;
+    }
+    const timeoutId = setTimeout(() => {
+      if (password.length < 6) {
+        setErrors((prev) => ({
+          ...prev,
+          password: t("registration_form.errors.password_short"),
+        }));
+      } else {
+        setErrors((prev) => ({ ...prev, password: null }));
+      }
+    }, 800);
+    return () => clearTimeout(timeoutId);
+  }, [password, t]);
+
   const handleGoogleSignup = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       setLoading(true);
-      setError("");
+      setErrors({});
       try {
         const data = await googleAuth(tokenResponse.access_token);
         await login({ email: data.email, token: data.token });
         navigate("/");
       } catch (err) {
-        setError(err.message || "Google auth failed");
+        setErrors({ form: err.message || "Google auth failed" });
       } finally {
         setLoading(false);
       }
     },
-    onError: () => setError("Google login failed"),
+    onError: () => setErrors({ form: "Google login failed" }),
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setErrors({});
 
-    if (!acceptedPolicies) {
-      setError(t("registration_form.error_policies"));
-      return;
-    }
+    if (!validate()) return;
 
     setLoading(true);
     try {
@@ -67,16 +159,22 @@ const SignUpPage = () => {
       await login({ email, password });
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      setErrors({ form: err.message });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleFieldChange = (fieldName, value, setter) => {
+    setter(value);
+    if (errors[fieldName]) {
+      setErrors((prev) => ({ ...prev, [fieldName]: null }));
     }
   };
 
   return (
     <Container>
       <div className={styles.signupWrapper}>
-        {/* Hero Text */}
         <div className={styles.heroText}>
           <span className={styles.badge}>
             <FaHashtag />
@@ -86,8 +184,7 @@ const SignUpPage = () => {
           <p>{t("hero_section.description")}</p>
         </div>
 
-        {/* Registration Form */}
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit} noValidate>
           <h2>{t("registration_form.title")}</h2>
           <p className={styles.loginText}>
             {t("login_text")}{" "}
@@ -96,7 +193,6 @@ const SignUpPage = () => {
             </Button>
           </p>
 
-          {/* Google Signup */}
           <Button
             type="button"
             variant="secondary"
@@ -108,53 +204,66 @@ const SignUpPage = () => {
 
           <div className={styles.divider}>{t("buttons.divider_text")}</div>
 
-          {/* Form */}
-          <label>
-            {t("registration_form.fields.name.label")}
-            <input
-              type="text"
-              placeholder={t("registration_form.fields.name.placeholder")}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </label>
+          <InputField
+            label={t("registration_form.fields.name.label")}
+            placeholder={t("registration_form.fields.name.placeholder")}
+            value={name}
+            onChange={(e) => handleFieldChange("name", e.target.value, setName)}
+            error={errors.name}
+          />
 
-          <label>
-            {t("registration_form.fields.email.label")}
-            <input
-              type="email"
-              placeholder={t("registration_form.fields.email.placeholder")}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
+          <InputField
+            type="email"
+            label={t("registration_form.fields.email.label")}
+            placeholder={t("registration_form.fields.email.placeholder")}
+            value={email}
+            onChange={(e) =>
+              handleFieldChange("email", e.target.value, setEmail)
+            }
+            error={errors.email}
+          />
 
-          <label>
-            {t("registration_form.fields.password.label")}
-            <input
-              type="password"
-              placeholder={t("registration_form.fields.password.placeholder")}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <InputField
+            type="password"
+            label={t("registration_form.fields.password.label")}
+            placeholder={t("registration_form.fields.password.placeholder")}
+            value={password}
+            onChange={(e) =>
+              handleFieldChange("password", e.target.value, setPassword)
+            }
+            error={errors.password}
+          />
+          <div className={styles.passwordStrengthWrapper}>
             <div className={styles.strengthTrack}>
               <div className={`${styles.strengthBar} ${styles[strength]}`} />
             </div>
-          </label>
+
+            <p
+              className={clsx(
+                styles.strengthText,
+                strength === "empty" && styles.invisible
+              )}
+            >
+              {strength !== "empty"
+                ? t(`registration_form.password_strength.${strength}`)
+                : ""}
+            </p>
+          </div>
 
           <label className={styles.policies}>
             <input
               type="checkbox"
               checked={acceptedPolicies}
-              onChange={(e) => setAcceptedPolicies(e.target.checked)}
-              required
-              aria-required="true"
+              onChange={(e) => {
+                const isChecked = e.target.checked;
+                setAcceptedPolicies(isChecked);
+                if (isChecked && errors.policies) {
+                  setErrors((prev) => ({ ...prev, policies: null }));
+                }
+              }}
             />
             <span className={styles.checkbox} aria-hidden="true" />
-            <p className={styles.text}>
+            <p className={styles.policiesText}>
               {t("registration_form.policies.text")}{" "}
               <Button
                 variant="link-accent"
@@ -167,8 +276,16 @@ const SignUpPage = () => {
             </p>
           </label>
 
-          {/* Error Message */}
-          {error && <p className={styles.error}>{error}</p>}
+          <div className={styles.formErrorWrapper}>
+            <p
+              className={clsx(
+                styles.errorText,
+                !(errors.policies || errors.form) && styles.invisible
+              )}
+            >
+              {errors.policies || errors.form || ""}
+            </p>
+          </div>
 
           <Button type="submit" isLoading={loading}>
             {t("buttons.submit")}

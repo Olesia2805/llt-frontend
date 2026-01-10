@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader";
 
 const Button = ({
   variant = "primary",
-  // variant = "primary" | "secondary" | "ghost" | "link-accent" | "link-muted" | "dot"
+  // variant = "primary" | "secondary" | "ghost" | "link-accent" | "link-muted" | "dot" | "eyeButton"
   text,
   children,
   className,

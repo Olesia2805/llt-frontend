@@ -26,7 +26,20 @@
       "text": "I agree to the",
       "link": "Terms of Use and Privacy Policy"
     },
-    "error_policies": "You must agree to the Terms of Use and Privacy Policy"
+    "errors": {
+      "name_required": "Name is required",
+      "name_invalid": "Name can only contain letters and spaces",
+      "name_short": "Name must be at least 2 characters long",
+      "name_too_long": "Name must be no more than 30 characters long",
+      "email_invalid": "Please enter a valid email address",
+      "password_short": "Password must be at least 6 characters long",
+      "policies_required": "You must agree to the Terms of Use and Privacy Policy"
+    },
+    "password_strength": {
+      "weak": "Weak password",
+      "medium": "Medium password",
+      "strong": "Strong password"
+    }
   },
   "buttons": {
     "submit": "Sign Up",
