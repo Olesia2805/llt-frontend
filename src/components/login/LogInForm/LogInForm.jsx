@@ -1,137 +1,189 @@
-import { useTranslation } from "react-i18next";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { IoEye, IoEyeOff } from "react-icons/io5";
-import Logo from "../../Logo/Logo";
-import styles from "./LogInForm.module.css";
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import clsx from 'clsx';
 
-import GoogleLoginButton from "../GoogleLoginButton/GoogleLoginButton";
+import styles from './LogInForm.module.css';
+import Button from '../../Button/Button';
+import InputField from '../../InputField/InputField';
+
+import { login as loginApi, googleAuth } from '../../../app/auth.api';
+import { useAuth } from '../../../context/AuthContext';
+import { emailRegex } from '../../../app/validation';
 
 const LogInForm = () => {
-  const { t } = useTranslation("login");
-  const [showPassword, setShowPassword] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { t } = useTranslation('login');
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log("Form submitted:", data);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/');
+  }, [isAuthenticated, navigate]);
+
+  // Live validation effects
+  useEffect(() => {
+    if (!email) {
+      setErrors(prev => ({ ...prev, email: null }));
+      return;
+    }
+    const timeoutId = setTimeout(() => {
+      if (!emailRegex.test(email)) {
+        setErrors(prev => ({
+          ...prev,
+          email: t('validation.emailPattern'),
+        }));
+      } else {
+        setErrors(prev => ({ ...prev, email: null }));
+      }
+    }, 800);
+    return () => clearTimeout(timeoutId);
+  }, [email, t]);
+
+  useEffect(() => {
+    if (!password) {
+      setErrors(prev => ({ ...prev, password: null }));
+      return;
+    }
+    const timeoutId = setTimeout(() => {
+      if (password.length < 6) {
+        setErrors(prev => ({
+          ...prev,
+          password: t('validation.passwordLength'),
+        }));
+      } else {
+        setErrors(prev => ({ ...prev, password: null }));
+      }
+    }, 800);
+    return () => clearTimeout(timeoutId);
+  }, [password, t]);
+
+  const validate = () => {
+    const newErrors = {};
+    if (!emailRegex.test(email)) {
+      newErrors.email = t('validation.emailPattern');
+    }
+    if (password.length < 6) {
+      newErrors.password = t('validation.passwordLength');
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
-  
-  const handleGoogleLogin = () => {
-    console.log("Google login clicked");
+
+  const handleGoogleSuccess = async credentialResponse => {
+    setLoading(true);
+    setErrors({});
+    try {
+      const data = await googleAuth(credentialResponse.credential);
+      await login({ email: data.email, token: data.token });
+      navigate('/');
+    } catch (err) {
+      setErrors({ form: err.message || 'Google auth failed' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setErrors({});
+    if (!validate()) return;
+    setLoading(true);
+    try {
+      const data = await loginApi({ email, password });
+      await login({
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      });
+      navigate('/');
+    } catch (err) {
+      setErrors({ form: err.message });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFieldChange = (fieldName, value, setter) => {
+    setter(value);
+    if (errors[fieldName]) {
+      setErrors(prev => ({ ...prev, [fieldName]: null }));
+    }
   };
 
   return (
-    <div className={styles.formContainer}>
-      {/* Mobile Logo */}
-      <div className={styles.mobileLogo}>
-        <Logo variant="header" />
-        <span>TravelApp</span>
+    <form className={styles.form} onSubmit={handleSubmit} noValidate>
+      <h2>{t('form.welcome')}</h2>
+      <p className={styles.loginText}>
+        {t('form.noAccount')}{' '}
+        <Button variant="link-accent" to="/signup">
+          {t('form.signup')}
+        </Button>
+      </p>
+
+      <div className={styles.googleBtnContainer}>
+        <GoogleLogin
+          onSuccess={handleGoogleSuccess}
+          onError={() => setErrors({ form: 'Google login failed' })}
+        />
       </div>
 
-      <div className={styles.header}>
-        <h1>{t("form.welcome")}</h1>
-        <p>{t("form.continue")}</p>
-      </div>
+      <div className={styles.divider}>{t('form.orContinue')}</div>
 
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.inputGroup}>
-          <label htmlFor="email">{t("form.emailLabel")}</label>
+      <InputField
+        type="email"
+        label={t('form.emailLabel')}
+        placeholder={t('form.emailPlaceholder')}
+        value={email}
+        onChange={e => handleFieldChange('email', e.target.value, setEmail)}
+        error={errors.email}
+        name="email"
+        autoComplete="email"
+      />
+
+      <InputField
+        type="password"
+        label={t('form.passwordLabel')}
+        placeholder={t('form.passwordPlaceholder')}
+        value={password}
+        onChange={e =>
+          handleFieldChange('password', e.target.value, setPassword)
+        }
+        autoComplete="current-password"
+        name="password"
+        error={errors.password}
+      />
+
+      <div className={styles.actions}>
+        <label className={styles.rememberMe}>
           <input
-            id="email"
-            type="text"
-            placeholder={t("form.emailPlaceholder")}
-            className={`${styles.input} ${errors.email ? styles.error : ""}`}
-            {...register("email", { 
-              required: t("validation.emailRequired"),
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: t("validation.emailPattern")
-              }
-            })}
+            type="checkbox"
+            checked={rememberMe}
+            onChange={e => setRememberMe(e.target.checked)}
           />
-          {errors.email && (
-            <span className={styles.errorMessage}>{errors.email.message}</span>
-          )}
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label htmlFor="password">{t("form.passwordLabel")}</label>
-          <div className={styles.passwordWrapper}>
-            <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder={t("form.passwordPlaceholder")}
-              className={`${styles.input} ${errors.password ? styles.error : ""}`}
-              {...register("password", { 
-                required: t("validation.passwordRequired"),
-                minLength: {
-                  value: 8,
-                  message: t("validation.passwordLength")
-                },
-                validate: {
-                  complexity: (value) => 
-                    /(?=.*[0-9])(?=.*[!@#$%^&*])/.test(value) || t("validation.passwordComplexity")
-                }
-              })}
-            />
-            <button
-              type="button"
-              className={styles.eyeButton}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? (
-                <IoEyeOff size={20} />
-              ) : (
-                <IoEye size={20} />
-              )}
-            </button>
-          </div>
-          {errors.password && (
-            <span className={styles.errorMessage}>
-              {errors.password.message}
-            </span>
-          )}
-        </div>
-
-        <div className={styles.actions}>
-          <label className={styles.rememberMe}>
-            <input type="checkbox" {...register("rememberMe")} />
-            <span>{t("form.rememberMe")}</span>
-          </label>
-          <a href="#" className={styles.forgotPassword}>
-            {t("form.forgotPassword")}
-          </a>
-        </div>
-
-        <button type="submit" className={styles.submitButton}>
-          {t("form.loginButton")}
-        </button>
-      </form>
-
-      <div className={styles.divider}>
-        <div className={styles.bgDivider}></div>
-        <span>{t("form.orContinue")}</span>
-        <div className={styles.bgDivider}></div>
+          <span className={styles.checkbox} aria-hidden="true" />
+          <span className={styles.rememberMeText}>{t('form.rememberMe')}</span>
+        </label>
+        <Button variant="link-accent" to="#">
+          {t('form.forgotPassword')}
+        </Button>
       </div>
 
-      <div className={styles.socialLogin}>
-        <GoogleLoginButton onClick={handleGoogleLogin} />
-      </div>
-
-      <div className={styles.footer}>
-        <p>
-          {t("form.noAccount")}{" "}
-          <Link to="/signup" className={styles.signupLink}>
-            {t("form.signup")}
-          </Link>
+      <div className={styles.formErrorWrapper}>
+        <p className={clsx(styles.errorText, !errors.form && styles.invisible)}>
+          {errors.form || '\u00A0'}
         </p>
       </div>
-    </div>
+
+      <Button type="submit" isLoading={loading}>
+        {t('form.loginButton')}
+      </Button>
+    </form>
   );
 };
 
