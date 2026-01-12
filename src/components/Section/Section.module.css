@@ -1,25 +1,13 @@
 .section {
   position: relative;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 @media (min-width: 1280px) {
   .section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-}
-
-.ctaSection {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
-@media (min-width: 1280px) {
-  .ctaSection {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
+    padding-top: 48px;
+    padding-bottom: 48px;
   }
 }
 
@@ -158,5 +146,17 @@
   }
   100% {
     transform: translate(120px, 60px) scale(1);
+  }
+}
+
+.ctaSectionBG {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+@media (min-width: 1280px) {
+  .ctaSectionBG {
+    padding-top: 160px;
+    padding-bottom: 160px;
   }
 }

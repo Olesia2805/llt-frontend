@@ -4,9 +4,23 @@ import NetworkLinks from "../NetworkLinks/NetworkLinks";
 import { useTranslation } from "react-i18next";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Footer = () => {
   const { t } = useTranslation("common");
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!email) return;
+
+    //TODO: Toaster
+    //TODO: BE endpoint
+
+    setEmail("");
+  };
 
   return (
     <footer>
@@ -23,7 +37,11 @@ const Footer = () => {
             <ul className={styles.links}>
               <li>{t("footer.aboutUs")}</li>
               <li>{t("footer.team")}</li>
-              <li>{t("footer.terms")}</li>
+              <li>
+                <Link to="/policies" className={styles.footerLink}>
+                  {t("footer.terms")}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -32,12 +50,16 @@ const Footer = () => {
             <p className={styles.description}>
               {t("footer.newsletterDescription")}
             </p>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleSubmit}>
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder={t("footer.emailPlaceholder")}
                 className={styles.input}
+                required
               />
+
               <Button text={t("footer.button")} />
             </form>
           </div>

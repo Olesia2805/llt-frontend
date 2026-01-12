@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "title": "Terms & Privacy Policies",
+    "description": "Everything you need to know about your rights, our responsibilities, and how we handle your data.",
+    "lastUpdated": "Last updated:",
+    "dateOfLastUpdated": " January 6, 2026"
+  },
+  "sidebar": {
+    "tocTitle": "Table of Contents",
+    "navTerms": "Terms of Service",
+    "navPrivacy": "Privacy Policy",
+    "navData": "Data Collection",
+    "navRights": "User Rights"
+  },
+  "welcomeText": "Welcome to LiteLifeTrip. Transparency is key to our relationship with you. Below you will find our Terms of Service and Privacy Policy, which outline the rules for using our platform and how we protect your personal information. By accessing or using our website and services, you agree to be bound by these Terms.",
+  "terms": {
+    "title": "1. Terms of Service",
+    "acceptanceTitle": "1.1 Acceptance of Terms",
+    "acceptanceText": "By creating an account, booking a trip, or simply browsing LiteLifeTrip, you acknowledge that you have read, understood, and agree to be bound by these terms. If you do not agree with any part of these terms, you must discontinue use of our services immediately.",
+    "responsibilitiesTitle": "1.2 User Responsibilities",
+    "responsibilitiesText": "You are responsible for maintaining the confidentiality of your account credentials. You agree to accept responsibility for all activities that occur under your account. LiteLifeTrip reserves the right to terminate accounts, remove or edit content, or cancel orders in its sole discretion.",
+    "responsibilitiesList": [
+      "You must be at least 18 years of age to use this service.",
+      "You agree not to use the service for any illegal or unauthorized purpose.",
+      "You must not transmit any worms or viruses or any code of a destructive nature."
+    ],
+    "bookingTitle": "1.3 Booking & Cancellations",
+    "bookingText": "All bookings are subject to availability and acceptance by our travel partners. Cancellation policies vary by booking type and provider. Please review the specific cancellation policy attached to your reservation before confirming your purchase."
+  },
+  "privacy": {
+    "title": "2. Privacy Policy",
+    "intro": "Your privacy is critically important to us. At LiteLifeTrip, we have a few fundamental principles:",
+    "minimalData": {
+      "title": "Minimal Data",
+      "text": "We only ask for personal information when we truly need it to provide a service to you."
+    },
+    "fairUsage": {
+      "title": "Fair Usage",
+      "text": "We don't share your personal information with anyone except to comply with the law or protect our rights."
+    },
+    "collectTitle": "2.1 Information We Collect",
+    "collectText": "We collect information directly from you when you provide it to us, automatically as you navigate through the site, and from third parties (e.g., when you log in via Google). This includes your name, email address, payment information, and travel preferences."
+  },
+  "dataCollection": {
+    "title": "3. Data Collection & Cookies",
+    "cookiesTitle": "3.1 Cookie Policy",
+    "cookiesText": "LiteLifeTrip uses cookies to help identify and track visitors, their usage of our website, and their website access preferences. Visitors who do not wish to have cookies placed on their computers should set their browsers to refuse cookies before using our websites.",
+    "locationTitle": "3.2 Location Data",
+    "locationText": "With your permission, we may collect and process information about your actual location. We use various technologies to determine location, including IP address, GPS, and other sensors. This data helps us provide localized recommendations for destinations and experiences."
+  },
+  "rights": {
+    "title": "4. User Rights",
+    "intro": "Depending on your location, you may have certain rights regarding your personal information, including:",
+    "rightsList": [
+      {
+        "title": "Right to Access",
+        "description": "Request copies of your personal data."
+      },
+      {
+        "title": "Right to Rectification",
+        "description": "Request correction of inaccurate data."
+      },
+      {
+        "title": "Right to Erasure",
+        "description": "Request deletion of your data."
+      },
+      {
+        "title": "Data Portability",
+        "description": "Request transfer of your data to another organization."
+      }
+    ],
+    "contactDPO": "To exercise these rights, please contact our Data Protection Officer at"
+  }
+}

@@ -1,13 +1,13 @@
 .top {
   display: grid;
   gap: 40px;
-  padding: 48px 0;
+  padding: 40px 0;
 }
 
 @media (min-width: 1280px) {
   .top {
     grid-template-columns: repeat(3, 1fr);
-    gap: 60px;
+    gap: 30px;
   }
 }
 
@@ -19,7 +19,7 @@
 
 .description {
   color: var(--text-muted);
-  max-width: 320px;
+  max-width: 330px;
 }
 
 .title {
@@ -67,7 +67,7 @@
   border-radius: 6px;
   border: 1px solid rgb(var(--border-color-rgb));
   background-color: var(--bg-main);
-  color: var(--text-main);
+  color: var(--text-muted);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 

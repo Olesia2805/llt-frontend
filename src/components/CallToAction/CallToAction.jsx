@@ -8,7 +8,7 @@ const CallToAction = () => {
   const { t } = useTranslation("homeGuest");
 
   return (
-    <Section variant="blobs ctaSection">
+    <Section variant="blobsBG ctaSectionBG">
       <Container>
         <div className={styles.ctaWrapper}>
           <div className="sectionHeaderWrapper">
