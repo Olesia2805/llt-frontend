@@ -9,7 +9,7 @@ import Button from "../Button/Button";
 
 const Header = () => {
   const { t } = useTranslation("common");
-  const { isAuthenticated, login, logout, signup } = useAuth();
+  const { login } = useAuth();
 
   return (
     <header className={styles.header}>
@@ -18,24 +18,20 @@ const Header = () => {
           <Logo variant="header" />
 
           <div className={styles.controls}>
-            {isAuthenticated ? (
-              <Button text="Logout" onClick={logout} />
-            ) : (
-              <>
-                <ThemeSwitcher />
-                <LanguageSwitcher />
-                <Button
-                  variant="secondary"
-                  text={t("header.login")}
-                  onClick={login}
-                />
-                <Button
-                  text={t("header.signup")}
-                  onClick={signup}
-                  className={styles.signupBtn}
-                />
-              </>
-            )}
+            <>
+              <ThemeSwitcher />
+              <LanguageSwitcher />
+              <Button
+                variant="secondary"
+                text={t("header.login")}
+                onClick={login}
+              />
+              <Button
+                text={t("header.signup")}
+                to="/signup"
+                className={styles.signupBtn}
+              />
+            </>
           </div>
         </div>
       </Container>

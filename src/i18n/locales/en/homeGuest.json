@@ -5,7 +5,7 @@
     "button": "Start for free",
     "imageAlt": "Trip preview"
   },
-  
+
   "chooseReasons": {
     "title": "Why Choose LiteLifeTrip",
     "description": "We understand that you don't have time for long planning, and weekends can be the only chance to recharge. LiteLifeTrip is designed to turn trip preparation from a stress into a pleasure.",
@@ -55,8 +55,8 @@
   "pricePlans": {
     "title": "Plans for Every Traveler",
     "description": "Choose the perfect plan for your adventure style. Switch or cancel anytime.",
-    "items": [
-      {
+    "items": {
+      "explorer": {
         "title": "Explorer",
         "description": "Essential tools for the casual traveler.",
         "price": "Free",
@@ -69,7 +69,7 @@
         ],
         "isPopular": false
       },
-      {
+      "nomad": {
         "title": "Nomad",
         "description": "Advanced features for active travelers.",
         "price": "$9",
@@ -82,7 +82,7 @@
         ],
         "isPopular": true
       },
-      {
+      "globetrotter": {
         "title": "Globetrotter",
         "description": "An essential kit for avid travelers.",
         "price": "$89",
@@ -96,8 +96,8 @@
         ],
         "isPopular": false
       }
-    ]
- },
+    }
+  },
 
   "testimonials": {
     "title": "Loved by Travelers",

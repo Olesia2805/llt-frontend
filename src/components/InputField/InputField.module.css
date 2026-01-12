@@ -1,0 +1,59 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.labelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 12px;
+  margin-bottom: 2px;
+}
+
+.labelText {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.errorText {
+  color: var(--red-color);
+  font-size: 12px;
+  font-weight: 400;
+  text-align: right;
+  transition: opacity 0.2s ease;
+}
+
+.invisible {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.inputContainer {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  outline: none;
+  background: var(--bg-main);
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.input:hover {
+  border-color: var(--primary);
+  box-shadow: 0px 0px 8px rgba(var(--primary-light-rgb), 0.25);
+}
+
+.input:focus {
+  border-color: var(--primary);
+}
