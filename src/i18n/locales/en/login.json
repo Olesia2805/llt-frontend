@@ -3,6 +3,12 @@
     "title": "Plan your next adventure.",
     "subtitle": "Discover new destinations, organize your itinerary, and travel with peace of mind."
   },
+  "hero_section": {
+    "badge_text": "Welcome Back",
+    "title": "Plan your <span>next adventure</span>",
+    "description": "Discover new destinations, organize your itinerary, and travel with peace of mind.",
+    "imageAlt": "Travel adventure background"
+  },
   "form": {
     "welcome": "Welcome Back",
     "continue": "Continue your journey.",

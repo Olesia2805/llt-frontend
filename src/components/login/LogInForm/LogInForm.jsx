@@ -118,71 +118,83 @@ const LogInForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit} noValidate>
-      <h2>{t('form.welcome')}</h2>
-      <p className={styles.loginText}>
-        {t('form.noAccount')}{' '}
-        <Button variant="link-accent" to="/signup">
-          {t('form.signup')}
-        </Button>
-      </p>
-
-      <div className={styles.googleBtnContainer}>
-        <GoogleLogin
-          onSuccess={handleGoogleSuccess}
-          onError={() => setErrors({ form: 'Google login failed' })}
-        />
-      </div>
-
-      <div className={styles.divider}>{t('form.orContinue')}</div>
-
-      <InputField
-        type="email"
-        label={t('form.emailLabel')}
-        placeholder={t('form.emailPlaceholder')}
-        value={email}
-        onChange={e => handleFieldChange('email', e.target.value, setEmail)}
-        error={errors.email}
-        name="email"
-        autoComplete="email"
-      />
-
-      <InputField
-        type="password"
-        label={t('form.passwordLabel')}
-        placeholder={t('form.passwordPlaceholder')}
-        value={password}
-        onChange={e =>
-          handleFieldChange('password', e.target.value, setPassword)
-        }
-        autoComplete="current-password"
-        name="password"
-        error={errors.password}
-      />
-
-      <div className={styles.actions}>
-        <label className={styles.rememberMe}>
-          <input
-            type="checkbox"
-            checked={rememberMe}
-            onChange={e => setRememberMe(e.target.checked)}
-          />
-          <span className={styles.checkbox} aria-hidden="true" />
-          <span className={styles.rememberMeText}>{t('form.rememberMe')}</span>
-        </label>
-        <Button variant="link-accent" to="#">
-          {t('form.forgotPassword')}
-        </Button>
-      </div>
-
-      <div className={styles.formErrorWrapper}>
-        <p className={clsx(styles.errorText, !errors.form && styles.invisible)}>
-          {errors.form || '\u00A0'}
+      <fieldset>
+        <legend className={styles.formLegend}>{t('form.welcome')}</legend>
+        <p className={styles.loginText}>
+          {t('form.noAccount')}{' '}
+          <Button variant="link-accent" to="/signup">
+            {t('form.signup')}
+          </Button>
         </p>
-      </div>
 
-      <Button type="submit" isLoading={loading}>
-        {t('form.loginButton')}
-      </Button>
+        <div className={styles.googleBtnContainer}>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => setErrors({ form: 'Google login failed' })}
+          />
+        </div>
+
+        <div className={styles.divider}>{t('form.orContinue')}</div>
+
+        <InputField
+          id="email"
+          type="email"
+          label={t('form.emailLabel')}
+          placeholder={t('form.emailPlaceholder')}
+          value={email}
+          onChange={e => handleFieldChange('email', e.target.value, setEmail)}
+          error={errors.email}
+          name="email"
+          autoComplete="email"
+        />
+
+        <InputField
+          id="password"
+          type="password"
+          label={t('form.passwordLabel')}
+          placeholder={t('form.passwordPlaceholder')}
+          value={password}
+          onChange={e =>
+            handleFieldChange('password', e.target.value, setPassword)
+          }
+          autoComplete="current-password"
+          name="password"
+          error={errors.password}
+        />
+
+        <div className={styles.actions}>
+          <label className={styles.rememberMe}>
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={e => setRememberMe(e.target.checked)}
+            />
+            <span className={styles.checkbox} aria-hidden="true" />
+            <span className={styles.rememberMeText}>
+              {t('form.rememberMe')}
+            </span>
+          </label>
+          <Button variant="link-accent" to="#">
+            {t('form.forgotPassword')}
+          </Button>
+        </div>
+
+        <div
+          className={styles.formErrorWrapper}
+          role="alert"
+          aria-live="polite"
+        >
+          <p
+            className={clsx(styles.errorText, !errors.form && styles.invisible)}
+          >
+            {errors.form || '\u00A0'}
+          </p>
+        </div>
+
+        <Button type="submit" isLoading={loading}>
+          {t('form.loginButton')}
+        </Button>
+      </fieldset>
     </form>
   );
 };

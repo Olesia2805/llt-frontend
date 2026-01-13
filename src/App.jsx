@@ -33,10 +33,10 @@ const App = () => {
       <Suspense fallback={<Loader />}>
         <ScrollToTop />
         <Routes>
-          <Route path={ROUTER.LOGIN} element={<LogInPage />} />
           <Route path={ROUTER.HOME} element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path={`${ROUTER.POLICIES}`} element={<PoliciesPage />} />
+            <Route path={`${ROUTER.LOGIN}`} element={<LogInPage />} />
             <Route path={`${ROUTER.SIGNUP}`} element={<SignUpPage />} />
             <Route element={<ProtectedRoute />}>
               <Route path={ROUTER.PROFILE} element={<ProfilePage />} />
