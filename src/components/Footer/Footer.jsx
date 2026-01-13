@@ -4,7 +4,6 @@ import NetworkLinks from "../NetworkLinks/NetworkLinks";
 import { useTranslation } from "react-i18next";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Footer = () => {
@@ -35,12 +34,20 @@ const Footer = () => {
           <div className={styles.column}>
             <h3 className={styles.title}>{t("footer.company")}</h3>
             <ul className={styles.links}>
-              <li>{t("footer.aboutUs")}</li>
-              <li>{t("footer.team")}</li>
               <li>
-                <Link to="/policies" className={styles.footerLink}>
+                <Button variant="link-muted" to="/">
+                  {t("footer.aboutUs")}
+                </Button>
+              </li>
+              <li>
+                <Button variant="link-muted" to="/">
+                  {t("footer.team")}
+                </Button>
+              </li>
+              <li>
+                <Button variant="link-muted" to="/policies">
                   {t("footer.terms")}
-                </Link>
+                </Button>
               </li>
             </ul>
           </div>
@@ -59,8 +66,7 @@ const Footer = () => {
                 className={styles.input}
                 required
               />
-
-              <Button text={t("footer.button")} />
+              <Button type="submit" text={t("footer.button")} />
             </form>
           </div>
         </div>

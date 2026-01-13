@@ -7,15 +7,16 @@
   padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid rgb(var(--primary-light-rgb));
-  background-color: var(--bg-main);
+  background-color: transparent;
   color: rgb(var(--primary-light-rgb));
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s, transform 0.2s;
+  box-shadow: 0 0 4px 0px rgba(var(--primary-light-rgb), 0.8);
 }
 
 .toggle:hover,
 .toggle:focus-visible {
-  filter: drop-shadow(0 0 4px rgba(var(--primary-light-rgb), 0.8));
+  box-shadow: 0 0 8px 0px rgba(var(--primary-light-rgb), 0.8);
   transform: scale(1.05);
 }
 

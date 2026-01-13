@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "title": "Settings",
+    "description": "Manage your account profile and global preferences."
+  },
+  "preferences": {
+    "sectionTitle": "Preferences",
+    "theme": "App Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "language": "System Language"
+  },
+  "buttons": {
+    "saveChanges": "Save Changes"
+  }
+}

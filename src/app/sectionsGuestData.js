@@ -32,14 +32,22 @@ export const OFFER_FEATURES = () => {
 };
 
 export const PRICE_PLANS = () => {
-  const plansJson = i18n.getResource(
+  const plansObj = i18n.getResource(
     i18n.language,
     "homeGuest",
     "pricePlans.items"
   );
 
-  return plansJson.map((plan, index) => ({
-    id: index,
+  const planHrefs = {
+    explorer: "/signup",
+    nomad: "/",
+    globetrotter: "/",
+  };
+
+  if (!plansObj) return [];
+
+  return Object.entries(plansObj).map(([key, plan]) => ({
+    id: key,
     title: plan.title,
     description: plan.description,
     price: plan.price,
@@ -50,6 +58,7 @@ export const PRICE_PLANS = () => {
     })),
     buttonText: plan.button,
     isPopular: plan.isPopular,
+    href: planHrefs[key] || "/",
   }));
 };
 

@@ -31,7 +31,7 @@ const Hero = () => {
               dangerouslySetInnerHTML={{ __html: t("hero.title") }}
             />
             <p className={styles.description}>{t("hero.description")}</p>
-            <Button text={t("hero.button")} />
+            <Button text={t("hero.button")} to="/signup" />
           </div>
 
           <picture>
@@ -43,7 +43,7 @@ const Hero = () => {
               alt={t("hero.imageAlt")}
               width="450"
               height="570"
-              fetchpriority="high"
+              fetchPriority="high"
               loading="eager"
             />
           </picture>
