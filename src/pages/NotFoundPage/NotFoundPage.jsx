@@ -4,7 +4,9 @@ import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
 import Button from "../../components/Button/Button";
 import styles from "./NotFoundPage.module.css";
-import illustration from "../../assets/img/404_img.png";
+import mapResolution from "../../assets/img/map-high-resolution.webp";
+import mapDesktop from "../../assets/img/map-desktop.webp";
+import mapMobile from "../../assets/img/map-mobile.webp";
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -15,30 +17,29 @@ const NotFoundPage = () => {
   };
 
   return (
-    <Section className={styles.root}>
+    <Section>
       <Container>
         <div className={styles.content}>
-          <div className={styles.imageWrapper}>
+          <picture className={styles.imageWrapper}>
+            <source media="(max-width: 768px)" srcSet={mapMobile} />
+            <source srcSet={`${mapDesktop} 1x, ${mapResolution} 2x`} />
             <img
-              src={illustration}
-              alt="404 illustration"
               className={styles.image}
+              src={mapDesktop}
+              alt={t("imageAlt")}
+              width="450"
+              height="570"
+              loading="lazy"
             />
-          </div>
+          </picture>
 
           <div className={styles.textWrapper}>
-            <p className={styles.code}>{t("errorCode")}</p>
-            <h1 className={styles.title}>{t("title")}</h1>
+            <h1 className={styles.code}>{t("errorCode")}</h1>
+            <h2 className={styles.title}>{t("title")}</h2>
             <p className={styles.description}>{t("description")}</p>
           </div>
 
-          <div className={styles.actions}>
-            <Button
-              text={t("returnHome")}
-              variant="primary"
-              onClick={handleReturnHome}
-            />
-          </div>
+          <Button text={t("returnHome")} onClick={handleReturnHome} />
         </div>
       </Container>
     </Section>
