@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import clsx from "clsx";
+import styles from "./ModalContainer.module.css";
 
-export default function ModalContainer({ isOpen, onClose, children }) {
+const ModalContainer = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     const handleEsc = (e) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", handleEsc);
@@ -8,10 +10,21 @@ export default function ModalContainer({ isOpen, onClose, children }) {
   }, [onClose]);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
+    if (isOpen) document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
-  return children;
-}
+  return (
+    <div className={clsx(styles.overlay, isOpen && styles.show)}>
+      <div className={styles.backdrop} onClick={onClose} />
+      <div className={styles.modal}>{children}</div>
+    </div>
+  );
+};
+
+export default ModalContainer;

@@ -62,7 +62,6 @@ const SignUpPage = () => {
     if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
 
-  // Live validation effects
   useEffect(() => {
     if (!name) {
       setErrors((prev) => ({ ...prev, name: null }));
