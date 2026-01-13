@@ -1,4 +1,5 @@
-import { MdDashboard, MdPerson, MdFlight, MdSettings } from "react-icons/md";
+import { MdDashboard, MdPerson, MdSettings } from "react-icons/md";
+import { FaRegCompass } from "react-icons/fa";
 
 const sidebarItems = [
   {
@@ -16,7 +17,7 @@ const sidebarItems = [
   {
     id: "trips",
     label: "trips",
-    icon: MdFlight,
+    icon: FaRegCompass,
     path: "/trips",
   },
   {
