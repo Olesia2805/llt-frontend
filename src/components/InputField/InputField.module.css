@@ -4,33 +4,10 @@
   width: 100%;
 }
 
-.labelHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  min-height: 12px;
-  margin-bottom: 2px;
-}
-
 .labelText {
   font-size: 14px;
   font-weight: 500;
   color: var(--text-muted);
-}
-
-.errorText {
-  color: var(--red-color);
-  font-size: 12px;
-  font-weight: 400;
-  text-align: right;
-  transition: opacity 0.2s ease;
-}
-
-.invisible {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
 }
 
 .inputContainer {
@@ -42,7 +19,7 @@
   width: 100%;
   padding: 10px 14px;
   border-radius: 6px;
-  border: 3px solid transparent;
+  border: 3px solid rgb(var(--border-color-rgb));
   outline: none;
   background: var(--bg-main);
   color: var(--text-muted);
@@ -56,4 +33,18 @@
 
 .input:focus {
   border-color: var(--primary);
+}
+
+.errorText {
+  color: rgb(var(--red-color-rgb));
+  font-size: 12px;
+  font-weight: 400;
+  height: 16px;
+  line-height: 16px;
+  visibility: visible;
+  margin-top: 6px;
+}
+
+.errorText.invisible {
+  visibility: hidden;
 }
