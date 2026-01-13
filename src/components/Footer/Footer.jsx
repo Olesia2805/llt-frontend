@@ -6,7 +6,7 @@ import Container from "../Container/Container";
 import Button from "../Button/Button";
 import { useState } from "react";
 
-const Footer = () => {
+const Footer = ({ setIsTeamOpen }) => {
   const { t } = useTranslation("common");
   const [email, setEmail] = useState("");
 
@@ -35,8 +35,11 @@ const Footer = () => {
             <h3 className={styles.title}>{t("footer.company")}</h3>
             <ul className={styles.links}>
               <li>
-                <Button variant="link-muted" to="/">
-                  {t("footer.team")}
+                <Button
+                  variant="link-button-muted"
+                  onClick={() => setIsTeamOpen(true)}
+                >
+                  {t("footer.team.modalName")}
                 </Button>
               </li>
               <li>
