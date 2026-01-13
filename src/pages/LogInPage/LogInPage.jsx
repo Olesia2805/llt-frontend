@@ -5,7 +5,8 @@ import styles from './LogInPage.module.css';
 import Container from '../../components/Container/Container';
 import LogInForm from '../../components/login/LogInForm/LogInForm';
 
-import loginBackground from '../../assets/img/login_background.png';
+import loginBackground from '../../assets/img/login_background.jpg';
+import loginBackgroundMobile from '../../assets/img/login_background_mobile.jpg';
 
 const LogInPage = () => {
   const { t } = useTranslation('login');
@@ -26,6 +27,7 @@ const LogInPage = () => {
           <LogInForm />
 
           <picture>
+            <source media="(max-width: 768px)" srcSet={loginBackgroundMobile} />
             <img
               className={styles.image}
               src={loginBackground}
