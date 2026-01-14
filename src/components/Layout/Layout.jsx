@@ -6,7 +6,8 @@ import HeaderForm from "../Header/HeaderForm";
 import SideBar from "../SideBar/SideBar";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import ModalContainer from "../ModalContainer/ModalContainer";
+import ModalOurTeam from "../ModalOurTeam/ModalOurTeam";
+import { useState } from "react";
 
 import styles from "./Layout.module.css";
 
@@ -16,6 +17,8 @@ const Layout = () => {
 
   const formPages = ["/signup", "/login"];
   const isFormPage = formPages.includes(location.pathname);
+
+  const [isTeamOpen, setIsTeamOpen] = useState(false);
 
   return (
     <div className={styles.layout}>
@@ -33,11 +36,23 @@ const Layout = () => {
             <Outlet />
           </Main>
 
-          {!isFormPage && <Footer />}
+          {!isFormPage && <Footer setIsTeamOpen={setIsTeamOpen} />}
         </div>
       </div>
 
-      <ModalContainer />
+      <div className={styles.modalRoot}>
+        <ModalOurTeam
+          isOpen={isTeamOpen}
+          onClose={() => setIsTeamOpen(false)}
+        />
+
+        {/* {isAuthenticated && (
+          <ExclusiveModal
+            isOpen={isExclusiveOpen}
+            onClose={() => setIsExclusiveOpen(false)}
+          />
+        )} */}
+      </div>
     </div>
   );
 };

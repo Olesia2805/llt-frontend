@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+  transition: all 0.2s ease;
 
   /* TODO: Loader */
   /* position: relative;
@@ -22,11 +23,6 @@
   .button {
     width: auto;
   }
-}
-
-.button:hover:not(:disabled),
-.button:focus-visible {
-  transition: all 0.5s ease;
 }
 
 .icon {
@@ -103,6 +99,7 @@
 .link-accent {
   color: var(--primary);
   padding: 0;
+  width: auto;
 }
 
 .link-accent:hover:not(:disabled),
@@ -113,6 +110,15 @@
 
 .link-muted {
   padding: 0;
+  font-weight: 400;
+}
+
+.link-button-muted {
+  background: none;
+  border: none;
+  padding: 0;
+  width: auto;
+  color: var(--text-primary);
   font-weight: 400;
 }
 
@@ -148,10 +154,31 @@
   cursor: pointer;
   display: flex;
   padding: 4px;
+  width: auto;
 }
 
 .eyeButton:hover {
   color: var(--primary);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0px;
+  right: -12px;
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 26px;
+  cursor: pointer;
+  width: auto;
+}
+
+@media (min-width: 1280px) {
+  .closeBtn {
+    top: 12px;
+    right: 0px;
+    font-size: 36px;
+  }
 }
 
 /* TODO: Loader */

@@ -23,3 +23,14 @@
 .mainContent {
   flex: 1;
 }
+
+.modalRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.modalRoot > * {
+  pointer-events: auto;
+}

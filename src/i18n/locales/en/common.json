@@ -3,17 +3,34 @@
     "login": "Log In",
     "signup": "Sign Up"
   },
-  
+
   "footer": {
     "description": "Discover the world with LiteLifeTrip. Plan your routes, track your stats, and explore new horizons with our comprehensive travel companion.",
     "company": "Company",
-    "aboutUs": "About Us",
-    "team": "Our Team",
+    "team": {
+      "modalName": "Our Team",
+      "headerTitle": "Meet the Creators",
+      "headerSubtitle": "Passionate travelers and tech enthusiasts",
+      "members": {
+        "olesiaVysotina": { "name": "Olesia Vysotina", "role": "Founder" },
+        "dmytroBalakin": { "name": "Dmytro Balakin", "role": "Co‑Founder" },
+        "ievgenTymoshenko": {
+          "name": "Ievgen Tymoshenko",
+          "role": "Co‑Founder"
+        }
+      }
+    },
     "terms": "Terms and Privacy Policies",
     "newsletterTitle": "Subscribe to our newsletter",
     "newsletterDescription": "The latest news, articles, and resources, sent to your inbox weekly.",
     "emailPlaceholder": "Enter your email",
     "button": "Subscribe",
-    "copyright": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "success": "You have successfully subscribed!",
+    "error": "Something went wrong. Please try again.",
+    "email_errors": {
+      "email_required": "Please enter your email",
+      "email_invalid": "Incorrect email format"
+    }
   }
 }
