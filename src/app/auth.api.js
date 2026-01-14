@@ -22,7 +22,7 @@ export const register = async (payload) => {
 };
 
 export const googleAuth = async (idToken) => {
-  const res = await fetch(`${BASE_URL}/auth/oauth/google/idToken`, {
+  const res = await fetch(`${BASE_URL}/auth/oauth/google/idtoken`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ idToken }),
