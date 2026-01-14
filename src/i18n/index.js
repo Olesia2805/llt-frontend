@@ -8,7 +8,7 @@ import commonEn from "./locales/en/common.json";
 import notFoundEn from "./locales/en/notFound.json";
 import sidebarEn from "./locales/en/sidebar.json";
 // import profileEn from "./locales/en/profile.json";
-// import tripsEn from "./locales/en/trips.json";
+// import myTripsEn from "./locales/en/myTrips.json";
 import settingsEn from "./locales/en/settings.json";
 
 import homeGuestUk from "./locales/uk/homeGuest.json";
@@ -18,7 +18,7 @@ import commonUk from "./locales/uk/common.json";
 import notFoundUk from "./locales/uk/notFound.json";
 import sidebarUk from "./locales/uk/sidebar.json";
 // import profileUk from "./locales/uk/profile.json";
-// import tripsUk from "./locales/uk/trips.json";
+// import myTripsUk from "./locales/uk/myTrips.json";
 import settingsUk from "./locales/uk/settings.json";
 
 const savedLang = localStorage.getItem("lang") || "uk";
@@ -33,7 +33,7 @@ i18n.use(initReactI18next).init({
       notFound: notFoundUk,
       sidebar: sidebarUk,
       // profile: profileUk,
-      // trips: tripsUk,
+      // myTrips: myTripsUk,
       settings: settingsUk,
     },
     en: {
@@ -44,7 +44,7 @@ i18n.use(initReactI18next).init({
       notFound: notFoundEn,
       sidebar: sidebarEn,
       // profile: profileEn,
-      // trips: tripsEn,
+      // myTrips: myTripsEn,
       settings: settingsEn,
     },
   },

@@ -3,7 +3,7 @@ export const ROUTER = {
   POLICIES: "/policies",
   SIGNUP: "/signup",
   PROFILE: "/profile",
-  TRIPS: "/trips",
+  MYTRIPS: "/mytrips",
   SETTINGS: "/settings",
   ALL: "*",
 };
