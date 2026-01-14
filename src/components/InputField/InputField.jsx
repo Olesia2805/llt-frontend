@@ -12,31 +12,28 @@ const InputField = ({ label, type = "text", error, className, ...props }) => {
 
   return (
     <div className={clsx(styles.wrapper, className)}>
-      <label className={styles.label}>
-        <div className={styles.labelHeader}>
-          {label && <span className={styles.labelText}>{label}</span>}
-          <span className={clsx(styles.errorText, !error && styles.invisible)}>
-            {error || ""}
-          </span>
-        </div>
+      {label && <span className={styles.labelText}>{label}</span>}
 
-        <div className={styles.inputContainer}>
-          <input
-            type={inputType}
-            className={clsx(styles.input, error && styles.inputError)}
-            {...props}
-          />
+      <div className={styles.inputContainer}>
+        <input
+          type={inputType}
+          className={clsx(styles.input, error && styles.inputError)}
+          {...props}
+        />
 
-          {isPassword && (
-            <Button
-              variant="eyeButton"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <RiEyeCloseFill /> : <RiEyeFill />}
-            </Button>
-          )}
-        </div>
-      </label>
+        {isPassword && (
+          <Button
+            variant="eyeButton"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <RiEyeCloseFill /> : <RiEyeFill />}
+          </Button>
+        )}
+      </div>
+
+      <span className={clsx(styles.errorText, !error && styles.invisible)}>
+        {error || "\u00A0"}
+      </span>
     </div>
   );
 };

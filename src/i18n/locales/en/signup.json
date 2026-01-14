@@ -33,7 +33,7 @@
       "name_too_long": "Name must be no more than 30 characters long",
       "email_invalid": "Please enter a valid email address",
       "password_short": "Password must be at least 6 characters long",
-      "policies_required": "You must agree to the Terms of Use and Privacy Policy"
+      "policies_required": "You must agree to the conditions"
     },
     "password_strength": {
       "weak": "Weak password",

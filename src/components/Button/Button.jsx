@@ -6,7 +6,8 @@ import Loader from "../Loader/Loader";
 
 const Button = ({
   variant = "primary",
-  // variant = "primary" | "secondary" | "ghost" | "link-accent" | "link-muted" | "dot" | "eyeButton"
+  // variant = "primary" | "secondary" | "ghost" | "link-accent" | "link-muted" |
+  // | "link-button-muted" | "dot" | "eyeButton" | "closeBtn"
   text,
   children,
   className,
@@ -55,7 +56,9 @@ const Button = ({
   const content = (
     <>
       {leftIcon && <span className={styles.icon}>{leftIcon}</span>}
-      <span className={styles.content}>{children || text}</span>
+      {(children || text) && (
+        <span className={styles.content}>{children || text}</span>
+      )}
       {rightIcon && <span className={styles.icon}>{rightIcon}</span>}
       {isLoading && <Loader />}
     </>

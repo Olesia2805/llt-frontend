@@ -1,0 +1,27 @@
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.title {
+  margin-bottom: 8px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1280px) {
+  .cards {
+    gap: 36px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
