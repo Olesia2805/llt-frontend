@@ -1,27 +1,59 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 import Header from "../Header/Header";
+import HeaderForm from "../Header/HeaderForm";
+import SideBar from "../SideBar/SideBar";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import ModalContainer from "../ModalContainer/ModalContainer";
+import ModalOurTeam from "../ModalOurTeam/ModalOurTeam";
+import { useState } from "react";
+
+import styles from "./Layout.module.css";
 
 const Layout = () => {
-  //TODO: SideBar
-  //   const { isAuthenticated } = useAuth();
-  //   return isAuthenticated ? <Header /> : <SideBar />;
+  const location = useLocation();
+  const { isAuthenticated } = useAuth();
+
+  const formPages = ["/signup", "/login"];
+  const isFormPage = formPages.includes(location.pathname);
+
+  const [isTeamOpen, setIsTeamOpen] = useState(false);
 
   return (
-    <>
-      <Header />
+    <div className={styles.layout}>
+      {isFormPage ? <HeaderForm /> : !isAuthenticated && <Header />}
 
-      <Main>
-        <Outlet />
-      </Main>
+      <div className={styles.content}>
+        {isAuthenticated && (
+          <div className={styles.sidebarWrapper}>
+            <SideBar />
+          </div>
+        )}
 
-      <Footer />
+        <div className={styles.mainWrapper}>
+          <Main className={styles.mainContent}>
+            <Outlet />
+          </Main>
 
-      <ModalContainer />
-    </>
+          {!isFormPage && <Footer setIsTeamOpen={setIsTeamOpen} />}
+        </div>
+      </div>
+
+      <div className={styles.modalRoot}>
+        <ModalOurTeam
+          isOpen={isTeamOpen}
+          onClose={() => setIsTeamOpen(false)}
+        />
+
+        {/* {isAuthenticated && (
+          <ExclusiveModal
+            isOpen={isExclusiveOpen}
+            onClose={() => setIsExclusiveOpen(false)}
+          />
+        )} */}
+      </div>
+    </div>
   );
 };
 

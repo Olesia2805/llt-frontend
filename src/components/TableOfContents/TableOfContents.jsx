@@ -60,7 +60,6 @@ const TableOfContents = () => {
               <li key={item.id} className={styles.navItem}>
                 <Button
                   variant="ghost"
-                  className={styles.link}
                   isActive={activeId === item.id}
                   onClick={() => handleNavClick(item.id)}
                   rightIcon={<MdArrowForward />}

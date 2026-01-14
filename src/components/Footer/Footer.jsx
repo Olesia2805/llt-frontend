@@ -1,25 +1,82 @@
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
+
 import styles from "./Footer.module.css";
 import Logo from "../Logo/Logo";
 import NetworkLinks from "../NetworkLinks/NetworkLinks";
-import { useTranslation } from "react-i18next";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import InputField from "../InputField/InputField";
+import { emailRegex } from "../../app/validation";
 
-const Footer = () => {
+const Footer = ({ setIsTeamOpen }) => {
   const { t } = useTranslation("common");
+
   const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState({ email: null });
+  const [touched, setTouched] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    if (!touched) return;
+
+    if (!email) {
+      setErrors({ email: t("footer.email_errors.email_required") });
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      if (!emailRegex.test(email)) {
+        setErrors({ email: t("footer.email_errors.email_invalid") });
+      } else {
+        setErrors({ email: null });
+      }
+    }, 800);
+
+    return () => clearTimeout(timeoutId);
+  }, [email, touched, t]);
+
+  useEffect(() => {
+    if (email) {
+      localStorage.setItem("subscribe_email", email);
+    }
+  }, [email]);
+
+  const validate = () => {
+    if (!email) {
+      setErrors({ email: t("footer.errors.email_required") });
+      return false;
+    }
+
+    if (!emailRegex.test(email)) {
+      setErrors({ email: t("footer.email_errors.email_invalid") });
+      return false;
+    }
+
+    setErrors({ email: null });
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setTouched(true);
 
-    if (!email) return;
+    if (!validate()) return;
 
-    //TODO: Toaster
-    //TODO: BE endpoint
+    try {
+      // setLoading(true);
+      // TODO: BE endpoint
 
-    setEmail("");
+      localStorage.removeItem("subscribe_email");
+      toast.success(t("footer.success"));
+      setEmail("");
+    } catch {
+      toast.error(t("footer.error"));
+    } finally {
+      // setLoading(false);
+      setTouched(false);
+    }
   };
 
   return (
@@ -35,12 +92,18 @@ const Footer = () => {
           <div className={styles.column}>
             <h3 className={styles.title}>{t("footer.company")}</h3>
             <ul className={styles.links}>
-              <li>{t("footer.aboutUs")}</li>
-              <li>{t("footer.team")}</li>
               <li>
-                <Link to="/policies" className={styles.footerLink}>
+                <Button
+                  variant="link-button-muted"
+                  onClick={() => setIsTeamOpen(true)}
+                >
+                  {t("footer.team.modalName")}
+                </Button>
+              </li>
+              <li>
+                <Button variant="link-muted" to="/policies">
                   {t("footer.terms")}
-                </Link>
+                </Button>
               </li>
             </ul>
           </div>
@@ -50,17 +113,22 @@ const Footer = () => {
             <p className={styles.description}>
               {t("footer.newsletterDescription")}
             </p>
-            <form className={styles.form} onSubmit={handleSubmit}>
-              <input
+
+            <form className={styles.form} onSubmit={handleSubmit} noValidate>
+              <InputField
                 type="email"
+                name="email"
+                autoComplete="email"
+                placeholder={t("footer.emailPlaceholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder={t("footer.emailPlaceholder")}
-                className={styles.input}
-                required
+                error={errors.email}
               />
 
-              <Button text={t("footer.button")} />
+              <Button
+                type="submit"
+                text={t("footer.button")} // disabled={loading}
+              />
             </form>
           </div>
         </div>
@@ -72,7 +140,6 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} LiteLifeTrip Inc.
             {` ${t("footer.copyright")}`}
           </p>
-
           <NetworkLinks />
         </div>
       </Container>

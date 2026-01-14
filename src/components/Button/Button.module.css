@@ -4,15 +4,16 @@
   font-weight: 600;
   cursor: pointer;
   border: none;
-  transition: all 0.25s ease;
   width: 100%;
-
-  /* TODO: Loader */
-  /* position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  transition: all 0.2s ease;
+
+  /* TODO: Loader */
+  /* position: relative;
+  
   min-height: 40px;
   overflow: hidden;
   outline: none; */
@@ -22,6 +23,11 @@
   .button {
     width: auto;
   }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
 }
 
 .primary {
@@ -35,14 +41,14 @@
 }
 
 .secondary {
-  background-color: transparent;
+  background-color: var(--bg-main);
   border: 3px solid rgb(var(--border-color-rgb));
   color: var(--text-main);
 }
 
 .secondary:hover:not(:disabled),
 .secondary:focus-visible {
-  background-color: rgba(var(--border-color-rgb), 0.1);
+  background-color: rgba(var(--border-color-rgb), 0.3);
   border-color: var(--primary);
   color: var(--primary);
 }
@@ -59,6 +65,7 @@
   border-radius: 6px;
   font-weight: 400;
   width: 100%;
+  font-size: 18px;
 }
 
 .ghost:hover:not(:disabled),
@@ -89,6 +96,32 @@
   }
 }
 
+.link-accent {
+  color: var(--primary);
+  padding: 0;
+  width: auto;
+}
+
+.link-accent:hover:not(:disabled),
+.link-accent:focus-visible {
+  color: rgb(var(--primary-light-rgb));
+  padding: 0;
+}
+
+.link-muted {
+  padding: 0;
+  font-weight: 400;
+}
+
+.link-button-muted {
+  background: none;
+  border: none;
+  padding: 0;
+  width: auto;
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
 .dot {
   width: 12px;
   height: 12px;
@@ -108,6 +141,44 @@
   background-color: var(--primary);
   width: 14px;
   height: 14px;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  padding: 4px;
+  width: auto;
+}
+
+.eyeButton:hover {
+  color: var(--primary);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0px;
+  right: -12px;
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 26px;
+  cursor: pointer;
+  width: auto;
+}
+
+@media (min-width: 1280px) {
+  .closeBtn {
+    top: 12px;
+    right: 0px;
+    font-size: 36px;
+  }
 }
 
 /* TODO: Loader */

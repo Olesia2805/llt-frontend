@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "title": "Settings",
+    "description": "Manage your account profile and global preferences.",
+    "avatar": "User avatar"
+  },
+  "preferences": {
+    "sectionTitle": "Preferences",
+    "theme": "App Theme",
+    "language": "App Language",
+    "notifications": "Email notifications"
+  },
+  "buttons": {
+    "saveChanges": "Save Changes"
+  }
+}
