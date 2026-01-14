@@ -153,6 +153,8 @@
   color: var(--text-muted);
   cursor: pointer;
   display: flex;
+  align-items: center;
+  justify-content: end;
   padding: 4px;
   width: auto;
 }

@@ -1,0 +1,23 @@
+.socialButton {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background-color: #283039;
+    border: 1px solid #3b4754;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.socialButton:hover {
+    background-color: #343e49;
+}
+
+.socialButton svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
