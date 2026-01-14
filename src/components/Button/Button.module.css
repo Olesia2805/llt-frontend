@@ -99,6 +99,7 @@
 .link-accent {
   color: var(--primary);
   padding: 0;
+  width: auto;
 }
 
 .link-accent:hover:not(:disabled),
@@ -153,6 +154,7 @@
   cursor: pointer;
   display: flex;
   padding: 4px;
+  width: auto;
 }
 
 .eyeButton:hover {
