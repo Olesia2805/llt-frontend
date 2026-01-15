@@ -14,7 +14,7 @@
         "placeholder": "Ваше ім'я"
       },
       "email": {
-        "label": "Email",
+        "label": "Електронна пошта",
         "placeholder": "example@email.com"
       },
       "password": {
