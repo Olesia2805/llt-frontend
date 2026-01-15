@@ -1,77 +1,57 @@
-const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+import api from "./api";
 
 export const register = async (payload) => {
-  const res = await fetch(`${BASE_URL}/auth/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+  try {
+    const { data } = await api.post("/auth/register", payload);
+    return data;
+  } catch (error) {
+    const status = error.response?.status;
+    const message = error.response?.data?.message;
 
-  const data = await res.json().catch(() => null);
+    if (status === 400) throw new Error(message || "Invalid data");
+    if (status === 409) throw new Error(message || "User already exists");
 
-  if (!res.ok) {
-    if (res.status === 400) throw new Error(data?.message || "Invalid data");
-
-    if (res.status === 409)
-      throw new Error(data?.message || "User already exists");
-
-    throw new Error(data?.message || "Registration failed");
+    throw new Error(message || "Registration failed");
   }
-
-  return data;
 };
 
 export const googleAuth = async (idToken) => {
-  const res = await fetch(`${BASE_URL}/auth/oauth/google/idToken`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ idToken }),
-  });
-
-  console.log(idToken);
-
-  const data = await res.json().catch(() => null);
-
-  if (!res.ok) {
-    if (res.status === 401)
+  try {
+    const { data } = await api.post("/auth/oauth/google/idtoken", { idToken });
+    return data;
+  } catch (error) {
+    if (error.response?.status === 401) {
       throw new Error("Google session expired. Please try again.");
-    throw new Error(data?.message || "Google authentication failed");
-  }
+    }
 
-  return data;
+    throw new Error(
+      error.response?.data?.message || "Google authentication failed"
+    );
+  }
 };
 
 export const login = async ({ email, password }) => {
-  const res = await fetch(`${BASE_URL}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-    credentials: "include",
-  });
-
-  const data = await res.json().catch(() => null);
-
-  if (!res.ok) {
-    throw new Error(data?.message || "Login failed");
+  try {
+    const { data } = await api.post("/auth/login", { email, password });
+    return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Login failed");
   }
-
-  return data;
 };
 
 export const logout = async () => {
-  await fetch(`${BASE_URL}/auth/logout`, {
-    method: "POST",
-    credentials: "include",
-  });
+  try {
+    await api.post("/auth/logout");
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Logout failed");
+  }
 };
 
 export const refresh = async () => {
-  const res = await fetch(`${BASE_URL}/refresh`, {
-    method: "POST",
-    credentials: "include",
-  });
-
-  if (!res.ok) throw new Error("Refresh failed");
-
-  return res.json();
+  try {
+    const { data } = await api.post("/auth/refresh");
+    return data;
+  } catch {
+    throw new Error("Refresh failed");
+  }
 };
