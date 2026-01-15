@@ -4,12 +4,10 @@ import Logo from "../Logo/Logo";
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import Container from "../Container/Container";
-import { useAuth } from "../../context/AuthContext";
 import Button from "../Button/Button";
 
 const Header = () => {
   const { t } = useTranslation("common");
-  const { login } = useAuth();
 
   return (
     <header className={styles.header}>
@@ -24,7 +22,7 @@ const Header = () => {
               <Button
                 variant="secondary"
                 text={t("header.login")}
-                onClick={login}
+                to="/login"
               />
               <Button
                 text={t("header.signup")}

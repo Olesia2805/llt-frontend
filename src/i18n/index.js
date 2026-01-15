@@ -6,6 +6,7 @@ import policiesEn from "./locales/en/policies.json";
 import signupEn from "./locales/en/signup.json";
 import commonEn from "./locales/en/common.json";
 import notFoundEn from "./locales/en/notFound.json";
+import loginEn from "./locales/en/login.json";
 import sidebarEn from "./locales/en/sidebar.json";
 // import profileEn from "./locales/en/profile.json";
 // import myTripsEn from "./locales/en/myTrips.json";
@@ -16,6 +17,7 @@ import policiesUk from "./locales/uk/policies.json";
 import signupUk from "./locales/uk/signup.json";
 import commonUk from "./locales/uk/common.json";
 import notFoundUk from "./locales/uk/notFound.json";
+import loginUk from "./locales/uk/login.json";
 import sidebarUk from "./locales/uk/sidebar.json";
 // import profileUk from "./locales/uk/profile.json";
 // import myTripsUk from "./locales/uk/myTrips.json";
@@ -35,6 +37,7 @@ i18n.use(initReactI18next).init({
       // profile: profileUk,
       // myTrips: myTripsUk,
       settings: settingsUk,
+      login: loginUk,
     },
     en: {
       homeGuest: homeGuestEn,
@@ -46,6 +49,7 @@ i18n.use(initReactI18next).init({
       // profile: profileEn,
       // myTrips: myTripsEn,
       settings: settingsEn,
+      login: loginEn,
     },
   },
   lng: savedLang,
