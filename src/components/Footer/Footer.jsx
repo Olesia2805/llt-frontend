@@ -21,14 +21,9 @@ const Footer = ({ setIsTeamOpen }) => {
   useEffect(() => {
     if (!touched) return;
 
-    if (!email) {
-      setErrors({ email: t("footer.email_errors.email_required") });
-      return;
-    }
-
     const timeoutId = setTimeout(() => {
       if (!emailRegex.test(email)) {
-        setErrors({ email: t("footer.email_errors.email_invalid") });
+        setErrors({ email: t("footer.email_invalid") });
       } else {
         setErrors({ email: null });
       }
@@ -43,14 +38,20 @@ const Footer = ({ setIsTeamOpen }) => {
     }
   }, [email]);
 
-  const validate = () => {
-    if (!email) {
-      setErrors({ email: t("footer.errors.email_required") });
-      return false;
-    }
+  useEffect(() => {
+    if (!errors.email) return;
+    if (email.trim() !== "") return;
 
+    const timer = setTimeout(() => {
+      setErrors({ email: null });
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [errors.email, email]);
+
+  const validate = () => {
     if (!emailRegex.test(email)) {
-      setErrors({ email: t("footer.email_errors.email_invalid") });
+      setErrors({ email: t("footer.email_invalid") });
       return false;
     }
 

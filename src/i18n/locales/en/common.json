@@ -28,9 +28,6 @@
     "copyright": "All rights reserved.",
     "success": "You have successfully subscribed!",
     "error": "Something went wrong. Please try again.",
-    "email_errors": {
-      "email_required": "Please enter your email",
-      "email_invalid": "Incorrect email format"
-    }
+    "email_invalid": "Incorrect email format"
   }
 }

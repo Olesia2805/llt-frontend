@@ -7,7 +7,7 @@ import Loader from "../Loader/Loader";
 const Button = ({
   variant = "primary",
   // variant = "primary" | "secondary" | "ghost" | "link-accent" | "link-muted" |
-  // | "link-button-muted" | "dot" | "eyeButton" | "closeBtn"
+  // | "link-button-muted" | "dot" | "inputBtn" | "closeBtn" | "primaryIcon" | "burgerBtn"
   text,
   children,
   className,

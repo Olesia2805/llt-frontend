@@ -19,7 +19,7 @@
   --red-color-rgb: 239, 68, 68;
   --orange-color-rgb: 245, 158, 11;
   --green-color-rgb: 16, 185, 129;
-  --switcher-dot: #fff;
+  --white-color: #fff;
 }
 
 [data-theme="light"] {
@@ -41,5 +41,5 @@
   --red-color-rgb: 239, 68, 68;
   --orange-color-rgb: 245, 158, 11;
   --green-color-rgb: 16, 185, 129;
-  --switcher-dot: #fff;
+  --white-color: #fff;
 }
