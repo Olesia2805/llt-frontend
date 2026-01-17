@@ -1,28 +1,11 @@
-import { useEffect, useState } from "react";
-import { getCurrentUser } from "../../app/user.api";
-// import styles from "./HomePageUser.module.css";
+import { useAuth } from "../../context/AuthContext";
 
 const HomePageUser = () => {
-  const [userName, setUserName] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const { user, isRefreshing } = useAuth();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const data = await getCurrentUser();
-        setUserName(data.name || data.user?.name || "User");
-      } catch (error) {
-        console.error(error);
-        setUserName("Guest");
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  if (isRefreshing) return <h1>Welcome Back</h1>;
 
-    fetchUser();
-  }, []);
-
-  return <h1>Welcome Back{isLoading ? "" : `, ${userName}!`}</h1>;
+  return <h1>Welcome Back, {user?.name || "Guest"}!</h1>;
 };
 
 export default HomePageUser;

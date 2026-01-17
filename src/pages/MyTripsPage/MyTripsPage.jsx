@@ -14,8 +14,6 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 const MyTripsPage = () => {
   const { user, isRefreshing } = useAuth();
 
-  const userId = user?.id;
-
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -25,13 +23,12 @@ const MyTripsPage = () => {
   const [tripToDelete, setTripToDelete] = useState(null);
 
   useEffect(() => {
-    if (isRefreshing || !userId) return;
+    if (isRefreshing || !user?.id) return;
 
     const fetchTrips = async () => {
       try {
         setLoading(true);
-        setError(null);
-        const response = await getUserTrips(userId);
+        const response = await getUserTrips(user.id);
         setTrips(response);
       } catch (err) {
         setError(err.message || "Failed to load trips");
@@ -41,8 +38,7 @@ const MyTripsPage = () => {
     };
 
     fetchTrips();
-    console.log(fetchTrips);
-  }, [userId, isRefreshing]);
+  }, [isRefreshing, user]);
 
   // const statusFilters = useMemo(() => {
   //   const statuses = trips.map((t) => t.status);
@@ -95,9 +91,6 @@ const MyTripsPage = () => {
     }
   };
 
-  if (isRefreshing || loading) return <p>Loading...</p>;
-  if (error) return <p className={styles.error}>{error}</p>;
-
   return (
     <Section>
       <Container>
@@ -123,7 +116,7 @@ const MyTripsPage = () => {
                   onClick={() => setSearch("")}
                   aria-label="Clear search"
                 >
-                  <IoIosCloseCircleOutline />
+                  <IoIosCloseCircleOutline font-size="24px" />
                 </Button>
               ) : (
                 <FaSearch className={styles.searchIcon} />
@@ -152,9 +145,17 @@ const MyTripsPage = () => {
             <p>Plan New Trip</p>
           </Button>
 
-          {filteredTrips.map((trip) => (
-            <MyTripCard key={trip.id} trip={trip} onDelete={handleAskDelete} />
-          ))}
+          {loading && <p>Loading trips...</p>}
+          {!loading && filteredTrips.length === 0 && <p>No trips found</p>}
+
+          {!loading &&
+            filteredTrips.map((trip) => (
+              <MyTripCard
+                key={trip.id}
+                trip={trip}
+                onDelete={handleAskDelete}
+              />
+            ))}
         </div>
 
         <ModalDeleteTrip

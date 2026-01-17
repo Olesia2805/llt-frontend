@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
-import { logout as logoutApi, refreshTokens } from "../app/auth.api";
+import {
+  login as loginApi,
+  logout as logoutApi,
+  refreshTokens,
+} from "../app/auth.api";
 import { getCurrentUser } from "../app/user.api";
 
 const AuthProvider = ({ children }) => {
@@ -18,7 +22,6 @@ const AuthProvider = ({ children }) => {
 
       try {
         await refreshTokens();
-
         const userData = await getCurrentUser();
         setUser(userData);
         setIsAuthenticated(true);
@@ -36,20 +39,22 @@ const AuthProvider = ({ children }) => {
     initAuth();
   }, []);
 
-  const login = (userData, tokens) => {
-    setUser(userData);
-    setIsAuthenticated(true);
-
-    localStorage.setItem("accessToken", tokens.access);
-    localStorage.setItem("refreshToken", tokens.refresh);
+  const login = async ({ email, password }) => {
+    try {
+      await loginApi({ email, password });
+      const userData = await getCurrentUser();
+      setUser(userData);
+      setIsAuthenticated(true);
+    } catch (err) {
+      console.error("Login failed:", err.message);
+      throw err;
+    }
   };
 
   const logout = async () => {
     await logoutApi();
     setUser(null);
     setIsAuthenticated(false);
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
   };
 
   return (

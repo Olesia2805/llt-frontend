@@ -1,8 +1,8 @@
-import api from "../app/api";
+import publicApi from "./public.api";
 
 export const register = async (payload) => {
   try {
-    const { data } = await api.post("/auth/register", payload);
+    const { data } = await publicApi.post("/auth/register", payload);
 
     if (data.tokens) {
       localStorage.setItem("accessToken", data.tokens.access);
@@ -23,7 +23,9 @@ export const register = async (payload) => {
 
 export const googleAuth = async (idToken) => {
   try {
-    const { data } = await api.post("/auth/oauth/google/idtoken", { idToken });
+    const { data } = await publicApi.post("/auth/oauth/google/idtoken", {
+      idToken,
+    });
 
     if (data.tokens) {
       localStorage.setItem("accessToken", data.tokens.access);
@@ -44,7 +46,7 @@ export const googleAuth = async (idToken) => {
 
 export const login = async ({ email, password }) => {
   try {
-    const { data } = await api.post("/auth/login", { email, password });
+    const { data } = await publicApi.post("/auth/login", { email, password });
 
     localStorage.setItem("accessToken", data.tokens.access);
     localStorage.setItem("refreshToken", data.tokens.refresh);
@@ -58,7 +60,7 @@ export const login = async ({ email, password }) => {
 export const logout = async () => {
   try {
     const refreshToken = localStorage.getItem("refreshToken");
-    await api.post("/auth/logout", { refreshToken });
+    await publicApi.post("/auth/logout", { refreshToken });
   } catch (error) {
     throw new Error(error.response?.data?.message || "Logout failed");
   } finally {
@@ -71,13 +73,13 @@ export const refreshTokens = async () => {
   try {
     const refreshToken = localStorage.getItem("refreshToken");
     if (!refreshToken) throw new Error("No refresh token found");
-    const { data } = await api.post("/auth/refresh", { refreshToken });
+    const { data } = await publicApi.post("/auth/refresh", { refreshToken });
 
     localStorage.setItem("accessToken", data.tokens.access);
     localStorage.setItem("refreshToken", data.tokens.refresh);
 
     return data.tokens;
-  } catch {
-    throw new Error("Refresh failed");
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Refresh failed");
   }
 };
