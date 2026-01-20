@@ -9,16 +9,10 @@ const sidebarItems = [
     path: "/",
   },
   {
-    id: "profile",
-    label: "profile",
-    icon: MdPerson,
-    path: "/profile",
-  },
-  {
-    id: "trips",
-    label: "trips",
+    id: "my_trips",
+    label: "my_trips",
     icon: FaRegCompass,
-    path: "/trips",
+    path: "/mytrips",
   },
   {
     id: "settings",

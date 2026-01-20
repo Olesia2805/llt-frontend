@@ -10,6 +10,7 @@
   justify-content: center;
   gap: 10px;
   transition: all 0.2s ease;
+  border: 3px solid transparent;
 
   /* TODO: Loader */
   /* position: relative;
@@ -143,7 +144,7 @@
   height: 14px;
 }
 
-.eyeButton {
+.inputBtn {
   position: absolute;
   right: 12px;
   top: 50%;
@@ -159,7 +160,7 @@
   width: auto;
 }
 
-.eyeButton:hover {
+.inputBtn:hover {
   color: var(--primary);
 }
 
@@ -180,6 +181,42 @@
     top: 12px;
     right: 0px;
     font-size: 36px;
+  }
+}
+
+.closeBtn:hover {
+  color: rgb(var(--primary-light-rgb));
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 6px;
+  right: -6px;
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 20px;
+  cursor: pointer;
+  width: auto;
+}
+
+.deleteBtn:hover {
+  color: rgb(var(--primary-light-rgb));
+}
+
+.burgerBtn {
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 20px;
+  cursor: pointer;
+  width: auto;
+  padding: 0;
+}
+
+@media (min-width: 1280px) {
+  .burgerBtn {
+    display: none;
   }
 }
 

@@ -1,0 +1,8 @@
+{
+  "deleteModal": {
+    "title": "Delete trip?",
+    "description": "Are you sure you want to delete this trip? This action cannot be undone.",
+    "cancel": "No",
+    "confirm": "Yes"
+  }
+}

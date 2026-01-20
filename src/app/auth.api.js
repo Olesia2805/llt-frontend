@@ -1,77 +1,85 @@
-const BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+import publicApi from "./public.api";
 
 export const register = async (payload) => {
-  const res = await fetch(`${BASE_URL}/auth/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+  try {
+    const { data } = await publicApi.post("/auth/register", payload);
 
-  const data = await res.json().catch(() => null);
+    if (data.tokens) {
+      localStorage.setItem("accessToken", data.tokens.access);
+      localStorage.setItem("refreshToken", data.tokens.refresh);
+    }
 
-  if (!res.ok) {
-    if (res.status === 400) throw new Error(data?.message || "Invalid data");
+    return data.user;
+  } catch (error) {
+    const status = error.response?.status;
+    const message = error.response?.data?.message;
 
-    if (res.status === 409)
-      throw new Error(data?.message || "User already exists");
+    if (status === 400) throw new Error(message || "Invalid data");
+    if (status === 409) throw new Error(message || "User already exists");
 
-    throw new Error(data?.message || "Registration failed");
+    throw new Error(message || "Registration failed");
   }
-
-  return data;
 };
 
 export const googleAuth = async (idToken) => {
-  const res = await fetch(`${BASE_URL}/auth/oauth/google/idtoken`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ idToken }),
-  });
+  try {
+    const { data } = await publicApi.post("/auth/oauth/google/idtoken", {
+      idToken,
+    });
 
-  console.log(idToken);
+    if (data.tokens) {
+      localStorage.setItem("accessToken", data.tokens.access);
+      localStorage.setItem("refreshToken", data.tokens.refresh);
+    }
 
-  const data = await res.json().catch(() => null);
-
-  if (!res.ok) {
-    if (res.status === 401)
+    return data.user;
+  } catch (error) {
+    if (error.response?.status === 401) {
       throw new Error("Google session expired. Please try again.");
-    throw new Error(data?.message || "Google authentication failed");
-  }
+    }
 
-  return data;
+    throw new Error(
+      error.response?.data?.message || "Google authentication failed"
+    );
+  }
 };
 
 export const login = async ({ email, password }) => {
-  const res = await fetch(`${BASE_URL}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-    credentials: "include",
-  });
+  try {
+    const { data } = await publicApi.post("/auth/login", { email, password });
 
-  const data = await res.json().catch(() => null);
+    localStorage.setItem("accessToken", data.tokens.access);
+    localStorage.setItem("refreshToken", data.tokens.refresh);
 
-  if (!res.ok) {
-    throw new Error(data?.message || "Login failed");
+    return data.user;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Login failed");
   }
-
-  return data;
 };
 
 export const logout = async () => {
-  await fetch(`${BASE_URL}/auth/logout`, {
-    method: "POST",
-    credentials: "include",
-  });
+  try {
+    const refreshToken = localStorage.getItem("refreshToken");
+    await publicApi.post("/auth/logout", { refreshToken });
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Logout failed");
+  } finally {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+  }
 };
 
-export const refresh = async () => {
-  const res = await fetch(`${BASE_URL}/refresh`, {
-    method: "POST",
-    credentials: "include",
-  });
+export const refreshTokens = async () => {
+  try {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!refreshToken) throw new Error("No refresh token found");
+    const { data } = await publicApi.post("/auth/refresh", { refreshToken });
 
-  if (!res.ok) throw new Error("Refresh failed");
+    localStorage.setItem("accessToken", data.tokens.access);
+    localStorage.setItem("refreshToken", data.tokens.refresh);
 
-  return res.json();
+    return data.tokens;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Refresh failed");
+  }
 };

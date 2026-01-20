@@ -23,7 +23,7 @@ const InputField = ({ label, type = "text", error, className, ...props }) => {
 
         {isPassword && (
           <Button
-            variant="eyeButton"
+            variant="inputBtn"
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? <RiEyeCloseFill /> : <RiEyeFill />}

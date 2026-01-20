@@ -1,7 +1,7 @@
 {
+  "cta": "New trip",
   "dashboard": "Dashboard",
-  "profile": "Profile",
-  "trips": "Trips",
+  "my_trips": "My trips",
   "settings": "Settings",
   "logout": "Log Out"
 }

@@ -107,7 +107,7 @@
   width: 16px;
   left: 4px;
   top: 4px;
-  background-color: var(--switcher-dot);
+  background-color: var(--white-color);
   border-radius: 50%;
   transition: 0.3s;
 }

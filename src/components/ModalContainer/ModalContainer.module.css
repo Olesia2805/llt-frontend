@@ -24,11 +24,13 @@
 }
 
 .modal {
+  box-sizing: border-box;
   position: relative;
   background-color: var(--bg-main);
   border-radius: 12px;
   width: 90%;
   max-height: 85vh;
+  overflow-x: hidden;
   overflow-y: auto;
   padding: 48px 24px 24px 24px;
 }

@@ -8,32 +8,51 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalOurTeam from "../ModalOurTeam/ModalOurTeam";
 import { useState } from "react";
+import HeaderUser from "../Header/HeaderUser";
 
 import styles from "./Layout.module.css";
 
 const Layout = () => {
   const location = useLocation();
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated, isRefreshing } = useAuth();
+  const userId = user?.id;
+
+  const [isTeamOpen, setIsTeamOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  if (isRefreshing) return null; //! Loader
 
   const formPages = ["/signup", "/login"];
   const isFormPage = formPages.includes(location.pathname);
 
-  const [isTeamOpen, setIsTeamOpen] = useState(false);
-
   return (
     <div className={styles.layout}>
-      {isFormPage ? <HeaderForm /> : !isAuthenticated && <Header />}
+      {isFormPage ? (
+        <HeaderForm />
+      ) : !isAuthenticated && !isFormPage ? (
+        <Header />
+      ) : null}
 
       <div className={styles.content}>
         {isAuthenticated && (
-          <div className={styles.sidebarWrapper}>
-            <SideBar />
-          </div>
+          <aside
+            className={`${styles.sidebarWrapper} ${
+              isSidebarOpen ? styles.active : ""
+            }`}
+          >
+            <SideBar onClose={() => setIsSidebarOpen(false)} />
+          </aside>
         )}
 
         <div className={styles.mainWrapper}>
+          {isAuthenticated && (
+            <HeaderUser
+              onBurgerClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              isSidebarOpen={isSidebarOpen}
+            />
+          )}
           <Main className={styles.mainContent}>
-            <Outlet />
+            <Outlet key={userId} />
           </Main>
 
           {!isFormPage && <Footer setIsTeamOpen={setIsTeamOpen} />}
@@ -45,7 +64,6 @@ const Layout = () => {
           isOpen={isTeamOpen}
           onClose={() => setIsTeamOpen(false)}
         />
-
         {/* {isAuthenticated && (
           <ExclusiveModal
             isOpen={isExclusiveOpen}
