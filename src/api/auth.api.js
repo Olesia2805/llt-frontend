@@ -39,7 +39,7 @@ export const googleAuth = async (idToken) => {
     }
 
     throw new Error(
-      error.response?.data?.message || "Google authentication failed"
+      error.response?.data?.message || "Google authentication failed",
     );
   }
 };

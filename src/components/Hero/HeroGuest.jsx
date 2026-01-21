@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import ThemeContext from "../../context/ThemeContext";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import Section from "../Section/Section";
 import Container from "../Container/Container";
 import tripDarkHighResolution from "../../assets/img/trip-dark-high-resolution.webp";
@@ -12,9 +11,10 @@ import tripLightMobile from "../../assets/img/trip-light-mobile.webp";
 import Button from "../Button/Button";
 import styles from "./HeroGuest.module.css";
 
-const Hero = () => {
+const HeroGuest = () => {
   const { t } = useTranslation("homeGuest");
-  const { theme } = useContext(ThemeContext);
+
+  const theme = useSelector((state) => state.preferences.data.theme);
 
   const highResolutionSrc =
     theme === "dark" ? tripDarkHighResolution : tripLightHighResolution;
@@ -53,4 +53,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default HeroGuest;

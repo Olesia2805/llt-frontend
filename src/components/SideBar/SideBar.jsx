@@ -1,15 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useDispatch } from "react-redux";
 import styles from "./SideBar.module.css";
 import Button from "../Button/Button";
 import { PiSignOutBold } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa6";
 import { sidebarItems } from "../../app/sidebarUserData.js";
+import { logout } from "../../store/authSlice.js";
+import { clearPreferences } from "../../store/preferencesSlice.js";
 
 const SideBar = ({ onClose }) => {
   const { t } = useTranslation("sidebar");
-  const { logout } = useAuth();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClickLink = (path) => {
@@ -18,7 +20,8 @@ const SideBar = ({ onClose }) => {
   };
 
   const handleLogout = async () => {
-    await logout();
+    await dispatch(logout()).unwrap();
+    dispatch(clearPreferences());
     onClose();
     navigate("/");
   };

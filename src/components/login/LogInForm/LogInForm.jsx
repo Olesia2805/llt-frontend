@@ -3,24 +3,25 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import clsx from "clsx";
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./LogInForm.module.css";
 import Button from "../../Button/Button";
 import InputField from "../../InputField/InputField";
 
-import { login as loginApi, googleAuth } from "../../../app/auth.api";
-import { useAuth } from "../../../context/AuthContext";
 import { emailRegex } from "../../../app/validation";
+import { login, googleAuth } from "../../../store/authSlice";
 
 const LogInForm = () => {
   const { t } = useTranslation("login");
-  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -77,33 +78,29 @@ const LogInForm = () => {
   };
 
   const handleGoogleSuccess = async (credentialResponse) => {
-    setLoading(true);
     setErrors({});
     try {
-      const data = await googleAuth(credentialResponse.credential);
-      await login({ email: data.email, token: data.token });
+      await dispatch(
+        googleAuth({ credential: credentialResponse.credential }),
+      ).unwrap();
+
       navigate("/");
     } catch (err) {
-      setErrors({ form: err.message || "Google auth failed" });
-    } finally {
-      setLoading(false);
+      setErrors({ form: err });
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
+
     if (!validate()) return;
-    setLoading(true);
+
     try {
-      const userData = await login({ email, password });
-      if (userData) {
-        navigate("/");
-      }
+      await dispatch(login({ email, password })).unwrap();
+      navigate("/");
     } catch (err) {
-      setErrors({ form: err.message });
-    } finally {
-      setLoading(false);
+      setErrors({ form: err });
     }
   };
 

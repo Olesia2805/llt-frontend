@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 import Header from "../Header/Header";
 import HeaderForm from "../Header/HeaderForm";
@@ -7,23 +8,25 @@ import SideBar from "../SideBar/SideBar";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalOurTeam from "../ModalOurTeam/ModalOurTeam";
-import { useState } from "react";
 import HeaderUser from "../Header/HeaderUser";
 
 import styles from "./Layout.module.css";
 
 const Layout = () => {
   const location = useLocation();
-  const { user, isAuthenticated, isRefreshing } = useAuth();
+
+  const { user, isAuthenticated, isRefreshing } = useSelector(
+    (state) => state.auth,
+  );
   const userId = user?.id;
 
   const [isTeamOpen, setIsTeamOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  if (isRefreshing) return null; //! Loader
-
   const formPages = ["/signup", "/login"];
   const isFormPage = formPages.includes(location.pathname);
+
+  if (isRefreshing) return null; //! Loader
 
   return (
     <div className={styles.layout}>

@@ -5,9 +5,11 @@ import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const { t } = useTranslation("common");
+  const preferences = useSelector((state) => state.preferences.data);
 
   return (
     <header className={styles.header}>
@@ -17,8 +19,11 @@ const Header = () => {
 
           <div className={styles.controls}>
             <>
-              <ThemeSwitcher />
-              <LanguageSwitcher />
+              <ThemeSwitcher value={preferences.theme} onChange={() => {}} />
+              <LanguageSwitcher
+                value={preferences.language}
+                onChange={() => {}}
+              />
               <Button
                 variant="secondary"
                 text={t("header.login")}

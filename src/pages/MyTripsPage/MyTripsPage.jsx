@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { getUserTrips, deleteTrip } from "../../app/trips.api";
+import { useSelector } from "react-redux";
+import { getUserTrips, deleteTrip } from "../../api/trips.api";
 import MyTripCard from "../../components/MyTripCard/MyTripCard";
 import ModalDeleteTrip from "../../components/ModalDeleteTrip/ModalDeleteTrip";
 import styles from "./MyTripsPage.module.css";
@@ -12,7 +12,7 @@ import { FaSearch } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const MyTripsPage = () => {
-  const { user, isRefreshing } = useAuth();
+  const { user } = useSelector((state) => state.auth);
 
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const MyTripsPage = () => {
   const [tripToDelete, setTripToDelete] = useState(null);
 
   useEffect(() => {
-    if (isRefreshing || !user?.id) return;
+    if (!user?.id) return;
 
     const fetchTrips = async () => {
       try {
@@ -38,7 +38,7 @@ const MyTripsPage = () => {
     };
 
     fetchTrips();
-  }, [isRefreshing, user]);
+  }, [user?.id]);
 
   // const statusFilters = useMemo(() => {
   //   const statuses = trips.map((t) => t.status);
@@ -72,7 +72,7 @@ const MyTripsPage = () => {
         return true;
       })
       .filter((trip) =>
-        trip.title?.toLowerCase().includes(search.toLowerCase())
+        trip.title?.toLowerCase().includes(search.toLowerCase()),
       );
   }, [trips, activeFilter, search]);
 

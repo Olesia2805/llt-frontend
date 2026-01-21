@@ -10,13 +10,14 @@ import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
 import InputField from "../../components/InputField/InputField";
 
-import { register, googleAuth } from "../../app/auth.api";
-import { useAuth } from "../../context/AuthContext";
+import { register, googleAuth } from "../../api/auth.api";
 import {
   getPasswordStrength,
   emailRegex,
   nameRegex,
 } from "../../app/validation";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/authSlice";
 
 import boatHighResolution from "../../assets/img/boat-high-resolution.webp";
 import boatDesktop from "../../assets/img/boat-desktop.webp";
@@ -24,12 +25,12 @@ import boatMobile from "../../assets/img/boat-mobile.webp";
 
 const SignUpPage = () => {
   const { t } = useTranslation("signup");
-  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [name, setName] = useState(localStorage.getItem("signup_name") || "");
   const [email, setEmail] = useState(
-    localStorage.getItem("signup_email") || ""
+    localStorage.getItem("signup_email") || "",
   );
   const [password, setPassword] = useState("");
   const [acceptedPolicies, setAcceptedPolicies] = useState(false);
@@ -57,10 +58,6 @@ const SignUpPage = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
-  useEffect(() => {
-    if (isAuthenticated) navigate("/");
-  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     if (!name) {
@@ -139,7 +136,7 @@ const SignUpPage = () => {
     setErrors({});
     try {
       const data = await googleAuth(credentialResponse.credential);
-      await login({ email: data.email, token: data.token });
+      await dispatch(login({ token: data.token })).unwrap();
       navigate("/");
     } catch (err) {
       setErrors({ form: err.message || "Google auth failed" });
@@ -159,7 +156,8 @@ const SignUpPage = () => {
       localStorage.removeItem("signup_name");
       localStorage.removeItem("signup_email");
 
-      await login({ email, password });
+      await dispatch(login({ email, password })).unwrap();
+
       navigate("/");
     } catch (err) {
       setErrors({ form: err.message });
@@ -249,7 +247,7 @@ const SignUpPage = () => {
             <p
               className={clsx(
                 styles.strengthText,
-                strength === "empty" && styles.invisible
+                strength === "empty" && styles.invisible,
               )}
             >
               {strength !== "empty"
@@ -288,7 +286,7 @@ const SignUpPage = () => {
             <p
               className={clsx(
                 styles.errorText,
-                !(errors.policies || errors.form) && styles.invisible
+                !(errors.policies || errors.form) && styles.invisible,
               )}
             >
               {errors.policies || errors.form || "\u00A0"}
