@@ -1,12 +1,12 @@
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import styles from "./HeaderUser.module.css";
-import { useAuth } from "../../context/AuthContext";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
 import defaultAvatar from "../../assets/img/default-avatar.jpg";
+import { useSelector } from "react-redux";
 
 const HeaderUser = ({ onBurgerClick, isSidebarOpen }) => {
-  const { user } = useAuth();
+  const user = useSelector((state) => state.userData);
 
   return (
     <header className={styles.header}>

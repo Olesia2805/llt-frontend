@@ -1,22 +1,30 @@
-import { useContext } from "react";
 import { IoSunny, IoMoon } from "../../app/sectionsGuestIcons.js";
-import ThemeContext from "../../context/ThemeContext";
 import styles from "./ThemeSwitcher.module.css";
+import { useSelector } from "react-redux";
 
-const ThemeSwitcher = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+const ThemeSwitcher = ({ value, onChange }) => {
+  const isAuthenticated = useSelector((state) => state.userData);
+  const handleToggle = () => {
+    const nextTheme = value === "dark" ? "light" : "dark";
+    onChange(nextTheme);
+
+    if (!isAuthenticated) {
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      localStorage.setItem("guestTheme", nextTheme);
+    }
+  };
 
   return (
     <button
       type="button"
-      onClick={toggleTheme}
+      onClick={handleToggle}
       className={styles.switcher}
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? (
-        <IoSunny className={styles.icon} />
-      ) : (
+      {value === "dark" ? (
         <IoMoon className={styles.icon} />
+      ) : (
+        <IoSunny className={styles.icon} />
       )}
     </button>
   );

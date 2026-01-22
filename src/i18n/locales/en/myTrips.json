@@ -1,4 +1,16 @@
 {
+  "hero": {
+    "title": "My Journeys",
+    "description": "Manage your planned adventure."
+  },
+  "searchInput": "Search trips...",
+  "filterButtons": {
+    "allTrips": "All Trips",
+    "presentTrips": "Present Trips",
+    "pastTrips": "Past Trips",
+    "futureTrips": "Future Trips",
+    "planNewTrip": "Plan New Trip"
+  },
   "deleteModal": {
     "title": "Delete trip?",
     "description": "Are you sure you want to delete this trip? This action cannot be undone.",

@@ -5,9 +5,24 @@ import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import Container from "../Container/Container";
 import Button from "../Button/Button";
+import { useState, useEffect } from "react";
 
 const Header = () => {
+  const { i18n } = useTranslation();
   const { t } = useTranslation("common");
+
+  const [theme, setTheme] = useState(
+    localStorage.getItem("guestTheme") || "dark",
+  );
+  const [lang, setLang] = useState(localStorage.getItem("guestLang") || "uk");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang, i18n]);
 
   return (
     <header className={styles.header}>
@@ -17,8 +32,8 @@ const Header = () => {
 
           <div className={styles.controls}>
             <>
-              <ThemeSwitcher />
-              <LanguageSwitcher />
+              <ThemeSwitcher value={theme} onChange={setTheme} />
+              <LanguageSwitcher value={lang} onChange={setLang} />
               <Button
                 variant="secondary"
                 text={t("header.login")}

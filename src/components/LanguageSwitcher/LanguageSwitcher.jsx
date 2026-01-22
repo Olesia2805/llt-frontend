@@ -1,16 +1,33 @@
-import { useState, useContext, useRef, useEffect } from "react";
-import LanguageContext from "../../context/LanguageContext";
 import styles from "./LanguageSwitcher.module.css";
+import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const languages = [
   { code: "en", label: "EN" },
   { code: "uk", label: "UK" },
 ];
 
-const LanguageSwitcher = () => {
-  const { lang, changeLanguage } = useContext(LanguageContext);
+const LanguageSwitcher = ({ value, onChange }) => {
+  const { i18n } = useTranslation();
+  const isAuthenticated = useSelector((state) => state.userData);
+  const [localLang, setLocalLang] = useState(value || "uk");
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    setLocalLang(value);
+  }, [value]);
+
+  const handleSelect = (code) => {
+    setLocalLang(code);
+    onChange(code);
+
+    if (!isAuthenticated) {
+      i18n.changeLanguage(code);
+      localStorage.setItem("guestLang", code);
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -30,7 +47,7 @@ const LanguageSwitcher = () => {
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        {lang.toUpperCase()}
+        {localLang.toUpperCase()}
       </button>
 
       {open && (
@@ -40,10 +57,10 @@ const LanguageSwitcher = () => {
               <button
                 className={styles.menuItem}
                 onClick={() => {
-                  changeLanguage(code);
+                  handleSelect(code);
                   setOpen(false);
                 }}
-                disabled={lang === code}
+                disabled={localLang === code}
               >
                 {label}
               </button>

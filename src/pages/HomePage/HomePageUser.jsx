@@ -1,9 +1,7 @@
-import { useAuth } from "../../context/AuthContext";
+import { useSelector } from "react-redux";
 
 const HomePageUser = () => {
-  const { user, isRefreshing } = useAuth();
-
-  if (isRefreshing) return <h1>Welcome Back</h1>;
+  const user = useSelector((state) => state.userData.user);
 
   return <h1>Welcome Back, {user?.name || "Guest"}!</h1>;
 };
