@@ -17,7 +17,7 @@ import {
   nameRegex,
 } from "../../app/validation";
 import { useDispatch } from "react-redux";
-import { login } from "../../store/authSlice";
+import { login } from "../../store/userSlice";
 
 import boatHighResolution from "../../assets/img/boat-high-resolution.webp";
 import boatDesktop from "../../assets/img/boat-desktop.webp";

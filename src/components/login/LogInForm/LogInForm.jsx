@@ -10,14 +10,14 @@ import Button from "../../Button/Button";
 import InputField from "../../InputField/InputField";
 
 import { emailRegex } from "../../../app/validation";
-import { login, googleAuth } from "../../../store/authSlice";
+import { login, googleAuth } from "../../../store/userSlice";
 
 const LogInForm = () => {
   const { t } = useTranslation("login");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+  const { isAuthenticated, loading } = useSelector((state) => state.userData);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

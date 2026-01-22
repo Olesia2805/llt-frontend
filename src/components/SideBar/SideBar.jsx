@@ -6,8 +6,8 @@ import Button from "../Button/Button";
 import { PiSignOutBold } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa6";
 import { sidebarItems } from "../../app/sidebarUserData.js";
-import { logout } from "../../store/authSlice.js";
-import { clearPreferences } from "../../store/preferencesSlice.js";
+import { logout } from "../../store/userSlice.js";
+import { clearPreferences } from "../../store/userSlice.js";
 
 const SideBar = ({ onClose }) => {
   const { t } = useTranslation("sidebar");

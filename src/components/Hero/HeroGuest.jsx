@@ -14,7 +14,7 @@ import styles from "./HeroGuest.module.css";
 const HeroGuest = () => {
   const { t } = useTranslation("homeGuest");
 
-  const theme = useSelector((state) => state.preferences.data.theme);
+  const theme = useSelector((state) => state.userData.preferences.theme);
 
   const highResolutionSrc =
     theme === "dark" ? tripDarkHighResolution : tripLightHighResolution;

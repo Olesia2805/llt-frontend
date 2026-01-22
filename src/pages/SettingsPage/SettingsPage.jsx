@@ -15,15 +15,16 @@ import Button from "../../components/Button/Button";
 import { MdTune } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
 
-import { updatePreferences } from "../../store/preferencesSlice";
+import { updatePreferences } from "../../store/userSlice";
+import InputField from "../../components/InputField/InputField";
 
 const SettingsPage = () => {
   const { t } = useTranslation("settings");
   const dispatch = useDispatch();
-  const preferences = useSelector((state) => state.preferences.data);
-  const user = useSelector((state) => state.auth.user);
-  const [isSaving, setIsSaving] = useState(false);
+  const { user, preferences } = useSelector((state) => state.userData);
 
+  const [isSaving, setIsSaving] = useState(false);
+  const [draftName, setDraftName] = useState(user.name);
   const [draftTheme, setDraftTheme] = useState(preferences.theme || "dark");
   const [draftLanguage, setDraftLanguage] = useState(
     preferences.language || "uk",
@@ -39,11 +40,14 @@ const SettingsPage = () => {
 
       await dispatch(
         updatePreferences({
+          name: draftName,
           theme: draftTheme,
           language: draftLanguage,
           notifications_enabled: draftNotifications,
         }),
       ).unwrap();
+
+      setDraftName(draftName);
     } catch (error) {
       console.error("Failed to save preferences:", error);
     } finally {
@@ -70,6 +74,11 @@ const SettingsPage = () => {
             </div>
 
             <h3 className={styles.name}>{user.name}</h3>
+            <InputField
+              className={styles.nameInput}
+              value={draftName}
+              onChange={(e) => setDraftName(e.target.value)}
+            />
             <p className={styles.email}>{user.email}</p>
             <span className={styles.plan}>{user.plan.toUpperCase()}</span>
           </section>

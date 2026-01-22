@@ -12,9 +12,7 @@ import "/src/assets/styles/global.css";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 import { Toaster } from "react-hot-toast";
 import { toastConfig } from "../src/app/toasterConfig.js";
-
-import { refreshTokens } from "./store/authSlice.js";
-import { getPreferences } from "./store/preferencesSlice.js";
+import { getPreferences, refreshTokens } from "./store/userSlice.js";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.jsx"));
 const PoliciesPage = lazy(
@@ -33,8 +31,9 @@ const LogInPage = lazy(() => import("./pages/LogInPage/LogInPage.jsx"));
 
 const App = () => {
   const dispatch = useDispatch();
-  const preferences = useSelector((state) => state.preferences.data);
-  const isAuthenticated = useSelector((state) => state.auth);
+  const { preferences, isAuthenticated } = useSelector(
+    (state) => state.userData,
+  );
 
   useEffect(() => {
     if (isAuthenticated) {

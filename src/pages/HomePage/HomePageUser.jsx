@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 const HomePageUser = () => {
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.userData);
 
   return <h1>Welcome Back, {user?.name || "Guest"}!</h1>;
 };

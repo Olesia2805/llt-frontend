@@ -3,7 +3,7 @@ import styles from "./ThemeSwitcher.module.css";
 import { useSelector } from "react-redux";
 
 const ThemeSwitcher = ({ value, onChange }) => {
-  const isAuthenticated = useSelector((state) => state.auth);
+  const isAuthenticated = useSelector((state) => state.userData);
   const handleToggle = () => {
     const nextTheme = value === "dark" ? "light" : "dark";
     onChange(nextTheme);

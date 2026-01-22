@@ -6,7 +6,7 @@ import defaultAvatar from "../../assets/img/default-avatar.jpg";
 import { useSelector } from "react-redux";
 
 const HeaderUser = ({ onBurgerClick, isSidebarOpen }) => {
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.userData);
 
   return (
     <header className={styles.header}>

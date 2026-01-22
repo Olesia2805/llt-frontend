@@ -12,7 +12,7 @@ import { FaSearch } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const MyTripsPage = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.userData);
 
   const [trips, setTrips] = useState([]);
   const [loading, setLoading] = useState(false);

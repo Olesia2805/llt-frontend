@@ -16,7 +16,7 @@ const Layout = () => {
   const location = useLocation();
 
   const { user, isAuthenticated, isRefreshing } = useSelector(
-    (state) => state.auth,
+    (state) => state.userData,
   );
   const userId = user?.id;
 

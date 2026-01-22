@@ -2,6 +2,47 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as apiAuth from "../api/auth.api";
 import * as apiUser from "../api/user.api";
 
+const GUEST_PREFS_KEY = "guestPreferences";
+
+const getInitialPreferences = () => ({
+  theme: "dark",
+  language: "uk",
+});
+
+const loadGuestPreferences = () => {
+  try {
+    const saved = localStorage.getItem(GUEST_PREFS_KEY);
+    if (saved) {
+      return JSON.parse(saved);
+    }
+  } catch (error) {
+    console.error("Failed to load guest preferences:", error);
+  }
+  return getInitialPreferences();
+};
+
+export const getPreferences = createAsyncThunk(
+  "preferences/get",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await apiUser.getPreferences();
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  },
+);
+
+export const updatePreferences = createAsyncThunk(
+  "preferences/update",
+  async (payload, { rejectWithValue }) => {
+    try {
+      return await apiUser.updatePreferences(payload);
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  },
+);
+
 export const refreshTokens = createAsyncThunk(
   "auth/refresh",
   async (_, { rejectWithValue }) => {
@@ -11,7 +52,6 @@ export const refreshTokens = createAsyncThunk(
 
       await apiAuth.refreshTokens();
       const user = await apiUser.getCurrentUser();
-
       return user;
     } catch (err) {
       localStorage.removeItem("accessToken");
@@ -30,7 +70,7 @@ export const login = createAsyncThunk(
         apiUser.getCurrentUser(),
         apiUser.getPreferences(),
       ]);
-      return { ...userData, ...preferences };
+      return { ...userData, preferences };
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -42,7 +82,8 @@ export const googleAuth = createAsyncThunk(
   async ({ credential }, { rejectWithValue }) => {
     try {
       const user = await apiAuth.googleAuth(credential);
-      return user;
+      const preferences = await apiUser.getPreferences();
+      return { user, preferences };
     } catch (err) {
       return rejectWithValue(err.message);
     }
@@ -61,21 +102,33 @@ const initialState = {
   isRefreshing: false,
   loading: false,
   error: null,
+  preferences: loadGuestPreferences(),
 };
 
-const authSlice = createSlice({
-  name: "auth",
+const userSlice = createSlice({
+  name: "userData",
   initialState,
   reducers: {
-    logout(state) {
+    clearAuth(state) {
       state.user = null;
-      state.token = null;
       state.isAuthenticated = false;
       state.error = null;
+    },
+    setTheme(state, action) {
+      state.preferences.theme = action.payload;
+    },
+    setLanguage(state, action) {
+      state.preferences.language = action.payload;
+    },
+    clearPreferences(state) {
+      state.preferences = getInitialPreferences();
+      state.error = null;
+      state.loading = false;
     },
   },
   extraReducers: (builder) => {
     builder
+
       .addCase(refreshTokens.pending, (state) => {
         state.isRefreshing = true;
       })
@@ -97,6 +150,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
+        state.preferences = action.payload.preferences;
         state.isAuthenticated = true;
       })
       .addCase(login.rejected, (state, action) => {
@@ -110,7 +164,8 @@ const authSlice = createSlice({
       })
       .addCase(googleAuth.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.preferences = action.payload.preferences;
         state.isAuthenticated = true;
       })
       .addCase(googleAuth.rejected, (state, action) => {
@@ -121,8 +176,27 @@ const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
         state.isAuthenticated = false;
+        state.preferences = getInitialPreferences();
+      })
+
+      .addCase(getPreferences.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getPreferences.fulfilled, (state, action) => {
+        state.loading = false;
+        state.preferences = { ...state.preferences, ...action.payload };
+      })
+      .addCase(getPreferences.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updatePreferences.fulfilled, (state, action) => {
+        state.preferences = { ...state.preferences, ...action.payload };
       });
   },
 });
 
-export default authSlice.reducer;
+export const { clearAuth, setTheme, setLanguage, clearPreferences } =
+  userSlice.actions;
+
+export default userSlice.reducer;

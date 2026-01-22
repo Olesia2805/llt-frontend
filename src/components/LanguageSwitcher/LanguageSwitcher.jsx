@@ -10,7 +10,7 @@ const languages = [
 
 const LanguageSwitcher = ({ value, onChange }) => {
   const { i18n } = useTranslation();
-  const isAuthenticated = !!useSelector((state) => state.auth.user);
+  const isAuthenticated = useSelector((state) => state.userData);
   const [localLang, setLocalLang] = useState(value || "uk");
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
