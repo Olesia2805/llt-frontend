@@ -5,25 +5,28 @@ import Button from "../Button/Button";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import defaultImg from "../../assets/img/default-avatar.jpg";
+import olesiaVysotinaImg from "../../assets/img/olesia-vysotina.webp";
+import ievgenTymoshenkoImg from "../../assets/img/ievgen-tymoshenko.webp";
+import dmytroBalakinImg from "../../assets/img/dmytro-balakin.webp";
 
 const teamMembers = [
   {
     key: "olesiaVysotina",
     linkedIn: "https://www.linkedin.com/in/olesia-vysotina",
     gitHub: "https://github.com/Olesia2805",
-    img: "",
-  },
-  {
-    key: "dmytroBalakin",
-    linkedIn: "...",
-    gitHub: "https://github.com/BalakaMd",
-    img: "",
+    img: olesiaVysotinaImg,
   },
   {
     key: "ievgenTymoshenko",
-    linkedIn: "...",
+    linkedIn: "https://www.linkedin.com/in/ievgen-tymoshenko-a24255311/",
     gitHub: "https://github.com/demosph",
-    img: "",
+    img: ievgenTymoshenkoImg,
+  },
+  {
+    key: "dmytroBalakin",
+    linkedIn: "https://www.linkedin.com/in/dmytro-balakin/",
+    gitHub: "https://github.com/BalakaMd",
+    img: dmytroBalakinImg,
   },
 ];
 

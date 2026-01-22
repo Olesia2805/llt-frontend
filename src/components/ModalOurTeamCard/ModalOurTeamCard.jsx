@@ -9,11 +9,18 @@ const ModalOurTeamCard = ({ name, role, img, linkedIn, gitHub }) => {
       <div className={styles.imgWrapper}>
         <img src={img} alt={name} />
       </div>
-      <h3>{name}</h3>
-      <p>{role}</p>
-      <div className={styles.links}>
-        <Button href={linkedIn} leftIcon={<FaLinkedin />} />
-        <Button href={gitHub} leftIcon={<FaGithub />} />
+      <div className={styles.cardContent}>
+        <h3>{name}</h3>
+        <p>{role}</p>
+
+        <div className={styles.links}>
+          <Button
+            variant="secondary"
+            href={linkedIn}
+            leftIcon={<FaLinkedin />}
+          />
+          <Button variant="secondary" href={gitHub} leftIcon={<FaGithub />} />
+        </div>
       </div>
     </div>
   );

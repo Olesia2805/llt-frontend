@@ -1,0 +1,74 @@
+import api from "./api";
+
+export const getUserTrips = async (userId) => {
+  try {
+    const { data } = await api.get(`/users/${userId}/trips`);
+    return data.data.trips || [];
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch user trips"
+    );
+  }
+};
+
+export const deleteTrip = async (tripId) => {
+  try {
+    await api.delete(`/trips/${tripId}`);
+  } catch (error) {
+    if (error.response?.status === 404) throw new Error("Trip not found");
+    throw new Error(error.response?.data?.message || "Failed to delete trip");
+  }
+};
+
+// export const createTrip = async (payload) => {
+//   try {
+//     const { data } = await api.post("/trips", payload);
+//     return data;
+//   } catch (error) {
+//     throw new Error(error.response?.data?.message || "Failed to create trip");
+//   }
+// };
+
+// export const getTripById = async (tripId) => {
+//   try {
+//     const { data } = await api.get(`/trips/${tripId}`);
+//     return data;
+//   } catch (error) {
+//     if (error.response?.status === 404) {
+//       throw new Error("Trip not found");
+//     }
+//     throw new Error(error.response?.data?.message || "Failed to fetch trip");
+//   }
+// };
+
+// export const updateTrip = async (tripId, payload) => {
+//   try {
+//     const { data } = await api.patch(`/trips/${tripId}`, payload);
+//     return data;
+//   } catch (error) {
+//     if (error.response?.status === 404) throw new Error("Trip not found");
+//     throw new Error(error.response?.data?.message || "Failed to update trip");
+//   }
+// };
+
+// export const addTripItem = async (tripId, payload) => {
+//   try {
+//     const { data } = await api.post(`/trips/${tripId}/items`, payload);
+//     return data;
+//   } catch (error) {
+//     if (error.response?.status === 404) throw new Error("Trip not found");
+//     throw new Error(error.response?.data?.message || "Failed to add trip item");
+//   }
+// };
+
+// export const getTripMap = async (tripId) => {
+//   try {
+//     const { data } = await api.get(`/trips/${tripId}/map`);
+//     return data;
+//   } catch (error) {
+//     if (error.response?.status === 404) throw new Error("Trip not found");
+//     throw new Error(
+//       error.response?.data?.message || "Failed to fetch trip map"
+//     );
+//   }
+// };
