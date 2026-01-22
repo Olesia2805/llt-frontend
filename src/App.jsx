@@ -34,7 +34,7 @@ const LogInPage = lazy(() => import("./pages/LogInPage/LogInPage.jsx"));
 const App = () => {
   const dispatch = useDispatch();
   const preferences = useSelector((state) => state.preferences.data);
-  const isAuthenticated = useSelector((state) => !!state.auth.user);
+  const isAuthenticated = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (isAuthenticated) {

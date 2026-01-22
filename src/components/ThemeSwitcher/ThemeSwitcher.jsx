@@ -1,29 +1,18 @@
 import { IoSunny, IoMoon } from "../../app/sectionsGuestIcons.js";
 import styles from "./ThemeSwitcher.module.css";
-import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const ThemeSwitcher = ({ value, onChange }) => {
-  const [localTheme, setLocalTheme] = useState(value || "dark");
-
+  const isAuthenticated = useSelector((state) => state.auth);
   const handleToggle = () => {
-    const nextTheme =
-      localTheme === "dark"
-        ? "light"
-        : localTheme === "light"
-          ? "dark"
-          : "dark";
-
-    setLocalTheme(nextTheme);
+    const nextTheme = value === "dark" ? "light" : "dark";
     onChange(nextTheme);
-    document.documentElement.setAttribute("data-theme", nextTheme);
-  };
 
-  const resolvedTheme =
-    localTheme === "system"
-      ? window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light"
-      : localTheme;
+    if (!isAuthenticated) {
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      localStorage.setItem("guestTheme", nextTheme);
+    }
+  };
 
   return (
     <button
@@ -32,7 +21,7 @@ const ThemeSwitcher = ({ value, onChange }) => {
       className={styles.switcher}
       aria-label="Toggle theme"
     >
-      {resolvedTheme === "dark" ? (
+      {value === "dark" ? (
         <IoMoon className={styles.icon} />
       ) : (
         <IoSunny className={styles.icon} />

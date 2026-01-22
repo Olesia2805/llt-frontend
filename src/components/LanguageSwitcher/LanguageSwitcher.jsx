@@ -1,6 +1,7 @@
 import styles from "./LanguageSwitcher.module.css";
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const languages = [
   { code: "en", label: "EN" },
@@ -9,15 +10,23 @@ const languages = [
 
 const LanguageSwitcher = ({ value, onChange }) => {
   const { i18n } = useTranslation();
+  const isAuthenticated = !!useSelector((state) => state.auth.user);
   const [localLang, setLocalLang] = useState(value || "uk");
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  useEffect(() => {
+    setLocalLang(value);
+  }, [value]);
+
   const handleSelect = (code) => {
     setLocalLang(code);
     onChange(code);
-    i18n.changeLanguage(code);
-    setOpen(false);
+
+    if (!isAuthenticated) {
+      i18n.changeLanguage(code);
+      localStorage.setItem("guestLang", code);
+    }
   };
 
   useEffect(() => {

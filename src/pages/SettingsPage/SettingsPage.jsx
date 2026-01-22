@@ -24,23 +24,24 @@ const SettingsPage = () => {
   const user = useSelector((state) => state.auth.user);
   const [isSaving, setIsSaving] = useState(false);
 
-  const [localTheme, setLocalTheme] = useState(preferences.theme || "dark");
-  const [localLanguage, setLocalLanguage] = useState(
+  const [draftTheme, setDraftTheme] = useState(preferences.theme || "dark");
+  const [draftLanguage, setDraftLanguage] = useState(
     preferences.language || "uk",
   );
-  const [localNotifications, setLocalNotifications] = useState(
+  const [draftNotifications, setDraftNotifications] = useState(
     preferences.notifications_enabled ?? false,
   );
 
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      i18n.changeLanguage(localLanguage);
+      i18n.changeLanguage(draftLanguage);
+
       await dispatch(
         updatePreferences({
-          theme: localTheme,
-          language: localLanguage,
-          notifications_enabled: localNotifications,
+          theme: draftTheme,
+          language: draftLanguage,
+          notifications_enabled: draftNotifications,
         }),
       ).unwrap();
     } catch (error) {
@@ -82,14 +83,14 @@ const SettingsPage = () => {
 
               <div className={styles.row}>
                 <p>{t("preferences.theme")}</p>
-                <ThemeSwitcher value={localTheme} onChange={setLocalTheme} />
+                <ThemeSwitcher value={draftTheme} onChange={setDraftTheme} />
               </div>
 
               <div className={styles.row}>
                 <p>{t("preferences.language")}</p>
                 <LanguageSwitcher
-                  value={localLanguage}
-                  onChange={setLocalLanguage}
+                  value={draftLanguage}
+                  onChange={setDraftLanguage}
                 />
               </div>
 
@@ -99,8 +100,8 @@ const SettingsPage = () => {
                   <input
                     type="checkbox"
                     className={styles.switchInput}
-                    checked={localNotifications}
-                    onChange={(e) => setLocalNotifications(e.target.checked)}
+                    checked={draftNotifications}
+                    onChange={(e) => setDraftNotifications(e.target.checked)}
                   />
                   <span className={styles.switchThumb}></span>
                 </label>
@@ -111,9 +112,7 @@ const SettingsPage = () => {
               onClick={handleSave}
               disabled={isSaving}
             >
-              {isSaving
-                ? t("buttons.saving") || "Saving..."
-                : t("buttons.saveChanges")}
+              {t("buttons.saveChanges")}
             </Button>
           </div>
         </div>
