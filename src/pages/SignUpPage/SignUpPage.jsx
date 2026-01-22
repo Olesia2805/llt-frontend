@@ -22,6 +22,7 @@ import { login } from "../../store/userSlice";
 import boatHighResolution from "../../assets/img/boat-high-resolution.webp";
 import boatDesktop from "../../assets/img/boat-desktop.webp";
 import boatMobile from "../../assets/img/boat-mobile.webp";
+import { useNameValidation } from "../../hooks/useNameValidation";
 
 const SignUpPage = () => {
   const { t } = useTranslation("signup");
@@ -38,54 +39,26 @@ const SignUpPage = () => {
   const [errors, setErrors] = useState({});
 
   const strength = password ? getPasswordStrength(password) : "empty";
-
+  const { error: nameError, isValid: isNameValid } = useNameValidation(name, t);
   const validate = () => {
     const newErrors = {};
     if (!name.trim()) {
-      newErrors.name = t("registration_form.errors.name_required");
+      newErrors.name = t("errors.name_required");
     } else if (!nameRegex.test(name)) {
-      newErrors.name = t("registration_form.errors.name_invalid");
+      newErrors.name = t("errors.name_invalid");
     }
     if (!emailRegex.test(email)) {
-      newErrors.email = t("registration_form.errors.email_invalid");
+      newErrors.email = t("errors.email_invalid");
     }
     if (password.length < 6) {
-      newErrors.password = t("registration_form.errors.password_short");
+      newErrors.password = t("errors.password_short");
     }
     if (!acceptedPolicies) {
-      newErrors.policies = t("registration_form.errors.policies_required");
+      newErrors.policies = t("errors.policies_required");
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
-  useEffect(() => {
-    if (!name) {
-      setErrors((prev) => ({ ...prev, name: null }));
-      return;
-    }
-    const timeoutId = setTimeout(() => {
-      if (name.trim().length < 2) {
-        setErrors((prev) => ({
-          ...prev,
-          name: t("registration_form.errors.name_short"),
-        }));
-      } else if (name.trim().length > 30) {
-        setErrors((prev) => ({
-          ...prev,
-          name: t("registration_form.errors.name_too_long"),
-        }));
-      } else if (!nameRegex.test(name)) {
-        setErrors((prev) => ({
-          ...prev,
-          name: t("registration_form.errors.name_invalid"),
-        }));
-      } else {
-        setErrors((prev) => ({ ...prev, name: null }));
-      }
-    }, 800);
-    return () => clearTimeout(timeoutId);
-  }, [name, t]);
 
   useEffect(() => {
     if (!email) {
@@ -96,7 +69,7 @@ const SignUpPage = () => {
       if (!emailRegex.test(email)) {
         setErrors((prev) => ({
           ...prev,
-          email: t("registration_form.errors.email_invalid"),
+          email: t("errors.email_invalid"),
         }));
       } else {
         setErrors((prev) => ({ ...prev, email: null }));
@@ -114,7 +87,7 @@ const SignUpPage = () => {
       if (password.length < 6) {
         setErrors((prev) => ({
           ...prev,
-          password: t("registration_form.errors.password_short"),
+          password: t("errors.password_short"),
         }));
       } else {
         setErrors((prev) => ({ ...prev, password: null }));
@@ -122,6 +95,11 @@ const SignUpPage = () => {
     }, 800);
     return () => clearTimeout(timeoutId);
   }, [password, t]);
+
+  const validationErrors = {
+    ...errors,
+    name: nameError || errors.name,
+  };
 
   useEffect(() => {
     localStorage.setItem("signup_name", name);
@@ -208,7 +186,7 @@ const SignUpPage = () => {
             placeholder={t("registration_form.fields.name.placeholder")}
             value={name}
             onChange={(e) => handleFieldChange("name", e.target.value, setName)}
-            error={errors.name}
+            error={validationErrors.name}
             name="username"
             autoComplete="name"
           />
@@ -293,7 +271,7 @@ const SignUpPage = () => {
             </p>
           </div>
 
-          <Button type="submit" isLoading={loading}>
+          <Button type="submit" isLoading={loading} disabled={!isNameValid}>
             {t("buttons.submit")}
           </Button>
         </form>

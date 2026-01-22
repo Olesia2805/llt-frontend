@@ -32,17 +32,6 @@ export const getPreferences = createAsyncThunk(
   },
 );
 
-export const updatePreferences = createAsyncThunk(
-  "preferences/update",
-  async (payload, { rejectWithValue }) => {
-    try {
-      return await apiUser.updatePreferences(payload);
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  },
-);
-
 export const refreshTokens = createAsyncThunk(
   "auth/refresh",
   async (_, { rejectWithValue }) => {
@@ -95,6 +84,28 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
 });
+
+export const updateCurrentUser = createAsyncThunk(
+  "user/updateCurrentUser",
+  async (payload, { rejectWithValue }) => {
+    try {
+      return await apiUser.updateCurrentUser(payload);
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  },
+);
+
+export const updatePreferences = createAsyncThunk(
+  "preferences/update",
+  async (payload, { rejectWithValue }) => {
+    try {
+      return await apiUser.updatePreferences(payload);
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  },
+);
 
 const initialState = {
   user: null,
@@ -190,8 +201,26 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
+
       .addCase(updatePreferences.fulfilled, (state, action) => {
         state.preferences = { ...state.preferences, ...action.payload };
+      })
+
+      .addCase(updateCurrentUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateCurrentUser.fulfilled, (state, action) => {
+        state.loading = false;
+
+        state.user = {
+          ...state.user,
+          ...action.payload,
+        };
+      })
+      .addCase(updateCurrentUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

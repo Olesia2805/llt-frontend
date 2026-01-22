@@ -14,17 +14,19 @@ import Button from "../../components/Button/Button";
 
 import { MdTune } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
+import { GrPowerReset } from "react-icons/gr";
 
-import { updatePreferences } from "../../store/userSlice";
+import { updateCurrentUser, updatePreferences } from "../../store/userSlice";
 import InputField from "../../components/InputField/InputField";
+import { useNameValidation } from "../../hooks/useNameValidation.js";
 
 const SettingsPage = () => {
   const { t } = useTranslation("settings");
   const dispatch = useDispatch();
-  const { user, preferences } = useSelector((state) => state.userData);
 
+  const { user, preferences } = useSelector((state) => state.userData);
   const [isSaving, setIsSaving] = useState(false);
-  const [draftName, setDraftName] = useState(user.name);
+  const [draftName, setDraftName] = useState(user?.name || "");
   const [draftTheme, setDraftTheme] = useState(preferences.theme || "dark");
   const [draftLanguage, setDraftLanguage] = useState(
     preferences.language || "uk",
@@ -33,14 +35,19 @@ const SettingsPage = () => {
     preferences.notifications_enabled ?? false,
   );
 
+  const { error: nameError, isValid: isNameValid } = useNameValidation(
+    draftName,
+    t,
+  );
+
   const handleSave = async () => {
     setIsSaving(true);
     try {
       i18n.changeLanguage(draftLanguage);
+      dispatch(updateCurrentUser({ name: draftName.trim() }));
 
       await dispatch(
         updatePreferences({
-          name: draftName,
           theme: draftTheme,
           language: draftLanguage,
           notifications_enabled: draftNotifications,
@@ -53,6 +60,13 @@ const SettingsPage = () => {
     } finally {
       setIsSaving(false);
     }
+  };
+
+  const handleReset = () => {
+    setDraftName(user?.name || "");
+    setDraftTheme(preferences.theme || "dark");
+    setDraftLanguage(preferences.language || "uk");
+    setDraftNotifications(preferences.notifications_enabled ?? false);
   };
 
   return (
@@ -73,11 +87,11 @@ const SettingsPage = () => {
               />
             </div>
 
-            <h3 className={styles.name}>{user.name}</h3>
             <InputField
               className={styles.nameInput}
               value={draftName}
               onChange={(e) => setDraftName(e.target.value)}
+              error={nameError}
             />
             <p className={styles.email}>{user.email}</p>
             <span className={styles.plan}>{user.plan.toUpperCase()}</span>
@@ -89,40 +103,48 @@ const SettingsPage = () => {
                 <MdTune />
                 {t("preferences.sectionTitle")}
               </h3>
-
-              <div className={styles.row}>
-                <p>{t("preferences.theme")}</p>
-                <ThemeSwitcher value={draftTheme} onChange={setDraftTheme} />
-              </div>
-
-              <div className={styles.row}>
-                <p>{t("preferences.language")}</p>
-                <LanguageSwitcher
-                  value={draftLanguage}
-                  onChange={setDraftLanguage}
-                />
-              </div>
-
-              <div className={styles.row}>
-                <p>{t("preferences.notifications")}</p>
-                <label className={`${styles.switch} ${styles.rounded}`}>
-                  <input
-                    type="checkbox"
-                    className={styles.switchInput}
-                    checked={draftNotifications}
-                    onChange={(e) => setDraftNotifications(e.target.checked)}
+              <div className={styles.preferencesList}>
+                <div className={styles.row}>
+                  <p>{t("preferences.theme")}</p>
+                  <ThemeSwitcher value={draftTheme} onChange={setDraftTheme} />
+                </div>
+                <div className={styles.row}>
+                  <p>{t("preferences.language")}</p>
+                  <LanguageSwitcher
+                    value={draftLanguage}
+                    onChange={setDraftLanguage}
                   />
-                  <span className={styles.switchThumb}></span>
-                </label>
+                </div>
+                <div className={styles.row}>
+                  <p>{t("preferences.notifications")}</p>
+                  <label className={`${styles.switch} ${styles.rounded}`}>
+                    <input
+                      type="checkbox"
+                      className={styles.switchInput}
+                      checked={draftNotifications}
+                      onChange={(e) => setDraftNotifications(e.target.checked)}
+                    />
+                    <span className={styles.switchThumb}></span>
+                  </label>
+                </div>
+              </div>
+              <div className={styles.buttons}>
+                <Button
+                  variant="secondary"
+                  leftIcon={<GrPowerReset />}
+                  onClick={handleReset}
+                >
+                  {t("buttons.resetChanges")}
+                </Button>
+                <Button
+                  leftIcon={<FaCheck />}
+                  onClick={handleSave}
+                  disabled={isSaving || !isNameValid}
+                >
+                  {t("buttons.saveChanges")}
+                </Button>
               </div>
             </section>
-            <Button
-              leftIcon={<FaCheck />}
-              onClick={handleSave}
-              disabled={isSaving}
-            >
-              {t("buttons.saveChanges")}
-            </Button>
           </div>
         </div>
       </Container>
