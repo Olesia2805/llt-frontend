@@ -10,8 +10,10 @@ import Section from "../../components/Section/Section";
 import Button from "../../components/Button/Button";
 import { FaSearch } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { useTranslation } from "react-i18next";
 
 const MyTripsPage = () => {
+  const { t } = useTranslation("myTrips");
   const { user } = useSelector((state) => state.userData);
 
   const [trips, setTrips] = useState([]);
@@ -51,10 +53,10 @@ const MyTripsPage = () => {
   // // }, [trips]);
 
   const dateFilters = [
-    { id: "all", label: "All Trips" },
-    { id: "present", label: "Present" },
-    { id: "future", label: "Future" },
-    { id: "past", label: "Past" },
+    { id: "all", label: t("buttons.allTrips") },
+    { id: "present", label: t("buttons.presentTrips") },
+    { id: "future", label: t("buttons.futureTrips") },
+    { id: "past", label: t("buttons.pastTrips") },
   ];
 
   const filteredTrips = useMemo(() => {
@@ -97,14 +99,14 @@ const MyTripsPage = () => {
         <div className={styles.headerWrapper}>
           <div className={styles.headerRow}>
             <div className={styles.header}>
-              <h1>My Journeys</h1>
-              <p>Manage your planned adventure</p>
+              <h2>{t("hero.title")}</h2>
+              <p>{t("hero.description")}</p>
             </div>
 
             <div className={styles.searchWrapper}>
               <input
                 type="text"
-                placeholder="Search trips..."
+                placeholder={t("searchInput")}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className={styles.searchInput}
@@ -138,14 +140,14 @@ const MyTripsPage = () => {
 
         <div className={styles.grid}>
           <Button
+            variant="secondary"
             className={styles.createCard}
             onClick={() => console.log("Navigate to create trip")}
           >
-            <FiPlusCircle />
-            <p>Plan New Trip</p>
+            <FiPlusCircle fontSize={32} />
+            <p>{t("buttons.planNewTrip")}</p>
           </Button>
 
-          {loading && <p>Loading trips...</p>}
           {!loading && filteredTrips.length === 0 && <p>No trips found</p>}
 
           {!loading &&
