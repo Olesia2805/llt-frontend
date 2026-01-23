@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import styles from "./SideBar.module.css";
 import Button from "../Button/Button";
 import { PiSignOutBold } from "react-icons/pi";
+import { AiOutlineSignature } from "react-icons/ai";
 import { FaPlus } from "react-icons/fa6";
 import { sidebarItems } from "../../app/sidebarUserData.js";
 import { logout } from "../../store/userSlice.js";
@@ -27,7 +28,7 @@ const SideBar = ({ onClose }) => {
   };
 
   return (
-    <div className={`${styles.sidebar}`}>
+    <>
       <Button variant="secondary" leftIcon={<FaPlus />}>
         {t("cta")}
       </Button>
@@ -48,10 +49,18 @@ const SideBar = ({ onClose }) => {
         })}
       </ul>
 
+      <div className={styles.subscriptionWrapper}>
+        <h3>{t("subscriptionHeader").toUpperCase()}</h3>
+        <p>{t("subscriptionText")}</p>
+        <Button variant="secondary" leftIcon={<AiOutlineSignature />}>
+          {t("subscriptionBtn")}
+        </Button>
+      </div>
+
       <Button onClick={handleLogout} rightIcon={<PiSignOutBold />}>
         {t("logout")}
       </Button>
-    </div>
+    </>
   );
 };
 
