@@ -20,7 +20,7 @@
     "policies_required": "You must agree to the conditions"
   },
   "buttons": {
-    "saveChanges": "Save Changes",
-    "resetChanges": "Reset Changes"
+    "saveChanges": "Save",
+    "resetChanges": "Reset"
   }
 }

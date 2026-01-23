@@ -25,7 +25,7 @@ const HeaderUser = ({ onBurgerClick, isSidebarOpen }) => {
         {user?.avatar_url ? (
           <img src={user.avatar_url} alt={user.name} />
         ) : (
-          <img src={defaultAvatar} alt={"avatar"} className={styles.avatar} />
+          <img src={defaultAvatar} alt={"avatar"} />
         )}
       </div>
     </header>

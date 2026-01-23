@@ -20,7 +20,7 @@
     "policies_required": "Ви повинні погодитися з умовами"
   },
   "buttons": {
-    "saveChanges": "Зберегти зміни",
-    "resetChanges": "Скасувати зміни"
+    "saveChanges": "Зберегти",
+    "resetChanges": "Скасувати"
   }
 }

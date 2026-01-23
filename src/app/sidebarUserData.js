@@ -23,13 +23,13 @@ const sidebarItems = [
     id: "myTrips",
     label: "myTrips",
     icon: FaRegCompass,
-    path: "/mytrips",
+    path: "/my-trips",
   },
   {
     id: "recommendedTrips",
     label: "recommendedTrips",
     icon: AiOutlineLike,
-    path: "/recommendedTrips",
+    path: "/recommended-trips",
   },
   {
     id: "settings",

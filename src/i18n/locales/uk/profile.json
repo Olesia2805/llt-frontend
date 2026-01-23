@@ -1,1 +1,29 @@
-{}
+{
+  "avatarUrl": "Avatar URL",
+  "name": "Name",
+  "plan": "Plan",
+  "travelerDNA": "Traveler DNA",
+  "primaryCity": "Primary travel city",
+  "cityPlaceholder": "Enter city",
+  "transport": "Preferred transport",
+  "budget": "Trip budget",
+  "budgetAmount": "Amount",
+  "dna": {
+    "hiking": "Hiking",
+    "solo": "Solo travel",
+    "familyTrips": "Family trips",
+    "history": "History",
+    "parks": "Parks",
+    "streetFood": "Street food"
+  },
+  "transportOptions": {
+    "car": "Car",
+    "walking": "Walking",
+    "publicTransport": "Public transport",
+    "bicycle": "Bicycle"
+  },
+  "buttons": {
+    "saveChanges": "Зберегти",
+    "resetChanges": "Скасувати"
+  }
+}
