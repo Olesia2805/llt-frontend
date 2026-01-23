@@ -30,12 +30,10 @@ const LogInForm = () => {
 
   // Live validation effects
   useEffect(() => {
-    if (!email) {
-      setErrors(prev => ({ ...prev, email: null }));
-      return;
-    }
     const timeoutId = setTimeout(() => {
-      if (!emailRegex.test(email)) {
+      if (!email) {
+        setErrors(prev => ({ ...prev, email: null }));
+      } else if (!emailRegex.test(email)) {
         setErrors(prev => ({
           ...prev,
           email: t('validation.emailPattern'),
