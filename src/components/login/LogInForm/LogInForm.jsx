@@ -47,31 +47,13 @@ const LogInForm = () => {
     return () => clearTimeout(timeoutId);
   }, [email, t]);
 
-  useEffect(() => {
-    if (!password) {
-      setErrors(prev => ({ ...prev, password: null }));
-      return;
-    }
-    const timeoutId = setTimeout(() => {
-      if (password.length < 6) {
-        setErrors(prev => ({
-          ...prev,
-          password: t('validation.passwordLength'),
-        }));
-      } else {
-        setErrors(prev => ({ ...prev, password: null }));
-      }
-    }, 800);
-    return () => clearTimeout(timeoutId);
-  }, [password, t]);
-
   const validate = () => {
     const newErrors = {};
     if (!emailRegex.test(email)) {
       newErrors.email = t('validation.emailPattern');
     }
-    if (password.length < 6) {
-      newErrors.password = t('validation.passwordLength');
+    if (!password) {
+      newErrors.password = t('validation.passwordRequired');
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
