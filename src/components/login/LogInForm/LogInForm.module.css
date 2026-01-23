@@ -23,15 +23,6 @@
     }
 }
 
-.formLegend {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 4px;
-    padding: 0;
-    border: none;
-}
-
 .loginText {
     color: var(--text-main);
     font-size: 14px;
