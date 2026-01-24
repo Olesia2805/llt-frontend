@@ -40,7 +40,7 @@
     top: 0;
     transform: translateX(0);
     height: 100vh;
-    width: 250px;
+    width: 280px;
     flex-shrink: 0;
     padding: 32px 24px;
   }

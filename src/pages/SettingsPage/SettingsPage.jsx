@@ -3,6 +3,7 @@ import i18n from "i18next";
 import styles from "./SettingsPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
@@ -48,14 +49,19 @@ const SettingsPage = () => {
 
       await dispatch(
         updatePreferences({
+          ...preferences,
           theme: draftTheme,
           language: draftLanguage,
           notifications_enabled: draftNotifications,
+          notification_channels: draftNotifications ? ["email"] : [],
         }),
       ).unwrap();
 
       setDraftName(draftName);
+      toast.success(t("toast.success"));
     } catch (error) {
+      toast.error(t("toast.error"));
+      handleReset();
       console.error("Failed to save preferences:", error);
     } finally {
       setIsSaving(false);

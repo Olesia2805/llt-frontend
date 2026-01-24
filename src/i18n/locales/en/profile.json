@@ -1,29 +1,49 @@
 {
-  "avatarUrl": "Avatar URL",
-  "name": "Name",
-  "plan": "Plan",
   "travelerDNA": "Traveler DNA",
   "primaryCity": "Primary travel city",
+  "primaryCityText": "We base your recommendations on this location.",
   "cityPlaceholder": "Enter city",
   "transport": "Preferred transport",
   "budget": "Trip budget",
-  "budgetAmount": "Amount",
+  "budgetText": "Estimated average daily spending.",
   "dna": {
-    "hiking": "Hiking",
+    "parks": "Parks",
     "solo": "Solo travel",
     "familyTrips": "Family trips",
+    "shopping": "Shopping",
+    "artGalleries": "Art galleries",
+    "petFriendly": "Pet-friendly",
+    "architecture": "Architecture",
+    "photography": "Photography",
+    "nature": "Nature & landscapes",
+    "spa": "Spa",
+    "music": "Music & concerts",
+    "bars": "Bars",
+    "streetFood": "Street food",
+    "markets": "Markets",
+    "instagramSpots": "Instagram spots",
     "history": "History",
-    "parks": "Parks",
-    "streetFood": "Street food"
+    "lakes": "Lakes",
+    "events": "Events & festivals",
+    "cafes": "Cafés",
+    "mountains": "Mountains",
+    "restaurants": "Restaurants",
+    "camping": "Camping",
+    "hiking": "Hiking",
+    "urban": "Urban exploration"
   },
   "transportOptions": {
     "car": "Car",
-    "walking": "Walking",
-    "publicTransport": "Public transport",
-    "bicycle": "Bicycle"
+    "bike": "Bicycle",
+    "walk": "Walking",
+    "public": "Public transport"    
   },
   "buttons": {
     "saveChanges": "Save",
     "resetChanges": "Reset"
+  },
+  "toast": {
+    "success": "Data successfully uploaded!",
+    "error": "Something went wrong. Please try again."
   }
 }

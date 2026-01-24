@@ -75,17 +75,29 @@
   margin-bottom: 24px;
 }
 
+@media (min-width: 1280px) {
+  .sectionGroup {
+    margin-bottom: 0px;
+    gap: 16px;
+  }
+
+  .DNAGroup {
+    margin-bottom: 48px;
+  }
+}
+
 .sectionGroup h3 {
   font-weight: 700;
   display: flex;
   align-items: center;
   gap: 8px;
+  color: var(--primary);
 }
 
 @media (min-width: 1280px) {
   .sectionGridGroup {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 330px 400px 300px;
     gap: 48px;
   }
 }
@@ -123,6 +135,11 @@
 
 .tag.unselected {
   border-color: rgb(var(--border-color-rgb));
+}
+
+.budgetWrapper {
+  display: flex;
+  gap: 12px;
 }
 
 /* .currencySelect {
