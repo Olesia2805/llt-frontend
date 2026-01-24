@@ -125,7 +125,7 @@ const MyTripsPage = () => {
               )}
             </div>
           </div>
-          <div className={styles.filters}>
+          <ul className={styles.filters}>
             {dateFilters.map((dates) => (
               <Button
                 key={dates.id}
@@ -135,19 +135,10 @@ const MyTripsPage = () => {
                 {dates.label}
               </Button>
             ))}
-          </div>
+          </ul>
         </div>
 
         <div className={styles.grid}>
-          <Button
-            variant="secondary"
-            className={styles.createCard}
-            onClick={() => console.log("Navigate to create trip")}
-          >
-            <FiPlusCircle fontSize={32} />
-            <p>{t("buttons.planNewTrip")}</p>
-          </Button>
-
           {!loading && filteredTrips.length === 0 && <p>No trips found</p>}
 
           {!loading &&
@@ -158,6 +149,14 @@ const MyTripsPage = () => {
                 onDelete={handleAskDelete}
               />
             ))}
+          <Button
+            variant="secondary"
+            className={styles.createCard}
+            onClick={() => console.log("Navigate to create trip")}
+          >
+            <FiPlusCircle fontSize={32} />
+            <p>{t("buttons.planNewTrip")}</p>
+          </Button>
         </div>
 
         <ModalDeleteTrip

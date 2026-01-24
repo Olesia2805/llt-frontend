@@ -6,9 +6,9 @@
   "searchInput": "Шукати поїздки...",
   "buttons": {
     "allTrips": "Усі поїздки",
-    "presentTrips": "Поточні поїздки",
-    "pastTrips": "Минулі поїздки",
-    "futureTrips": "Майбутні поїздки",
+    "presentTrips": "Поточні",
+    "pastTrips": "Минулі",
+    "futureTrips": "Майбутні",
     "planNewTrip": "Сплануй нову подорож"
   },
   "deleteModal": {
