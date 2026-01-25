@@ -1,0 +1,206 @@
+.calendarContainer {
+    background-color: var(--bg-alt);
+    border: 1px solid rgb(var(--border-color-rgb));
+    border-radius: 12px;
+    padding: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-main);
+}
+
+.title svg {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.navigation {
+    display: flex;
+    gap: 8px;
+}
+
+.navBtn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.monthLabel {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.weekday {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.daysGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.day {
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: var(--text-main);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.day:hover {
+    background-color: rgba(var(--border-color-rgb), 0.2);
+}
+
+.day.otherMonth {
+    color: var(--text-muted);
+    opacity: 0.4;
+}
+
+.day.start {
+    background-color: rgba(var(--primary-light-rgb), 0.2);
+    border: 1px solid rgba(var(--primary-light-rgb), 0.3);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.day.middle {
+    background-color: rgba(var(--primary-light-rgb), 0.2);
+    border-top: 1px solid rgba(var(--primary-light-rgb), 0.3);
+    border-bottom: 1px solid rgba(var(--primary-light-rgb), 0.3);
+    border-radius: 0;
+}
+
+.day.end {
+    background-color: rgba(var(--primary-light-rgb), 0.2);
+    border: 1px solid rgba(var(--primary-light-rgb), 0.3);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.eventDot {
+    position: absolute;
+    bottom: 8px;
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(var(--primary-light-rgb), 0.5);
+}
+
+.upcomingSection {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid rgb(var(--border-color-rgb));
+}
+
+.upcomingTitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.upcomingList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.upcomingTrip {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.tripDate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(var(--primary-light-rgb), 0.1);
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.tripMonth {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.tripDay {
+    font-size: 1.125rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.tripInfo {
+    flex: 1;
+}
+
+.tripTitle {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 2px;
+}
+
+.tripDetails {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+}

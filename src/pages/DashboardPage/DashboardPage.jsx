@@ -22,14 +22,15 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const fetchDashboardData = async () => {
-      if (!user?.id) return;
+      // TODO: Remove mock userId after testing - should require real user
+      const userId = user?.id || "mock-user-id";
 
       try {
         setLoading(true);
         const [statsData, calendarInfo, travelInfo] = await Promise.all([
-          getDashboardStats(user.id),
-          getDashboardCalendar(user.id),
-          getTravelHistory(user.id),
+          getDashboardStats(userId),
+          getDashboardCalendar(userId),
+          getTravelHistory(userId),
         ]);
 
         setStats(statsData);

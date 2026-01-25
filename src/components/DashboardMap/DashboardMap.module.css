@@ -1,0 +1,198 @@
+.mapContainer {
+    background-color: var(--bg-alt);
+    border: 1px solid rgb(var(--border-color-rgb));
+    border-radius: 12px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    background-color: rgba(var(--border-color-rgb), 0.1);
+    backdrop-filter: blur(12px);
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-main);
+}
+
+.title svg {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.badge {
+    padding: 4px 12px;
+    background-color: rgba(var(--primary-light-rgb), 0.1);
+    border: 1px solid rgba(var(--primary-light-rgb), 0.3);
+    border-radius: 20px;
+    font-size: 0.625rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+}
+
+.mapWrapper {
+    flex: 1;
+    position: relative;
+    min-height: 400px;
+    background: linear-gradient(135deg, rgba(var(--border-color-rgb), 0.05) 0%, rgba(var(--border-color-rgb), 0.15) 100%);
+}
+
+.mapBackground {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(var(--primary-light-rgb), 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(var(--primary-light-rgb), 0.03) 0%, transparent 50%);
+    opacity: 0.4;
+}
+
+.cityMarker {
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+.marker:hover {
+    transform: scale(1.3);
+}
+
+.markerUpcoming {
+    background-color: var(--primary);
+    box-shadow: 0 0 15px rgba(var(--primary-light-rgb), 0.5);
+    animation: pulse 2s infinite;
+}
+
+.markerVisited {
+    background-color: rgba(var(--text-main), 0.5);
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px rgba(var(--primary-light-rgb), 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(var(--primary-light-rgb), 0.8);
+    }
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    background-color: var(--bg-main);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--primary-light-rgb), 0.5);
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.tooltipCity {
+    font-size: 0.625rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin-bottom: 2px;
+}
+
+.tooltipDate {
+    font-size: 0.5625rem;
+    color: var(--text-muted);
+}
+
+.zoomControls {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 3;
+}
+
+.zoomBtn {
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-alt);
+    border: 1px solid rgb(var(--border-color-rgb));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.25rem;
+}
+
+.zoomBtn:hover {
+    background-color: rgba(var(--border-color-rgb), 0.3);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.statsOverlay {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background-color: var(--bg-alt);
+    border: 1px solid rgb(var(--border-color-rgb));
+    padding: 16px;
+    border-radius: 12px;
+    display: flex;
+    gap: 16px;
+    z-index: 3;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.statLabel {
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.statValue {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--text-main);
+}
+
+.statValue.statHighlight {
+    color: var(--primary);
+}
+
+.statDivider {
+    width: 1px;
+    background-color: rgb(var(--border-color-rgb));
+}
