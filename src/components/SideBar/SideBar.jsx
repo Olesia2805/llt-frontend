@@ -29,7 +29,11 @@ const SideBar = ({ onClose }) => {
 
   return (
     <>
-      <Button variant="secondary" leftIcon={<FaPlus />}>
+      <Button
+        variant="secondary"
+        leftIcon={<FaPlus />}
+        onClick={() => handleClickLink("/recommended-trips")}
+      >
         {t("cta")}
       </Button>
       <ul className={styles.navList}>
@@ -52,7 +56,11 @@ const SideBar = ({ onClose }) => {
       <div className={styles.subscriptionWrapper}>
         <h3>{t("subscriptionHeader").toUpperCase()}</h3>
         <p>{t("subscriptionText")}</p>
-        <Button variant="secondary" leftIcon={<AiOutlineSignature />}>
+        <Button
+          variant="secondary"
+          leftIcon={<AiOutlineSignature />}
+          onClick={() => handleClickLink("/subscription")}
+        >
           {t("subscriptionBtn")}
         </Button>
       </div>

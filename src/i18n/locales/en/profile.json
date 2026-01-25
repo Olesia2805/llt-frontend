@@ -36,7 +36,7 @@
     "car": "Car",
     "bike": "Bicycle",
     "walk": "Walking",
-    "public": "Public transport"    
+    "public": "Public transport"
   },
   "buttons": {
     "saveChanges": "Save",
@@ -45,5 +45,9 @@
   "toast": {
     "success": "Data successfully uploaded!",
     "error": "Something went wrong. Please try again."
+  },
+  "errors": {
+    "budgetNegative": "Budget cannot be less than 0",
+    "budgetTooHigh": "Budget too high"
   }
 }

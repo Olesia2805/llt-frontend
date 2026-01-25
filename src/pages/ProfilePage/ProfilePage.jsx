@@ -3,25 +3,34 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { updatePreferences } from "../../store/userSlice";
+// import { getCityInfo } from "../../store/integrationSlice";
 import { TRAVELER_DNA, TRANSPORT } from "../../app/sectionProfileData";
 
 import InputField from "../../components/InputField/InputField";
 import Button from "../../components/Button/Button";
 import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
+import CurrencyDropdown from "../../components/CurrencyDropdown/CurrencyDropdown";
 import styles from "./ProfilePage.module.css";
-import defaultAvatar from "../../assets/img/default-avatar.jpg";
-import { IoIosArrowDown } from "react-icons/io";
+import defaultImg from "../../assets/img/default-avatar.jpg";
+
+//TODO:
+// - input for city
+// - input for budget (design)
+// - current forecast for home_city
 
 const ProfilePage = () => {
   const { t } = useTranslation("profile");
   const dispatch = useDispatch();
   const { user, preferences } = useSelector((state) => state.userData);
+  // const { cityInfo } = useSelector((state) => state.integrationData);
 
   const [draftForm, setDraftForm] = useState({
     travelerDNA: preferences.interests ?? [],
     transportModes: preferences.transport_modes ?? [],
     city: preferences.home_city ?? "",
+    // city_lat: preferences.home_lat ?? null,
+    // city_lng: preferences.home_lng ?? null,
     budget: preferences.avg_daily_budget ?? 0,
     currency: preferences.currency ?? "USD",
   });
@@ -32,6 +41,8 @@ const ProfilePage = () => {
         travelerDNA: preferences.interests ?? [],
         transportModes: preferences.transport_modes ?? [],
         city: preferences.home_city ?? "",
+        // city_lat: preferences.home_lat ?? null,
+        // city_lng: preferences.home_lng ?? null,
         budget: preferences.avg_daily_budget ?? 0,
         currency: preferences.currency ?? "USD",
       });
@@ -53,28 +64,46 @@ const ProfilePage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    if (name === "budget") {
+      if (value === "") {
+        setDraftForm((prev) => ({
+          ...prev,
+          budget: "",
+        }));
+        return;
+      }
+
+      const normalized = value.replace(/^0+(?=\d)/, "");
+
+      setDraftForm((prev) => ({
+        ...prev,
+        budget: Number(normalized),
+      }));
+      return;
+    }
+
     setDraftForm((prev) => ({
       ...prev,
-      [name]: name === "budget" ? Number(value) : value,
+      [name]: value,
     }));
   };
 
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      const prefer = await dispatch(
+      await dispatch(
         updatePreferences({
           ...preferences,
           interests: draftForm.travelerDNA,
           transport_modes: draftForm.transportModes,
           home_city: draftForm.city,
-          avg_daily_budget: draftForm.budget,
+          // home_lat: draftForm.city_lat,
+          // home_lng: draftForm.city_lng,
+          avg_daily_budget: Math.max(0, Number(draftForm.budget)),
           currency: draftForm.currency,
         }),
       ).unwrap();
       toast.success(t("toast.success"));
-
-      console.log(prefer);
     } catch (error) {
       toast.error(t("toast.error"));
       handleReset();
@@ -89,10 +118,33 @@ const ProfilePage = () => {
       travelerDNA: preferences.interests ?? [],
       transportModes: preferences.transport_modes ?? [],
       city: preferences.home_city ?? "",
+      // city_lat: preferences.home_lat ?? null,
+      // city_lng: preferences.home_lng ?? null,
       budget: preferences.avg_daily_budget ?? 0,
       currency: preferences.currency ?? "USD",
     });
   };
+
+  const budgetError =
+    draftForm.budget < 0
+      ? t("errors.budgetNegative")
+      : draftForm.budget > 1000000
+        ? t("errors.budgetTooHigh")
+        : "";
+
+  const isCityValid = draftForm.city.trim() !== "";
+  // && draftForm.city_lat !== null &&
+  // draftForm.city_lng !== null;
+
+  // const handleCityInput = (e) => {
+  //   const city = e.target.value;
+  //   if (city) dispatch(getCityInfo(city));
+  // };
+
+  const isFormValid =
+    !budgetError &&
+    draftForm.travelerDNA.length >= 0 &&
+    draftForm.transportModes.length >= 0;
 
   return (
     <Section>
@@ -103,7 +155,7 @@ const ProfilePage = () => {
               {user?.avatar_url ? (
                 <img src={user.avatar_url} alt={user.name} />
               ) : (
-                <img src={defaultAvatar} alt={"avatar"} />
+                <img src={defaultImg} alt={"avatar"} />
               )}
             </div>
             <div className={styles.personInfo}>
@@ -122,7 +174,7 @@ const ProfilePage = () => {
             <Button
               className={styles.saveButton}
               onClick={handleSave}
-              disabled={isSaving}
+              disabled={isSaving || !isFormValid}
             >
               {t("buttons.saveChanges")}
             </Button>
@@ -133,17 +185,16 @@ const ProfilePage = () => {
           <h3>{t("travelerDNA")}</h3>
           <ul className={styles.tagGroup}>
             {TRAVELER_DNA().map(({ id, key, title, Icon }) => (
-              <li
-                key={id}
-                className={`${styles.tag} ${
-                  draftForm.travelerDNA.includes(key)
-                    ? styles.selected
-                    : styles.unselected
-                }`}
-                onClick={() => toggleOption(key, "travelerDNA")}
-              >
-                {Icon && <Icon className={styles.tagIcon} />}
-                {title}
+              <li key={id}>
+                <Button
+                  variant="tag"
+                  isActive={draftForm.travelerDNA.includes(key)}
+                  disabled={isSaving}
+                  onClick={() => toggleOption(key, "travelerDNA")}
+                  leftIcon={Icon && <Icon />}
+                >
+                  {title}
+                </Button>
               </li>
             ))}
           </ul>
@@ -154,17 +205,16 @@ const ProfilePage = () => {
             <h3>{t("transport")}</h3>
             <ul className={styles.tagGroup}>
               {TRANSPORT().map(({ id, key, title, Icon }) => (
-                <li
-                  key={id}
-                  className={`${styles.tag} ${
-                    draftForm.transportModes.includes(key)
-                      ? styles.selected
-                      : styles.unselected
-                  }`}
-                  onClick={() => toggleOption(key, "transportModes")}
-                >
-                  {Icon && <Icon className={styles.tagIcon} />}
-                  {title}
+                <li key={id}>
+                  <Button
+                    variant="tag"
+                    isActive={draftForm.transportModes.includes(key)}
+                    disabled={isSaving}
+                    onClick={() => toggleOption(key, "transportModes")}
+                    leftIcon={Icon && <Icon />}
+                  >
+                    {title}
+                  </Button>
                 </li>
               ))}
             </ul>
@@ -177,7 +227,10 @@ const ProfilePage = () => {
               name="city"
               value={draftForm.city}
               onChange={handleChange}
+              // onChange={handleCityInput}
               placeholder={t("cityPlaceholder")}
+              error={isCityValid}
+              disabled={isSaving}
             />
           </div>
 
@@ -189,21 +242,22 @@ const ProfilePage = () => {
                 type="number"
                 name="budget"
                 min={0}
+                step={1}
+                inputMode="numeric"
+                pattern="[0-9]*"
                 value={draftForm.budget}
                 onChange={handleChange}
+                error={budgetError}
+                disabled={isSaving}
               />
-              <IoIosArrowDown />
 
-              <select
-                className={styles.currencySelect}
-                name="currency"
+              <CurrencyDropdown
                 value={draftForm.currency}
-                onChange={handleChange}
-              >
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="UAH">UAH</option>
-              </select>
+                disabled={isSaving}
+                onChange={(currency) =>
+                  setDraftForm((prev) => ({ ...prev, currency }))
+                }
+              />
             </div>
           </div>
         </div>

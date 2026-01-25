@@ -91,7 +91,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--primary);
 }
 
 @media (min-width: 1280px) {
@@ -108,50 +107,24 @@
   gap: 8px;
 }
 
-.tag {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 8px 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
-}
-
-.tag:hover {
-  color: var(--primary);
-  background-color: rgba(var(--primary-light-rgb), 0.05);
-}
-
-.tag.selected {
-  color: var(--primary);
-  background-color: rgba(var(--primary-light-rgb), 0.05);
-}
-
-.tag.selected:hover {
-  border: 1px solid var(--primary);
-}
-
-.tag.unselected {
-  border-color: rgb(var(--border-color-rgb));
-}
-
 .budgetWrapper {
   display: flex;
   gap: 12px;
+  position: relative;
+  align-items: baseline;
 }
 
-/* .currencySelect {
+.currencySelect {
   appearance: none;
   border: 1px solid var(--primary);
   border-radius: 12px;
-  padding: 10px;
-  font-weight: 700;
-  cursor: pointer;
+  padding: 10px 36px 10px 12px;
+  background-color: transparent;
   color: var(--primary);
-}
+  cursor: pointer;
 
-.currencySelect:focus {
-  outline: none;
-} */
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}

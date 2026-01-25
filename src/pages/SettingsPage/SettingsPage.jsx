@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
 
-import defaultAvatar from "../../assets/img/default-avatar.jpg";
+import defaultImg from "../../assets/img/default-avatar.jpg";
 import ThemeSwitcher from "../../components/ThemeSwitcher/ThemeSwitcher";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher";
 import Button from "../../components/Button/Button";
@@ -40,6 +40,8 @@ const SettingsPage = () => {
     draftName,
     t,
   );
+
+  //TODO: UseEffect like in ProfilePage
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -86,11 +88,19 @@ const SettingsPage = () => {
         <div className={styles.container}>
           <section className={styles.profile}>
             <div className={styles.avatarWrapper}>
-              <img
-                src={defaultAvatar}
-                alt={t("hero.avatar")}
-                className={styles.avatar}
-              />
+              {user?.avatar_url ? (
+                <img
+                  src={user.avatar_url}
+                  alt={user.name}
+                  className={styles.avatar}
+                />
+              ) : (
+                <img
+                  src={defaultImg}
+                  alt={t("hero.avatar") || "avatar"}
+                  className={styles.avatar}
+                />
+              )}
             </div>
 
             <InputField
