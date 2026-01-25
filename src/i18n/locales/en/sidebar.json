@@ -1,7 +1,12 @@
 {
   "cta": "New trip",
   "dashboard": "Dashboard",
-  "my_trips": "My trips",
+  "profile": "Profile",
+  "myTrips": "My trips",
+  "recommendedTrips": "Recommended trips",
   "settings": "Settings",
+  "subscriptionHeader": "Pro plan",
+  "subscriptionText": "Unlock unlimited routes.",
+  "subscriptionBtn": "Subscription",
   "logout": "Log Out"
 }

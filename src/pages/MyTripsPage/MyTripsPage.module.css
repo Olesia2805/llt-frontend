@@ -56,9 +56,16 @@
 }
 
 .filters {
-  display: flex;
+  display: grid;
   gap: 12px;
-  flex-wrap: wrap;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 1280px) {
+  .filters {
+    display: flex;
+    gap: 16px;
+  }
 }
 
 .grid {
@@ -74,7 +81,7 @@
   justify-content: center;
   border: 2px dashed var(--primary);
   border-radius: 12px;
-  min-height: 220px;
+  min-height: 200px;
   cursor: pointer;
   transition: all 0.3s ease;
 }

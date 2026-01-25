@@ -8,7 +8,7 @@
     "sectionTitle": "Preferences",
     "theme": "App Theme",
     "language": "App Language",
-    "notifications": "Email notifications"
+    "notifications": "Notifications"
   },
   "errors": {
     "name_required": "Name is required",
@@ -20,7 +20,11 @@
     "policies_required": "You must agree to the conditions"
   },
   "buttons": {
-    "saveChanges": "Save Changes",
-    "resetChanges": "Reset Changes"
+    "saveChanges": "Save",
+    "resetChanges": "Reset"
+  },
+  "toast": {
+    "success": "Data successfully uploaded!",
+    "error": "Something went wrong. Please try again."
   }
 }

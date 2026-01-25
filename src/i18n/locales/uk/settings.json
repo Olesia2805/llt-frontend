@@ -8,7 +8,7 @@
     "sectionTitle": "Налаштування",
     "theme": "Тема додатку",
     "language": "Мова додатку",
-    "notifications": "Сповіщення на пошту"
+    "notifications": "Сповіщення"
   },
   "errors": {
     "name_required": "Ім'я обов'язкове для заповнення",
@@ -20,7 +20,11 @@
     "policies_required": "Ви повинні погодитися з умовами"
   },
   "buttons": {
-    "saveChanges": "Зберегти зміни",
-    "resetChanges": "Скасувати зміни"
+    "saveChanges": "Зберегти",
+    "resetChanges": "Скасувати"
+  },
+  "toast": {
+    "success": "Дані успішно завантажено!",
+    "error": "Щось пішло не так. Будь ласка, спробуйте ще раз."
   }
 }

@@ -177,9 +177,7 @@
 
 @media (min-width: 1280px) {
   .buttons {
-    display: flex;
     flex-direction: row;
-    gap: 12px;
-    justify-content: space-around;
+    gap: 0px;
   }
 }
