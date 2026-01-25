@@ -28,6 +28,9 @@ const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.jsx"),
 );
 const LogInPage = lazy(() => import("./pages/LogInPage/LogInPage.jsx"));
+const DashboardPage = lazy(
+  () => import("./pages/DashboardPage/DashboardPage.jsx"),
+);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -69,6 +72,7 @@ const App = () => {
             <Route element={<ProtectedRoute />}>
               <Route path={ROUTER.PROFILE} element={<ProfilePage />} />
               <Route path={ROUTER.MYTRIPS} element={<MyTripsPage />} />
+              <Route path={ROUTER.DASHBOARD} element={<DashboardPage />} />
               <Route path={ROUTER.SETTINGS} element={<SettingsPage />} />
             </Route>
             <Route path={ROUTER.ALL} element={<NotFoundPage />} />
