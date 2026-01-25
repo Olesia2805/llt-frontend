@@ -1,7 +1,12 @@
 {
   "cta": "Нова подорож",
   "dashboard": "Панель навігації",
-  "my_trips": "Мої подорожі",
+  "profile": "Профіль",
+  "myTrips": "Мої подорожі",
+  "recommendedTrips": "Рекомендовані подорожі",
   "settings": "Налаштування",
+  "subscriptionHeader": "План Pro",
+  "subscriptionText": "Розблокуйте необмежену кількість маршрутів.",
+  "subscriptionBtn": "Підписка",
   "logout": "Вийти"
 }

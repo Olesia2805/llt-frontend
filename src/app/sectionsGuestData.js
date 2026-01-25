@@ -5,7 +5,7 @@ export const CHOOSE_REASONS = () => {
   const reasonsJson = i18n.getResource(
     i18n.language,
     "homeGuest",
-    "chooseReasons.items"
+    "chooseReasons.items",
   );
 
   return reasonsJson.map((reason, index) => ({
@@ -20,7 +20,7 @@ export const OFFER_FEATURES = () => {
   const featuresJson = i18n.getResource(
     i18n.language,
     "homeGuest",
-    "offers.items"
+    "offers.items",
   );
 
   return featuresJson.map((feature, index) => ({
@@ -35,13 +35,13 @@ export const PRICE_PLANS = () => {
   const plansObj = i18n.getResource(
     i18n.language,
     "homeGuest",
-    "pricePlans.items"
+    "pricePlans.items",
   );
 
   const planHrefs = {
     explorer: "/signup",
-    nomad: "/",
-    globetrotter: "/",
+    nomad: "/signup",
+    globetrotter: "/signup",
   };
 
   if (!plansObj) return [];
@@ -66,7 +66,7 @@ export const TESTIMONIALS = () => {
   const testimonialsJson = i18n.getResource(
     i18n.language,
     "homeGuest",
-    "testimonials.items"
+    "testimonials.items",
   );
 
   return testimonialsJson.map((testimonial, index) => ({

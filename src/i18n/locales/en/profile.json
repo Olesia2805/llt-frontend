@@ -1,0 +1,53 @@
+{
+  "travelerDNA": "Traveler DNA",
+  "primaryCity": "Primary travel city",
+  "primaryCityText": "We base your recommendations on this location.",
+  "cityPlaceholder": "Enter city",
+  "transport": "Preferred transport",
+  "budget": "Trip budget",
+  "budgetText": "Estimated average daily spending.",
+  "dna": {
+    "parks": "Parks",
+    "solo": "Solo travel",
+    "familyTrips": "Family trips",
+    "shopping": "Shopping",
+    "artGalleries": "Art galleries",
+    "petFriendly": "Pet-friendly",
+    "architecture": "Architecture",
+    "photography": "Photography",
+    "nature": "Nature & landscapes",
+    "spa": "Spa",
+    "music": "Music & concerts",
+    "bars": "Bars",
+    "streetFood": "Street food",
+    "markets": "Markets",
+    "instagramSpots": "Instagram spots",
+    "history": "History",
+    "lakes": "Lakes",
+    "events": "Events & festivals",
+    "cafes": "Cafés",
+    "mountains": "Mountains",
+    "restaurants": "Restaurants",
+    "camping": "Camping",
+    "hiking": "Hiking",
+    "urban": "Urban exploration"
+  },
+  "transportOptions": {
+    "car": "Car",
+    "bike": "Bicycle",
+    "walk": "Walking",
+    "public": "Public transport"
+  },
+  "buttons": {
+    "saveChanges": "Save",
+    "resetChanges": "Reset"
+  },
+  "toast": {
+    "success": "Data successfully uploaded!",
+    "error": "Something went wrong. Please try again."
+  },
+  "errors": {
+    "budgetNegative": "Budget cannot be less than 0",
+    "budgetTooHigh": "Budget too high"
+  }
+}

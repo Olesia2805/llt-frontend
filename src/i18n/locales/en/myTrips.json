@@ -4,11 +4,11 @@
     "description": "Manage your planned adventure."
   },
   "searchInput": "Search trips...",
-  "filterButtons": {
+  "buttons": {
     "allTrips": "All Trips",
-    "presentTrips": "Present Trips",
-    "pastTrips": "Past Trips",
-    "futureTrips": "Future Trips",
+    "presentTrips": "Present",
+    "pastTrips": "Past",
+    "futureTrips": "Future",
     "planNewTrip": "Plan New Trip"
   },
   "deleteModal": {

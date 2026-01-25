@@ -1,0 +1,81 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.toggle {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid rgb(var(--primary-light-rgb));
+  background-color: transparent;
+  color: rgb(var(--primary-light-rgb));
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    transform 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle:hover,
+.toggle:focus-visible {
+  box-shadow: 0 0 4px 0px rgba(var(--primary-light-rgb), 0.8);
+  transform: scale(1.05);
+}
+
+.arrow {
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.arrowOpen {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background-color: var(--bg-main);
+  border: 1px solid rgb(var(--primary-light-rgb));
+  border-radius: 6px;
+  padding: 4px 0;
+  margin: 0;
+  min-width: 60px;
+  z-index: 10;
+  animation: fadeIn 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menuItem {
+  width: 100%;
+  text-align: left;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: rgb(var(--primary-light-rgb));
+  transition: background 0.2s;
+}
+
+.menuItem:hover:not(:disabled),
+.menuItem:focus-visible:not(:disabled) {
+  background-color: rgba(var(--primary-light-rgb), 0.1);
+}
+
+.menuItem:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
