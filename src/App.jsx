@@ -63,7 +63,6 @@ const App = () => {
 
   return (
     <>
-      {/* TODO: Loader */}
       <Suspense fallback={<Loader />}>
         <ScrollToTop />
         <Routes>

@@ -1,7 +1,12 @@
+import { ClimbingBoxLoader } from "react-spinners";
 import styles from "./Loader.module.css";
 
-const Loader = ({ children }) => {
-  return <div className={styles.loader}>{children}</div>;
+const Loader = () => {
+  return (
+    <div className={styles.overlay}>
+      <ClimbingBoxLoader color="var(--primary)" />
+    </div>
+  );
 };
 
 export default Loader;

@@ -1,1 +1,19 @@
-{}
+{
+  "title": "Plan Your AI-Powered Adventure",
+  "text": "Tell us where you want to go and what you love.",
+  "destinationCity": "Destination",
+  "cityPlaceholder": "Enter city",
+  "dates": "Start and End dates",
+  "travelerDNA": "Traveler DNA",
+  "transport": "Transportation you want to use during trip",
+  "maxBudget": "Max trip budget",
+  "travelerNotes": "Traveler Notes",
+  "buttons": {
+    "generateRoute": "Generate My AI Route",
+    "resetChanges": "Reset to Basic Preferences"
+  },
+  "errors": {
+    "budgetNegative": "Budget cannot be less than 0",
+    "budgetTooHigh": "Budget too high"
+  }
+}

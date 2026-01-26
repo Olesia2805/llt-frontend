@@ -6,38 +6,6 @@
   "transport": "Бажаний транспорт",
   "budget": "Бюджет подорожі",
   "budgetText": "Орієнтовні середні витрати на день.",
-  "dna": {
-    "parks": "Парки",
-    "solo": "Подорожі наодинці",
-    "familyTrips": "Сімейні подорожі",
-    "shopping": "Шопінг",
-    "artGalleries": "Арт галереї",
-    "petFriendly": "З тваринами",
-    "architecture": "Архітектура",
-    "photography": "Фотографія",
-    "nature": "Природа та пейзажі",
-    "spa": "Спа",
-    "music": "Музика та концерти",
-    "bars": "Бари",
-    "streetFood": "Вулична їжа",
-    "markets": "Ярмарки",
-    "instagramSpots": "Інстаграм-локації",
-    "history": "Історія",
-    "lakes": "Озера",
-    "events": "Події та фестивалі",
-    "cafes": "Кавʼярні",
-    "mountains": "Гори",
-    "restaurants": "Ресторани",
-    "camping": "Кемпінг",
-    "hiking": "Туризм",
-    "urban": "Дослідження міст"
-  },
-  "transportOptions": {
-    "car": "Машина",
-    "bike": "Велосипед",
-    "walk": "Пішки",
-    "public": "Громадський транспорт"
-  },
   "buttons": {
     "saveChanges": "Зберегти",
     "resetChanges": "Скинути"

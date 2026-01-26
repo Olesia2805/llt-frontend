@@ -9,7 +9,7 @@
     "presentTrips": "Present",
     "pastTrips": "Past",
     "futureTrips": "Future",
-    "planNewTrip": "Plan New Trip"
+    "planNewTrip": "Plan your first trip"
   },
   "deleteModal": {
     "title": "Delete trip?",

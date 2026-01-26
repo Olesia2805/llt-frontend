@@ -98,7 +98,7 @@ const MyTripsPage = () => {
       <Container>
         <div className={styles.headerWrapper}>
           <div className={styles.headerRow}>
-            <div className={styles.header}>
+            <div>
               <h2>{t("hero.title")}</h2>
               <p>{t("hero.description")}</p>
             </div>
@@ -139,7 +139,12 @@ const MyTripsPage = () => {
         </div>
 
         <div className={styles.grid}>
-          {!loading && filteredTrips.length === 0 && <p>No trips found</p>}
+          {filteredTrips.length === 0 && (
+            <Button variant="createCard" to="/recommended-trips">
+              <FiPlusCircle fontSize={32} />
+              <p>{t("buttons.planNewTrip")}</p>
+            </Button>
+          )}
 
           {!loading &&
             filteredTrips.map((trip) => (
@@ -149,14 +154,6 @@ const MyTripsPage = () => {
                 onDelete={handleAskDelete}
               />
             ))}
-          <Button
-            variant="secondary"
-            className={styles.createCard}
-            onClick={() => console.log("Navigate to create trip")}
-          >
-            <FiPlusCircle fontSize={32} />
-            <p>{t("buttons.planNewTrip")}</p>
-          </Button>
         </div>
 
         <ModalDeleteTrip

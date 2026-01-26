@@ -260,6 +260,26 @@
   opacity: 0.6;
 }
 
+.createCard {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 12px;
+  min-height: 200px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--bg-main);
+  border: 3px dashed rgb(var(--border-color-rgb));
+  color: var(--text-main);
+}
+
+.createCard:not(.disabled):hover,
+.createCard:focus-visible {
+  background-color: rgba(var(--border-color-rgb), 0.3);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
 /* TODO: Loader */
 
 /* .loading {

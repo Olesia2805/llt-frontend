@@ -113,18 +113,3 @@
   position: relative;
   align-items: baseline;
 }
-
-.currencySelect {
-  appearance: none;
-  border: 1px solid var(--primary);
-  border-radius: 12px;
-  padding: 10px 36px 10px 12px;
-  background-color: transparent;
-  color: var(--primary);
-  cursor: pointer;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease;
-}
