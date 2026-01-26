@@ -10,6 +10,7 @@ import Section from "../../components/Section/Section";
 import DashboardStatsCard from "../../components/DashboardStatsCard/DashboardStatsCard";
 import DashboardCalendar from "../../components/DashboardCalendar/DashboardCalendar";
 import DashboardMap from "../../components/DashboardMap/DashboardMap";
+import DashboardHero from "../../components/DashboardHero/DashboardHero";
 import styles from "./DashboardPage.module.css";
 import { MdCalendarToday, MdTaskAlt, MdRocketLaunch } from "react-icons/md";
 
@@ -52,20 +53,8 @@ const DashboardPage = () => {
 
   return (
     <Section>
+      <DashboardHero user={user} />
       <Container>
-        <div className={styles.heroSection}>
-          <div className={styles.heroBackground} />
-          <div className={styles.heroContent}>
-            <p className={styles.heroLabel}>Welcome Back</p>
-            <h1 className={styles.heroTitle}>
-              Hello, {user?.firstName || "Traveler"}
-            </h1>
-            <p className={styles.heroDescription}>
-              Your next adventure awaits. All systems ready for departure.
-            </p>
-          </div>
-        </div>
-
         <div className={styles.statsBar}>
           <DashboardStatsCard
             icon={MdCalendarToday}
