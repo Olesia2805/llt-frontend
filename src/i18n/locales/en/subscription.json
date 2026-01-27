@@ -1,1 +1,26 @@
-{}
+{
+  "title": "Subscription plan",
+  "text": "Choose the plan that fits you best",
+  "monthly": "Monthly",
+  "yearly": "Yearly",
+  "month": "month",
+  "year": "year",
+  "monthlyDesc": "Pay monthly, cancel anytime",
+  "yearlyDesc": "Save money with yearly billing",
+
+  "paymentTitle": "Payment details",
+
+  "cardName": "Cardholder name",
+  "cardNamePlaceholder": "John Doe",
+  "cardNameError": "Please enter a valid name",
+
+  "cardNumber": "Card number",
+  "cardNumberError": "Card number must contain 16 digits",
+
+  "expiry": "Expiry date",
+  "expiryError": "Enter a valid expiry date (MM/YY)",
+
+  "subscribe": "Subscribe now",
+  "subscriptionSuccess": "Subscription to {{plan}} activated successfully",
+  "subscriptionError": "Something went wrong. Please try again"
+}

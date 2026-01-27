@@ -8,7 +8,7 @@ const Button = ({
   variant = "primary",
   // variant = "primary" | "secondary" | "ghost" | "link-accent" | "link-muted" | "tag"
   // | "link-button-muted" | "dot" | "inputBtn" | "closeBtn" | "primaryIcon" | "burgerBtn"
-  // | "createCard"
+  // | "createCard" | "removeSubscriptionBtn"
   text,
   children,
   className,
