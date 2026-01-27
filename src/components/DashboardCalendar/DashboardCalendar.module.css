@@ -207,10 +207,11 @@
 
 .todayDot {
     position: absolute;
-    top: 40px;
-    right: 25px;
-    width: 8px;
-    height: 8px;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
     background-color: #ff6b35;
     border-radius: 50%;
     box-shadow: 0 0 6px rgba(255, 107, 53, 0.6);
