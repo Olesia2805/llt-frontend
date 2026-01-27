@@ -204,3 +204,16 @@
     font-size: 0.6875rem;
     color: var(--text-muted);
 }
+
+.todayDot {
+    position: absolute;
+    top: 40px;
+    right: 25px;
+    width: 8px;
+    height: 8px;
+    background-color: #ff6b35;
+    /* Bright orange for visibility */
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 107, 53, 0.6);
+    z-index: 10;
+}

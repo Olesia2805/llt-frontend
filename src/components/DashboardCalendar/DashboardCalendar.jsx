@@ -43,6 +43,15 @@ const DashboardCalendar = ({ calendarData }) => {
     return null;
   };
 
+  const isToday = (day) => {
+    const today = new Date();
+    return (
+      day === today.getDate() &&
+      displayMonth === today.getMonth() &&
+      currentYear === today.getFullYear()
+    );
+  };
+
   return (
     <div className={styles.calendarContainer}>
       <div className={styles.header}>
@@ -81,7 +90,8 @@ const DashboardCalendar = ({ calendarData }) => {
       <div className={styles.daysGrid}>
         {calendarDays.map((item, index) => {
           const tripPosition = item.isCurrentMonth ? getTripPosition(item.day) : null;
-          const hasEventDot = item.isCurrentMonth && hasEvent(item.day);
+          const isTodayDay = item.isCurrentMonth && isToday(item.day);
+          
 
           return (
             <div
@@ -91,7 +101,7 @@ const DashboardCalendar = ({ calendarData }) => {
               } ${tripPosition ? styles[tripPosition] : ""}`}
             >
               {item.day}
-              {hasEventDot && <div className={styles.eventDot} />}
+              {isTodayDay && <div className={styles.todayDot} title="Today" />}
             </div>
           );
         })}
