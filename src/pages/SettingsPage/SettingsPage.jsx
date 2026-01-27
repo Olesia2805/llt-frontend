@@ -77,6 +77,17 @@ const SettingsPage = () => {
     setDraftNotifications(preferences.notifications_enabled ?? false);
   };
 
+  const handleRemoveSubscription = async () => {
+    if (!user?.plan || user.plan === "Explorer") return;
+
+    try {
+      await dispatch(updateCurrentUser({ plan: "Explorer" })).unwrap();
+      toast.success(t("toast.successRemoved"));
+    } catch {
+      toast.error(t("toast.error"));
+    }
+  };
+
   return (
     <Section>
       <Container>
@@ -109,8 +120,18 @@ const SettingsPage = () => {
               onChange={(e) => setDraftName(e.target.value)}
               error={nameError}
             />
+
             <p className={styles.email}>{user.email}</p>
-            <span className={styles.plan}>{user.plan.toUpperCase()}</span>
+            <div className={styles.planRow}>
+              <span className={styles.plan}>{user.plan.toUpperCase()}</span>
+              {user.plan && user.plan !== "Explorer" && (
+                <Button
+                  variant="removeSubscriptionBtn"
+                  text={t("buttons.removeSubscription")}
+                  onClick={handleRemoveSubscription}
+                />
+              )}
+            </div>
           </section>
 
           <div className={styles.preferencesWrapper}>
