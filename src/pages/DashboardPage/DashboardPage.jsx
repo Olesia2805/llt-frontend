@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   getDashboardStats,
   getDashboardCalendar,
@@ -16,6 +17,7 @@ import { MdCalendarToday, MdTaskAlt, MdRocketLaunch } from "react-icons/md";
 
 const DashboardPage = () => {
   const { user } = useSelector((state) => state.userData);
+  const { t } = useTranslation("dashboard");
   const [stats, setStats] = useState(null);
   const [calendarData, setCalendarData] = useState(null);
   const [travelData, setTravelData] = useState(null);
@@ -58,19 +60,19 @@ const DashboardPage = () => {
         <div className={styles.statsBar}>
           <DashboardStatsCard
             icon={MdCalendarToday}
-            label="Total Trips"
+            label={t("stats.totalTrips")}
             value={stats.totalTrips}
             variant="default"
           />
           <DashboardStatsCard
             icon={MdTaskAlt}
-            label="Completed"
+            label={t("stats.completed")}
             value={stats.completedTrips}
             variant="success"
           />
           <DashboardStatsCard
             icon={MdRocketLaunch}
-            label="Active/Future"
+            label={t("stats.activeFuture")}
             value={stats.activeTrips}
             variant="active"
           />

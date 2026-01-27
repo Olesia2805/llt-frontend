@@ -1,17 +1,29 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./DashboardCalendar.module.css";
 import { MdChevronLeft, MdChevronRight, MdCalendarMonth } from "react-icons/md";
 import Button from "../Button/Button";
 
 const DashboardCalendar = ({ calendarData }) => {
+  const { t } = useTranslation("dashboard");
   const { events, upcomingTrips } = calendarData;
   const today = new Date();
   const [displayMonth, setDisplayMonth] = useState(today.getMonth());
   const [displayYear, setDisplayYear] = useState(today.getFullYear());
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    t("calendar.months.January"),
+    t("calendar.months.February"),
+    t("calendar.months.March"),
+    t("calendar.months.April"),
+    t("calendar.months.May"),
+    t("calendar.months.June"),
+    t("calendar.months.July"),
+    t("calendar.months.August"),
+    t("calendar.months.September"),
+    t("calendar.months.October"),
+    t("calendar.months.November"),
+    t("calendar.months.December"),
   ];
 
   const daysInMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
@@ -90,14 +102,14 @@ const DashboardCalendar = ({ calendarData }) => {
       <div className={styles.header}>
         <h3 className={styles.title}>
           <MdCalendarMonth />
-          Trip Schedule
+          {t("calendar.title")}
         </h3>
         <div className={styles.navigation}>
           <Button
             variant="secondary"
             className={styles.navBtn}
             onClick={handlePrevMonth}
-            aria-label="Previous month"
+            aria-label={t("calendar.prevMonth")}
           >
             <MdChevronLeft />
           </Button>
@@ -105,7 +117,7 @@ const DashboardCalendar = ({ calendarData }) => {
             variant="secondary"
             className={styles.navBtn}
             onClick={handleNextMonth}
-            aria-label="Next month"
+            aria-label={t("calendar.nextMonth")}
           >
             <MdChevronRight />
           </Button>
@@ -115,7 +127,15 @@ const DashboardCalendar = ({ calendarData }) => {
       <div className={styles.monthLabel}>{monthNames[displayMonth]} {displayYear}</div>
 
       <div className={styles.weekdays}>
-        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
+        {[
+          t("calendar.weekdays.Mon"),
+          t("calendar.weekdays.Tue"),
+          t("calendar.weekdays.Wed"),
+          t("calendar.weekdays.Thu"),
+          t("calendar.weekdays.Fri"),
+          t("calendar.weekdays.Sat"),
+          t("calendar.weekdays.Sun"),
+        ].map((day) => (
           <span key={day} className={styles.weekday}>{day}</span>
         ))}
       </div>
@@ -141,7 +161,7 @@ const DashboardCalendar = ({ calendarData }) => {
       </div>
 
       <div className={styles.upcomingSection}>
-        <h4 className={styles.upcomingTitle}>Upcoming Next</h4>
+        <h4 className={styles.upcomingTitle}>{t("calendar.upcomingNext")}</h4>
         <div className={styles.upcomingList}>
           {upcomingTrips && upcomingTrips.length > 0 ? (
             upcomingTrips.map((trip) => (
@@ -157,14 +177,14 @@ const DashboardCalendar = ({ calendarData }) => {
                 <div className={styles.tripInfo}>
                   <p className={styles.tripTitle}>{trip.title}</p>
                   <p className={styles.tripDetails}>
-                    {trip.duration} • {trip.travelers} Travelers
+                    {trip.duration} • {t("calendar.travelers", { count: trip.travelers })}
                   </p>
                 </div>
               </div>
             ))
           ) : (
             <p className={styles.noTripsMessage}>
-              No upcoming trips planned yet. Start planning your next adventure!
+              {t("calendar.noTrips")}
             </p>
           )}
         </div>

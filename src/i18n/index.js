@@ -11,6 +11,8 @@ import sidebarEn from "./locales/en/sidebar.json";
 // import profileEn from "./locales/en/profile.json";
 import myTripsEn from "./locales/en/myTrips.json";
 import settingsEn from "./locales/en/settings.json";
+import dashboardEn from "./locales/en/dashboard.json";
+
 
 import homeGuestUk from "./locales/uk/homeGuest.json";
 import policiesUk from "./locales/uk/policies.json";
@@ -22,6 +24,8 @@ import sidebarUk from "./locales/uk/sidebar.json";
 // import profileUk from "./locales/uk/profile.json";
 import myTripsUk from "./locales/uk/myTrips.json";
 import settingsUk from "./locales/uk/settings.json";
+import dashboardUk from "./locales/uk/dashboard.json";
+
 
 const savedLang = localStorage.getItem("lang") || "uk";
 
@@ -38,6 +42,7 @@ i18n.use(initReactI18next).init({
       myTrips: myTripsUk,
       settings: settingsUk,
       login: loginUk,
+      dashboard: dashboardUk,
     },
     en: {
       homeGuest: homeGuestEn,
@@ -50,6 +55,7 @@ i18n.use(initReactI18next).init({
       myTrips: myTripsEn,
       settings: settingsEn,
       login: loginEn,
+      dashboard: dashboardEn,
     },
   },
   lng: savedLang,

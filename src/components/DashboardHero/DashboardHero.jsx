@@ -1,17 +1,20 @@
+import { useTranslation } from "react-i18next";
 import styles from "./DashboardHero.module.css";
 
 
 const DashboardHero = ({ user }) => {
+  const { t } = useTranslation("dashboard");
+
   return (
     <div className={styles.heroSection}>
       <div className={styles.heroBackground} />
         <div className={styles.heroContent}>
-          <p className={styles.heroLabel}>Welcome Back</p>
+          <p className={styles.heroLabel}>{t("hero.welcomeBack")}</p>
           <h1 className={styles.heroTitle}>
-            Hello, {user?.firstName || "Traveler"}
+            {t("hero.hello", { name: user?.firstName || t("hero.traveler") })}
           </h1>
           <p className={styles.heroDescription}>
-            Your next adventure awaits. All systems ready for departure.
+            {t("hero.description")}
           </p>
         </div>
     </div>
