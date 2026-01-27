@@ -212,8 +212,14 @@
     width: 8px;
     height: 8px;
     background-color: #ff6b35;
-    /* Bright orange for visibility */
     border-radius: 50%;
     box-shadow: 0 0 6px rgba(255, 107, 53, 0.6);
     z-index: 10;
+}
+
+.noTripsMessage {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    padding: 5px;
+    font-style: italic;
 }

@@ -25,36 +25,30 @@ export const getDashboardCalendar = async (userId) => {
     // const { data } = await api.get(`/users/${userId}/dashboard/calendar`);
     // return data.data;
 
-    // Mock data - current month with some trip events
+    // Mock data with ISO date strings to support multi-month trips
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
 
     return {
-      currentMonth: currentMonth,
-      currentYear: currentYear,
       events: [
         {
-          date: 6,
-          type: "departure",
-        },
-        {
-          startDate: 13,
-          endDate: 17,
+          startDate: `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-13`,
+          endDate: `${currentYear}-${String(currentMonth + 2).padStart(2, "0")}-05`,
           tripId: "1",
           title: "Trip to Kyoto",
           status: "upcoming",
         },
       ],
       upcomingTrips: [
-        {
-          id: "1",
-          title: "Trip to Kyoto",
-          startDate: `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-13`,
-          endDate: `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-17`,
-          duration: "7 Days",
-          travelers: 2,
-        },
+        // {
+        //   id: "1",
+        //   title: "Trip to Kyoto",
+        //   startDate: `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-13`,
+        //   endDate: `${currentYear}-${String(currentMonth + 2).padStart(2, "0")}-05`,
+        //   duration: "7 Days",
+        //   travelers: 2,
+        // },
       ],
     };
   } catch (error) {
