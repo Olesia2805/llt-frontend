@@ -53,9 +53,12 @@ const DashboardPage = () => {
     return null;
   }
 
+  // Find next upcoming trip
+  const nextTrip = travelData?.cities?.find(city => city.status === "upcoming");
+
   return (
     <Section>
-      <DashboardHero user={user} />
+      <DashboardHero user={user} nextTrip={nextTrip} />
       <Container>
         <div className={styles.statsBar}>
           <DashboardStatsCard

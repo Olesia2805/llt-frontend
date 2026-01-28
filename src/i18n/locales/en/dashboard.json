@@ -3,7 +3,8 @@
     "welcomeBack": "Welcome Back",
     "hello": "Hello, {{name}}",
     "traveler": "Traveler",
-    "description": "Your next adventure awaits. All systems ready for departure."
+    "description": "Your next adventure awaits. All systems ready for departure.",
+    "descriptionWithTrip": "Your next adventure to <1>{{destination}}</1> starts in {{days}} days. All systems ready for departure."
   },
   "stats": {
     "totalTrips": "Total Trips",

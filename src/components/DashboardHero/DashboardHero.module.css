@@ -84,6 +84,22 @@
     font-size: 1.125rem;
     font-weight: 300;
     line-height: 1.6;
-    max-width: 600px;
+    max-width: 650px;
     color: var(--text-muted);
+}
+.destination {
+    color: var(--text-main);
+    font-weight: 700;
+    position: relative;
+    white-space: nowrap;
+}
+
+.destination::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
 }

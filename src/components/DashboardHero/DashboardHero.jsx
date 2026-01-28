@@ -1,8 +1,8 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import styles from "./DashboardHero.module.css";
 
 
-const DashboardHero = ({ user }) => {
+const DashboardHero = ({ user, nextTrip }) => {
   const { t } = useTranslation("dashboard");
 
   return (
@@ -14,7 +14,19 @@ const DashboardHero = ({ user }) => {
             {t("hero.hello", { name: user?.firstName || t("hero.traveler") })}
           </h1>
           <p className={styles.heroDescription}>
-            {t("hero.description")}
+            {nextTrip ? (
+              <Trans
+                i18nKey="hero.descriptionWithTrip"
+                ns="dashboard"
+                values={{ 
+                  destination: nextTrip.title || nextTrip.name, 
+                  days: nextTrip.daysUntil 
+                }}
+                components={[<span key="0" />, <strong key="1" className={styles.destination} />]}
+              />
+            ) : (
+              t("hero.description")
+            )}
           </p>
         </div>
     </div>

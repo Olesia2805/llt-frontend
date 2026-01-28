@@ -74,6 +74,7 @@ export const getTravelHistory = async (userId) => {
           coordinates: { lat: 35.0116, lng: 135.7681 },
           status: "upcoming",
           visitDate: "Next Destination",
+          daysUntil: 4,
         },
         {
           id: "2",
