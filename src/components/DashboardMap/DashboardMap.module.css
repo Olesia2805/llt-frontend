@@ -111,17 +111,24 @@
     z-index: 10;
 }
 
+.infoWindow {
+    /* padding: 4px; */
+    min-width: 100px;
+    max-height: fit-content;
+}
+
 .tooltipCity {
-    font-size: 0.625rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    color: var(--text-main);
-    margin-bottom: 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    /* Force dark color for visibility on light map InfoWindow */
+    margin-bottom: 4px;
 }
 
 .tooltipDate {
-    font-size: 0.5625rem;
-    color: var(--text-muted);
+    font-size: 0.7rem;
+    color: #666666;
+    /* Specific muted dark color */
 }
 
 .zoomControls {

@@ -8,7 +8,7 @@
   "stats": {
     "totalTrips": "Всього поїздок",
     "completed": "Завершено",
-    "activeFuture": "Активні/Майбутні"
+    "activeFuture": "Майбутні поїздки"
   },
   "calendar": {
     "title": "Розклад поїздок",

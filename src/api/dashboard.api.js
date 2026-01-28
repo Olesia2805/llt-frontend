@@ -71,7 +71,7 @@ export const getTravelHistory = async (userId) => {
           id: "1",
           name: "Kyoto",
           country: "JP",
-          position: { top: "40%", right: "20%" },
+          coordinates: { lat: 35.0116, lng: 135.7681 },
           status: "upcoming",
           visitDate: "Next Destination",
         },
@@ -79,7 +79,7 @@ export const getTravelHistory = async (userId) => {
           id: "2",
           name: "Paris",
           country: "FR",
-          position: { top: "35%", left: "45%" },
+          coordinates: { lat: 48.8566, lng: 2.3522 },
           status: "visited",
           visitDate: "Visited Aug 2023",
         },
@@ -87,15 +87,27 @@ export const getTravelHistory = async (userId) => {
           id: "3",
           name: "New York",
           country: "US",
-          position: { top: "42%", left: "25%" },
+          coordinates: { lat: 40.7128, lng: -74.006 },
           status: "visited",
           visitDate: "Visited May 2023",
         },
-      ],
-      stats: {
-        citiesVisited: 42,
-        countriesVisited: 12,
-      },
+        {
+          id: "4",
+          name: "Rome",
+          country: "IT",
+          coordinates: { lat: 41.9028, lng: 12.4964 },
+          status: "visited",
+          visitDate: "Visited Sep 2023",
+        },
+        {
+          id: "5",
+          name: "London",
+          country: "GB",
+          coordinates: { lat: 51.5074, lng: -0.1278 },
+          status: "visited",
+          visitDate: "Visited Oct 2023",
+        },
+      ]
     };
   } catch (error) {
     throw new Error(
