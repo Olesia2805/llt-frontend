@@ -4,10 +4,10 @@
     height: 480px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: stretch;
-    padding: 0 0 40px 0;
-    margin-bottom: 40px;
+    padding: 0;
+    margin-bottom: 24px;
     overflow: hidden;
 }
 
