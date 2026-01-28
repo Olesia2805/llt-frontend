@@ -1,8 +1,12 @@
 .statsBar {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 0;
     margin-bottom: 40px;
+    background-color: var(--bg-alt);
+    border: 1px solid rgb(var(--border-color-rgb));
+    border-radius: 24px;
+    overflow: hidden;
 }
 
 @media (min-width: 768px) {

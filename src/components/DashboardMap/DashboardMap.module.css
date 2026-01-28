@@ -112,7 +112,7 @@
 }
 
 .infoWindow {
-    /* padding: 4px; */
+    padding: 4px;
     min-width: 100px;
     max-height: fit-content;
 }
@@ -121,14 +121,12 @@
     font-size: 0.75rem;
     font-weight: 700;
     color: #1a1a1a;
-    /* Force dark color for visibility on light map InfoWindow */
     margin-bottom: 4px;
 }
 
 .tooltipDate {
     font-size: 0.7rem;
     color: #666666;
-    /* Specific muted dark color */
 }
 
 .zoomControls {
