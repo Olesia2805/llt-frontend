@@ -1,118 +1,99 @@
-// import api from "./api";
+import { getUserTrips } from "./trips.api";
 
-export const getDashboardStats = async (userId) => {
+export const getDashboardData = async (userId) => {
   try {
-    // TODO: Replace with real API call
-    // const { data } = await api.get(`/users/${userId}/dashboard/stats`);
-    // return data.data;
+    const trips = await getUserTrips(userId);
+    const now = new Date();
 
-    // Mock data
+    // 1. Calculate Stats
+    const stats = trips.reduce(
+      (acc, trip) => {
+        acc.totalTrips += 1;
+        const start = new Date(trip.startDate);
+        const end = new Date(trip.endDate);
+
+        if (now >= start && now <= end) {
+          acc.activeTrips += 1;
+        } else if (now > end) {
+          acc.completedTrips += 1;
+        }
+        return acc;
+      },
+      { totalTrips: 0, completedTrips: 0, activeTrips: 0 }
+    );
+
+    // 2. Prepare Calendar Data
+    const events = trips.map((trip) => ({
+      startDate: trip.startDate,
+      endDate: trip.endDate,
+      tripId: trip.id,
+      title: trip.title,
+      status: trip.status === "draft" ? "upcoming" : trip.status,
+    }));
+
+    const upcomingTrips = trips
+      .filter((trip) => new Date(trip.startDate) > now)
+      .sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+      .map((trip) => {
+        const start = new Date(trip.startDate);
+        const end = new Date(trip.endDate);
+        const durationDays =
+          Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+
+        return {
+          id: trip.id,
+          title: trip.title,
+          startDate: trip.startDate,
+          endDate: trip.endDate,
+          duration: `${durationDays} Days`,
+        };
+      });
+
+    const calendarData = { events, upcomingTrips };
+
+    // 3. Prepare Travel History (Cities for Map)
+    const cities = trips.map((trip) => {
+      const start = new Date(trip.startDate);
+      const end = new Date(trip.endDate);
+      let status = "visited";
+      let visitDate = `Visited ${start.toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+      })}`;
+
+      if (now < start) {
+        status = "upcoming";
+        const daysUntil = Math.ceil((start - now) / (1000 * 60 * 60 * 24));
+        visitDate = "Next Destination";
+        trip.daysUntil = daysUntil;
+      } else if (now >= start && now <= end) {
+        status = "upcoming"; // Active trips can be treated as current/next destinations
+        visitDate = "Current Trip";
+      }
+
+      return {
+        id: trip.id,
+        name: trip.originCity || "Unknown",
+        country: null, // Geocoding happens in the DashboardMap component
+        coordinates: {
+          lat: parseFloat(trip.originLat),
+          lng: parseFloat(trip.originLng),
+        },
+        status,
+        visitDate,
+        daysUntil: trip.daysUntil,
+        title: trip.title,
+      };
+    });
+
+    const travelData = { cities };
+
     return {
-      totalTrips: 24,
-      completedTrips: 18,
-      activeTrips: 6,
+      stats,
+      calendarData,
+      travelData,
     };
   } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to fetch dashboard stats"
-    );
-  }
-};
-
-export const getDashboardCalendar = async (userId) => {
-  try {
-    // TODO: Replace with real API call
-    // const { data } = await api.get(`/users/${userId}/dashboard/calendar`);
-    // return data.data;
-
-    // Mock data with ISO date strings to support multi-month trips
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    const currentYear = currentDate.getFullYear();
-
-    return {
-      events: [
-        {
-          startDate: `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-13`,
-          endDate: `${currentYear}-${String(currentMonth + 2).padStart(2, "0")}-05`,
-          tripId: "1",
-          title: "Trip to Kyoto",
-          status: "upcoming",
-        },
-      ],
-      upcomingTrips: [
-        // {
-        //   id: "1",
-        //   title: "Trip to Kyoto",
-        //   startDate: `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-13`,
-        //   endDate: `${currentYear}-${String(currentMonth + 2).padStart(2, "0")}-05`,
-        //   duration: "7 Days",
-        //   travelers: 2,
-        // },
-      ],
-    };
-  } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to fetch calendar data"
-    );
-  }
-};
-
-export const getTravelHistory = async (userId) => {
-  try {
-    // TODO: Replace with real API call
-    // const { data } = await api.get(`/users/${userId}/dashboard/travel-history`);
-    // return data.data;
-
-    // Mock data
-    return {
-      cities: [
-        {
-          id: "1",
-          name: "Kyoto",
-          country: "JP",
-          coordinates: { lat: 35.0116, lng: 135.7681 },
-          status: "upcoming",
-          visitDate: "Next Destination",
-          daysUntil: 4,
-        },
-        {
-          id: "2",
-          name: "Paris",
-          country: "FR",
-          coordinates: { lat: 48.8566, lng: 2.3522 },
-          status: "visited",
-          visitDate: "Visited Aug 2023",
-        },
-        {
-          id: "3",
-          name: "New York",
-          country: "US",
-          coordinates: { lat: 40.7128, lng: -74.006 },
-          status: "visited",
-          visitDate: "Visited May 2023",
-        },
-        {
-          id: "4",
-          name: "Rome",
-          country: "IT",
-          coordinates: { lat: 41.9028, lng: 12.4964 },
-          status: "visited",
-          visitDate: "Visited Sep 2023",
-        },
-        {
-          id: "5",
-          name: "London",
-          country: "GB",
-          coordinates: { lat: 51.5074, lng: -0.1278 },
-          status: "visited",
-          visitDate: "Visited Oct 2023",
-        },
-      ]
-    };
-  } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to fetch travel history"
-    );
+    throw new Error(error.message || "Failed to fetch dashboard data");
   }
 };

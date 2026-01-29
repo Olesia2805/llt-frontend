@@ -177,7 +177,7 @@ const DashboardCalendar = ({ calendarData }) => {
                 <div className={styles.tripInfo}>
                   <p className={styles.tripTitle}>{trip.title}</p>
                   <p className={styles.tripDetails}>
-                    {trip.duration} • {t("calendar.travelers", { count: trip.travelers })}
+                    {trip.duration}
                   </p>
                 </div>
               </div>

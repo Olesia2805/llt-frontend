@@ -57,17 +57,10 @@ const AdvancedMarker = ({ map, position, onClick, status }) => {
 
 const DashboardMap = ({ travelData }) => {
   const { t } = useTranslation("dashboard");
-  const { cities, stats: apiStats } = travelData;
+  const { cities } = travelData;
   const [map, setMap] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
-
-  const stats = useMemo(() => {
-    const visitedCities = cities.filter((city) => city.status === "visited");
-    return {
-      citiesVisited: visitedCities.length,
-      countriesVisited: new Set(visitedCities.map((city) => city.country)).size,
-    };
-  }, [cities]);
+  const [enrichedCities, setEnrichedCities] = useState(cities);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -76,22 +69,65 @@ const DashboardMap = ({ travelData }) => {
   });
 
   useEffect(() => {
-    if (map && cities.length > 0) {
+    if (!isLoaded || !window.google?.maps?.Geocoder || cities.length === 0) {
+      setEnrichedCities(cities);
+      return;
+    }
+
+    const geocoder = new window.google.maps.Geocoder();
+    
+    const fetchCountries = async () => {
+      const promises = cities.map(async (city) => {
+        if (city.country) return city;
+
+        try {
+          const response = await geocoder.geocode({ location: city.coordinates });
+          if (response.results && response.results.length > 0) {
+            const countryComponent = response.results[0].address_components.find(
+              (c) => c.types.includes("country")
+            );
+            if (countryComponent) {
+              return { ...city, country: countryComponent.short_name };
+            }
+          }
+        } catch (error) {
+          console.error(`Failed to geocode ${city.name}:`, error);
+        }
+        return city;
+      });
+
+      const results = await Promise.all(promises);
+      setEnrichedCities(results);
+    };
+
+    fetchCountries();
+  }, [isLoaded, cities]);
+
+  const stats = useMemo(() => {
+    const visitedCities = enrichedCities.filter((city) => city.status === "visited");
+    return {
+      citiesVisited: visitedCities.length,
+      countriesVisited: new Set(visitedCities.map((city) => city.country).filter(Boolean)).size,
+    };
+  }, [enrichedCities]);
+
+  useEffect(() => {
+    if (map && enrichedCities.length > 0) {
       const bounds = new window.google.maps.LatLngBounds();
-      cities.forEach((city) => {
+      enrichedCities.forEach((city) => {
         bounds.extend(city.coordinates);
       });
       map.fitBounds(bounds);
       
       // Optional: Don't zoom in too much for a single city
-      if (cities.length === 1) {
+      if (enrichedCities.length === 1) {
         const listener = window.google.maps.event.addListener(map, 'idle', () => {
           if (map.getZoom() > 10) map.setZoom(10);
           window.google.maps.event.removeListener(listener);
         });
       }
     }
-  }, [map, cities]);
+  }, [map, enrichedCities]);
 
   const onUnmount = useCallback(function callback(map) {
     setMap(null);
@@ -106,11 +142,11 @@ const DashboardMap = ({ travelData }) => {
   };
 
   const center = useMemo(() => {
-    if (cities.length > 0) {
-      return cities[0].coordinates;
+    if (enrichedCities.length > 0) {
+      return enrichedCities[0].coordinates;
     }
     return defaultCenter;
-  }, [cities]);
+  }, [enrichedCities]);
 
   const mapOptions = useMemo(() => ({
     ...options,
@@ -138,7 +174,7 @@ const DashboardMap = ({ travelData }) => {
           onLoad={(map) => setMap(map)}
           onUnmount={onUnmount}
         >
-          {cities.map((city) => (
+          {enrichedCities.map((city) => (
             <AdvancedMarker
               key={city.id}
               map={map}

@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import {
-  getDashboardStats,
-  getDashboardCalendar,
-  getTravelHistory,
-} from "../../api/dashboard.api";
+import { getDashboardData } from "../../api/dashboard.api";
 import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
 import DashboardStatsCard from "../../components/DashboardStatsCard/DashboardStatsCard";
@@ -16,8 +12,17 @@ import styles from "./DashboardPage.module.css";
 import { MdCalendarToday, MdTaskAlt, MdRocketLaunch } from "react-icons/md";
 
 const DashboardPage = () => {
-  const { user } = useSelector((state) => state.userData);
+  // const { user } = useSelector((state) => state.userData);
   const { t } = useTranslation("dashboard");
+  
+  
+  // TODO: remove mock data
+  const user = {
+    id: "4b278d27-2e9e-4e4e-ad3a-ad55c0567729",
+  };
+  // TODO: remove mock data
+  
+  
   const [stats, setStats] = useState(null);
   const [calendarData, setCalendarData] = useState(null);
   const [travelData, setTravelData] = useState(null);
@@ -25,20 +30,17 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const fetchDashboardData = async () => {
-      // TODO: Remove mock userId after testing - should require real user
-      const userId = user?.id || "mock-user-id";
+      if (!user?.id) return;
 
       try {
         setLoading(true);
-        const [statsData, calendarInfo, travelInfo] = await Promise.all([
-          getDashboardStats(userId),
-          getDashboardCalendar(userId),
-          getTravelHistory(userId),
-        ]);
+        const { stats, calendarData, travelData } = await getDashboardData(
+          user.id,
+        );
 
-        setStats(statsData);
-        setCalendarData(calendarInfo);
-        setTravelData(travelInfo);
+        setStats(stats);
+        setCalendarData(calendarData);
+        setTravelData(travelData);
       } catch (error) {
         console.error("Failed to load dashboard data:", error);
       } finally {
