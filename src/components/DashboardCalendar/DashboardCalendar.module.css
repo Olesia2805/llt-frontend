@@ -84,7 +84,7 @@
     font-size: 0.875rem;
     color: var(--text-main);
     border-radius: 8px;
-    cursor: pointer;
+    border-radius: 8px;
     transition: all 0.2s ease;
     position: relative;
 }
