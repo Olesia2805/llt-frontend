@@ -9,11 +9,14 @@ import { FaPlus } from "react-icons/fa6";
 import { sidebarItems } from "../../app/sidebarUserData.js";
 import { logout } from "../../store/userSlice.js";
 import { clearPreferences } from "../../store/userSlice.js";
+import { useSelector } from "react-redux";
 
 const SideBar = ({ onClose }) => {
   const { t } = useTranslation("sidebar");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.userData);
 
   const handleClickLink = (path) => {
     onClose();
@@ -53,17 +56,19 @@ const SideBar = ({ onClose }) => {
         })}
       </ul>
 
-      <div className={styles.subscriptionWrapper}>
-        <h3>{t("subscriptionHeader").toUpperCase()}</h3>
-        <p>{t("subscriptionText")}</p>
-        <Button
-          variant="secondary"
-          leftIcon={<AiOutlineSignature />}
-          onClick={() => handleClickLink("/subscription")}
-        >
-          {t("subscriptionBtn")}
-        </Button>
-      </div>
+      {user?.plan.toLowerCase() === "explorer" && (
+        <div className={styles.subscriptionWrapper}>
+          <h3>{t("subscriptionHeader").toUpperCase()}</h3>
+          <p>{t("subscriptionText")}</p>
+          <Button
+            variant="secondary"
+            leftIcon={<AiOutlineSignature />}
+            onClick={() => handleClickLink("/subscription")}
+          >
+            {t("subscriptionBtn")}
+          </Button>
+        </div>
+      )}
 
       <Button onClick={handleLogout} rightIcon={<PiSignOutBold />}>
         {t("logout")}

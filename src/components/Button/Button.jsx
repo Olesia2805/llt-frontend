@@ -8,6 +8,7 @@ const Button = ({
   variant = "primary",
   // variant = "primary" | "secondary" | "ghost" | "link-accent" | "link-muted" | "tag"
   // | "link-button-muted" | "dot" | "inputBtn" | "closeBtn" | "primaryIcon" | "burgerBtn"
+  // | "createCard" | "removeSubscriptionBtn"
   text,
   children,
   className,
@@ -60,7 +61,6 @@ const Button = ({
         <span className={styles.content}>{children || text}</span>
       )}
       {rightIcon && <span className={styles.icon}>{rightIcon}</span>}
-      {isLoading && <Loader />}
     </>
   );
 

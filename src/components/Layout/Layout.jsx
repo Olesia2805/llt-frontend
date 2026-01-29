@@ -10,6 +10,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalOurTeam from "../ModalOurTeam/ModalOurTeam";
 import HeaderUser from "../Header/HeaderUser";
+import Loader from "../Loader/Loader";
 
 import styles from "./Layout.module.css";
 
@@ -35,7 +36,7 @@ const Layout = () => {
   const formPages = ["/signup", "/login"];
   const isFormPage = formPages.includes(location.pathname);
 
-  if (isRefreshing) return null; //! Loader
+  if (isRefreshing) return <Loader />;
 
   return (
     <div className={styles.layout}>

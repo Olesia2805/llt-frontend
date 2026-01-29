@@ -4,10 +4,11 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { updatePreferences } from "../../store/userSlice";
 // import { getCityInfo } from "../../store/integrationSlice";
-import { TRAVELER_DNA, TRANSPORT } from "../../app/sectionProfileData";
+import { TRAVELER_DNA, TRANSPORT } from "../../app/sectionPreferencesData";
 
 import InputField from "../../components/InputField/InputField";
 import Button from "../../components/Button/Button";
+import Tag from "../../components/Tag/Tag";
 import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
 import CurrencyDropdown from "../../components/CurrencyDropdown/CurrencyDropdown";
@@ -16,11 +17,10 @@ import defaultImg from "../../assets/img/default-avatar.jpg";
 
 //TODO:
 // - input for city
-// - input for budget (design)
 // - current forecast for home_city
 
 const ProfilePage = () => {
-  const { t } = useTranslation("profile");
+  const { t } = useTranslation(["profile", "tagPreferences"]);
   const dispatch = useDispatch();
   const { user, preferences } = useSelector((state) => state.userData);
   // const { cityInfo } = useSelector((state) => state.integrationData);
@@ -32,7 +32,7 @@ const ProfilePage = () => {
     // city_lat: preferences.home_lat ?? null,
     // city_lng: preferences.home_lng ?? null,
     budget: preferences.avg_daily_budget ?? 0,
-    currency: preferences.currency ?? "USD",
+    currency: preferences.currency ?? "UAH",
   });
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const ProfilePage = () => {
         // city_lat: preferences.home_lat ?? null,
         // city_lng: preferences.home_lng ?? null,
         budget: preferences.avg_daily_budget ?? 0,
-        currency: preferences.currency ?? "USD",
+        currency: preferences.currency ?? "UAH",
       });
     }
   }, [preferences]);
@@ -121,7 +121,7 @@ const ProfilePage = () => {
       // city_lat: preferences.home_lat ?? null,
       // city_lng: preferences.home_lng ?? null,
       budget: preferences.avg_daily_budget ?? 0,
-      currency: preferences.currency ?? "USD",
+      currency: preferences.currency ?? "UAH",
     });
   };
 
@@ -186,15 +186,13 @@ const ProfilePage = () => {
           <ul className={styles.tagGroup}>
             {TRAVELER_DNA().map(({ id, key, title, Icon }) => (
               <li key={id}>
-                <Button
-                  variant="tag"
+                <Tag
+                  label={title}
+                  icon={Icon}
                   isActive={draftForm.travelerDNA.includes(key)}
                   disabled={isSaving}
                   onClick={() => toggleOption(key, "travelerDNA")}
-                  leftIcon={Icon && <Icon />}
-                >
-                  {title}
-                </Button>
+                />
               </li>
             ))}
           </ul>
@@ -206,15 +204,13 @@ const ProfilePage = () => {
             <ul className={styles.tagGroup}>
               {TRANSPORT().map(({ id, key, title, Icon }) => (
                 <li key={id}>
-                  <Button
-                    variant="tag"
+                  <Tag
+                    label={title}
+                    icon={Icon}
                     isActive={draftForm.transportModes.includes(key)}
                     disabled={isSaving}
                     onClick={() => toggleOption(key, "transportModes")}
-                    leftIcon={Icon && <Icon />}
-                  >
-                    {title}
-                  </Button>
+                  />
                 </li>
               ))}
             </ul>
