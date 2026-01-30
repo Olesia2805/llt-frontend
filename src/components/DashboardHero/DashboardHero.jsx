@@ -11,7 +11,7 @@ const DashboardHero = ({ user, nextTrip }) => {
         <div className={styles.heroContent}>
           <p className={styles.heroLabel}>{t("hero.welcomeBack")}</p>
           <h1 className={styles.heroTitle}>
-            {t("hero.hello", { name: user?.firstName || t("hero.traveler") })}
+            {t("hero.hello", { name: user?.name || t("hero.traveler") })}
           </h1>
           <p className={styles.heroDescription}>
             {nextTrip ? (
