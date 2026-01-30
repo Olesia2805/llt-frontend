@@ -6,7 +6,7 @@ const sidebarItems = [
     id: "dashboard",
     label: "dashboard",
     icon: MdDashboard,
-    path: "/dashboard",
+    path: "/",
   },
   {
     id: "my_trips",

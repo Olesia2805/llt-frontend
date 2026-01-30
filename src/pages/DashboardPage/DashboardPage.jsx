@@ -12,16 +12,8 @@ import styles from "./DashboardPage.module.css";
 import { MdCalendarToday, MdTaskAlt, MdRocketLaunch } from "react-icons/md";
 
 const DashboardPage = () => {
-  // const { user } = useSelector((state) => state.userData);
+  const { user } = useSelector((state) => state.userData);
   const { t } = useTranslation("dashboard");
-  
-  
-  // TODO: remove mock data
-  const user = {
-    id: "4b278d27-2e9e-4e4e-ad3a-ad55c0567729",
-  };
-  // TODO: remove mock data
-  
   
   const [stats, setStats] = useState(null);
   const [calendarData, setCalendarData] = useState(null);

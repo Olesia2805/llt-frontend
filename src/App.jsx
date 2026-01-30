@@ -69,8 +69,6 @@ const App = () => {
             <Route path={`${ROUTER.POLICIES}`} element={<PoliciesPage />} />
             <Route path={`${ROUTER.LOGIN}`} element={<LogInPage />} />
             <Route path={`${ROUTER.SIGNUP}`} element={<SignUpPage />} />
-            {/* TODO: Remove this after testing - Dashboard should be protected */}
-            <Route path={ROUTER.DASHBOARD} element={<DashboardPage />} />
             <Route element={<ProtectedRoute />}>
               <Route path={ROUTER.PROFILE} element={<ProfilePage />} />
               <Route path={ROUTER.MYTRIPS} element={<MyTripsPage />} />
