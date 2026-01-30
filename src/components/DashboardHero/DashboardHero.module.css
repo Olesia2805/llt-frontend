@@ -51,12 +51,12 @@
 }
 
 .heroLabel {
-    font-size: 0.875rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     color: var(--primary);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .heroTitle {
@@ -87,6 +87,36 @@
     max-width: 650px;
     color: var(--text-muted);
 }
+
+/* Light Theme Overrides */
+[data-theme="light"] .heroBackground {
+    background-image: linear-gradient(to top,
+            var(--bg-main) 0%,
+            rgba(248, 250, 252, 0.8) 50%,
+            rgba(248, 250, 252, 0.4) 100%),
+        url('../../assets/img/dashboard-backgroud-mobile.jpg');
+}
+
+@media (min-width: 768px) {
+    [data-theme="light"] .heroBackground {
+        background-image: linear-gradient(to top,
+                var(--bg-main) 0%,
+                rgba(248, 250, 252, 0.8) 50%,
+                rgba(248, 250, 252, 0.4) 100%),
+            url('../../assets/img/dashboard-backgroud.jpg');
+    }
+}
+
+[data-theme="light"] .heroTitle {
+    color: var(--text-main);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .heroDescription {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
 .destination {
     color: var(--text-main);
     font-weight: 700;

@@ -51,8 +51,8 @@ const DashboardPage = () => {
     fetchDashboardData();
   }, [user?.id]);
 
-  if (loading || !stats || !calendarData || !travelData) {
-    return null;
+  if (loading) {
+    return null; 
   }
 
   // Find next upcoming trip
@@ -65,6 +65,11 @@ const DashboardPage = () => {
       return (a.daysUntil || 0) - (b.daysUntil || 0);
     })?.[0];
 
+  // Default stats and data if empty
+  const displayStats = stats || { totalTrips: 0, completedTrips: 0, activeTrips: 0 };
+  const displayCalendarData = calendarData || { events: [], upcomingTrips: [] };
+  const displayTravelData = travelData || { cities: [] };
+
   return (
     <Section>
       <DashboardHero user={user} nextTrip={nextTrip} />
@@ -73,29 +78,29 @@ const DashboardPage = () => {
           <DashboardStatsCard
             icon={MdCalendarToday}
             label={t("stats.totalTrips")}
-            value={stats.totalTrips}
+            value={displayStats.totalTrips}
             variant="default"
           />
           <DashboardStatsCard
             icon={MdTaskAlt}
             label={t("stats.completed")}
-            value={stats.completedTrips}
+            value={displayStats.completedTrips}
             variant="success"
           />
           <DashboardStatsCard
             icon={MdRocketLaunch}
             label={t("stats.activeFuture")}
-            value={stats.activeTrips}
+            value={displayStats.activeTrips}
             variant="active"
           />
         </div>
 
         <div className={styles.contentGrid}>
           <div className={styles.calendarColumn}>
-            <DashboardCalendar calendarData={calendarData} />
+            <DashboardCalendar calendarData={displayCalendarData} />
           </div>
           <div className={styles.mapColumn}>
-            <DashboardMap travelData={travelData} />
+            <DashboardMap travelData={displayTravelData} />
           </div>
         </div>
       </Container>

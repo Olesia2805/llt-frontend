@@ -4,9 +4,9 @@
     "hello": "Hello, {{name}}",
     "traveler": "Traveler",
     "description": "Your next adventure awaits. All systems ready for departure.",
-    "descriptionWithTrip": "Your next adventure to '<1>{{destination}}</1>' starts in {{days}} days. All systems ready for departure.",
-    "descriptionWithTripTomorrow": "Your next adventure to '<1>{{destination}}</1>' starts tomorrow! All systems ready for departure.",
-    "descriptionWithTripActive": "Your adventure to '<1>{{destination}}</1>' is currently underway! Have a great trip."
+    "descriptionWithTrip": "Your next adventure '<1>{{destination}}</1>' starts in {{days}} days. All systems ready for departure.",
+    "descriptionWithTripTomorrow": "Your next adventure '<1>{{destination}}</1>' starts tomorrow! All systems ready for departure.",
+    "descriptionWithTripActive": "Your adventure '<1>{{destination}}</1>' is currently underway! Have a great trip."
   },
   "stats": {
     "totalTrips": "Total Trips",
