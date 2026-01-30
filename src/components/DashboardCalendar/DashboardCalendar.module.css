@@ -125,6 +125,28 @@
     color: var(--primary);
 }
 
+/* Future Trips Styles */
+.day.future.start,
+.day.future.middle,
+.day.future.end {
+    background-color: rgba(129, 140, 248, 0.15);
+    border-color: rgba(129, 140, 248, 0.3);
+}
+
+.day.future.start {
+    border-left: 1px solid rgba(129, 140, 248, 0.5);
+}
+
+.day.future.end {
+    border-right: 1px solid rgba(129, 140, 248, 0.5);
+    color: #818cf8;
+}
+
+.day.future.middle {
+    border-top: 1px solid rgba(129, 140, 248, 0.3);
+    border-bottom: 1px solid rgba(129, 140, 248, 0.3);
+}
+
 .eventDot {
     position: absolute;
     bottom: 8px;

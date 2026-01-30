@@ -16,7 +16,13 @@ const DashboardHero = ({ user, nextTrip }) => {
           <p className={styles.heroDescription}>
             {nextTrip ? (
               <Trans
-                i18nKey="hero.descriptionWithTrip"
+                i18nKey={
+                  nextTrip.visitDate === "Current Trip"
+                    ? "hero.descriptionWithTripActive"
+                    : nextTrip.daysUntil === 1
+                    ? "hero.descriptionWithTripTomorrow"
+                    : "hero.descriptionWithTrip"
+                }
                 ns="dashboard"
                 values={{ 
                   destination: nextTrip.title || nextTrip.name, 

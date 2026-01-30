@@ -50,25 +50,36 @@ const DashboardCalendar = ({ calendarData }) => {
   const getTripPosition = (day) => {
     // Create a date object for the current day in the displayed month
     const currentDate = new Date(displayYear, displayMonth, day);
-    
-    const tripEvent = events.find(e => e.startDate && e.endDate);
+    currentDate.setHours(0, 0, 0, 0);
+
+    // Find a trip that covers this specific day
+    const tripEvent = events.find((e) => {
+      if (!e.startDate || !e.endDate) return false;
+      const tripStart = new Date(e.startDate);
+      const tripEnd = new Date(e.endDate);
+      tripStart.setHours(0, 0, 0, 0);
+      tripEnd.setHours(0, 0, 0, 0);
+      return currentDate >= tripStart && currentDate <= tripEnd;
+    });
+
     if (!tripEvent) return null;
-    
+
     const tripStart = new Date(tripEvent.startDate);
     const tripEnd = new Date(tripEvent.endDate);
-    
-    // Normalize dates to midnight for accurate comparison
-    currentDate.setHours(0, 0, 0, 0);
     tripStart.setHours(0, 0, 0, 0);
     tripEnd.setHours(0, 0, 0, 0);
-    
-    // Check if current date falls within the trip range
-    if (currentDate < tripStart || currentDate > tripEnd) return null;
-    
+
     // Determine position
-    if (currentDate.getTime() === tripStart.getTime()) return "start";
-    if (currentDate.getTime() === tripEnd.getTime()) return "end";
-    return "middle";
+    let position = "middle";
+    if (currentDate.getTime() === tripStart.getTime()) position = "start";
+    else if (currentDate.getTime() === tripEnd.getTime()) position = "end";
+
+    // Determine if it's a future trip (starts after today)
+    const normalizedToday = new Date();
+    normalizedToday.setHours(0, 0, 0, 0);
+    const isFuture = tripStart > normalizedToday;
+
+    return { position, isFuture };
   };
 
   const isToday = (day) => {
@@ -142,16 +153,19 @@ const DashboardCalendar = ({ calendarData }) => {
 
       <div className={styles.daysGrid}>
         {calendarDays.map((item, index) => {
-          const tripPosition = item.isCurrentMonth ? getTripPosition(item.day) : null;
+          const tripData = item.isCurrentMonth ? getTripPosition(item.day) : null;
           const isTodayDay = item.isCurrentMonth && isToday(item.day);
           
+          const tripClasses = tripData 
+            ? `${styles[tripData.position]} ${tripData.isFuture ? styles.future : ""}` 
+            : "";
 
           return (
             <div
               key={index}
               className={`${styles.day} ${
                 !item.isCurrentMonth ? styles.otherMonth : ""
-              } ${tripPosition ? styles[tripPosition] : ""}`}
+              } ${tripClasses}`}
             >
               {item.day}
               {isTodayDay && <div className={styles.todayDot} title="Today" />}
