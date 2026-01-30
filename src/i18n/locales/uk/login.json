@@ -13,13 +13,13 @@
     "welcome": "З поверненням",
     "continue": "Продовжуйте свою подорож.",
     "emailLabel": "Електронна пошта",
-    "emailPlaceholder": "Електронна пошта або ім'я користувача",
+    "emailPlaceholder": "example@email.com",
     "passwordLabel": "Пароль",
     "passwordPlaceholder": "Введіть ваш пароль",
     "rememberMe": "Запам'ятати мене",
     "forgotPassword": "Забули пароль?",
     "loginButton": "Увійти",
-    "orContinue": "Або продовжити через",
+    "orContinue": "або",
     "noAccount": "Немає облікового запису?",
     "signup": "Зареєструватися",
     "googleLogin": "Google"
@@ -27,8 +27,6 @@
   "validation": {
     "emailRequired": "Електронна пошта обов'язкова",
     "emailPattern": "Будь ласка, введіть дійсну адресу електронної пошти",
-    "passwordRequired": "Пароль обов'язковий",
-    "passwordLength": "Пароль повинен містити не менше 8 символів",
-    "passwordComplexity": "Пароль повинен містити хоча б одну цифру та один символ"
+    "passwordRequired": "Пароль обов'язковий"
   }
 }

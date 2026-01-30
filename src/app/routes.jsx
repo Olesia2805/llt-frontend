@@ -4,8 +4,10 @@ export const ROUTER = {
   LOGIN: "/login",
   SIGNUP: "/signup",
   PROFILE: "/profile",
-  MYTRIPS: "/mytrips",
+  MYTRIPS: "/my-trips",
+  RECOMMENDEDTRIPS: "/recommended-trips",
   DASHBOARD: "/",
   SETTINGS: "/settings",
+  SUBSCRIPTION: "/subscription",
   ALL: "*",
 };

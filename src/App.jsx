@@ -21,8 +21,14 @@ const PoliciesPage = lazy(
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage.jsx"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage/ProfilePage.jsx"));
 const MyTripsPage = lazy(() => import("./pages/MyTripsPage/MyTripsPage.jsx"));
+const RecommendedTripsPage = lazy(
+  () => import("./pages/RecommendedTripsPage/RecommendedTripsPage.jsx"),
+);
 const SettingsPage = lazy(
   () => import("./pages/SettingsPage/SettingsPage.jsx"),
+);
+const SubscriptionPage = lazy(
+  () => import("./pages/SubscriptionPage/SubscriptionPage.jsx"),
 );
 const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.jsx"),
@@ -60,7 +66,6 @@ const App = () => {
 
   return (
     <>
-      {/* TODO: Loader */}
       <Suspense fallback={<Loader />}>
         <ScrollToTop />
         <Routes>
@@ -72,7 +77,15 @@ const App = () => {
             <Route element={<ProtectedRoute />}>
               <Route path={ROUTER.PROFILE} element={<ProfilePage />} />
               <Route path={ROUTER.MYTRIPS} element={<MyTripsPage />} />
+              <Route
+                path={ROUTER.RECOMMENDEDTRIPS}
+                element={<RecommendedTripsPage />}
+              />
               <Route path={ROUTER.SETTINGS} element={<SettingsPage />} />
+              <Route
+                path={ROUTER.SUBSCRIPTION}
+                element={<SubscriptionPage />}
+              />
             </Route>
             <Route path={ROUTER.ALL} element={<NotFoundPage />} />
           </Route>

@@ -35,6 +35,13 @@
   border-color: var(--primary);
 }
 
+.input:hover .input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  border: 3px solid rgb(var(--border-color-rgb));
+}
+
 .errorText {
   color: rgb(var(--red-color-rgb));
   font-size: 12px;

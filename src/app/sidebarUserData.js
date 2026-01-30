@@ -1,5 +1,10 @@
-import { MdDashboard, MdPerson, MdSettings } from "react-icons/md";
+import {
+  MdDashboard,
+  MdSettings,
+  MdOutlinePersonPinCircle,
+} from "react-icons/md";
 import { FaRegCompass } from "react-icons/fa";
+import { AiOutlineLike } from "react-icons/ai";
 
 const sidebarItems = [
   {
@@ -9,10 +14,22 @@ const sidebarItems = [
     path: "/",
   },
   {
-    id: "my_trips",
-    label: "my_trips",
+    id: "profile",
+    label: "profile",
+    icon: MdOutlinePersonPinCircle,
+    path: "/profile",
+  },
+  {
+    id: "myTrips",
+    label: "myTrips",
     icon: FaRegCompass,
-    path: "/mytrips",
+    path: "/my-trips",
+  },
+  {
+    id: "recommendedTrips",
+    label: "recommendedTrips",
+    icon: AiOutlineLike,
+    path: "/recommended-trips",
   },
   {
     id: "settings",

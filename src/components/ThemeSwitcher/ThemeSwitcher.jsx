@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 const ThemeSwitcher = ({ value, onChange }) => {
   const isAuthenticated = useSelector((state) => state.userData);
   const handleToggle = () => {
-    const nextTheme = value === "dark" ? "light" : "dark";
+    const currentTheme = value === "system" ? "dark" : value;
+    const nextTheme = currentTheme === "dark" ? "light" : "dark";
     onChange(nextTheme);
 
     if (!isAuthenticated) {

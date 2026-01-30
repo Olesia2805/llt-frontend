@@ -131,7 +131,9 @@
   background-color: var(--bg-alt);
   cursor: pointer;
   padding: 0;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .dot:hover {
@@ -218,6 +220,79 @@
   .burgerBtn {
     display: none;
   }
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+
+  border: 1px solid rgb(var(--border-color-rgb));
+  background-color: transparent;
+  color: var(--text-main);
+  font-weight: 400;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.tag:not(.disabled):hover {
+  color: var(--primary);
+  background-color: rgba(var(--primary-light-rgb), 0.05);
+}
+
+.tag.active {
+  color: var(--primary);
+  background-color: rgba(var(--primary-light-rgb), 0.05);
+}
+
+.tag.active:not(.disabled):hover {
+  border-color: var(--primary);
+}
+
+.tag.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.createCard {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 12px;
+  min-height: 200px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--bg-main);
+  border: 3px dashed rgb(var(--border-color-rgb));
+  color: var(--text-main);
+}
+
+.createCard:not(.disabled):hover,
+.createCard:focus-visible {
+  background-color: rgba(var(--border-color-rgb), 0.3);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.removeSubscriptionBtn {
+  background-color: var(--bg-main);
+  border: 3px solid rgb(var(--border-color-rgb));
+  color: var(--text-main);
+  font-size: 0.8rem;
+  padding: 4px 8px;
+}
+
+.removeSubscriptionBtn:hover:not(:disabled),
+.removeSubscriptionBtn:focus-visible {
+  background-color: rgba(var(--border-color-rgb), 0.3);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 /* TODO: Loader */

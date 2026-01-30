@@ -6,8 +6,9 @@ import Loader from "../Loader/Loader";
 
 const Button = ({
   variant = "primary",
-  // variant = "primary" | "secondary" | "ghost" | "link-accent" | "link-muted" |
+  // variant = "primary" | "secondary" | "ghost" | "link-accent" | "link-muted" | "tag"
   // | "link-button-muted" | "dot" | "inputBtn" | "closeBtn" | "primaryIcon" | "burgerBtn"
+  // | "createCard" | "removeSubscriptionBtn"
   text,
   children,
   className,
@@ -28,7 +29,7 @@ const Button = ({
 
   if (import.meta.env.DEV && isLink && onClick) {
     console.warn(
-      "[Button]: `onClick` is ignored when `to` or `href` is provided."
+      "[Button]: `onClick` is ignored when `to` or `href` is provided.",
     );
   }
 
@@ -45,7 +46,7 @@ const Button = ({
       [styles.active]: isActive,
       [styles.disabled]: disabled || isLoading,
     },
-    className
+    className,
   );
 
   const commonProps = {
@@ -60,7 +61,6 @@ const Button = ({
         <span className={styles.content}>{children || text}</span>
       )}
       {rightIcon && <span className={styles.icon}>{rightIcon}</span>}
-      {isLoading && <Loader />}
     </>
   );
 

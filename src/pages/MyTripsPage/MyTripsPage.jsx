@@ -98,7 +98,7 @@ const MyTripsPage = () => {
       <Container>
         <div className={styles.headerWrapper}>
           <div className={styles.headerRow}>
-            <div className={styles.header}>
+            <div>
               <h2>{t("hero.title")}</h2>
               <p>{t("hero.description")}</p>
             </div>
@@ -125,7 +125,7 @@ const MyTripsPage = () => {
               )}
             </div>
           </div>
-          <div className={styles.filters}>
+          <ul className={styles.filters}>
             {dateFilters.map((dates) => (
               <Button
                 key={dates.id}
@@ -135,20 +135,16 @@ const MyTripsPage = () => {
                 {dates.label}
               </Button>
             ))}
-          </div>
+          </ul>
         </div>
 
         <div className={styles.grid}>
-          <Button
-            variant="secondary"
-            className={styles.createCard}
-            onClick={() => console.log("Navigate to create trip")}
-          >
-            <FiPlusCircle fontSize={32} />
-            <p>{t("buttons.planNewTrip")}</p>
-          </Button>
-
-          {!loading && filteredTrips.length === 0 && <p>No trips found</p>}
+          {filteredTrips.length === 0 && (
+            <Button variant="createCard" to="/recommended-trips">
+              <FiPlusCircle fontSize={32} />
+              <p>{t("buttons.planNewTrip")}</p>
+            </Button>
+          )}
 
           {!loading &&
             filteredTrips.map((trip) => (

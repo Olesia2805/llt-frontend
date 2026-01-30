@@ -8,9 +8,12 @@ import commonEn from "./locales/en/common.json";
 import notFoundEn from "./locales/en/notFound.json";
 import loginEn from "./locales/en/login.json";
 import sidebarEn from "./locales/en/sidebar.json";
-// import profileEn from "./locales/en/profile.json";
+import profileEn from "./locales/en/profile.json";
 import myTripsEn from "./locales/en/myTrips.json";
+import recommendedTripsEn from "./locales/en/recommendedTrips.json";
+import subscriptionEn from "./locales/en/subscription.json";
 import settingsEn from "./locales/en/settings.json";
+import tagPreferencesEn from "./locales/en/tagPreferences.json";
 import dashboardEn from "./locales/en/dashboard.json";
 
 
@@ -21,11 +24,14 @@ import commonUk from "./locales/uk/common.json";
 import notFoundUk from "./locales/uk/notFound.json";
 import loginUk from "./locales/uk/login.json";
 import sidebarUk from "./locales/uk/sidebar.json";
-// import profileUk from "./locales/uk/profile.json";
+import profileUk from "./locales/uk/profile.json";
 import myTripsUk from "./locales/uk/myTrips.json";
+import recommendedTripsUk from "./locales/uk/recommendedTrips.json";
+import subscriptionUk from "./locales/uk/subscription.json";
 import settingsUk from "./locales/uk/settings.json";
 import dashboardUk from "./locales/uk/dashboard.json";
 
+import tagPreferencesUk from "./locales/uk/tagPreferences.json";
 
 const savedLang = localStorage.getItem("lang") || "uk";
 
@@ -38,11 +44,14 @@ i18n.use(initReactI18next).init({
       common: commonUk,
       notFound: notFoundUk,
       sidebar: sidebarUk,
-      // profile: profileUk,
+      profile: profileUk,
       myTrips: myTripsUk,
+      recommendedTrips: recommendedTripsUk,
       settings: settingsUk,
+      subscription: subscriptionUk,
       login: loginUk,
       dashboard: dashboardUk,
+      tagPreferences: tagPreferencesUk,
     },
     en: {
       homeGuest: homeGuestEn,
@@ -51,11 +60,14 @@ i18n.use(initReactI18next).init({
       common: commonEn,
       notFound: notFoundEn,
       sidebar: sidebarEn,
-      // profile: profileEn,
+      profile: profileEn,
       myTrips: myTripsEn,
+      recommendedTrips: recommendedTripsEn,
       settings: settingsEn,
+      subscription: subscriptionEn,
       login: loginEn,
       dashboard: dashboardEn,
+      tagPreferences: tagPreferencesEn,
     },
   },
   lng: savedLang,

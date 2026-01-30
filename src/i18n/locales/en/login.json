@@ -13,13 +13,13 @@
     "welcome": "Welcome Back",
     "continue": "Continue your journey.",
     "emailLabel": "Email",
-    "emailPlaceholder": "Email or Username",
+    "emailPlaceholder": "example@email.com",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Enter your password",
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot Password?",
     "loginButton": "Log In",
-    "orContinue": "Or continue with",
+    "orContinue": "or",
     "noAccount": "Don't have an account?",
     "signup": "Sign up",
     "googleLogin": "Google"
@@ -27,8 +27,6 @@
   "validation": {
     "emailRequired": "Email is required",
     "emailPattern": "Please enter a valid email address",
-    "passwordRequired": "Password is required",
-    "passwordLength": "Password must be at least 8 characters",
-    "passwordComplexity": "Password must contain at least one number and one symbol"
+    "passwordRequired": "Password is required"
   }
 }

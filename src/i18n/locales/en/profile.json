@@ -1,0 +1,21 @@
+{
+  "travelerDNA": "Traveler DNA",
+  "primaryCity": "Primary travel city",
+  "primaryCityText": "We base your recommendations on this location.",
+  "cityPlaceholder": "Enter city",
+  "transport": "Preferred transport",
+  "budget": "Trip budget",
+  "budgetText": "Estimated average daily spending.",
+  "buttons": {
+    "saveChanges": "Save",
+    "resetChanges": "Reset"
+  },
+  "toast": {
+    "success": "Data successfully uploaded!",
+    "error": "Something went wrong. Please try again."
+  },
+  "errors": {
+    "budgetNegative": "Budget cannot be less than 0",
+    "budgetTooHigh": "Budget too high"
+  }
+}

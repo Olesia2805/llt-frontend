@@ -1,0 +1,103 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 1280px) {
+  .page {
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .page > :first-child {
+    flex: 1;
+  }
+
+  .page > :last-child {
+    flex: 2;
+  }
+}
+
+.headerWrapper {
+  margin-bottom: 16px;
+}
+
+.card {
+  padding: 15px;
+  min-width: 200px;
+  min-height: 210px;
+  border-radius: 12px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+@media (min-width: 1280px) {
+  .card {
+    padding: 24px;
+    min-width: 300px;
+  }
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 18px rgba(var(--primary-light-rgb), 0.35);
+}
+
+.switcher {
+  display: flex;
+  justify-content: center;
+  background: var(--bg-alt);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 16px;
+  gap: 4px;
+}
+
+.planBox {
+  background: var(--bg-alt);
+  border-radius: 12px;
+  padding: 16px;
+  animation: fadeSlide 0.35s ease;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.price span {
+  color: var(--primary);
+}
+
+.description {
+  margin-top: 8px;
+  color: var(--text-muted);
+}
+
+.title {
+  margin-bottom: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+}

@@ -1,0 +1,34 @@
+{
+  "dna": {
+    "parks": "Parks",
+    "solo": "Solo travel",
+    "familyTrips": "Family trips",
+    "shopping": "Shopping",
+    "artGalleries": "Art galleries",
+    "petFriendly": "Pet-friendly",
+    "architecture": "Architecture",
+    "photography": "Photography",
+    "nature": "Nature & landscapes",
+    "spa": "Spa",
+    "music": "Music & concerts",
+    "bars": "Bars",
+    "streetFood": "Street food",
+    "markets": "Markets",
+    "instagramSpots": "Instagram spots",
+    "history": "History",
+    "lakes": "Lakes",
+    "events": "Events & festivals",
+    "cafes": "Cafés",
+    "mountains": "Mountains",
+    "restaurants": "Restaurants",
+    "camping": "Camping",
+    "hiking": "Hiking",
+    "urban": "Urban exploration"
+  },
+  "transportOptions": {
+    "car": "Car",
+    "bike": "Bicycle",
+    "walk": "Walking",
+    "public": "Public transport"
+  }
+}

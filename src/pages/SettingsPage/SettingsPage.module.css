@@ -63,6 +63,10 @@
 .email {
   font-size: 14px;
   opacity: 0.7;
+  max-width: 380px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .plan {
@@ -177,9 +181,14 @@
 
 @media (min-width: 1280px) {
   .buttons {
-    display: flex;
     flex-direction: row;
-    gap: 12px;
-    justify-content: space-around;
+    gap: 0px;
   }
+}
+
+.planRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
 }

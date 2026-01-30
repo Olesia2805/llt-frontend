@@ -3,11 +3,12 @@ import i18n from "i18next";
 import styles from "./SettingsPage.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
 
-import defaultAvatar from "../../assets/img/default-avatar.jpg";
+import defaultImg from "../../assets/img/default-avatar.jpg";
 import ThemeSwitcher from "../../components/ThemeSwitcher/ThemeSwitcher";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher";
 import Button from "../../components/Button/Button";
@@ -40,6 +41,8 @@ const SettingsPage = () => {
     t,
   );
 
+  //TODO: UseEffect like in ProfilePage
+
   const handleSave = async () => {
     setIsSaving(true);
     try {
@@ -48,14 +51,19 @@ const SettingsPage = () => {
 
       await dispatch(
         updatePreferences({
+          ...preferences,
           theme: draftTheme,
           language: draftLanguage,
           notifications_enabled: draftNotifications,
+          notification_channels: draftNotifications ? ["email"] : [],
         }),
       ).unwrap();
 
       setDraftName(draftName);
+      toast.success(t("toast.success"));
     } catch (error) {
+      toast.error(t("toast.error"));
+      handleReset();
       console.error("Failed to save preferences:", error);
     } finally {
       setIsSaving(false);
@@ -69,6 +77,17 @@ const SettingsPage = () => {
     setDraftNotifications(preferences.notifications_enabled ?? false);
   };
 
+  const handleRemoveSubscription = async () => {
+    if (!user?.plan || user.plan === "Explorer") return;
+
+    try {
+      await dispatch(updateCurrentUser({ plan: "Explorer" })).unwrap();
+      toast.success(t("toast.successRemoved"));
+    } catch {
+      toast.error(t("toast.error"));
+    }
+  };
+
   return (
     <Section>
       <Container>
@@ -80,11 +99,19 @@ const SettingsPage = () => {
         <div className={styles.container}>
           <section className={styles.profile}>
             <div className={styles.avatarWrapper}>
-              <img
-                src={defaultAvatar}
-                alt={t("hero.avatar")}
-                className={styles.avatar}
-              />
+              {user?.avatar_url ? (
+                <img
+                  src={user.avatar_url}
+                  alt={user.name}
+                  className={styles.avatar}
+                />
+              ) : (
+                <img
+                  src={defaultImg}
+                  alt={t("hero.avatar") || "avatar"}
+                  className={styles.avatar}
+                />
+              )}
             </div>
 
             <InputField
@@ -93,8 +120,18 @@ const SettingsPage = () => {
               onChange={(e) => setDraftName(e.target.value)}
               error={nameError}
             />
+
             <p className={styles.email}>{user.email}</p>
-            <span className={styles.plan}>{user.plan.toUpperCase()}</span>
+            <div className={styles.planRow}>
+              <span className={styles.plan}>{user.plan.toUpperCase()}</span>
+              {user.plan && user.plan !== "Explorer" && (
+                <Button
+                  variant="removeSubscriptionBtn"
+                  text={t("buttons.removeSubscription")}
+                  onClick={handleRemoveSubscription}
+                />
+              )}
+            </div>
           </section>
 
           <div className={styles.preferencesWrapper}>

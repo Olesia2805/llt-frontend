@@ -110,7 +110,7 @@ export const updatePreferences = createAsyncThunk(
 const initialState = {
   user: null,
   isAuthenticated: false,
-  isRefreshing: false,
+  isRefreshing: true,
   loading: false,
   error: null,
   preferences: loadGuestPreferences(),

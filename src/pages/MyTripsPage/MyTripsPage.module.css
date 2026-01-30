@@ -56,29 +56,20 @@
 }
 
 .filters {
-  display: flex;
+  display: grid;
   gap: 12px;
-  flex-wrap: wrap;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 1280px) {
+  .filters {
+    display: flex;
+    gap: 16px;
+  }
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
-}
-
-.createCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed var(--primary);
-  border-radius: 12px;
-  min-height: 220px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.createCard:hover {
-  background-color: rgba(var(--primary-light-rgb), 0.15);
 }

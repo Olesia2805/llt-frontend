@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { useEffect } from "react";
 
 import Header from "../Header/Header";
 import HeaderForm from "../Header/HeaderForm";
@@ -9,6 +10,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import ModalOurTeam from "../ModalOurTeam/ModalOurTeam";
 import HeaderUser from "../Header/HeaderUser";
+import Loader from "../Loader/Loader";
 
 import styles from "./Layout.module.css";
 
@@ -23,10 +25,18 @@ const Layout = () => {
   const [isTeamOpen, setIsTeamOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isSidebarOpen]);
+
   const formPages = ["/signup", "/login"];
   const isFormPage = formPages.includes(location.pathname);
 
-  if (isRefreshing) return null; //! Loader
+  if (isRefreshing) return <Loader />;
 
   return (
     <div className={styles.layout}>
@@ -38,13 +48,15 @@ const Layout = () => {
 
       <div className={styles.content}>
         {isAuthenticated && (
-          <aside
-            className={`${styles.sidebarWrapper} ${
-              isSidebarOpen ? styles.active : ""
-            }`}
-          >
-            <SideBar onClose={() => setIsSidebarOpen(false)} />
-          </aside>
+          <>
+            <aside
+              className={`${styles.sidebarWrapper} ${
+                isSidebarOpen ? styles.active : ""
+              }`}
+            >
+              <SideBar onClose={() => setIsSidebarOpen(false)} />
+            </aside>
+          </>
         )}
 
         <div className={styles.mainWrapper}>

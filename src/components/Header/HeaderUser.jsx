@@ -2,11 +2,11 @@ import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import styles from "./HeaderUser.module.css";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
-import defaultAvatar from "../../assets/img/default-avatar.jpg";
+import defaultImg from "../../assets/img/default-avatar.jpg";
 import { useSelector } from "react-redux";
 
 const HeaderUser = ({ onBurgerClick, isSidebarOpen }) => {
-  const user = useSelector((state) => state.userData);
+  const { user } = useSelector((state) => state.userData);
 
   return (
     <header className={styles.header}>
@@ -25,7 +25,7 @@ const HeaderUser = ({ onBurgerClick, isSidebarOpen }) => {
         {user?.avatar_url ? (
           <img src={user.avatar_url} alt={user.name} />
         ) : (
-          <img src={defaultAvatar} alt={"avatar"} className={styles.avatar} />
+          <img src={defaultImg} alt={"avatar"} />
         )}
       </div>
     </header>
