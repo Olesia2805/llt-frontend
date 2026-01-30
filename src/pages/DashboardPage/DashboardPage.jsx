@@ -56,7 +56,14 @@ const DashboardPage = () => {
   }
 
   // Find next upcoming trip
-  const nextTrip = travelData?.cities?.find(city => city.status === "upcoming");
+  const nextTrip = travelData?.cities
+    ?.filter((city) => city.status === "upcoming")
+    ?.sort((a, b) => {
+      // Prioritize "Current Trip" over future trips
+      if (a.visitDate === "Current Trip") return -1;
+      if (b.visitDate === "Current Trip") return 1;
+      return (a.daysUntil || 0) - (b.daysUntil || 0);
+    })?.[0];
 
   return (
     <Section>

@@ -5,7 +5,6 @@ export const getDashboardData = async (userId) => {
     const trips = await getUserTrips(userId);
     const now = new Date();
 
-    // 1. Calculate Stats
     const stats = trips.reduce(
       (acc, trip) => {
         acc.totalTrips += 1;
@@ -14,6 +13,9 @@ export const getDashboardData = async (userId) => {
 
         if (now >= start && now <= end) {
           acc.activeTrips += 1;
+        } else if (now < start) {
+          acc.futureTrips = (acc.futureTrips || 0) + 1;
+          acc.activeTrips += 1; 
         } else if (now > end) {
           acc.completedTrips += 1;
         }
