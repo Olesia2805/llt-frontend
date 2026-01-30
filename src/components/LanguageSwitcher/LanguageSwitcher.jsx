@@ -2,6 +2,7 @@ import styles from "./LanguageSwitcher.module.css";
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
 const languages = [
   { code: "en", label: "EN" },
@@ -12,8 +13,8 @@ const LanguageSwitcher = ({ value, onChange }) => {
   const { i18n } = useTranslation();
   const isAuthenticated = useSelector((state) => state.userData);
   const [localLang, setLocalLang] = useState(value || "uk");
-  const [open, setOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
     setLocalLang(value);
@@ -29,28 +30,20 @@ const LanguageSwitcher = ({ value, onChange }) => {
     }
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  useClickOutside(ref, () => setIsOpen(false));
 
   return (
-    <div className={styles.dropdown} ref={dropdownRef}>
+    <div className={styles.dropdown} ref={ref}>
       <button
         className={styles.toggle}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => setIsOpen((prev) => !prev)}
         aria-haspopup="listbox"
-        aria-expanded={open}
+        aria-expanded={isOpen}
       >
         {localLang.toUpperCase()}
       </button>
 
-      {open && (
+      {isOpen && (
         <ul className={styles.menu} role="listbox">
           {languages.map(({ code, label }) => (
             <li key={code}>
@@ -58,7 +51,7 @@ const LanguageSwitcher = ({ value, onChange }) => {
                 className={styles.menuItem}
                 onClick={() => {
                   handleSelect(code);
-                  setOpen(false);
+                  setIsOpen(false);
                 }}
                 disabled={localLang === code}
               >

@@ -16,6 +16,7 @@
   },
   "errors": {
     "budgetNegative": "Budget cannot be less than 0",
-    "budgetTooHigh": "Budget too high"
+    "budgetTooHigh": "Budget too high",
+    "selectCityFromList": "Please select a city from the list"
   }
 }

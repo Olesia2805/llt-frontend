@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import clsx from "clsx";
 import styles from "./CurrencyDropdown.module.css";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
 const CURRENCIES = ["USD", "EUR", "UAH"];
 
@@ -18,15 +19,7 @@ const CurrencyDropdown = ({ value, onChange, disabled = false }) => {
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  useClickOutside(ref, () => setIsOpen(false));
 
   return (
     <div ref={ref} className={styles.dropdown}>

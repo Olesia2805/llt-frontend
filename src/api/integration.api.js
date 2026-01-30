@@ -1,4 +1,40 @@
-import api from "./api";
+// import api from "./api";
+
+import i18n from "i18next";
+
+export const searchCities = async (query) => {
+  if (!query) return [];
+
+  const lang = i18n.language === "uk" ? "uk" : "en";
+
+  const res = await fetch(
+    `https://nominatim.openstreetmap.org/search?` +
+      new URLSearchParams({
+        q: query,
+        format: "json",
+        addressdetails: 1,
+        limit: 5,
+      }),
+    {
+      headers: {
+        "Accept-Language": lang,
+        "User-Agent": "LiteLifeTrip",
+      },
+    },
+  );
+
+  const data = await res.json();
+
+  return data
+    .map((item) => ({
+      city:
+        item.address.city || item.address.town || item.address.village || "",
+      country: item.address.country || "",
+      lat: Number(item.lat),
+      lng: Number(item.lon),
+    }))
+    .filter((item) => item.city);
+};
 
 // export const searchPOIs = async (city, interests) => {
 //   try {
@@ -12,19 +48,19 @@ import api from "./api";
 //   }
 // };
 
-export const getCityInfo = async (city) => {
-  try {
-    const { data } = await api.get("/integrations/maps/city", {
-      params: { city: encodeURIComponent(city) },
-    });
-    console.log(data);
-    return data.data;
-  } catch (error) {
-    throw new Error(
-      error.response?.data?.message || "Failed to get city information",
-    );
-  }
-};
+// export const getCityInfo = async (city) => {
+//   try {
+//     const { data } = await api.get("/integrations/maps/city", {
+//       params: { city: encodeURIComponent(city) },
+//     });
+//     console.log(data);
+//     return data.data;
+//   } catch (error) {
+//     throw new Error(
+//       error.response?.data?.message || "Failed to get city information",
+//     );
+//   }
+// };
 
 // export const getWeatherForecast = async (city, start_date, end_date) => {
 //   try {

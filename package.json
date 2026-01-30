@@ -18,6 +18,7 @@
     "dotenv": "^17.2.3",
     "google-auth-library": "^10.5.0",
     "i18next": "^25.7.3",
+    "lodash": "^4.17.23",
     "modern-normalize": "^3.0.1",
     "react": "^19.2.0",
     "react-datepicker": "^9.1.0",

@@ -11,6 +11,7 @@ import Button from "../../components/Button/Button";
 import { FaSearch } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useTranslation } from "react-i18next";
+import InputField from "../../components/InputField/InputField";
 
 const MyTripsPage = () => {
   const { t } = useTranslation("myTrips");
@@ -102,27 +103,25 @@ const MyTripsPage = () => {
               <h2>{t("hero.title")}</h2>
               <p>{t("hero.description")}</p>
             </div>
-
             <div className={styles.searchWrapper}>
-              <input
+              <InputField
                 type="text"
                 placeholder={t("searchInput")}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className={styles.searchInput}
+                rightElement={
+                  search ? (
+                    <Button
+                      variant="inputBtn"
+                      onClick={() => setSearch("")}
+                      aria-label="Clear search"
+                      rightIcon={<IoIosCloseCircleOutline fontSize="24px" />}
+                    />
+                  ) : (
+                    <FaSearch className={styles.searchIcon} />
+                  )
+                }
               />
-
-              {search ? (
-                <Button
-                  variant="inputBtn"
-                  onClick={() => setSearch("")}
-                  aria-label="Clear search"
-                >
-                  <IoIosCloseCircleOutline font-size="24px" />
-                </Button>
-              ) : (
-                <FaSearch className={styles.searchIcon} />
-              )}
             </div>
           </div>
           <ul className={styles.filters}>
