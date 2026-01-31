@@ -58,3 +58,8 @@
   position: relative;
   align-items: baseline;
 }
+
+.mustHaveField {
+  color: rgb(var(--red-color-rgb));
+  font-size: 10px;
+}

@@ -8,12 +8,24 @@
   "transport": "Transportation you want to use during trip",
   "maxBudget": "Max trip budget",
   "travelerNotes": "Traveler Notes",
+  "meta": {
+    "duration": "Duration",
+    "budget": "Budget",
+    "transport": "Transport"
+  },
+  "whyTitle": "Why we recommend this",
   "buttons": {
     "generateRoute": "Generate My AI Route",
-    "resetChanges": "Reset to Basic Preferences"
+    "resetChanges": "Reset to Basic Preferences",
+    "saveRoute": "Save Route"
+  },
+  "toast": {
+    "success": "Trip saved successfully to 'My Trips'!",
+    "error": "Failed to save the trip. Try again."
   },
   "errors": {
     "budgetNegative": "Budget cannot be less than 0",
-    "budgetTooHigh": "Budget too high"
+    "budgetTooHigh": "Budget too high",
+    "selectCityFromList": "Please select a city from the list"
   }
 }

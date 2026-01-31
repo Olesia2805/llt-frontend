@@ -6,7 +6,7 @@ export const getUserTrips = async (userId) => {
     return data.data.trips || [];
   } catch (error) {
     throw new Error(
-      error.response?.data?.message || "Failed to fetch user trips"
+      error.response?.data?.message || "Failed to fetch user trips",
     );
   }
 };
@@ -17,6 +17,22 @@ export const deleteTrip = async (tripId) => {
   } catch (error) {
     if (error.response?.status === 404) throw new Error("Trip not found");
     throw new Error(error.response?.data?.message || "Failed to delete trip");
+  }
+};
+
+export const recommendTrip = async (payload) => {
+  try {
+    const { data } = await api.post(`/trips/recommend`, payload);
+    return data;
+  } catch (error) {
+    if (error.response?.status === 400)
+      throw new Error("Incorrect data for route generation");
+    if (error.response?.status === 401)
+      throw new Error("User authentication required");
+    throw new Error(
+      error.response?.data?.message ||
+        "An error occurred while generating the journey",
+    );
   }
 };
 

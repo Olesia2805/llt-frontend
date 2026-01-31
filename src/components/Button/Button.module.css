@@ -41,6 +41,10 @@
   background-color: var(--primary-btn-hover);
 }
 
+.primary:disabled {
+  display: none;
+}
+
 .secondary {
   background-color: var(--bg-main);
   border: 3px solid rgb(var(--border-color-rgb));
