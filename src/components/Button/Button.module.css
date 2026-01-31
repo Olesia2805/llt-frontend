@@ -42,7 +42,7 @@
 }
 
 .primary:disabled {
-  display: none;
+  cursor: default;
 }
 
 .secondary {

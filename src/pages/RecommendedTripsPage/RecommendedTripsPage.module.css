@@ -63,3 +63,8 @@
   color: rgb(var(--red-color-rgb));
   font-size: 10px;
 }
+
+.requiredHint {
+  font-size: 12px;
+  color: var(--text-muted);
+}

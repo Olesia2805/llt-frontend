@@ -19,6 +19,7 @@
     "resetChanges": "Reset to Basic Preferences",
     "saveRoute": "Save Route"
   },
+  "requiredFields": "Before 'Generate My AI Route' fill in all required fields",
   "toast": {
     "success": "Trip saved successfully to 'My Trips'!",
     "error": "Failed to save the trip. Try again."

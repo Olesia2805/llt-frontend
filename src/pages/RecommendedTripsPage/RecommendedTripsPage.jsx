@@ -88,7 +88,12 @@ const RecommendedTripsPage = () => {
         : "";
 
   const isFormValid =
-    !budgetError && !cityError && draftForm.startDate && draftForm.endDate;
+    !budgetError &&
+    !cityError &&
+    draftForm.startDate &&
+    draftForm.endDate &&
+    draftForm.transportModes.length !== 0 &&
+    draftForm.travelerDNA.length !== 0;
 
   const toggleOption = (key, type) => {
     setDraftForm((prev) => ({
@@ -359,6 +364,12 @@ const RecommendedTripsPage = () => {
           >
             {t("buttons.generateRoute")}
           </Button>
+          {!isFormValid && (
+            <span className={styles.requiredHint}>
+              <BiSolidStar className={styles.mustHaveField} />{" "}
+              {t("requiredFields")}
+            </span>
+          )}
         </div>
 
         {tripData && !isSending && (
