@@ -90,6 +90,7 @@ const RecommendedTripsPage = () => {
   const isFormValid =
     !budgetError &&
     !cityError &&
+    draftForm.city &&
     draftForm.startDate &&
     draftForm.endDate &&
     draftForm.transportModes.length !== 0 &&
@@ -154,6 +155,14 @@ const RecommendedTripsPage = () => {
     });
   };
 
+  const formatDateLocal = (date) => {
+    if (!date) return null;
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // місяці 0-11
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const handleGenerate = async () => {
     try {
       setTripData(null);
@@ -172,8 +181,8 @@ const RecommendedTripsPage = () => {
           lng: draftForm.city_lng,
         },
         dates: {
-          start: draftForm.startDate?.toISOString().split("T")[0],
-          end: draftForm.endDate?.toISOString().split("T")[0],
+          start: formatDateLocal(draftForm.startDate),
+          end: formatDateLocal(draftForm.endDate),
         },
         budget: calculatedBudget,
         interests: draftForm.travelerDNA,
@@ -183,7 +192,9 @@ const RecommendedTripsPage = () => {
         language: languageMap[i18n.language] || "Ukrainian",
       };
 
+      console.log(payload);
       const data = await recommendTrip(payload);
+      console.log(data);
       setTripData(data);
 
       setTimeout(() => {
