@@ -80,7 +80,12 @@ const RecommendedTripsPage = () => {
   const cityError =
     hasCityText && !hasCoords ? t("errors.selectCityFromList") : "";
 
-  const budgetError = draftForm.budget < 0 ? t("errors.budgetNegative") : "";
+  const budgetError =
+    draftForm.budget < 0
+      ? t("errors.budgetNegative")
+      : draftForm.budget > 1000000
+        ? t("errors.budgetTooHigh")
+        : "";
 
   const isFormValid =
     !budgetError && !cityError && draftForm.startDate && draftForm.endDate;
@@ -367,5 +372,4 @@ const RecommendedTripsPage = () => {
     </Section>
   );
 };
-
 export default RecommendedTripsPage;

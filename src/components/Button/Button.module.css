@@ -298,3 +298,53 @@
   border-color: var(--primary);
   color: var(--primary);
 }
+
+/* TODO: Loader */
+
+/* .loading {
+  cursor: wait;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  z-index: 1;
+}
+
+.loaderWrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 12px;
+  min-height: 200px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--bg-main);
+  border: 3px dashed rgb(var(--border-color-rgb));
+  color: var(--text-main);
+}
+
+.createCard:not(.disabled):hover,
+.createCard:focus-visible {
+  background-color: rgba(var(--border-color-rgb), 0.3);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.removeSubscriptionBtn {
+  background-color: var(--bg-main);
+  border: 3px solid rgb(var(--border-color-rgb));
+  color: var(--text-main);
+  font-size: 0.8rem;
+  padding: 4px 8px;
+}
+
+.removeSubscriptionBtn:hover:not(:disabled),
+.removeSubscriptionBtn:focus-visible {
+  background-color: rgba(var(--border-color-rgb), 0.3);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+*/
