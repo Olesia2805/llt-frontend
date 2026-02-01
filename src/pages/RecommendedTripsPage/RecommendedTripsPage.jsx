@@ -158,7 +158,7 @@ const RecommendedTripsPage = () => {
   const formatDateLocal = (date) => {
     if (!date) return null;
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // місяці 0-11
+    const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
@@ -186,7 +186,11 @@ const RecommendedTripsPage = () => {
         },
         budget: calculatedBudget,
         interests: draftForm.travelerDNA,
-        transport: draftForm.transportModes[0] || "car",
+        transport: draftForm.transportModes?.length
+          ? draftForm.transportModes[
+              Math.floor(Math.random() * draftForm.transportModes.length)
+            ]
+          : "car",
         currency: draftForm.currency,
         notes: draftForm.notes,
         language: languageMap[i18n.language] || "Ukrainian",
@@ -194,6 +198,7 @@ const RecommendedTripsPage = () => {
 
       console.log(payload);
       const data = await recommendTrip(payload);
+      toast.success(t("toast.success"));
       console.log(data);
       setTripData(data);
 
@@ -210,34 +215,6 @@ const RecommendedTripsPage = () => {
       }, 100);
     } catch (err) {
       setError(err.message);
-    } finally {
-      setIsSending(false);
-    }
-  };
-
-  const handleTripSaved = () => {
-    try {
-      setIsSending(true);
-
-      // const payload = buildTripPayload();
-      // await saveTrip(payload);
-
-      setTimeout(() => {
-        setTripData(null);
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-        toast.success(t("toast.success"));
-      }, 1000);
-
-      setDraftForm((prev) => ({
-        ...prev,
-        startDate: null,
-        endDate: null,
-        notes: "",
-      }));
-    } catch {
       toast.error(t("toast.error"));
     } finally {
       setIsSending(false);
@@ -356,6 +333,7 @@ const RecommendedTripsPage = () => {
             value={draftForm.notes}
             onChange={handleChange}
             placeholder={t("travelerNotes")}
+            disabled={isSending}
           />
         </div>
 
@@ -363,6 +341,7 @@ const RecommendedTripsPage = () => {
           <Button
             variant="secondary"
             onClick={handleReset}
+            disabled={isSending}
             leftIcon={<GrPowerReset />}
           >
             {t("buttons.resetChanges")}
@@ -385,7 +364,7 @@ const RecommendedTripsPage = () => {
 
         {tripData && !isSending && (
           <div ref={tripRef}>
-            <TripCard data={tripData} onSave={handleTripSaved} />
+            <TripCard data={tripData} />
           </div>
         )}
 

@@ -4,6 +4,11 @@
     "description": "Manage your planned adventure."
   },
   "searchInput": "Search trips...",
+  "noTrips": "There are no trips in this filter",
+  "toast": {
+    "success": "Trip cloned!",
+    "error": "Failed to clone the trip. Try again."
+  },
   "buttons": {
     "allTrips": "All Trips",
     "presentTrips": "Present",

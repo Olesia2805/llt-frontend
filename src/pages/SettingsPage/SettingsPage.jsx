@@ -170,6 +170,7 @@ const SettingsPage = () => {
                   variant="secondary"
                   leftIcon={<GrPowerReset />}
                   onClick={handleReset}
+                  disabled={isSaving}
                 >
                   {t("buttons.resetChanges")}
                 </Button>

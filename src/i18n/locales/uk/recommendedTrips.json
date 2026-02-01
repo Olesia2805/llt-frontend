@@ -9,9 +9,15 @@
   "maxBudget": "Максимальний бюджет",
   "travelerNotes": "Нотатки мандрівника",
   "meta": {
-    "duration": "Тривалість",
+    "duration": "Кількість днів",
     "budget": "Бюджет",
     "transport": "Транспорт"
+  },
+  "transportOptions": {
+    "car": "Машина",
+    "bike": "Велосипед",
+    "walk": "Немає", 
+    "public": "Громадський транспорт"
   },
   "whyTitle": "Чому ми рекомендуємо цю подорож",
   "buttons": {

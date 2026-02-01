@@ -2,12 +2,13 @@ import styles from "./Section.module.css";
 import clsx from "clsx";
 
 const Section = ({ children, variant = "main" }) => {
-  // variant: "mainBG", "altBG", "blobsBG", "ctaSectionBG"
+  // variant: "mainBG", "altBG", "blobsBG", "ctaSectionBG", "sectionFooterDown"
   const variantClasses = variant.split(" ").map((v) => {
     if (v === "mainBG") return styles.mainBG;
     if (v === "altBG") return styles.altBG;
     if (v === "blobsBG") return styles.blobBG;
     if (v === "ctaSectionBG") return styles.ctaSectionBG;
+    if (v === "sectionFooterDown") return styles.sectionFooterDown;
     return null;
   });
 

@@ -23,7 +23,7 @@ export const deleteTrip = async (tripId) => {
 export const recommendTrip = async (payload) => {
   try {
     const { data } = await api.post(`/trips/recommend`, payload);
-    return data;
+    return data.data;
   } catch (error) {
     if (error.response?.status === 400)
       throw new Error("Incorrect data for route generation");
@@ -32,6 +32,18 @@ export const recommendTrip = async (payload) => {
     throw new Error(
       error.response?.data?.message ||
         "An error occurred while generating the journey",
+    );
+  }
+};
+
+export const cloneTrip = async (tripId) => {
+  if (!tripId) throw new Error("Trip ID is required");
+
+  try {
+    await api.post(`/trips/${tripId}/clone`);
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || "Failed to clone the trip",
     );
   }
 };

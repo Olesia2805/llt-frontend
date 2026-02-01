@@ -3,6 +3,17 @@
     padding: 5px;
   }
 }
+
+.activityItem {
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+}
+
+.activityIcon {
+  color: var(--primary);
+}
+
 .dayTitle {
   border: 3px solid var(--primary);
   border-radius: 50%;
@@ -15,10 +26,6 @@
   font-weight: 700;
   display: block;
   margin: 0 auto 10px;
-}
-
-.activityItem:not(:last-child) {
-  margin-bottom: 25px;
 }
 
 .activityTitle {

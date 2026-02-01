@@ -17,22 +17,21 @@
 }
 
 .cardTop {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+  padding-right: 48px;
 }
 
-/* .status {
-  padding: 6px 10px;
-  border-radius: 12px;
-  color: var(--text-main);
-  border: 1px solid rgb(var(--border-color-rgb));
+.tripCardBtnsWrapper {
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  display: flex;
+  gap: 16px;
 }
-
-.card:hover .status {
-  border: 1px solid var(--primary);
-} */
 
 .title {
   margin-bottom: auto;
@@ -54,4 +53,12 @@
   display: flex;
   align-items: center;
   gap: 14px;
+}
+
+.disintegrating {
+  transition:
+    transform 0.3s ease-out,
+    opacity 0.2s ease-out;
+  transform: translateY(-20px);
+  opacity: 0;
 }

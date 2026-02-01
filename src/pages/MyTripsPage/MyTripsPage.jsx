@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { getUserTrips, deleteTrip } from "../../api/trips.api";
+import { getUserTrips, deleteTrip, cloneTrip } from "../../api/trips.api";
 import MyTripCard from "../../components/MyTripCard/MyTripCard";
 import ModalDeleteTrip from "../../components/ModalDeleteTrip/ModalDeleteTrip";
 import styles from "./MyTripsPage.module.css";
@@ -12,6 +12,8 @@ import { FaSearch } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useTranslation } from "react-i18next";
 import InputField from "../../components/InputField/InputField";
+import Loader from "../../components/Loader/Loader";
+import toast from "react-hot-toast";
 
 const MyTripsPage = () => {
   const { t } = useTranslation("myTrips");
@@ -24,6 +26,7 @@ const MyTripsPage = () => {
   const [search, setSearch] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [tripToDelete, setTripToDelete] = useState(null);
+  const [confirmedDelete, setConfirmedDelete] = useState(null);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -86,7 +89,9 @@ const MyTripsPage = () => {
   const handleConfirmDelete = async () => {
     try {
       await deleteTrip(tripToDelete);
-      setTrips((prev) => prev.filter((trip) => trip.id !== tripToDelete));
+      setConfirmedDelete(tripToDelete);
+      const response = await getUserTrips(user.id);
+      setTrips(response);
     } catch (err) {
       alert(err.message);
     } finally {
@@ -94,8 +99,26 @@ const MyTripsPage = () => {
     }
   };
 
+  const handleAnimationEnd = async (tripId) => {
+    setTrips((prev) => prev.filter((trip) => trip.id !== tripId));
+    setConfirmedDelete(null);
+  };
+
+  const handleClone = async (tripId) => {
+    if (!tripId) return;
+    try {
+      await cloneTrip(tripId);
+      toast.success(t("toast.success"));
+      const response = await getUserTrips(user.id);
+      setTrips(response);
+    } catch (err) {
+      alert(err.message);
+      toast.error(t("toast.error"));
+    }
+  };
+
   return (
-    <Section>
+    <Section variant="sectionFooterDown">
       <Container>
         <div className={styles.headerWrapper}>
           <div className={styles.headerRow}>
@@ -138,7 +161,9 @@ const MyTripsPage = () => {
         </div>
 
         <div className={styles.grid}>
-          {filteredTrips.length === 0 && (
+          {loading && <Loader />}
+
+          {!loading && trips.length === 0 && (
             <Button variant="createCard" to="/recommended-trips">
               <FiPlusCircle fontSize={32} />
               <p>{t("buttons.planNewTrip")}</p>
@@ -146,13 +171,21 @@ const MyTripsPage = () => {
           )}
 
           {!loading &&
+            filteredTrips.length > 0 &&
             filteredTrips.map((trip) => (
               <MyTripCard
                 key={trip.id}
                 trip={trip}
                 onDelete={handleAskDelete}
+                confirmedDelete={confirmedDelete}
+                onAnimationEnd={handleAnimationEnd}
+                onClone={handleClone}
               />
             ))}
+
+          {!loading && trips.length !== 0 && filteredTrips.length === 0 && (
+            <p>{t("noTrips")}</p>
+          )}
         </div>
 
         <ModalDeleteTrip

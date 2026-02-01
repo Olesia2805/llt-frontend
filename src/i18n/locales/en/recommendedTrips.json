@@ -9,9 +9,15 @@
   "maxBudget": "Max trip budget",
   "travelerNotes": "Traveler Notes",
   "meta": {
-    "duration": "Duration",
+    "duration": "Number of days",
     "budget": "Budget",
     "transport": "Transport"
+  },
+  "transportOptions": {
+    "car": "Car",
+    "bike": "Bicycle",
+    "walk": "None",
+    "public": "Public transport"
   },
   "whyTitle": "Why we recommend this",
   "buttons": {

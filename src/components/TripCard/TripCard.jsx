@@ -1,54 +1,65 @@
 import TripCardDay from "../TripCardDay/TripCardDay";
-import Button from "../Button/Button";
 import styles from "./TripCard.module.css";
 import { TbBrandWechat } from "react-icons/tb";
-import { FaBookmark } from "react-icons/fa6";
-import { disintegrate } from "../../utils/disintegrate";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { MdOutlineCalendarToday } from "react-icons/md";
 import { TbPigMoney } from "react-icons/tb";
 import { FaBus } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-const TripCard = ({ data, onSave }) => {
+const TripCard = ({ data }) => {
   const { t } = useTranslation("recommendedTrips");
   const cardRef = useRef(null);
-  if (!data) return null;
 
+  const { trip, mapData } = data || {};
   const {
     title,
     summary,
-    total_budget_estimate,
+    totalBudgetEstimate,
     currency,
-    duration_days,
-    itinerary,
-    transport,
-  } = data;
+    startDate,
+    endDate,
+    transportMode,
+  } = trip;
 
-  const daysMap = itinerary.reduce((acc, item) => {
-    if (!acc[item.day_index]) acc[item.day_index] = [];
-    acc[item.day_index].push(item);
+  const { markers } = mapData;
+
+  const durationDays = useMemo(() => {
+    if (!startDate || !endDate) return 1;
+
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    const startTime = Date.UTC(
+      start.getFullYear(),
+      start.getMonth(),
+      start.getDate(),
+    );
+    const endTime = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate());
+
+    const diff = Math.floor((endTime - startTime) / (1000 * 60 * 60 * 24));
+
+    return Math.max(1, diff + 1);
+  }, [startDate, endDate]);
+
+  const daysMap = (markers || []).reduce((acc, marker) => {
+    const day = Number(marker.infoWindowContent?.dayIndex || 1);
+    if (!acc[day]) acc[day] = [];
+    acc[day].push(marker);
     return acc;
   }, {});
 
-  const days = Object.entries(daysMap);
+  const days = Object.entries(daysMap)
+    .map(([dayIndex, activities]) => ({
+      dayIndex: Number(dayIndex),
+      activities: activities.sort((a, b) => a.orderIndex - b.orderIndex),
+    }))
+    .sort((a, b) => a.dayIndex - b.dayIndex);
 
-  const handleSave = () => {
-    if (!cardRef.current) return;
-    disintegrate(cardRef.current);
-    onSave();
-  };
+  if (!trip || !mapData) return null;
 
   return (
     <div ref={cardRef} className={styles.tripCard}>
-      <div className={styles.headerBtn}>
-        <Button
-          leftIcon={<FaBookmark />}
-          onClick={handleSave}
-          text={t("buttons.saveRoute")}
-        />
-      </div>
-
       <div>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.summary}>{summary}</p>
@@ -59,29 +70,33 @@ const TripCard = ({ data, onSave }) => {
           <MdOutlineCalendarToday />
           <div className={styles.metaText}>
             <span className={styles.metaLabel}>{t("meta.duration")}</span>
-            <span className={styles.metaValue}>{`${duration_days} days`}</span>
+            <span className={styles.metaValue}>{durationDays}</span>
           </div>
         </div>
+
         <div className={styles.metaItem}>
           <TbPigMoney />
           <div className={styles.metaText}>
             <span className={styles.metaLabel}>{t("meta.budget")}</span>
-            <span
-              className={styles.metaValue}
-            >{`≈ ${total_budget_estimate} ${currency}`}</span>
+            <span className={styles.metaValue}>
+              ≈ {totalBudgetEstimate} {currency}
+            </span>
           </div>
         </div>
+
         <div className={styles.metaItem}>
           <FaBus />
           <div className={styles.metaText}>
             <span className={styles.metaLabel}>{t("meta.transport")}</span>
-            <span className={styles.metaValue}>{transport ?? "—"}</span>
+            <span className={styles.metaValue}>
+              {t(`transportOptions.${transportMode}`) ?? "—"}
+            </span>
           </div>
         </div>
       </div>
 
       <ul className={styles.days}>
-        {days.map(([dayIndex, activities]) => (
+        {days.map(({ dayIndex, activities }) => (
           <TripCardDay
             key={dayIndex}
             dayIndex={dayIndex}
@@ -95,7 +110,7 @@ const TripCard = ({ data, onSave }) => {
           <TbBrandWechat />
           {t("whyTitle")}
         </h4>
-        <p className={styles.whyText}>{itinerary[0]?.rationale}</p>
+        <p className={styles.whyText}>{summary}</p>
       </div>
     </div>
   );

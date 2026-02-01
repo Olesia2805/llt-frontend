@@ -58,6 +58,10 @@
   color: var(--primary);
 }
 
+.secondary:disabled {
+  cursor: default;
+}
+
 .ghost {
   display: flex;
   align-items: center;
@@ -194,19 +198,20 @@
   color: rgb(var(--primary-light-rgb));
 }
 
-.deleteBtn {
-  position: absolute;
-  top: 6px;
-  right: -6px;
+.tripCardBtn {
   background: transparent;
   border: none;
   color: var(--primary);
   font-size: 20px;
   cursor: pointer;
   width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
 }
 
-.deleteBtn:hover {
+.tripCardBtn:hover {
   color: rgb(var(--primary-light-rgb));
 }
 

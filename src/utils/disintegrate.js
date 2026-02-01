@@ -1,5 +1,5 @@
 import html2canvas from "html2canvas";
-import styles from "../components/TripCard/TripCard.module.css";
+import styles from "../components/MyTripCard/MyTripCard.module.css";
 
 export function disintegrate(element) {
   if (!element) return;
