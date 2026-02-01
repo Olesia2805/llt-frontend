@@ -174,7 +174,6 @@ const MyTripsPage = () => {
             filteredTrips.length > 0 &&
             filteredTrips.map((trip) => (
               <MyTripCard
-                key={trip.id}
                 trip={trip}
                 onDelete={handleAskDelete}
                 confirmedDelete={confirmedDelete}

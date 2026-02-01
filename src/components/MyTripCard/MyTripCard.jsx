@@ -6,6 +6,8 @@ import { ImBin } from "react-icons/im";
 import { GrClone } from "react-icons/gr";
 import Button from "../Button/Button";
 import { disintegrate } from "../../utils/disintegrate";
+import { ROUTER } from "../../app/routes";
+import { Link } from "react-router-dom";
 
 const MyTripCard = ({
   trip,
@@ -42,19 +44,20 @@ const MyTripCard = ({
           />
         </div>
       </div>
+      <Link key={trip.id} to={ROUTER.MYTRIP.replace(":id", trip.id)}>
+        <h3 className={styles.title}>{title}</h3>
 
-      <h3 className={styles.title}>{title}</h3>
-
-      <div className={styles.dates}>
-        <p>
-          <MdCalendarMonth />
-          START: {startDate}
-        </p>
-        <p>
-          <PiCalendarCheckBold />
-          END: {endDate}
-        </p>
-      </div>
+        <div className={styles.dates}>
+          <p>
+            <MdCalendarMonth />
+            START: {startDate}
+          </p>
+          <p>
+            <PiCalendarCheckBold />
+            END: {endDate}
+          </p>
+        </div>
+      </Link>
     </li>
   );
 };

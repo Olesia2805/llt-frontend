@@ -36,6 +36,7 @@
   "errors": {
     "budgetNegative": "Бюджет не може бути меншим за 0",
     "budgetTooHigh": "Занадто великий бюджет",
-    "selectCityFromList": "Будь ласка, виберіть місто зі списку"
+    "selectCityFromList": "Будь ласка, виберіть місто зі списку",
+    "maxTripDays": "Подорож не може тривати довше ніж {{maxDays}} днів"
   }
 }
