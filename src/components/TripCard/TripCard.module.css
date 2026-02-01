@@ -88,6 +88,13 @@
   background-color: var(--bg-alt);
   border-radius: 6px;
   padding: 20px;
+  min-height: 250px;
+}
+
+@media (min-width: 1280px) {
+  .why {
+    min-height: 200px;
+  }
 }
 
 .whyTitle {

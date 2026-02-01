@@ -48,6 +48,15 @@ export const cloneTrip = async (tripId) => {
   }
 };
 
+export const explainRecommendTrip = async (payload) => {
+  try {
+    const { data } = await api.post("/ai/explain", payload);
+    return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "AI error");
+  }
+};
+
 // export const createTrip = async (payload) => {
 //   try {
 //     const { data } = await api.post("/trips", payload);

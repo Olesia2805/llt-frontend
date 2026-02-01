@@ -24,6 +24,8 @@ import { recommendTrip } from "../../api/trips.api";
 
 import styles from "./RecommendedTripsPage.module.css";
 
+//TODO: travelerNotes
+
 const getTripDays = (start, end) => {
   if (!start || !end) return 0;
 
@@ -195,11 +197,8 @@ const RecommendedTripsPage = () => {
         notes: draftForm.notes,
         language: languageMap[i18n.language] || "Ukrainian",
       };
-
-      console.log(payload);
       const data = await recommendTrip(payload);
       toast.success(t("toast.success"));
-      console.log(data);
       setTripData(data);
 
       setTimeout(() => {
@@ -326,7 +325,7 @@ const RecommendedTripsPage = () => {
           </ul>
         </div>
 
-        <div className={styles.sectionGroup}>
+        {/* <div className={styles.sectionGroup}>
           <h3>{t("travelerNotes")}</h3>
           <InputField
             name="notes"
@@ -335,7 +334,7 @@ const RecommendedTripsPage = () => {
             placeholder={t("travelerNotes")}
             disabled={isSending}
           />
-        </div>
+        </div> */}
 
         <div className={styles.buttons}>
           <Button

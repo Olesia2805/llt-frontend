@@ -20,6 +20,9 @@
     "public": "Public transport"
   },
   "whyTitle": "Why we recommend this",
+  "whyQuestion": "Why were these locations recommended?",
+  "whyLoading": "Explaining the itinerary...",
+  "whyError": "Failed to get explanation",
   "buttons": {
     "generateRoute": "Generate My AI Route",
     "resetChanges": "Reset to Basic Preferences",
