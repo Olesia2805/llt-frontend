@@ -5,6 +5,7 @@
     "avatar": "User avatar"
   },
   "preferences": {
+    "urlInput": "You can get an avatar from https://www.pexels.com/ by right-clicking an image and selecting 'Copy image link'.",
     "sectionTitle": "Preferences",
     "theme": "App Theme",
     "language": "App Language",
@@ -27,6 +28,7 @@
   "toast": {
     "success": "Data successfully uploaded!",
     "error": "Something went wrong. Please try again.",
-    "successRemoved": "Subscription successfully removed."
+    "successRemoved": "Subscription successfully removed.",
+    "invalidUrl": "Please enter a valid image URL (jpg, jpeg, png, gif, webp)."
   }
 }

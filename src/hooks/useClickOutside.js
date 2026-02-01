@@ -8,7 +8,18 @@ export const useClickOutside = (ref, callback) => {
       }
     };
 
+    const handleEsc = (event) => {
+      if (event.key === "Escape") {
+        callback?.();
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEsc);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEsc);
+    };
   }, [ref, callback]);
 };
