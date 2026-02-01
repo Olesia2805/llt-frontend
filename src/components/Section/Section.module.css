@@ -11,6 +11,16 @@
   }
 }
 
+.sectionFooterDown {
+  min-height: 100vh;
+}
+
+@media (min-width: 1280px) {
+  .sectionFooterDown {
+    min-height: 90vh;
+  }
+}
+
 .mainBG {
   background-color: var(--bg-main);
 }

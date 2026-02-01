@@ -6,7 +6,7 @@ export const getUserTrips = async (userId) => {
     return data.data.trips || [];
   } catch (error) {
     throw new Error(
-      error.response?.data?.message || "Failed to fetch user trips"
+      error.response?.data?.message || "Failed to fetch user trips",
     );
   }
 };
@@ -20,24 +20,73 @@ export const deleteTrip = async (tripId) => {
   }
 };
 
+export const recommendTrip = async (payload) => {
+  try {
+    const { data } = await api.post(`/trips/recommend`, payload);
+    return data.data;
+  } catch (error) {
+    if (error.response?.status === 400)
+      throw new Error("Incorrect data for route generation");
+    if (error.response?.status === 401)
+      throw new Error("User authentication required");
+    throw new Error(
+      error.response?.data?.message ||
+        "An error occurred while generating the journey",
+    );
+  }
+};
+
+export const cloneTrip = async (tripId) => {
+  if (!tripId) throw new Error("Trip ID is required");
+
+  try {
+    await api.post(`/trips/${tripId}/clone`);
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || "Failed to clone the trip",
+    );
+  }
+};
+
+export const explainRecommendTrip = async (payload) => {
+  try {
+    const { data } = await api.post("/ai/explain", payload);
+    return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "AI error");
+  }
+};
+
+export const getTripById = async (tripId) => {
+  try {
+    const { data } = await api.get(`/trips/${tripId}`);
+    return data.data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      throw new Error("Trip not found");
+    }
+    throw new Error(error.response?.data?.message || "Failed to fetch trip");
+  }
+};
+
+export const getTripMap = async (tripId) => {
+  try {
+    const { data } = await api.get(`/trips/${tripId}/map`);
+    return data.data;
+  } catch (error) {
+    if (error.response?.status === 404) throw new Error("Trip not found");
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch trip map",
+    );
+  }
+};
+
 // export const createTrip = async (payload) => {
 //   try {
 //     const { data } = await api.post("/trips", payload);
 //     return data;
 //   } catch (error) {
 //     throw new Error(error.response?.data?.message || "Failed to create trip");
-//   }
-// };
-
-// export const getTripById = async (tripId) => {
-//   try {
-//     const { data } = await api.get(`/trips/${tripId}`);
-//     return data;
-//   } catch (error) {
-//     if (error.response?.status === 404) {
-//       throw new Error("Trip not found");
-//     }
-//     throw new Error(error.response?.data?.message || "Failed to fetch trip");
 //   }
 // };
 
@@ -58,17 +107,5 @@ export const deleteTrip = async (tripId) => {
 //   } catch (error) {
 //     if (error.response?.status === 404) throw new Error("Trip not found");
 //     throw new Error(error.response?.data?.message || "Failed to add trip item");
-//   }
-// };
-
-// export const getTripMap = async (tripId) => {
-//   try {
-//     const { data } = await api.get(`/trips/${tripId}/map`);
-//     return data;
-//   } catch (error) {
-//     if (error.response?.status === 404) throw new Error("Trip not found");
-//     throw new Error(
-//       error.response?.data?.message || "Failed to fetch trip map"
-//     );
 //   }
 // };

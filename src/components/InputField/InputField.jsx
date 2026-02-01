@@ -4,7 +4,14 @@ import { RiEyeFill, RiEyeCloseFill } from "react-icons/ri";
 import styles from "./InputField.module.css";
 import Button from "../Button/Button";
 
-const InputField = ({ label, type = "text", error, className, ...props }) => {
+const InputField = ({
+  label,
+  type = "text",
+  error,
+  className,
+  rightElement,
+  ...props
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const isPassword = type === "password";
@@ -28,6 +35,10 @@ const InputField = ({ label, type = "text", error, className, ...props }) => {
           >
             {showPassword ? <RiEyeCloseFill /> : <RiEyeFill />}
           </Button>
+        )}
+
+        {rightElement && (
+          <div className={styles.rightElement}>{rightElement}</div>
         )}
       </div>
 

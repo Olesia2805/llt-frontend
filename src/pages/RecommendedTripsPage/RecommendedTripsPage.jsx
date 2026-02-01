@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 import { TRAVELER_DNA, TRANSPORT } from "../../app/sectionPreferencesData";
 
 import { BsStars } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
+import { BiSolidStar } from "react-icons/bi";
 
 import InputField from "../../components/InputField/InputField";
 import Button from "../../components/Button/Button";
@@ -14,8 +16,15 @@ import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
 import CurrencyDropdown from "../../components/CurrencyDropdown/CurrencyDropdown";
 import DateRangeInput from "../../components/DateRangeInput/DateRangeInput";
+import CityAutocomplete from "../../components/CityAutocomplete/CityAutocomplete";
+import TripCard from "../../components/TripCard/TripCard";
+import Loader from "../../components/Loader/Loader";
+
+import { recommendTrip } from "../../api/trips.api";
 
 import styles from "./RecommendedTripsPage.module.css";
+
+//TODO: travelerNotes
 
 const getTripDays = (start, end) => {
   if (!start || !end) return 0;
@@ -29,49 +38,73 @@ const getTripDays = (start, end) => {
   const endDate = new Date(end.getFullYear(), end.getMonth(), end.getDate());
 
   const diff = (endDate - startDate) / (1000 * 60 * 60 * 24);
-
   return diff + 1;
 };
 
 const RecommendedTripsPage = () => {
-  const { t } = useTranslation(["recommendedTrips", "tagPreferences"]);
+  const { t, i18n } = useTranslation(["recommendedTrips", "tagPreferences"]);
   const { preferences } = useSelector((state) => state.userData);
+
+  const [tripData, setTripData] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [isSending, setIsSending] = useState(false);
+
+  const tripRef = useRef(null);
+
+  const dailyBudget = preferences.avg_daily_budget ?? 0;
 
   const [draftForm, setDraftForm] = useState({
     travelerDNA: preferences.interests ?? [],
     transportModes: preferences.transport_modes ?? [],
     city: preferences.home_city ?? "",
+    city_lat: preferences.home_lat ?? null,
+    city_lng: preferences.home_lng ?? null,
     budget: preferences.avg_daily_budget ?? 0,
     currency: preferences.currency ?? "UAH",
     startDate: null,
     endDate: null,
     isBudgetManual: false,
+    notes: "",
   });
 
-  const [isSending, setIsSending] = useState(false);
+  const days = getTripDays(draftForm.startDate, draftForm.endDate);
 
-  useEffect(() => {
-    if (
-      !draftForm.startDate ||
-      !draftForm.endDate ||
-      draftForm.isBudgetManual
-    ) {
-      return;
-    }
+  const calculatedBudget = draftForm.isBudgetManual
+    ? draftForm.budget
+    : days > 0
+      ? dailyBudget * days
+      : 0;
 
-    const days = getTripDays(draftForm.startDate, draftForm.endDate);
-    const dailyBudget = preferences.avg_daily_budget ?? 0;
+  const hasCityText = draftForm.city.trim().length > 0;
+  const hasCoords = draftForm.city_lat !== null && draftForm.city_lng !== null;
 
-    setDraftForm((prev) => ({
-      ...prev,
-      budget: dailyBudget * days,
-    }));
-  }, [
-    draftForm.startDate,
-    draftForm.endDate,
-    draftForm.isBudgetManual,
-    preferences.avg_daily_budget,
-  ]);
+  const cityError =
+    hasCityText && !hasCoords ? t("errors.selectCityFromList") : "";
+
+  const budgetError =
+    draftForm.budget < 0
+      ? t("errors.budgetNegative")
+      : draftForm.budget > 1000000
+        ? t("errors.budgetTooHigh")
+        : "";
+
+  const MAX_TRIP_DAYS = 7;
+
+  const dateError =
+    days > MAX_TRIP_DAYS
+      ? t("errors.maxTripDays", { maxDays: MAX_TRIP_DAYS })
+      : "";
+
+  const isFormValid =
+    !budgetError &&
+    !cityError &&
+    draftForm.city &&
+    draftForm.startDate &&
+    draftForm.endDate &&
+    draftForm.transportModes.length !== 0 &&
+    draftForm.travelerDNA.length !== 0 &&
+    !dateError;
 
   const toggleOption = (key, type) => {
     setDraftForm((prev) => ({
@@ -94,9 +127,25 @@ const RecommendedTripsPage = () => {
       return;
     }
 
+    if (name === "city") {
+      setDraftForm((prev) => ({
+        ...prev,
+        city: value,
+        city_lat: null,
+        city_lng: null,
+      }));
+      return;
+    }
+
+    setDraftForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCitySelect = (item) => {
     setDraftForm((prev) => ({
       ...prev,
-      [name]: value,
+      city: `${item.city}, ${item.country}`,
+      city_lat: item.lat,
+      city_lng: item.lng,
     }));
   };
 
@@ -105,22 +154,79 @@ const RecommendedTripsPage = () => {
       travelerDNA: preferences.interests ?? [],
       transportModes: preferences.transport_modes ?? [],
       city: preferences.home_city ?? "",
+      city_lat: preferences.home_lat ?? null,
+      city_lng: preferences.home_lng ?? null,
       budget: preferences.avg_daily_budget ?? 0,
       currency: preferences.currency ?? "UAH",
       startDate: null,
       endDate: null,
       isBudgetManual: false,
+      notes: "",
     });
   };
 
-  const budgetError =
-    draftForm.budget < 0
-      ? t("errors.budgetNegative")
-      : draftForm.budget > 1000000
-        ? t("errors.budgetTooHigh")
-        : "";
+  const formatDateLocal = (date) => {
+    if (!date) return null;
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
-  const isFormValid = !budgetError;
+  const handleGenerate = async () => {
+    try {
+      setTripData(null);
+      setIsSending(true);
+      setError(null);
+
+      const languageMap = {
+        uk: "Ukrainian",
+        en: "English",
+      };
+
+      const payload = {
+        origin: {
+          city: draftForm.city,
+          lat: draftForm.city_lat,
+          lng: draftForm.city_lng,
+        },
+        dates: {
+          start: formatDateLocal(draftForm.startDate),
+          end: formatDateLocal(draftForm.endDate),
+        },
+        budget: calculatedBudget,
+        interests: draftForm.travelerDNA,
+        transport: draftForm.transportModes?.length
+          ? draftForm.transportModes[
+              Math.floor(Math.random() * draftForm.transportModes.length)
+            ]
+          : "car",
+        currency: draftForm.currency,
+        notes: draftForm.notes,
+        language: languageMap[i18n.language] || "Ukrainian",
+      };
+      const data = await recommendTrip(payload);
+      toast.success(t("toast.success"));
+      setTripData(data);
+
+      setTimeout(() => {
+        if (tripRef.current) {
+          const topOffset =
+            tripRef.current.getBoundingClientRect().top + window.scrollY;
+          const headerOffset = 100;
+          window.scrollTo({
+            top: topOffset - headerOffset,
+            behavior: "smooth",
+          });
+        }
+      }, 100);
+    } catch (err) {
+      setError(err.message);
+      toast.error(t("toast.error"));
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
     <Section>
@@ -132,24 +238,49 @@ const RecommendedTripsPage = () => {
 
         <div className={styles.rowGroup}>
           <div className={styles.sectionGroup}>
-            <h3>{t("destinationCity")}</h3>
-            <InputField
-              name="city"
+            <h3>
+              {t("destinationCity")}{" "}
+              <BiSolidStar className={styles.mustHaveField} />
+            </h3>
+            <CityAutocomplete
+              placeholder={t("cityPlaceholder")}
               value={draftForm.city}
               onChange={handleChange}
-              placeholder={t("cityPlaceholder")}
+              onSelect={handleCitySelect}
+              error={cityError}
               disabled={isSending}
             />
           </div>
 
           <div className={styles.sectionGroup}>
-            <h3>{t("maxBudget")}</h3>
+            <h3>
+              {t("dates")} <BiSolidStar className={styles.mustHaveField} />
+            </h3>
+            <DateRangeInput
+              startDate={draftForm.startDate}
+              endDate={draftForm.endDate}
+              disabled={isSending}
+              onChange={([start, end]) =>
+                setDraftForm((prev) => ({
+                  ...prev,
+                  startDate: start,
+                  endDate: end,
+                }))
+              }
+              error={dateError}
+            />
+          </div>
+
+          <div className={styles.sectionGroup}>
+            <h3>
+              {t("maxBudget")} <BiSolidStar className={styles.mustHaveField} />
+            </h3>
             <div className={styles.budgetWrapper}>
               <InputField
                 type="number"
                 name="budget"
                 min={0}
-                value={draftForm.budget}
+                value={calculatedBudget}
                 onChange={handleChange}
                 error={budgetError}
                 disabled={isSending}
@@ -163,26 +294,12 @@ const RecommendedTripsPage = () => {
               />
             </div>
           </div>
-
-          <div className={styles.sectionGroup}>
-            <h3>{t("dates")}</h3>
-            <DateRangeInput
-              startDate={draftForm.startDate}
-              endDate={draftForm.endDate}
-              disabled={isSending}
-              onChange={([start, end]) =>
-                setDraftForm((prev) => ({
-                  ...prev,
-                  startDate: start,
-                  endDate: end,
-                }))
-              }
-            />
-          </div>
         </div>
 
         <div className={styles.sectionGroup}>
-          <h3>{t("transport")}</h3>
+          <h3>
+            {t("transport")} <BiSolidStar className={styles.mustHaveField} />
+          </h3>
           <ul className={styles.tagGroup}>
             {TRANSPORT().map(({ id, key, title, Icon }) => (
               <li key={id}>
@@ -199,7 +316,9 @@ const RecommendedTripsPage = () => {
         </div>
 
         <div className={styles.sectionGroup}>
-          <h3>{t("travelerDNA")}</h3>
+          <h3>
+            {t("travelerDNA")} <BiSolidStar className={styles.mustHaveField} />
+          </h3>
           <ul className={styles.tagGroup}>
             {TRAVELER_DNA().map(({ id, key, title, Icon }) => (
               <li key={id}>
@@ -215,31 +334,51 @@ const RecommendedTripsPage = () => {
           </ul>
         </div>
 
-        <div className={styles.sectionGroup}>
+        {/* <div className={styles.sectionGroup}>
           <h3>{t("travelerNotes")}</h3>
-          <InputField />
-        </div>
+          <InputField
+            name="notes"
+            value={draftForm.notes}
+            onChange={handleChange}
+            placeholder={t("travelerNotes")}
+            disabled={isSending}
+          />
+        </div> */}
 
         <div className={styles.buttons}>
           <Button
             variant="secondary"
             onClick={handleReset}
+            disabled={isSending}
             leftIcon={<GrPowerReset />}
           >
             {t("buttons.resetChanges")}
           </Button>
 
           <Button
-            type="submit"
+            onClick={handleGenerate}
             disabled={isSending || !isFormValid}
             leftIcon={<BsStars />}
           >
             {t("buttons.generateRoute")}
           </Button>
+          {!isFormValid && (
+            <span className={styles.requiredHint}>
+              <BiSolidStar className={styles.mustHaveField} />{" "}
+              {t("requiredFields")}
+            </span>
+          )}
         </div>
+
+        {tripData && !isSending && (
+          <div ref={tripRef}>
+            <TripCard data={tripData} />
+          </div>
+        )}
+
+        {error && <p className={styles.error}>{error}</p>}
       </Container>
     </Section>
   );
 };
-
 export default RecommendedTripsPage;

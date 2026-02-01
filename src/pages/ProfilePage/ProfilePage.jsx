@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { updatePreferences } from "../../store/userSlice";
-// import { getCityInfo } from "../../store/integrationSlice";
 import { TRAVELER_DNA, TRANSPORT } from "../../app/sectionPreferencesData";
 
 import InputField from "../../components/InputField/InputField";
+import CityAutocomplete from "../../components/CityAutocomplete/CityAutocomplete";
 import Button from "../../components/Button/Button";
 import Tag from "../../components/Tag/Tag";
 import Section from "../../components/Section/Section";
@@ -15,22 +15,17 @@ import CurrencyDropdown from "../../components/CurrencyDropdown/CurrencyDropdown
 import styles from "./ProfilePage.module.css";
 import defaultImg from "../../assets/img/default-avatar.jpg";
 
-//TODO:
-// - input for city
-// - current forecast for home_city
-
 const ProfilePage = () => {
   const { t } = useTranslation(["profile", "tagPreferences"]);
   const dispatch = useDispatch();
   const { user, preferences } = useSelector((state) => state.userData);
-  // const { cityInfo } = useSelector((state) => state.integrationData);
 
   const [draftForm, setDraftForm] = useState({
     travelerDNA: preferences.interests ?? [],
     transportModes: preferences.transport_modes ?? [],
     city: preferences.home_city ?? "",
-    // city_lat: preferences.home_lat ?? null,
-    // city_lng: preferences.home_lng ?? null,
+    city_lat: preferences.home_lat ?? null,
+    city_lng: preferences.home_lng ?? null,
     budget: preferences.avg_daily_budget ?? 0,
     currency: preferences.currency ?? "UAH",
   });
@@ -41,8 +36,8 @@ const ProfilePage = () => {
         travelerDNA: preferences.interests ?? [],
         transportModes: preferences.transport_modes ?? [],
         city: preferences.home_city ?? "",
-        // city_lat: preferences.home_lat ?? null,
-        // city_lng: preferences.home_lng ?? null,
+        city_lat: preferences.home_lat ?? null,
+        city_lng: preferences.home_lng ?? null,
         budget: preferences.avg_daily_budget ?? 0,
         currency: preferences.currency ?? "UAH",
       });
@@ -63,6 +58,15 @@ const ProfilePage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "city") {
+      setDraftForm((prev) => ({
+        ...prev,
+        city: value,
+        city_lat: null,
+        city_lng: null,
+      }));
+      return;
+    }
 
     if (name === "budget") {
       if (value === "") {
@@ -88,6 +92,15 @@ const ProfilePage = () => {
     }));
   };
 
+  const handleCitySelect = (item) => {
+    setDraftForm((prev) => ({
+      ...prev,
+      city: `${item.city}, ${item.country}`,
+      city_lat: item.lat,
+      city_lng: item.lng,
+    }));
+  };
+
   const handleSave = async () => {
     setIsSaving(true);
     try {
@@ -97,8 +110,8 @@ const ProfilePage = () => {
           interests: draftForm.travelerDNA,
           transport_modes: draftForm.transportModes,
           home_city: draftForm.city,
-          // home_lat: draftForm.city_lat,
-          // home_lng: draftForm.city_lng,
+          home_lat: draftForm.city_lat,
+          home_lng: draftForm.city_lng,
           avg_daily_budget: Math.max(0, Number(draftForm.budget)),
           currency: draftForm.currency,
         }),
@@ -118,8 +131,8 @@ const ProfilePage = () => {
       travelerDNA: preferences.interests ?? [],
       transportModes: preferences.transport_modes ?? [],
       city: preferences.home_city ?? "",
-      // city_lat: preferences.home_lat ?? null,
-      // city_lng: preferences.home_lng ?? null,
+      city_lat: preferences.home_lat ?? null,
+      city_lng: preferences.home_lng ?? null,
       budget: preferences.avg_daily_budget ?? 0,
       currency: preferences.currency ?? "UAH",
     });
@@ -132,19 +145,14 @@ const ProfilePage = () => {
         ? t("errors.budgetTooHigh")
         : "";
 
-  const isCityValid = draftForm.city.trim() !== "";
-  // && draftForm.city_lat !== null &&
-  // draftForm.city_lng !== null;
+  const hasText = draftForm.city.trim().length > 0;
 
-  // const handleCityInput = (e) => {
-  //   const city = e.target.value;
-  //   if (city) dispatch(getCityInfo(city));
-  // };
+  const hasCoordinates =
+    draftForm.city_lat !== null && draftForm.city_lng !== null;
 
-  const isFormValid =
-    !budgetError &&
-    draftForm.travelerDNA.length >= 0 &&
-    draftForm.transportModes.length >= 0;
+  const isCityValid = !hasText || (hasText && hasCoordinates);
+
+  const isFormValid = !budgetError && isCityValid && !isSaving;
 
   return (
     <Section>
@@ -219,14 +227,15 @@ const ProfilePage = () => {
           <div className={styles.sectionGroup}>
             <h3>{t("primaryCity")}</h3>
             <p>{t("primaryCityText")}</p>
-            <InputField
-              name="city"
+            <CityAutocomplete
+              placeholder={t("cityPlaceholder")}
+              disabled={isSaving}
               value={draftForm.city}
               onChange={handleChange}
-              // onChange={handleCityInput}
-              placeholder={t("cityPlaceholder")}
-              error={isCityValid}
-              disabled={isSaving}
+              onSelect={handleCitySelect}
+              error={
+                hasText && !hasCoordinates ? t("errors.selectCityFromList") : ""
+              }
             />
           </div>
 
