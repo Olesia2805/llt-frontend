@@ -3,6 +3,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import { uk, enUS } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./DateRangeInput.module.css";
+import clsx from "clsx";
 
 registerLocale("uk", uk);
 registerLocale("en", enUS);
@@ -37,6 +38,9 @@ const DateRangeInput = ({
           locale={lang}
           portalId="root-portal"
         />
+        <span className={clsx(styles.errorText, !error && styles.invisible)}>
+          {error || "\u00A0"}
+        </span>
       </div>
     </>
   );

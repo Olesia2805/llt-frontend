@@ -36,6 +36,7 @@
   "errors": {
     "budgetNegative": "Budget cannot be less than 0",
     "budgetTooHigh": "Budget too high",
-    "selectCityFromList": "Please select a city from the list"
+    "selectCityFromList": "Please select a city from the list",
+    "maxTripDays": "Trip cannot be longer than {{maxDays}} days"
   }
 }

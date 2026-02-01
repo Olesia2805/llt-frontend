@@ -134,3 +134,17 @@
 .inputContainer :global(.react-datepicker__close-icon:hover::after) {
   background-color: rgba(var(--primary-light-rgb), 0.4);
 }
+
+.errorText {
+  color: rgb(var(--red-color-rgb));
+  font-size: 12px;
+  font-weight: 400;
+  height: 16px;
+  line-height: 16px;
+  visibility: visible;
+  margin-top: 6px;
+}
+
+.errorText.invisible {
+  visibility: hidden;
+}

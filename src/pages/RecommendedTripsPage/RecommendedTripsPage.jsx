@@ -89,6 +89,13 @@ const RecommendedTripsPage = () => {
         ? t("errors.budgetTooHigh")
         : "";
 
+  const MAX_TRIP_DAYS = 7;
+
+  const dateError =
+    days > MAX_TRIP_DAYS
+      ? t("errors.maxTripDays", { maxDays: MAX_TRIP_DAYS })
+      : "";
+
   const isFormValid =
     !budgetError &&
     !cityError &&
@@ -96,7 +103,8 @@ const RecommendedTripsPage = () => {
     draftForm.startDate &&
     draftForm.endDate &&
     draftForm.transportModes.length !== 0 &&
-    draftForm.travelerDNA.length !== 0;
+    draftForm.travelerDNA.length !== 0 &&
+    !dateError;
 
   const toggleOption = (key, type) => {
     setDraftForm((prev) => ({
@@ -259,6 +267,7 @@ const RecommendedTripsPage = () => {
                   endDate: end,
                 }))
               }
+              error={dateError}
             />
           </div>
 
