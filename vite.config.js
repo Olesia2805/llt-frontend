@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), basicSsl()],
     server: {
-      https: false,
+      https: true,
       proxy: {
         "/api/v1": {
           target: env.VITE_PROXY_TARGET,
