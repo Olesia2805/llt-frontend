@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), basicSsl()],
     server: {
-      https: true,
+      https: false,
       proxy: {
         "/api/v1": {
           target: env.VITE_PROXY_TARGET,
@@ -18,6 +18,9 @@ export default defineConfig(({ mode }) => {
         },
       },
       headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+        "Access-Control-Allow-Headers": "Authorization,Content-Type",
         "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
         "Cross-Origin-Embedder-Policy": "unsafe-none",
       },

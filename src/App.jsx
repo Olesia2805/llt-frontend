@@ -21,6 +21,7 @@ const PoliciesPage = lazy(
 const SignUpPage = lazy(() => import("./pages/SignUpPage/SignUpPage.jsx"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage/ProfilePage.jsx"));
 const MyTripsPage = lazy(() => import("./pages/MyTripsPage/MyTripsPage.jsx"));
+const MyTripPage = lazy(() => import("./pages/MyTripPage/MyTripPage.jsx"));
 const RecommendedTripsPage = lazy(
   () => import("./pages/RecommendedTripsPage/RecommendedTripsPage.jsx"),
 );
@@ -77,6 +78,7 @@ const App = () => {
             <Route element={<ProtectedRoute />}>
               <Route path={ROUTER.PROFILE} element={<ProfilePage />} />
               <Route path={ROUTER.MYTRIPS} element={<MyTripsPage />} />
+              <Route path={ROUTER.MYTRIP} element={<MyTripPage />} />
               <Route
                 path={ROUTER.RECOMMENDEDTRIPS}
                 element={<RecommendedTripsPage />}

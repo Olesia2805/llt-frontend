@@ -16,6 +16,7 @@
   },
   "errors": {
     "budgetNegative": "Бюджет не може бути меншим за 0",
-    "budgetTooHigh": "Занадто великий бюджет"
+    "budgetTooHigh": "Занадто великий бюджет",
+    "selectCityFromList": "Будь ласка, виберіть місто зі списку"
   }
 }

@@ -10,6 +10,7 @@ import loginEn from "./locales/en/login.json";
 import sidebarEn from "./locales/en/sidebar.json";
 import profileEn from "./locales/en/profile.json";
 import myTripsEn from "./locales/en/myTrips.json";
+import myTripEn from "./locales/en/myTrip.json";
 import recommendedTripsEn from "./locales/en/recommendedTrips.json";
 import subscriptionEn from "./locales/en/subscription.json";
 import settingsEn from "./locales/en/settings.json";
@@ -26,6 +27,7 @@ import loginUk from "./locales/uk/login.json";
 import sidebarUk from "./locales/uk/sidebar.json";
 import profileUk from "./locales/uk/profile.json";
 import myTripsUk from "./locales/uk/myTrips.json";
+import myTripUk from "./locales/uk/myTrip.json";
 import recommendedTripsUk from "./locales/uk/recommendedTrips.json";
 import subscriptionUk from "./locales/uk/subscription.json";
 import settingsUk from "./locales/uk/settings.json";
@@ -46,6 +48,7 @@ i18n.use(initReactI18next).init({
       sidebar: sidebarUk,
       profile: profileUk,
       myTrips: myTripsUk,
+      myTrip: myTripUk,
       recommendedTrips: recommendedTripsUk,
       settings: settingsUk,
       subscription: subscriptionUk,
@@ -62,6 +65,7 @@ i18n.use(initReactI18next).init({
       sidebar: sidebarEn,
       profile: profileEn,
       myTrips: myTripsEn,
+      myTrip: myTripEn,
       recommendedTrips: recommendedTripsEn,
       settings: settingsEn,
       subscription: subscriptionEn,
