@@ -1,0 +1,56 @@
+{
+  "hero": {
+    "welcomeBack": "Welcome Back",
+    "hello": "Hello, {{name}}",
+    "traveler": "Traveler",
+    "description": "Your next adventure awaits. All systems ready for departure.",
+    "descriptionWithTrip": "Your next adventure '<1>{{destination}}</1>' starts in {{days}} days. All systems ready for departure.",
+    "descriptionWithTripTomorrow": "Your next adventure '<1>{{destination}}</1>' starts tomorrow! All systems ready for departure.",
+    "descriptionWithTripActive": "Your adventure '<1>{{destination}}</1>' is currently underway! Have a great trip."
+  },
+  "stats": {
+    "totalTrips": "Total Trips",
+    "completed": "Completed",
+    "activeFuture": "Active/Future"
+  },
+  "calendar": {
+    "title": "Trip Schedule",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "upcomingNext": "Upcoming Next",
+    "noTrips": "No upcoming trips planned yet. Start planning your next adventure!",
+    "travelers": "{{count}} Travelers",
+    "traveler": "1 Traveler",
+    "months": {
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    },
+    "weekdays": {
+      "Mon": "Mon",
+      "Tue": "Tue",
+      "Wed": "Wed",
+      "Thu": "Thu",
+      "Fri": "Fri",
+      "Sat": "Sat",
+      "Sun": "Sun"
+    }
+  },
+  "map": {
+    "title": "Travel History",
+    "badge": "Global View",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "citiesVisited": "Cities Visited",
+    "countries": "Countries"
+  }
+}

@@ -7,6 +7,7 @@ export const ROUTER = {
   MYTRIPS: "/my-trips",
   MYTRIP: "/my-trip-details/:id",
   RECOMMENDEDTRIPS: "/recommended-trips",
+  DASHBOARD: "/",
   SETTINGS: "/settings",
   SUBSCRIPTION: "/subscription",
   ALL: "*",

@@ -15,6 +15,8 @@ import recommendedTripsEn from "./locales/en/recommendedTrips.json";
 import subscriptionEn from "./locales/en/subscription.json";
 import settingsEn from "./locales/en/settings.json";
 import tagPreferencesEn from "./locales/en/tagPreferences.json";
+import dashboardEn from "./locales/en/dashboard.json";
+
 
 import homeGuestUk from "./locales/uk/homeGuest.json";
 import policiesUk from "./locales/uk/policies.json";
@@ -29,6 +31,8 @@ import myTripUk from "./locales/uk/myTrip.json";
 import recommendedTripsUk from "./locales/uk/recommendedTrips.json";
 import subscriptionUk from "./locales/uk/subscription.json";
 import settingsUk from "./locales/uk/settings.json";
+import dashboardUk from "./locales/uk/dashboard.json";
+
 import tagPreferencesUk from "./locales/uk/tagPreferences.json";
 
 const savedLang = localStorage.getItem("lang") || "uk";
@@ -49,6 +53,7 @@ i18n.use(initReactI18next).init({
       settings: settingsUk,
       subscription: subscriptionUk,
       login: loginUk,
+      dashboard: dashboardUk,
       tagPreferences: tagPreferencesUk,
     },
     en: {
@@ -65,6 +70,7 @@ i18n.use(initReactI18next).init({
       settings: settingsEn,
       subscription: subscriptionEn,
       login: loginEn,
+      dashboard: dashboardEn,
       tagPreferences: tagPreferencesEn,
     },
   },

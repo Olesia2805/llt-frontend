@@ -35,6 +35,9 @@ const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.jsx"),
 );
 const LogInPage = lazy(() => import("./pages/LogInPage/LogInPage.jsx"));
+const DashboardPage = lazy(
+  () => import("./pages/DashboardPage/DashboardPage.jsx"),
+);
 
 const App = () => {
   const dispatch = useDispatch();

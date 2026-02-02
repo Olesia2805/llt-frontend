@@ -1,9 +1,7 @@
-import { useSelector } from "react-redux";
+import DashboardPage from "../DashboardPage/DashboardPage";
 
 const HomePageUser = () => {
-  const user = useSelector((state) => state.userData.user);
-
-  return <h1>Welcome Back, {user?.name || "Guest"}!</h1>;
+  return <DashboardPage />;
 };
 
 export default HomePageUser;
