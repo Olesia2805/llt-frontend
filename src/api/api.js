@@ -2,7 +2,7 @@ import axios from "axios";
 import { refreshTokens } from "./auth.api";
 
 const api = axios.create({
-  baseURL: "/api/v1",
+  baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
 });
 
 let isRefreshing = false;
