@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { getDashboardData } from "../../api/dashboard.api";
+import { getDashboardData } from "../../services/dashboard.api";
 import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
 import DashboardStatsCard from "../../components/DashboardStatsCard/DashboardStatsCard";
@@ -14,7 +14,7 @@ import { MdCalendarToday, MdTaskAlt, MdRocketLaunch } from "react-icons/md";
 const DashboardPage = () => {
   const { user } = useSelector((state) => state.userData);
   const { t } = useTranslation("dashboard");
-  
+
   const [stats, setStats] = useState(null);
   const [calendarData, setCalendarData] = useState(null);
   const [travelData, setTravelData] = useState(null);
@@ -44,7 +44,7 @@ const DashboardPage = () => {
   }, [user?.id]);
 
   if (loading) {
-    return null; 
+    return null;
   }
 
   // Find next upcoming trip
@@ -58,7 +58,11 @@ const DashboardPage = () => {
     })?.[0];
 
   // Default stats and data if empty
-  const displayStats = stats || { totalTrips: 0, completedTrips: 0, activeTrips: 0 };
+  const displayStats = stats || {
+    totalTrips: 0,
+    completedTrips: 0,
+    activeTrips: 0,
+  };
   const displayCalendarData = calendarData || { events: [], upcomingTrips: [] };
   const displayTravelData = travelData || { cities: [] };
 
