@@ -7,7 +7,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
 import Loader from "../../components/Loader/Loader";
-import { getTripById, getTripMap } from "../../api/trips.api";
+import { getTripById, getTripMap } from "../../services/trips.api";
 
 import "leaflet/dist/leaflet.css";
 import styles from "./MyTripPage.module.css";

@@ -6,7 +6,7 @@ import { MdOutlineCalendarToday } from "react-icons/md";
 import { TbPigMoney } from "react-icons/tb";
 import { FaBus } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import { explainRecommendTrip } from "../../api/trips.api";
+import { explainRecommendTrip } from "../../services/trips.api";
 
 const TripCard = ({ data }) => {
   const { t } = useTranslation("recommendedTrips");

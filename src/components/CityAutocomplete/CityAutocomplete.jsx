@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./CityAutocomplete.module.css";
 import InputField from "../InputField/InputField";
-import { searchCities } from "../../api/integration.api";
+import { searchCities } from "../../services/integration.api";
 import { FaSearch } from "react-icons/fa";
 import Button from "../Button/Button";
 import { useClickOutside } from "../../hooks/useClickOutside";
