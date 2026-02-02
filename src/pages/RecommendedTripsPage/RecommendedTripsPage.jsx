@@ -20,7 +20,7 @@ import CityAutocomplete from "../../components/CityAutocomplete/CityAutocomplete
 import TripCard from "../../components/TripCard/TripCard";
 import Loader from "../../components/Loader/Loader";
 
-import { recommendTrip } from "../../api/trips.api";
+import { recommendTrip } from "../../services/trips.api";
 
 import styles from "./RecommendedTripsPage.module.css";
 
