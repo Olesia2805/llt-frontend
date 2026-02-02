@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { getUserTrips, deleteTrip, cloneTrip } from "../../services/trips.api";
+import { getUserTrips, deleteTrip, cloneTrip } from "../../api/trips.api";
 import MyTripCard from "../../components/MyTripCard/MyTripCard";
 import ModalDeleteTrip from "../../components/ModalDeleteTrip/ModalDeleteTrip";
 import styles from "./MyTripsPage.module.css";

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as apiAuth from "../services/auth.api";
-import * as apiUser from "../services/user.api";
+import * as apiAuth from "../api/auth.api";
+import * as apiUser from "../api/user.api";
 
 const GUEST_PREFS_KEY = "guestPreferences";
 

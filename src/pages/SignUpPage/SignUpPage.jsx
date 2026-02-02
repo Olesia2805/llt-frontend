@@ -10,7 +10,7 @@ import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
 import InputField from "../../components/InputField/InputField";
 
-import { register, googleAuth } from "../../services/auth.api";
+import { register, googleAuth } from "../../api/auth.api";
 import {
   getPasswordStrength,
   emailRegex,
