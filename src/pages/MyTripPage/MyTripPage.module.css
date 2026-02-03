@@ -1,3 +1,38 @@
+.changeBtn {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 1280px) {
+  .changeBtn {
+    justify-content: end;
+  }
+}
+
+.editInputsWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+}
+
+@media (min-width: 1280px) {
+  .editInputsWrapper {
+    grid-template-columns: 2.5fr 1fr;
+    max-width: 100%;
+    gap: 20px;
+    align-items: flex-start;
+    flex: 1;
+  }
+}
+
+.editActions {
+  display: flex;
+  gap: 10px;
+}
+
 .tripHeader {
   display: flex;
   flex-direction: column;
@@ -15,11 +50,24 @@
 
 .tripTitle {
   margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
 }
 
 @media (min-width: 1280px) {
   .tripTitle {
-    margin-bottom: 32px;
+    margin-bottom: 0px;
+    margin-bottom: 0;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    max-width: 900px;
+    flex-shrink: 1;
+    min-width: 0;
   }
 }
 

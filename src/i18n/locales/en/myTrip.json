@@ -1,1 +1,18 @@
-{}
+{
+  "actions": {
+    "edit": "Edit trip",
+    "save": "Save",
+    "cancel": "Reset"
+  },
+  "placeholders": {
+    "tripTitle": "Trip title"
+  },
+  "labels": {
+    "day": "Day {{number}}"
+  },
+  "errors": {
+    "tripNotFound": "Trip not found",
+    "selectBothDates": "Please select both dates",
+    "maxTripDays": "Trip cannot be longer than {{maxDays}} days"
+  }
+}

@@ -81,22 +81,22 @@ export const getTripMap = async (tripId) => {
   }
 };
 
+export const updateTrip = async (tripId, payload) => {
+  try {
+    const { data } = await api.patch(`/trips/${tripId}`, payload);
+    return data.data.trip;
+  } catch (error) {
+    if (error.response?.status === 404) throw new Error("Trip not found");
+    throw new Error(error.response?.data?.message || "Failed to update trip");
+  }
+};
+
 // export const createTrip = async (payload) => {
 //   try {
 //     const { data } = await api.post("/trips", payload);
 //     return data;
 //   } catch (error) {
 //     throw new Error(error.response?.data?.message || "Failed to create trip");
-//   }
-// };
-
-// export const updateTrip = async (tripId, payload) => {
-//   try {
-//     const { data } = await api.patch(`/trips/${tripId}`, payload);
-//     return data;
-//   } catch (error) {
-//     if (error.response?.status === 404) throw new Error("Trip not found");
-//     throw new Error(error.response?.data?.message || "Failed to update trip");
 //   }
 // };
 
