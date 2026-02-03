@@ -8,6 +8,7 @@ import DashboardStatsCard from "../../components/DashboardStatsCard/DashboardSta
 import DashboardCalendar from "../../components/DashboardCalendar/DashboardCalendar";
 import DashboardMap from "../../components/DashboardMap/DashboardMap";
 import DashboardHero from "../../components/DashboardHero/DashboardHero";
+import Loader from "../../components/Loader/Loader";
 import styles from "./DashboardPage.module.css";
 import { MdCalendarToday, MdTaskAlt, MdRocketLaunch } from "react-icons/md";
 
@@ -43,10 +44,6 @@ const DashboardPage = () => {
     fetchDashboardData();
   }, [user?.id]);
 
-  if (loading) {
-    return null;
-  }
-
   // Find next upcoming trip
   const nextTrip = travelData?.cities
     ?.filter((city) => city.status === "upcoming")
@@ -67,7 +64,7 @@ const DashboardPage = () => {
   const displayTravelData = travelData || { cities: [] };
 
   return (
-    <Section>
+    <Section variant="sectionFooterDown">
       <DashboardHero user={user} nextTrip={nextTrip} />
       <Container>
         <div className={styles.statsBar}>
