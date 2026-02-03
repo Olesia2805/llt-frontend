@@ -122,7 +122,7 @@ const SubscriptionPage = () => {
             {plan === "monthly" && (
               <div className={styles.planBox}>
                 <p className={styles.price}>
-                  <span>$9.99</span> / {t("month")}
+                  <span>$8.99</span> / {t("month")}
                 </p>
                 <p className={styles.description}>{t("monthlyDesc")}</p>
               </div>
@@ -131,7 +131,7 @@ const SubscriptionPage = () => {
             {plan === "yearly" && (
               <div className={styles.planBox}>
                 <p className={styles.price}>
-                  <span>$99.99</span> / {t("year")}
+                  <span>$88.99</span> / {t("year")}
                 </p>
                 <p className={styles.description}>{t("yearlyDesc")}</p>
               </div>

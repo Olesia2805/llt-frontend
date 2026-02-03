@@ -1,1 +1,18 @@
-{}
+{
+  "actions": {
+    "edit": "Редагувати подорож",
+    "save": "Зберегти",
+    "cancel": "Скасувати"
+  },
+  "placeholders": {
+    "tripTitle": "Назва подорожі"
+  },
+  "labels": {
+    "day": "День {{number}}"
+  },
+  "errors": {
+    "tripNotFound": "Подорож не знайдена",
+    "selectBothDates": "Будь ласка, оберіть обидві дати",
+    "maxTripDays": "Подорож не може бути довшою за {{maxDays}} днів"
+  }
+}
