@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import { FaLocationDot } from "react-icons/fa6";
-import { FaPen, FaCheck } from "react-icons/fa6";
-import { GrPowerReset } from "react-icons/gr";
+import { FaPen } from "react-icons/fa6";
 
 import Section from "../../components/Section/Section";
 import Container from "../../components/Container/Container";
@@ -88,6 +87,14 @@ const MyTripPage = () => {
       ? t("errors.maxTripDays", { maxDays: MAX_TRIP_DAYS })
       : "";
 
+  const formatDateLocal = (date) => {
+    if (!date) return null;
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const handleSave = async () => {
     if (!form.startDate || !form.endDate) {
       alert(t("errors.selectBothDates"));
@@ -103,8 +110,8 @@ const MyTripPage = () => {
     try {
       const updated = await updateTrip(tripId, {
         title: form.title,
-        startDate: form.startDate.toISOString(),
-        endDate: form.endDate.toISOString(),
+        startDate: formatDateLocal(form.startDate),
+        endDate: formatDateLocal(form.endDate),
       });
 
       const normalized = normalizeTrip(updated);
@@ -178,14 +185,12 @@ const MyTripPage = () => {
             <div className={styles.editActions}>
               <Button
                 variant="primary"
-                leftIcon={<FaCheck />}
                 text={t("actions.save")}
                 onClick={handleSave}
                 disabled={isUpdating}
               />
               <Button
                 variant="secondary"
-                leftIcon={<GrPowerReset />}
                 text={t("actions.cancel")}
                 onClick={handleCancel}
               />
