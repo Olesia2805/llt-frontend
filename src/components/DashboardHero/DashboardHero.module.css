@@ -85,7 +85,6 @@
   color: var(--text-muted);
 }
 
-/* Light Theme Overrides */
 [data-theme="light"] .heroBackground {
   background-image:
     linear-gradient(

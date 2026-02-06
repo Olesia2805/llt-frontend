@@ -15,16 +15,15 @@ export const getDashboardData = async (userId) => {
           acc.activeTrips += 1;
         } else if (now < start) {
           acc.futureTrips = (acc.futureTrips || 0) + 1;
-          acc.activeTrips += 1; 
+          acc.activeTrips += 1;
         } else if (now > end) {
           acc.completedTrips += 1;
         }
         return acc;
       },
-      { totalTrips: 0, completedTrips: 0, activeTrips: 0 }
+      { totalTrips: 0, completedTrips: 0, activeTrips: 0 },
     );
 
-    // 2. Prepare Calendar Data
     const events = trips.map((trip) => ({
       startDate: trip.startDate,
       endDate: trip.endDate,
@@ -53,7 +52,6 @@ export const getDashboardData = async (userId) => {
 
     const calendarData = { events, upcomingTrips };
 
-    // 3. Prepare Travel History (Cities for Map)
     const cities = trips.map((trip) => {
       const start = new Date(trip.startDate);
       const end = new Date(trip.endDate);
@@ -69,14 +67,14 @@ export const getDashboardData = async (userId) => {
         visitDate = "Next Destination";
         trip.daysUntil = daysUntil;
       } else if (now >= start && now <= end) {
-        status = "upcoming"; // Active trips can be treated as current/next destinations
+        status = "upcoming";
         visitDate = "Current Trip";
       }
 
       return {
         id: trip.id,
         name: trip.originCity || "Unknown",
-        country: null, // Geocoding happens in the DashboardMap component
+        country: null,
         coordinates: {
           lat: parseFloat(trip.originLat),
           lng: parseFloat(trip.originLng),

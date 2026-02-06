@@ -142,13 +142,13 @@ const MyTripPage = () => {
   };
 
   const dayColors = [
-    "#FF6B6B", // Day 1 - red
-    "#4ECDC4", // Day 2 - teal
-    "#FFD93D", // Day 3 - yellow
-    "#6A4C93", // Day 4 - purple
-    "#FF9F1C", // Day 5 - orange
-    "#1A535C", // Day 6 - dark teal
-    "#FF6BFF", // Day 7 - pink
+    "#FF6B6B",
+    "#4ECDC4",
+    "#FFD93D",
+    "#6A4C93",
+    "#FF9F1C",
+    "#1A535C",
+    "#FF6BFF",
   ];
 
   const handleTitleClick = (p) => {

@@ -79,12 +79,6 @@ const Layout = () => {
           isOpen={isTeamOpen}
           onClose={() => setIsTeamOpen(false)}
         />
-        {/* {isAuthenticated && (
-          <ExclusiveModal
-            isOpen={isExclusiveOpen}
-            onClose={() => setIsExclusiveOpen(false)}
-          />
-        )} */}
       </div>
     </div>
   );

@@ -25,6 +25,7 @@ import { recommendTrip } from "../../services/trips.api";
 import styles from "./RecommendedTripsPage.module.css";
 
 //TODO: travelerNotes
+//TODO: Loader
 
 const getTripDays = (start, end) => {
   if (!start || !end) return 0;
@@ -46,7 +47,6 @@ const RecommendedTripsPage = () => {
   const { preferences } = useSelector((state) => state.userData);
 
   const [tripData, setTripData] = useState(null);
-  // const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isSending, setIsSending] = useState(false);
 
@@ -333,17 +333,6 @@ const RecommendedTripsPage = () => {
             ))}
           </ul>
         </div>
-
-        {/* <div className={styles.sectionGroup}>
-          <h3>{t("travelerNotes")}</h3>
-          <InputField
-            name="notes"
-            value={draftForm.notes}
-            onChange={handleChange}
-            placeholder={t("travelerNotes")}
-            disabled={isSending}
-          />
-        </div> */}
 
         <div className={styles.buttons}>
           <Button

@@ -8,9 +8,10 @@ import DashboardStatsCard from "../../components/DashboardStatsCard/DashboardSta
 import DashboardCalendar from "../../components/DashboardCalendar/DashboardCalendar";
 import DashboardMap from "../../components/DashboardMap/DashboardMap";
 import DashboardHero from "../../components/DashboardHero/DashboardHero";
-import Loader from "../../components/Loader/Loader";
 import styles from "./DashboardPage.module.css";
 import { MdCalendarToday, MdTaskAlt, MdRocketLaunch } from "react-icons/md";
+
+//TODO: Loader
 
 const DashboardPage = () => {
   const { user } = useSelector((state) => state.userData);
@@ -44,17 +45,14 @@ const DashboardPage = () => {
     fetchDashboardData();
   }, [user?.id]);
 
-  // Find next upcoming trip
   const nextTrip = travelData?.cities
     ?.filter((city) => city.status === "upcoming")
     ?.sort((a, b) => {
-      // Prioritize "Current Trip" over future trips
       if (a.visitDate === "Current Trip") return -1;
       if (b.visitDate === "Current Trip") return 1;
       return (a.daysUntil || 0) - (b.daysUntil || 0);
     })?.[0];
 
-  // Default stats and data if empty
   const displayStats = stats || {
     totalTrips: 0,
     completedTrips: 0,
