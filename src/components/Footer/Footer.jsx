@@ -10,13 +10,14 @@ import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
 import { emailRegex } from "../../app/validation";
 
+// TODO: endpoint for email
+
 const Footer = ({ setIsTeamOpen }) => {
   const { t } = useTranslation("common");
 
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({ email: null });
   const [touched, setTouched] = useState(false);
-  // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!touched) return;
@@ -66,16 +67,12 @@ const Footer = ({ setIsTeamOpen }) => {
     if (!validate()) return;
 
     try {
-      // setLoading(true);
-      // TODO: BE endpoint
-
       localStorage.removeItem("subscribe_email");
       toast.success(t("footer.success"));
       setEmail("");
     } catch {
       toast.error(t("footer.error"));
     } finally {
-      // setLoading(false);
       setTouched(false);
     }
   };
@@ -126,10 +123,7 @@ const Footer = ({ setIsTeamOpen }) => {
                 error={errors.email}
               />
 
-              <Button
-                type="submit"
-                text={t("footer.button")} // disabled={loading}
-              />
+              <Button type="submit" text={t("footer.button")} />
             </form>
           </div>
         </div>

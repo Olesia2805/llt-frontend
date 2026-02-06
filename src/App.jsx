@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import i18n from "i18next";
 
 import Layout from "./components/Layout/Layout.jsx";
-//TODO: Loader
 import Loader from "./components/Loader/Loader.jsx";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop.jsx";
 import { ROUTER } from "./app/routes.jsx";

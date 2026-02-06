@@ -21,7 +21,6 @@ const options = {
   zoomControl: false,
 };
 
-// Custom component to use the new AdvancedMarkerElement
 const AdvancedMarker = ({ map, position, onClick, status }) => {
   const markerRef = useRef(null);
 
@@ -75,17 +74,20 @@ const DashboardMap = ({ travelData }) => {
     }
 
     const geocoder = new window.google.maps.Geocoder();
-    
+
     const fetchCountries = async () => {
       const promises = cities.map(async (city) => {
         if (city.country) return city;
 
         try {
-          const response = await geocoder.geocode({ location: city.coordinates });
+          const response = await geocoder.geocode({
+            location: city.coordinates,
+          });
           if (response.results && response.results.length > 0) {
-            const countryComponent = response.results[0].address_components.find(
-              (c) => c.types.includes("country")
-            );
+            const countryComponent =
+              response.results[0].address_components.find((c) =>
+                c.types.includes("country"),
+              );
             if (countryComponent) {
               return { ...city, country: countryComponent.short_name };
             }
@@ -104,10 +106,14 @@ const DashboardMap = ({ travelData }) => {
   }, [isLoaded, cities]);
 
   const stats = useMemo(() => {
-    const visitedCities = enrichedCities.filter((city) => city.status === "visited");
+    const visitedCities = enrichedCities.filter(
+      (city) => city.status === "visited",
+    );
     return {
       citiesVisited: visitedCities.length,
-      countriesVisited: new Set(visitedCities.map((city) => city.country).filter(Boolean)).size,
+      countriesVisited: new Set(
+        visitedCities.map((city) => city.country).filter(Boolean),
+      ).size,
     };
   }, [enrichedCities]);
 
@@ -118,13 +124,16 @@ const DashboardMap = ({ travelData }) => {
         bounds.extend(city.coordinates);
       });
       map.fitBounds(bounds);
-      
-      // Optional: Don't zoom in too much for a single city
+
       if (enrichedCities.length === 1) {
-        const listener = window.google.maps.event.addListener(map, 'idle', () => {
-          if (map.getZoom() > 10) map.setZoom(10);
-          window.google.maps.event.removeListener(listener);
-        });
+        const listener = window.google.maps.event.addListener(
+          map,
+          "idle",
+          () => {
+            if (map.getZoom() > 10) map.setZoom(10);
+            window.google.maps.event.removeListener(listener);
+          },
+        );
       }
     }
   }, [map, enrichedCities]);
@@ -148,10 +157,13 @@ const DashboardMap = ({ travelData }) => {
     return defaultCenter;
   }, [enrichedCities]);
 
-  const mapOptions = useMemo(() => ({
-    ...options,
-    mapId: import.meta.env.VITE_GOOGLE_MAPS_LIGHT_MAP_ID || "DEMO_MAP_ID",
-  }), []);
+  const mapOptions = useMemo(
+    () => ({
+      ...options,
+      mapId: import.meta.env.VITE_GOOGLE_MAPS_LIGHT_MAP_ID || "DEMO_MAP_ID",
+    }),
+    [],
+  );
 
   if (!isLoaded) return <div className={styles.mapLoading}>Loading Map...</div>;
 

@@ -40,7 +40,6 @@ const PoliciesPage = () => {
           <div className={styles.contentWrapper}>
             <p className={styles.welcomeText}>{t("welcomeText")}</p>
 
-            {/* 1. Terms of Service */}
             <PolicySection
               id={NAV_ITEMS.terms.id}
               title={t(NAV_ITEMS.terms.title)}
@@ -68,7 +67,7 @@ const PoliciesPage = () => {
                         <FaCheckCircle className={styles.icon} />
                         <p>{item}</p>
                       </li>
-                    )
+                    ),
                   )}
                 </ul>
               </div>
@@ -79,7 +78,6 @@ const PoliciesPage = () => {
               </div>
             </PolicySection>
 
-            {/* 2. Privacy Policy */}
             <PolicySection
               id={NAV_ITEMS.privacy.id}
               title={t(NAV_ITEMS.privacy.title)}
@@ -110,7 +108,6 @@ const PoliciesPage = () => {
               </div>
             </PolicySection>
 
-            {/* 3. Data Collection */}
             <PolicySection
               id={NAV_ITEMS.data.id}
               title={t(NAV_ITEMS.data.title)}
@@ -135,7 +132,6 @@ const PoliciesPage = () => {
               </div>
             </PolicySection>
 
-            {/* 4. User Rights */}
             <PolicySection
               id={NAV_ITEMS.rights.id}
               title={t(NAV_ITEMS.rights.title)}
@@ -155,7 +151,7 @@ const PoliciesPage = () => {
                           <p>{right.description}</p>
                         </div>
                       </div>
-                    )
+                    ),
                   )}
                 </div>
 

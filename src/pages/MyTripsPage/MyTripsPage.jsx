@@ -15,6 +15,9 @@ import InputField from "../../components/InputField/InputField";
 import Loader from "../../components/Loader/Loader";
 import toast from "react-hot-toast";
 
+//TODO: statusFilters
+//TODO: townFilter
+
 const MyTripsPage = () => {
   const { t } = useTranslation("myTrips");
   const { user } = useSelector((state) => state.userData);
@@ -45,16 +48,6 @@ const MyTripsPage = () => {
 
     fetchTrips();
   }, [user?.id]);
-
-  // const statusFilters = useMemo(() => {
-  //   const statuses = trips.map((t) => t.status);
-  //   return ["all", ...new Set(statuses)];
-  // }, [trips]);
-
-  // // const statusFilters = useMemo(() => {
-  // //   const statuses = trips.map((t) => t.status).filter(Boolean);
-  // //   return ["all", ...Array.from(new Set(statuses))];
-  // // }, [trips]);
 
   const dateFilters = [
     { id: "all", label: t("buttons.allTrips") },

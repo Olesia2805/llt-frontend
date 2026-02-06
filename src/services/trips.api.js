@@ -90,22 +90,3 @@ export const updateTrip = async (tripId, payload) => {
     throw new Error(error.response?.data?.message || "Failed to update trip");
   }
 };
-
-// export const createTrip = async (payload) => {
-//   try {
-//     const { data } = await api.post("/trips", payload);
-//     return data;
-//   } catch (error) {
-//     throw new Error(error.response?.data?.message || "Failed to create trip");
-//   }
-// };
-
-// export const addTripItem = async (tripId, payload) => {
-//   try {
-//     const { data } = await api.post(`/trips/${tripId}/items`, payload);
-//     return data;
-//   } catch (error) {
-//     if (error.response?.status === 404) throw new Error("Trip not found");
-//     throw new Error(error.response?.data?.message || "Failed to add trip item");
-//   }
-// };

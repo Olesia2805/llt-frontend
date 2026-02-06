@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NAV_ITEMS } from "../../app/sectionPolicyIcons.js";
 import { MdToc, MdArrowForward } from "../../app/sectionPolicyIcons.js";
-import Button from "../../components/Button/Button"; // Імпортуємо твій новий компонент
+import Button from "../../components/Button/Button";
 import styles from "./TableOfContents.module.css";
 
 const TableOfContents = () => {

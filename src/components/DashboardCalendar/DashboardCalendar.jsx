@@ -48,11 +48,9 @@ const DashboardCalendar = ({ calendarData }) => {
   };
 
   const getTripPosition = (day) => {
-    // Create a date object for the current day in the displayed month
     const currentDate = new Date(displayYear, displayMonth, day);
     currentDate.setHours(0, 0, 0, 0);
 
-    // Find a trip that covers this specific day
     const tripEvent = events.find((e) => {
       if (!e.startDate || !e.endDate) return false;
       const tripStart = new Date(e.startDate);
@@ -69,12 +67,10 @@ const DashboardCalendar = ({ calendarData }) => {
     tripStart.setHours(0, 0, 0, 0);
     tripEnd.setHours(0, 0, 0, 0);
 
-    // Determine position
     let position = "middle";
     if (currentDate.getTime() === tripStart.getTime()) position = "start";
     else if (currentDate.getTime() === tripEnd.getTime()) position = "end";
 
-    // Determine if it's a future trip (starts after today)
     const normalizedToday = new Date();
     normalizedToday.setHours(0, 0, 0, 0);
     const isFuture = tripStart > normalizedToday;
